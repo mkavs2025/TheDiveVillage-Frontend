@@ -1,14 +1,12 @@
 import { useState, useEffect, Suspense, useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas } from '@react-three/fiber'
 import { OrbitControls, useVideoTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import videoFile from '../assets/VID_20260525_095921_00_220.mp4'
 
-const videoSrc = import.meta.env.VITE_DIVE_VIDEO_URL || videoFile
-
 function SphereMesh({ autoRotate }) {
   const meshRef = useRef()
-  const texture = useVideoTexture(videoSrc, {
+  const texture = useVideoTexture(videoFile, {
     crossOrigin: 'Anonymous',
     muted: true,
     loop: true,
@@ -18,18 +16,10 @@ function SphereMesh({ autoRotate }) {
   
   texture.colorSpace = THREE.SRGBColorSpace
 
-  useFrame((state, delta) => {
-    if (meshRef.current && meshRef.current.material) {
-      if (meshRef.current.material.opacity < 1) {
-        meshRef.current.material.opacity = Math.min(1, meshRef.current.material.opacity + delta * 2)
-      }
-    }
-  })
-
   return (
     <mesh ref={meshRef} scale={[-1, 1, 1]}>
       <sphereGeometry args={[500, 60, 40]} />
-      <meshBasicMaterial map={texture} side={THREE.BackSide} transparent={true} opacity={0} />
+      <meshBasicMaterial map={texture} side={THREE.BackSide} />
     </mesh>
   )
 }
