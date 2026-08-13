@@ -4,11 +4,13 @@ import { OrbitControls, useVideoTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import videoFile from '../assets/VID_20260525_095921_00_220.mp4'
 
+const videoSrc = import.meta.env.VITE_DIVE_VIDEO_URL || videoFile
+
 function VideoSphere() {
   const meshRef = useRef()
   const targetRotation = useRef({ x: 0, y: 0 })
 
-  const texture = useVideoTexture(videoFile, {
+  const texture = useVideoTexture(videoSrc, {
     crossOrigin: 'Anonymous',
     muted: true,
     loop: true,
@@ -80,13 +82,18 @@ function VideoSphere() {
       // Smoothly interpolate the mesh rotation towards the scroll target
       meshRef.current.rotation.y += (targetRotation.current.y - meshRef.current.rotation.y) * delta * 5
       meshRef.current.rotation.x += (targetRotation.current.x - meshRef.current.rotation.x) * delta * 5
+
+      // Smoothly fade in the video opacity on load
+      if (meshRef.current.material && meshRef.current.material.opacity < 1) {
+        meshRef.current.material.opacity = Math.min(1, meshRef.current.material.opacity + delta * 2)
+      }
     }
   })
 
   return (
     <mesh ref={meshRef} scale={[-1, 1, 1]}>
       <sphereGeometry args={[500, 60, 40]} />
-      <meshBasicMaterial map={texture} side={THREE.BackSide} />
+      <meshBasicMaterial map={texture} side={THREE.BackSide} transparent={true} opacity={0} />
     </mesh>
   )
 }

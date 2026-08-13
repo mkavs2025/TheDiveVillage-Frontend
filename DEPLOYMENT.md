@@ -55,6 +55,7 @@ To make sure Firebase features and API calls function correctly, add the followi
 | Variable Name | Description / Value |
 | :--- | :--- |
 | `VITE_API_BASE_URL` | Base URL of your backend API (e.g. `https://api.thedivevillage.com`) |
+| `VITE_DIVE_VIDEO_URL` | (Optional) CDN/Storage URL for the large 360° video (highly recommended to bypass LFS bandwidth and lag) |
 | `VITE_FIREBASE_API_KEY` | Your Firebase project API Key |
 | `VITE_FIREBASE_AUTH_DOMAIN` | Your Firebase Auth Domain |
 | `VITE_FIREBASE_PROJECT_ID` | Your Firebase Project ID |
