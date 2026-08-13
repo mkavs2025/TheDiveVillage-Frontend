@@ -1,0 +1,11 @@
+{
+  "name": "thedivevillage-monorepo",
+  "private": true,
+  "workspaces": [
+    "Frontend"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=Frontend",
+    "dev": "npm run dev --workspace=Frontend"
+  }
+}
