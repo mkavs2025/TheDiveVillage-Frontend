@@ -6,7 +6,9 @@ import videoFile from '../assets/VID_20260525_095921_00_220.mp4'
 
 function VideoSphere() {
   const meshRef = useRef()
-  const targetRotation = useRef({ x: 0, y: 0 })
+  // Initial target rotation to point at a nice angle
+  const targetRotation = useRef({ x: -Math.PI / 8, y: Math.PI / 2.65 })
+  const joystickInput = useRef({ x: 0, y: 0 })
 
   const texture = useVideoTexture(videoFile, {
     crossOrigin: 'Anonymous',
@@ -19,60 +21,11 @@ function VideoSphere() {
   texture.colorSpace = THREE.SRGBColorSpace
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY
-      
-      const aboutEl = document.getElementById('about-section')
-      const programsEl = document.getElementById('programs-section')
-
-      if (!aboutEl || !programsEl) {
-        // Fallback if elements aren't mounted yet
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight
-        const scrollProgress = maxScroll > 0 ? scrollY / maxScroll : 0
-        targetRotation.current.y = Math.PI / 2.65
-        targetRotation.current.x = -Math.PI / 8 + scrollProgress * (Math.PI * 2)
-        return
-      }
-
-      const aboutRect = aboutEl.getBoundingClientRect()
-      const programsRect = programsEl.getBoundingClientRect()
-      
-      // Calculate absolute positions relative to the top of the document
-      const aboutTop = scrollY + aboutRect.top
-      const programsTop = scrollY + programsRect.top
-
-      if (scrollY < aboutTop) {
-        // 1. Before About Section
-        // Move slightly downwards
-        const progress = aboutTop > 0 ? scrollY / aboutTop : 0
-        targetRotation.current.y = Math.PI / 2.65
-        targetRotation.current.x = -Math.PI / 8 + progress * (Math.PI / 8)
-      } else if (scrollY >= aboutTop && scrollY < programsTop) {
-        // 2. Between About Section and Programs Section
-        // Hold vertical pitch, move horizontally
-        targetRotation.current.x = -Math.PI / 8 + (Math.PI / 8)
-        
-        const distance = programsTop - aboutTop
-        const progress = distance > 0 ? (scrollY - aboutTop) / distance : 0
-        targetRotation.current.y = Math.PI / 2.65 + progress * (Math.PI / 1.5)
-      } else {
-        // 3. After Programs Section
-        // Hold horizontal yaw, resume moving downwards to sea bed
-        targetRotation.current.y = Math.PI / 2.65 + Math.PI / 1.5
-        
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight
-        const distanceRemaining = maxScroll - programsTop
-        const progress = distanceRemaining > 0 ? (scrollY - programsTop) / distanceRemaining : 1
-        
-        // Pitch downwards sharply to show sea bed
-        targetRotation.current.x = -Math.PI / 8 + (Math.PI / 8) + progress * (Math.PI / 2)
-      }
+    const onJoystickMove = (e) => {
+      joystickInput.current = e.detail
     }
-    
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll() // Initialize
-    
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('joystickMove', onJoystickMove)
+    return () => window.removeEventListener('joystickMove', onJoystickMove)
   }, [])
 
   // --- DRAG LOGIC ---
@@ -82,11 +35,9 @@ function VideoSphere() {
 
   useEffect(() => {
     const onPointerDown = (e) => {
-      // Do not initiate drag if the user is clicking on an interactive element (buttons, links, etc.)
       if (e.target.closest('button, a, input, textarea, select, [role="button"]')) {
         return
       }
-      
       isDragging.current = true
       previousPointer.current = { x: e.clientX, y: e.clientY }
     }
@@ -94,12 +45,10 @@ function VideoSphere() {
     const onPointerMove = (e) => {
       if (!isDragging.current) return
       
-      // Calculate delta
       const dx = e.clientX - previousPointer.current.x
       const dy = e.clientY - previousPointer.current.y
       previousPointer.current = { x: e.clientX, y: e.clientY }
       
-      // Update drag offsets
       dragOffset.current.y -= dx * 0.005 
       dragOffset.current.x -= dy * 0.005
     }
@@ -123,11 +72,16 @@ function VideoSphere() {
 
   useFrame((state, delta) => {
     if (meshRef.current) {
-      // Combine programmatic scroll rotation with user's manual drag offset
+      // Continuous panning based on joystick input
+      if (joystickInput.current.x !== 0 || joystickInput.current.y !== 0) {
+        // Joystick X moves left/right (yaw = Y axis), Y moves up/down (pitch = X axis)
+        targetRotation.current.y -= joystickInput.current.x * delta * 1.5
+        targetRotation.current.x -= joystickInput.current.y * delta * 1.5
+      }
+
       const finalTargetX = targetRotation.current.x + dragOffset.current.x
       const finalTargetY = targetRotation.current.y + dragOffset.current.y
       
-      // Smoothly interpolate the mesh rotation towards the combined target
       meshRef.current.rotation.y += (finalTargetY - meshRef.current.rotation.y) * delta * 5
       meshRef.current.rotation.x += (finalTargetX - meshRef.current.rotation.x) * delta * 5
     }

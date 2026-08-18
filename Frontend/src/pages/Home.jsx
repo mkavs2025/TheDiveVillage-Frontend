@@ -9,6 +9,7 @@ const ProgramsPreview = lazy(() => import('../components/ProgramsPreview'))
 const TrainingSafety = lazy(() => import('../components/TrainingSafety'))
 const GalleryPreview = lazy(() => import('../components/GalleryPreview'))
 const InteractiveDiveMap = lazy(() => import('../components/InteractiveDiveMap'))
+import Joystick from '../components/Joystick'
 
 const POWER = [
   {
@@ -295,6 +296,8 @@ export default function Home() {
           </SectionReveal>
         </div>
       </section>
+
+      <Joystick />
     </div>
   )
 }
