@@ -23,21 +23,16 @@ import AdminOrders from '../pages/admin/Orders'
 import AdminCustomers from '../pages/admin/Customers'
 import AdminContent from '../pages/admin/Content'
 
-function PageFade({ children }) {
-  const reduce = useReducedMotion()
+import AllCourses from '../pages/AllCourses'
+import Scuba from '../pages/Scuba'
+import Snorkeling from '../pages/Snorkeling'
+import Surfing from '../pages/Surfing'
+import About from '../pages/About'
+import Services from '../pages/Services'
+import Gallery from '../pages/Gallery'
 
-  if (reduce) return children
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -15 }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {children}
-    </motion.div>
-  )
+function PageLiquid({ children }) {
+  return children
 }
 
 export default function AppRouter() {
@@ -50,20 +45,28 @@ export default function AppRouter() {
           <Route
             index
             element={
-              <PageFade>
+              <PageLiquid>
                 <Home />
-              </PageFade>
+              </PageLiquid>
             }
           />
-          <Route path="book-us" element={<PageFade><BookUs /></PageFade>} />
-          <Route path="shop" element={<PageFade><Shop /></PageFade>} />
-          <Route path="shop/:id" element={<PageFade><ProductDetail /></PageFade>} />
-          <Route path="cart" element={<PageFade><Cart /></PageFade>} />
-          <Route path="checkout" element={<PageFade><Checkout /></PageFade>} />
-          <Route path="contact" element={<PageFade><Contact /></PageFade>} />
-          <Route path="login" element={<PageFade><Login /></PageFade>} />
-          <Route path="signup" element={<PageFade><Signup /></PageFade>} />
+          <Route path="about" element={<PageLiquid><About /></PageLiquid>} />
+          <Route path="services" element={<PageLiquid><Services /></PageLiquid>} />
+          <Route path="gallery" element={<PageLiquid><Gallery /></PageLiquid>} />
+          <Route path="book-us" element={<PageLiquid><BookUs /></PageLiquid>} />
+          <Route path="shop" element={<PageLiquid><Shop /></PageLiquid>} />
+          <Route path="shop/:id" element={<PageLiquid><ProductDetail /></PageLiquid>} />
+          <Route path="cart" element={<PageLiquid><Cart /></PageLiquid>} />
+          <Route path="checkout" element={<PageLiquid><Checkout /></PageLiquid>} />
+          <Route path="contact" element={<PageLiquid><Contact /></PageLiquid>} />
+          <Route path="login" element={<PageLiquid><Login /></PageLiquid>} />
+          <Route path="signup" element={<PageLiquid><Signup /></PageLiquid>} />
           <Route path="profile" element={<Navigate to="/dashboard/profile" replace />} />
+          
+          <Route path="courses" element={<PageLiquid><AllCourses /></PageLiquid>} />
+          <Route path="courses/scuba" element={<PageLiquid><Scuba /></PageLiquid>} />
+          <Route path="courses/snorkeling" element={<PageLiquid><Snorkeling /></PageLiquid>} />
+          <Route path="courses/surfing" element={<PageLiquid><Surfing /></PageLiquid>} />
         </Route>
 
         <Route

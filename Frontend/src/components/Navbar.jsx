@@ -7,13 +7,18 @@ import { useAuth } from '../hooks/useAuth'
 
 const NAV = [
   { to: '/', label: 'Home', end: true },
-  { to: '/book-us', label: 'Book Us', highlight: true },
+  { to: '/about', label: 'About Us' },
+  { to: '/services', label: 'Services' },
+  { to: '/courses', label: 'Courses' },
+  { to: '/gallery', label: 'Gallery' },
   { to: '/shop', label: 'Shop' },
   { to: '/contact', label: 'Contact Us' },
+  { to: '/book-us', label: 'Book Us', highlight: true },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const [open, setOpen] = useState(false)
   const { itemCount } = useCart()
   const { isAuthenticated, user } = useAuth()
@@ -22,6 +27,13 @@ export default function Navbar() {
   const { scrollY } = useScroll()
 
   useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious()
+    if (latest > 150 && latest > previous) {
+      setHidden(true)
+      setOpen(false)
+    } else {
+      setHidden(false)
+    }
     setScrolled(latest > 16)
   })
 
@@ -42,11 +54,27 @@ export default function Navbar() {
   const bgSoft = isDarkBackground ? 'bg-white/5' : 'bg-navy/5'
 
   return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? (isDarkBackground ? 'bg-navy/90 backdrop-blur-md shadow-sm' : 'bg-white/90 backdrop-blur-md shadow-sm') : 'bg-transparent'}`}
+    <motion.header
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: "-150%" }
+      }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+      className={`fixed top-4 left-4 right-4 z-50 mx-auto max-w-7xl transition-all duration-300 ${
+        open
+          ? isDarkBackground
+            ? 'bg-navy/95 backdrop-blur-xl shadow-2xl rounded-3xl border border-white/10'
+            : 'bg-white/95 backdrop-blur-xl shadow-2xl rounded-3xl border border-navy/10'
+          : scrolled 
+            ? isDarkBackground 
+              ? 'glass-premium rounded-full shadow-lg' 
+              : 'bg-white/90 backdrop-blur-md shadow-lg border border-navy/10 rounded-full'
+            : 'bg-transparent'
+      }`}
       style={{ textShadow: 'none' }}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:h-[72px] sm:px-6 lg:px-8">
+      <div className="flex h-16 w-full items-center justify-between gap-4 px-4 sm:h-[72px] sm:px-6 lg:px-8">
         <Logo light={isDarkBackground} />
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
@@ -174,7 +202,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   )
 }
 

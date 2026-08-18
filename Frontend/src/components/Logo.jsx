@@ -15,7 +15,7 @@ export default function Logo({ className = '', compact = false, light = false })
       />
       {!compact && (
         <span className={`font-heading font-extrabold text-lg tracking-wide ${light ? 'text-white' : 'text-navy'}`}>
-          DIVE VILLAGE
+          THE DIVE VILLAGE
         </span>
       )}
     </Link>

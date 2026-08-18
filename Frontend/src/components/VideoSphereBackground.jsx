@@ -29,8 +29,8 @@ function VideoSphere() {
         // Fallback if elements aren't mounted yet
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight
         const scrollProgress = maxScroll > 0 ? scrollY / maxScroll : 0
-        targetRotation.current.y = 0
-        targetRotation.current.x = -Math.PI / 3 + scrollProgress * (Math.PI * 2)
+        targetRotation.current.y = Math.PI / 2.65
+        targetRotation.current.x = -Math.PI / 8 + scrollProgress * (Math.PI * 2)
         return
       }
 
@@ -45,27 +45,27 @@ function VideoSphere() {
         // 1. Before About Section
         // Move slightly downwards
         const progress = aboutTop > 0 ? scrollY / aboutTop : 0
-        targetRotation.current.y = 0
-        targetRotation.current.x = -Math.PI / 3 + progress * (Math.PI / 8)
+        targetRotation.current.y = Math.PI / 2.65
+        targetRotation.current.x = -Math.PI / 8 + progress * (Math.PI / 8)
       } else if (scrollY >= aboutTop && scrollY < programsTop) {
         // 2. Between About Section and Programs Section
         // Hold vertical pitch, move horizontally
-        targetRotation.current.x = -Math.PI / 3 + (Math.PI / 8)
+        targetRotation.current.x = -Math.PI / 8 + (Math.PI / 8)
         
         const distance = programsTop - aboutTop
         const progress = distance > 0 ? (scrollY - aboutTop) / distance : 0
-        targetRotation.current.y = progress * (Math.PI / 1.5)
+        targetRotation.current.y = Math.PI / 2.65 + progress * (Math.PI / 1.5)
       } else {
         // 3. After Programs Section
         // Hold horizontal yaw, resume moving downwards to sea bed
-        targetRotation.current.y = Math.PI / 1.5
+        targetRotation.current.y = Math.PI / 2.65 + Math.PI / 1.5
         
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight
         const distanceRemaining = maxScroll - programsTop
         const progress = distanceRemaining > 0 ? (scrollY - programsTop) / distanceRemaining : 1
         
         // Pitch downwards sharply to show sea bed
-        targetRotation.current.x = -Math.PI / 3 + (Math.PI / 8) + progress * (Math.PI / 2)
+        targetRotation.current.x = -Math.PI / 8 + (Math.PI / 8) + progress * (Math.PI / 2)
       }
     }
     
@@ -75,11 +75,61 @@ function VideoSphere() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // --- DRAG LOGIC ---
+  const isDragging = useRef(false)
+  const previousPointer = useRef({ x: 0, y: 0 })
+  const dragOffset = useRef({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const onPointerDown = (e) => {
+      // Do not initiate drag if the user is clicking on an interactive element (buttons, links, etc.)
+      if (e.target.closest('button, a, input, textarea, select, [role="button"]')) {
+        return
+      }
+      
+      isDragging.current = true
+      previousPointer.current = { x: e.clientX, y: e.clientY }
+    }
+    
+    const onPointerMove = (e) => {
+      if (!isDragging.current) return
+      
+      // Calculate delta
+      const dx = e.clientX - previousPointer.current.x
+      const dy = e.clientY - previousPointer.current.y
+      previousPointer.current = { x: e.clientX, y: e.clientY }
+      
+      // Update drag offsets
+      dragOffset.current.y -= dx * 0.005 
+      dragOffset.current.x -= dy * 0.005
+    }
+    
+    const onPointerUp = () => {
+      isDragging.current = false
+    }
+
+    window.addEventListener('pointerdown', onPointerDown)
+    window.addEventListener('pointermove', onPointerMove, { passive: false })
+    window.addEventListener('pointerup', onPointerUp)
+    window.addEventListener('pointercancel', onPointerUp)
+
+    return () => {
+      window.removeEventListener('pointerdown', onPointerDown)
+      window.removeEventListener('pointermove', onPointerMove)
+      window.removeEventListener('pointerup', onPointerUp)
+      window.removeEventListener('pointercancel', onPointerUp)
+    }
+  }, [])
+
   useFrame((state, delta) => {
     if (meshRef.current) {
-      // Smoothly interpolate the mesh rotation towards the scroll target
-      meshRef.current.rotation.y += (targetRotation.current.y - meshRef.current.rotation.y) * delta * 5
-      meshRef.current.rotation.x += (targetRotation.current.x - meshRef.current.rotation.x) * delta * 5
+      // Combine programmatic scroll rotation with user's manual drag offset
+      const finalTargetX = targetRotation.current.x + dragOffset.current.x
+      const finalTargetY = targetRotation.current.y + dragOffset.current.y
+      
+      // Smoothly interpolate the mesh rotation towards the combined target
+      meshRef.current.rotation.y += (finalTargetY - meshRef.current.rotation.y) * delta * 5
+      meshRef.current.rotation.x += (finalTargetX - meshRef.current.rotation.x) * delta * 5
     }
   })
 
@@ -101,22 +151,24 @@ export default function VideoSphereBackground() {
   if (!mounted) return null // Prevent SSR/hydration mismatches if any
 
   return (
-    <div className="fixed inset-0 -z-10 bg-navy">
-      <Canvas camera={{ position: [0, 0, 0.1], fov: 75 }}>
-        <Suspense fallback={null}>
-          <VideoSphere />
-        </Suspense>
-        <OrbitControls
-          enableZoom={false}
-          enablePan={false}
-          enableDamping={true}
-          dampingFactor={0.05}
-          autoRotate={false}
-          rotateSpeed={-0.5} // Invert rotation since we are inside the sphere
-        />
-      </Canvas>
-      {/* Subtle Gradient Vignette Overlay to ensure text readability */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-navy/70 via-transparent to-navy/90" />
+    <div className="absolute inset-0 -z-10">
+      <div className="sticky top-0 h-[100dvh] w-full bg-navy overflow-hidden">
+        <Canvas camera={{ position: [0, 0, 0.1], fov: 90 }}>
+          <Suspense fallback={null}>
+            <VideoSphere />
+          </Suspense>
+          <OrbitControls
+            enableZoom={false}
+            enablePan={false}
+            enableDamping={true}
+            dampingFactor={0.05}
+            autoRotate={false}
+            rotateSpeed={-0.5} // Invert rotation since we are inside the sphere
+          />
+        </Canvas>
+        {/* Subtle Gradient Vignette Overlay to ensure text readability */}
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-navy/70 via-transparent to-navy/90" />
+      </div>
     </div>
   )
 }

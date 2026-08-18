@@ -24,7 +24,7 @@ export default function CustomCursor() {
       cursorX.set(e.clientX)
       cursorY.set(e.clientY)
       
-      const isClickableHovered = e.target.closest('header, footer, a, button, [role="button"]')
+      const isClickableHovered = e.target.closest('header, footer, a, button, [role="button"], #dive-map-container')
       
       // If over the header/footer or any clickable element, show standard cursor
       if (isClickableHovered) {

@@ -2,15 +2,17 @@ import { useState } from 'react'
 import { useSearchParams } from 'react-router'
 import { IMAGES } from '../utils/images'
 import InteractiveVideoSphere from '../components/InteractiveVideoSphere'
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 const PROGRAMS = [
-  { id: 'try-experiences', label: 'Try Experiences', price: '$99' },
-  { id: 'certification', label: 'Certification Pathway', price: '$399' },
-  { id: 'rescue-refresher', label: 'Rescue & Refresher', price: '$299' },
-  { id: 'fun-dives', label: 'Fun Dives', price: '$149' },
-  { id: 'snorkeling', label: 'Snorkeling', price: '$49' },
-  { id: 'combos', label: 'Combos', price: '$499' },
-  { id: 'pro-courses', label: 'Pro Courses', price: '$899' },
+  { id: 'try-experiences', label: 'Try Experiences', price: 'Contact Us' },
+  { id: 'certification', label: 'Certification Pathway', price: 'Contact Us' },
+  { id: 'rescue-refresher', label: 'Rescue & Refresher', price: 'Contact Us' },
+  { id: 'fun-dives', label: 'Fun Dives', price: 'Contact Us' },
+  { id: 'snorkeling', label: 'Snorkeling', price: 'Contact Us' },
+  { id: 'combos', label: 'Combos', price: 'Contact Us' },
+  { id: 'pro-courses', label: 'Pro Courses', price: 'Contact Us' },
 ]
 
 export default function BookUs() {
@@ -24,6 +26,7 @@ export default function BookUs() {
     name: '',
     email: '',
     phone: '',
+    requests: '',
   })
 
   const [submitted, setSubmitted] = useState(false)
@@ -174,27 +177,38 @@ export default function BookUs() {
                 </div>
                 <div>
                   <label className="mb-3 block text-xs font-bold text-navy/70">Phone Number</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="+91 8971001010"
+                  <PhoneInput
+                    defaultCountry="IN"
+                    placeholder="8971001010"
                     value={booking.phone}
-                    onChange={handleChange}
-                    required
-                    className="w-full rounded-2xl bg-[#F0F2F5] px-5 py-4 text-sm text-navy outline-none focus:ring-2 focus:ring-accent/50 transition placeholder:text-navy/30"
+                    onChange={(value) => setBooking(prev => ({ ...prev, phone: value }))}
+                    className="w-full rounded-2xl bg-[#F0F2F5] px-5 py-4 text-sm text-navy outline-none focus-within:ring-2 focus-within:ring-accent/50 transition [&_.PhoneInputCountryIcon]:rounded-sm [&_.PhoneInputInput]:bg-transparent [&_.PhoneInputInput]:outline-none [&_.PhoneInputInput]:border-none [&_.PhoneInputCountrySelect]:outline-none [&_.PhoneInputCountryIcon--border]:border-none [&_.PhoneInputInput]:ml-3"
                   />
                 </div>
+              </div>
+
+              {/* Special Requests */}
+              <div>
+                <label className="mb-3 block text-xs font-bold text-navy/70">Special Requests / Expectations</label>
+                <textarea
+                  name="requests"
+                  placeholder="Any dietary requirements, medical conditions, or specific expectations we should know about?"
+                  value={booking.requests}
+                  onChange={handleChange}
+                  rows="3"
+                  className="w-full rounded-2xl bg-[#F0F2F5] px-5 py-4 text-sm text-navy outline-none focus:ring-2 focus:ring-accent/50 transition placeholder:text-navy/30 resize-y"
+                ></textarea>
               </div>
 
               {/* Booking Summary Inline */}
               {selectedProgram && (
                 <div className="mt-8 rounded-3xl bg-white p-6 border border-navy/5 shadow-sm">
                   <div className="flex justify-between items-center pb-4 border-b border-navy/5">
-                    <span className="text-sm font-bold text-navy/70">Estimated Total</span>
-                    <span className="font-heading text-2xl font-bold text-navy">{selectedProgram.price}</span>
+                    <span className="text-sm font-bold text-navy/70">Program Selected</span>
+                    <span className="font-heading text-lg font-bold text-navy">{selectedProgram.label}</span>
                   </div>
                   <p className="mt-4 text-xs text-navy/50">
-                    No payment is required right now. We will confirm availability and send a payment link.
+                    We will confirm availability and get back to you with the next steps.
                   </p>
                 </div>
               )}

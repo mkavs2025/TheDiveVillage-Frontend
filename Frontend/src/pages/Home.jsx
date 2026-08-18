@@ -5,58 +5,69 @@ import Button from '../components/Button'
 import SafeImage from '../components/SafeImage'
 import SectionReveal, { StaggerGrid, StaggerItem } from '../components/SectionReveal'
 import { IMAGES, CAROUSEL_IMAGES } from '../utils/images'
-import VideoSphereBackground from '../components/VideoSphereBackground'
-import rayImg from '../assets/ray.png'
-import turtleImg from '../assets/rayy.png'
-const AboutSection = lazy(() => import('../components/AboutSection'))
 const ProgramsPreview = lazy(() => import('../components/ProgramsPreview'))
 const TrainingSafety = lazy(() => import('../components/TrainingSafety'))
 const GalleryPreview = lazy(() => import('../components/GalleryPreview'))
-
-const WHY = [
-  {
-    title: 'Authentic Experiences',
-    desc: 'Community-driven dive experiences tailored to every individual.',
-    icon: GroupIcon,
-  },
-  {
-    title: 'Expert Instructors',
-    desc: 'Top-tier safety practices guided by experienced professionals.',
-    icon: InstructIcon,
-  },
-  {
-    title: 'Inclusive Environment',
-    desc: 'A welcoming space for enthusiastic beginners and seasoned pros alike.',
-    icon: TrainIcon,
-  },
-  {
-    title: 'Ocean Stewardship',
-    desc: 'Sustainability and marine conservation at the core of everything we do.',
-    icon: OceanIcon,
-  },
-  {
-    title: 'Seamless Journeys',
-    desc: 'From travel to stay, we ensure your trip is hassle-free.',
-    icon: SupportIcon,
-  },
-]
+const InteractiveDiveMap = lazy(() => import('../components/InteractiveDiveMap'))
 
 const POWER = [
   {
     title: 'Unique Skill Development',
-    desc: 'Builds confidence, discipline, and responsibility through mastering safety protocols and equipment handling.',
-  },
-  {
-    title: 'Physical & Mental Growth',
-    desc: "Enhances fitness, focus, and stress management. It's not just adventure — it's therapy, delivered by nature herself.",
+    desc: 'It Builds confidence, discipline, and responsibility through mastering safety protocols and equipment handling.',
   },
   {
     title: 'STEM Integration',
-    desc: 'Connects to biology, physics (pressure, buoyancy), and environmental science.',
+    desc: 'Directly connects to biology (self and marine ecosystems), physics (pressure, buoyancy) and environmental science (conservation).',
+  },
+  {
+    title: 'Physical & Mental Growth',
+    desc: 'Enhances fitness, focus, and stress management while encouraging mindfulness in nature.',
   },
   {
     title: 'Global Citizenship',
-    desc: 'Instils respect for oceans and sustainability.',
+    desc: 'Instils respect for oceans and sustainability, aligning with modern educational goals.',
+  },
+]
+const HIGHLIGHTS_DATA = [
+  {
+    id: 'scuba',
+    title: 'Introductory Programs',
+    desc: 'Experience scuba safely in shallow water with professional supervision.',
+    image: IMAGES.scubaHero,
+    link: '/courses/scuba',
+    btnText: 'Explore Scuba'
+  },
+  {
+    id: 'snorkeling',
+    title: 'Guided Snorkeling',
+    desc: 'Discover snorkeling and explore the ocean up close. The ocean welcomes all.',
+    image: IMAGES.snorkelingHero,
+    link: '/courses/snorkeling',
+    btnText: 'Explore Snorkeling'
+  },
+  {
+    id: 'courses',
+    title: 'Certified Courses',
+    desc: 'From your very first breath underwater to professional divemaster certifications.',
+    image: IMAGES.hero,
+    link: '/courses',
+    btnText: 'View Courses'
+  },
+  {
+    id: 'surfing',
+    title: 'Freediving',
+    desc: 'Breath-hold freediving to explore the ocean with just your natural abilities.',
+    image: IMAGES.surfingHero,
+    link: '/courses/surfing',
+    btnText: 'Explore Freediving'
+  },
+  {
+    id: 'products',
+    title: 'Flexible Fun Dives',
+    desc: 'Every experience is a step deeper into the world of the ocean.',
+    image: IMAGES.gear1,
+    link: '/shop',
+    btnText: 'View Packages'
   },
 ]
 
@@ -65,10 +76,6 @@ export default function Home() {
 
   return (
     <div className="overflow-x-hidden relative isolate pointer-events-none">
-      {/* Interactive 360 Video Background for entire page */}
-      <Suspense fallback={<div className="fixed inset-0 -z-10 bg-navy" />}>
-        <VideoSphereBackground />
-      </Suspense>
 
       {/* 1. HERO */}
       <section className="relative -mt-16 flex min-h-screen items-center justify-start pt-16 sm:-mt-[72px] sm:pt-[72px] pointer-events-none">
@@ -85,7 +92,7 @@ export default function Home() {
                 More Than a Destination
               </span>
               <h1 className="mt-5 font-heading text-5xl font-extrabold tracking-wide text-white text-balance sm:text-6xl md:text-[5.5rem] md:leading-[1.1]">
-                It's a <em className="not-italic font-heading italic font-bold text-[#064979]">Community</em>
+                It's a <em className="not-italic font-heading italic font-bold text-white">Community</em>
               </h1>
               <p className="mt-6 max-w-xl text-lg text-white/90 sm:text-xl">
                 The Dive Village was born from a simple belief: that the life-changing magic of the ocean is a feeling meant to be shared.
@@ -119,41 +126,27 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* 2. THE CALL OF THE OCEAN */}
+      {/* HIGHLIGHTS */}
       <section className="relative z-10 pb-24 pt-16 sm:pt-20 pointer-events-auto">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionReveal className="mb-12 text-center">
+            <h2 className="font-heading text-h2 font-extrabold text-white">
+              Explore Our Programs
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-white/70">
+              From your very first breath underwater to professional divemaster certifications.
+            </p>
+          </SectionReveal>
           <SectionReveal>
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="font-heading text-h2 font-extrabold text-white">
-                What Diving <em className="font-heading italic font-bold text-accent">Truly Means</em>
-              </h2>
-              <p className="mt-4 text-lg text-white/70 leading-relaxed">
-                Diving is more than an activity — it's an awakening of the senses. Below the waves, silence deepens. Each breath, a conscious choice. Each moment, fully yours. The underwater world transforms chaos into calm and sound into serenity.
-              </p>
-              <blockquote className="mt-12 border-l-2 border-accent pl-6 text-left font-heading text-xl italic text-white sm:text-2xl">
-                "To dive is to discover yourself — one breath at a time."
-              </blockquote>
-            </div>
+            <InteractiveHighlights />
           </SectionReveal>
         </div>
       </section>
 
-      {/* 3. ABOUT SANJEEV */}
-      <div id="about-section" className="pointer-events-auto">
-        <Suspense fallback={<div className="py-20 text-center text-navy/50">Loading Story...</div>}>
-          <AboutSection />
-        </Suspense>
-      </div>
+
 
       {/* 4. WHO CAN DIVE */}
       <section className="relative py-24 sm:py-32 pointer-events-auto">
-        <motion.img 
-          src={turtleImg} 
-          alt="Turtle" 
-          className="absolute left-[-10%] sm:left-[5%] top-20 w-[150px] sm:w-[250px] opacity-20 pointer-events-none mix-blend-screen -rotate-12"
-          animate={{ y: [0, -40, 0], x: [0, 20, 0], rotate: [-12, -8, -12] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionReveal className="mb-16 text-center">
             <h2 className="font-heading text-h2 font-extrabold text-white">
@@ -220,6 +213,27 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 5.5 INTERACTIVE MAP */}
+      <div className="pointer-events-auto">
+        <Suspense fallback={<div className="py-20 text-center text-navy/50">Loading Dive Map...</div>}>
+          <section className="relative py-24 sm:py-32">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <SectionReveal className="mb-16 text-center">
+                <h2 className="font-heading text-h2 font-extrabold text-white">
+                  Explore Our <em className="font-heading italic font-bold text-accent">Dive Sites</em>
+                </h2>
+                <p className="mx-auto mt-4 max-w-2xl text-white/70">
+                  Interact with the globe to discover the underwater wonders waiting for you across our island bases.
+                </p>
+              </SectionReveal>
+              <SectionReveal>
+                <InteractiveDiveMap />
+              </SectionReveal>
+            </div>
+          </section>
+        </Suspense>
+      </div>
+
       {/* 5. COURSES & TRIPS PREVIEW */}
       <div id="programs-section" className="pointer-events-auto">
         <Suspense fallback={<div className="py-20 text-center text-navy/50">Loading Programs...</div>}>
@@ -236,17 +250,10 @@ export default function Home() {
 
       {/* 6. WHY DIVE VILLAGE */}
       <section className="relative py-24 text-white sm:py-32 pointer-events-auto">
-        <motion.img 
-          src={rayImg} 
-          alt="Manta Ray" 
-          className="absolute right-[-15%] sm:right-[5%] top-1/4 w-[250px] sm:w-[400px] opacity-20 pointer-events-none mix-blend-screen rotate-12"
-          animate={{ y: [0, -60, 0], x: [0, -40, 0], rotate: [12, 18, 12] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionReveal className="text-center mb-16">
             <h2 className="font-heading text-h2 font-extrabold text-white">
-              From Journey to Stay — <em className="font-heading italic font-bold text-accent">We've Got You Covered</em>
+              From Airport to Airport — <em className="font-heading italic font-bold text-accent">We've Got You Covered</em>
             </h2>
           </SectionReveal>
           <div className="grid gap-8 lg:gap-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -292,7 +299,53 @@ export default function Home() {
   )
 }
 
-function AutoCarousel({ images }) {
+function InteractiveHighlights() {
+  return (
+    <div className="perspective-[1500px] mx-auto w-full max-w-[95vw] lg:max-w-7xl h-[450px] sm:h-[550px] flex items-center justify-center overflow-visible my-12">
+      <div className="relative w-full h-full preserve-3d animate-spin-carousel hover:[animation-play-state:paused]">
+        {[...HIGHLIGHTS_DATA, ...HIGHLIGHTS_DATA].map((current, i) => (
+          <div 
+            key={`${current.id}-${i}`}
+            className="absolute inset-0 flex items-center justify-center backface-hidden"
+            style={{
+              transform: `rotateY(${i * 36}deg) translateZ(clamp(300px, 60vw, 650px))`
+            }}
+          >
+            <div className="w-[260px] sm:w-[320px] h-[360px] sm:h-[420px] rounded-2xl overflow-hidden shadow-2xl relative border border-white/20 bg-navy/10 group">
+              <img
+                src={current.image}
+                alt={current.title}
+                className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent opacity-90 transition duration-300" />
+              
+              <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">
+                <span className="inline-block text-accent font-heading font-bold uppercase tracking-widest text-[10px] mb-2">
+                  Featured
+                </span>
+                <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-white leading-tight mb-3">
+                  {current.title}
+                </h3>
+                <p className="text-white/80 text-xs sm:text-sm mb-6 line-clamp-3">
+                  {current.desc}
+                </p>
+                <Button
+                  as={Link}
+                  to={current.link}
+                  className="bg-accent text-navy border-none py-2.5 px-4 text-sm w-full shadow-sm hover:bg-white transition-all duration-300"
+                >
+                  {current.btnText}
+                </Button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function AutoCarousel({ images, showContent = true }) {
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
@@ -319,29 +372,31 @@ function AutoCarousel({ images }) {
       <div className="absolute inset-0 bg-navy/10 mix-blend-multiply z-10" />
       <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/40 to-transparent z-10" />
       
-      <div className="absolute inset-0 z-20 flex flex-col justify-center p-8 sm:p-12 lg:p-16">
-        <div className="max-w-xl">
-          <span className="inline-block text-accent font-heading font-bold uppercase tracking-widest text-xs mb-4">
-            The Sea is Calling
-          </span>
-          <h3 className="font-heading text-4xl sm:text-5xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-6 tracking-tight">
-            Come for the adventure.<br/>
-            <span className="text-white/60">Stay for the calm.</span>
-          </h3>
-          <p className="text-white/80 font-medium text-base sm:text-lg mb-8 max-w-sm">
-            Leave with stories that last a lifetime.
-          </p>
-          <Button
-            as={Link}
-            to="/book-us"
-            variant="secondary"
-            className="!bg-white !text-navy !border-0 hover:!bg-accent hover:!text-white shadow-sm transition-all duration-300 hover:scale-105"
-          >
-            Book Your Dive
-            <ArrowIcon />
-          </Button>
+      {showContent && (
+        <div className="absolute inset-0 z-20 flex flex-col justify-center p-8 sm:p-12 lg:p-16">
+          <div className="max-w-xl">
+            <span className="inline-block text-accent font-heading font-bold uppercase tracking-widest text-xs mb-4">
+              The Sea is Calling
+            </span>
+            <h3 className="font-heading text-4xl sm:text-5xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-6 tracking-tight">
+              Come for the adventure.<br/>
+              <span className="text-white/60">Stay for the calm.</span>
+            </h3>
+            <p className="text-white/80 font-medium text-base sm:text-lg mb-8 max-w-sm">
+              Leave with stories that last a lifetime.
+            </p>
+            <Button
+              as={Link}
+              to="/book-us"
+              variant="secondary"
+              className="!bg-white !text-navy !border-0 hover:!bg-accent hover:!text-white shadow-sm transition-all duration-300 hover:scale-105"
+            >
+              Book Your Dive
+              <ArrowIcon />
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

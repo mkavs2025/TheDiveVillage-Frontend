@@ -13,12 +13,12 @@ import c5 from '../assets/Carosel/WhatsApp Image 2026-07-31 at 9.36.43 AM.jpeg'
 import c6 from '../assets/Carosel/WhatsApp Image 2026-07-31 at 9.36.44 AM.jpeg'
 
 const GALLERY_IMAGES = [
-  { id: 1, src: c1, category: 'Islands & Lagoons', alt: 'Gallery Image 1' },
-  { id: 2, src: c2, category: 'Coral Reefs', alt: 'Gallery Image 2' },
-  { id: 3, src: c3, category: 'Diving in Action', alt: 'Gallery Image 3' },
-  { id: 4, src: c4, category: 'Community Moments', alt: 'Gallery Image 4' },
-  { id: 5, src: c5, category: 'Islands & Lagoons', alt: 'Gallery Image 5' },
-  { id: 6, src: c6, category: 'Diving in Action', alt: 'Gallery Image 6' },
+  { id: 1, src: c1, location: 'Havelock Island', alt: 'Gallery Image 1' },
+  { id: 2, src: c2, location: 'Goa Coast', alt: 'Gallery Image 2' },
+  { id: 3, src: c3, location: 'Lakshadweep', alt: 'Gallery Image 3' },
+  { id: 4, src: c4, location: 'Pondicherry', alt: 'Gallery Image 4' },
+  { id: 5, src: c5, location: 'Andaman Sea', alt: 'Gallery Image 5' },
+  { id: 6, src: c6, location: 'Netrani Island', alt: 'Gallery Image 6' },
 ]
 
 export default function GalleryPreview() {
@@ -29,7 +29,7 @@ export default function GalleryPreview() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionReveal className="mb-12 text-center">
           <h2 className="font-heading text-h2 font-extrabold text-white">
-            The Dive Village, <em className="font-heading italic font-bold text-accent">Lakshadweep</em>
+            The Dive Village <em className="font-heading italic font-bold text-accent">Gallery</em>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-white/80">
             Where the sea is your classroom, playground, and escape.
@@ -61,7 +61,7 @@ export default function GalleryPreview() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
                   <span className="absolute bottom-4 left-4 rounded-full bg-white/20 px-3 py-1 text-xs font-bold text-white opacity-0 backdrop-blur-md transition duration-300 group-hover:opacity-100">
-                    {img.category}
+                    {img.location}
                   </span>
                 </div>
               </div>

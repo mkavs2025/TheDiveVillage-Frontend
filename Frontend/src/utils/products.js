@@ -1,61 +1,185 @@
-import diveSuit from '../assets/Products/dive suit 2 .png'
-import shorts from '../assets/Products/shorts 2 .png'
-import sweetheartNeckline from '../assets/Products/sweerheart neckline 2.png'
-import unisexFullSleeve from '../assets/Products/unisex full sleeve 2.png'
-import womans from '../assets/Products/womans 2.png'
-import womansSwimPants from '../assets/Products/womans swim pants 2.png'
+import { IMAGES, CAROUSEL_IMAGES } from './images'
+
+import imgWomensShirtFront from '../assets/Products/Womans sweetheart front upscaled.png'
+import imgWomensShirtBack from '../assets/Products/Womans sweetheart back upscaled.png'
+import imgWomensPantsFront from '../assets/Products/Womans pants front upscaled.png'
+import imgWomensPantsBack from '../assets/Products/Womans pants back upscaled.png'
+import imgWomensStrapFront from '../assets/Products/Womans front upscaled.png'
+import imgWomensStrapBack from '../assets/Products/Womans Back Upscaled.png'
+import imgUnisexShortsFront from '../assets/Products/Unisex Shorts front upscaled.png'
+import imgUnisexShortsBack from '../assets/Products/Unisex shorts back upscaled.png'
+import imgUnisexShirtFront from '../assets/Products/unisex front upscaled.png'
+import imgUnisexShirtBack from '../assets/Products/Unisex back upscaled.png'
+import imgDiveSuitFront from '../assets/Products/Dive Suit Front.png'
+import imgDiveSuitBack from '../assets/Products/Dive suit back.png'
 
 export const SHOP_PRODUCTS = [
   {
-    id: 'dive-suit',
-    title: 'Essential Dive Suit',
-    price: '$129.99',
-    oldPrice: '$159.99',
-    image: diveSuit,
-    category: 'Wetsuits',
-    tag: 'Best Seller',
-    description: 'Premium heavyweight neoprene dive suit with an oversized fit for ultimate comfort and modern style.',
-  },
-  {
-    id: 'unisex-full-sleeve',
-    title: 'Unisex Full Sleeve Rash Guard',
-    price: '$59.99',
-    oldPrice: '$89.99',
-    image: unisexFullSleeve,
-    category: 'Rash Guards',
+    id: 'product-womens-shirt',
+    title: 'Women’s Dive Shirt (Sweetheart Neck)',
+    name: 'Women’s Dive Shirt',
+    price: 2499,
+    oldPrice: 2999,
+    image: imgWomensShirtFront,
+    images: [imgWomensShirtFront, imgWomensShirtBack],
+    category: 'Apparel',
     tag: 'New Arrival',
-    description: 'Crafted from high-quality UPF 50+ fabric, this full sleeve rash guard delivers unmatched comfort and durability.',
+    description: 'Stay protected and stylish in the water. Features a sweetheart neckline, premium stretch, and sun protection.',
+    features: [
+      'UPF 50+ Protection: Helps protect your skin from harmful UV rays during outdoor activities.',
+      'Quick-Dry Fabric: Dries quickly after getting wet, keeping you comfortable in and out of the water.',
+      '4-Way Stretch: Flexible fabric allows easy movement without restricting your mobility.',
+      'Lightweight & Breathable: Lightweight fabric allows airflow and keeps you comfortable during extended wear.'
+    ],
+    materials: 'High-grade stretch fabric with UPF 50+.',
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    colors: [
+      { name: 'Ocean Navy', hex: '#003865' }
+    ],
+    stock: 35,
+    stockStatus: 'In Stock',
+    shippingDetails: 'Standard shipping available.',
+    rating: 4.9,
+    reviewCount: 42,
   },
   {
-    id: 'sweetheart-neckline',
-    title: 'Sweetheart Neckline Swim Top',
-    price: '$45.00',
-    image: sweetheartNeckline,
-    category: 'Swimwear',
-    description: 'Elegant sweetheart neckline design offering both style and support for your surface intervals.',
+    id: 'product-womens-pants',
+    title: 'Women’s Dive Pants',
+    name: 'Women’s Dive Pants',
+    price: 2999,
+    oldPrice: 3499,
+    image: imgWomensPantsFront,
+    images: [imgWomensPantsFront, imgWomensPantsBack],
+    category: 'Apparel',
+    tag: 'Bestseller',
+    description: 'High-waisted dive pants offering full-length coverage and thigh-smoothing panels for ultimate comfort and confidence.',
+    features: [
+      'High-Waist Fit: Provides comfortable coverage and a secure fit while keeping you supported during movement.',
+      '4-Way Stretch: Flexible fabric allows easy movement and comfort during swimming, diving, and other water activities.',
+      'Thigh-Smoothing Panels: Designed to provide extra coverage and create a smoother appearance around the thighs.',
+      'Full-Length Coverage: Offers extended coverage for your legs while providing comfort and protection during water activities.'
+    ],
+    materials: 'Premium stretch fabric.',
+    sizes: ['S', 'M', 'L', 'XL'],
+    colors: [
+      { name: 'Ocean Navy', hex: '#003865' }
+    ],
+    stock: 20,
+    stockStatus: 'In Stock',
+    shippingDetails: 'Standard shipping available.',
+    rating: 4.8,
+    reviewCount: 89,
   },
   {
-    id: 'womans-swim-pants',
-    title: 'Womens Swim Pants',
-    price: '$55.00',
-    image: womansSwimPants,
-    category: 'Swimwear',
-    description: 'High-waisted, comfortable swim pants perfect for diving, snorkeling, or lounging on the boat.',
+    id: 'product-womens-strap',
+    title: 'Women’s Shoulder Strap Top',
+    name: 'Women’s Shoulder Strap Top',
+    price: 1999,
+    oldPrice: 2499,
+    image: imgWomensStrapFront,
+    images: [imgWomensStrapFront, imgWomensStrapBack],
+    category: 'Apparel',
+    tag: 'Essential',
+    description: 'Supportive and comfortable dive top featuring heavy-duty Velcro straps and built-in chest support.',
+    features: [
+      'Heavy-Duty Velcro Straps: Strong Velcro fastening keeps the shoulder straps securely in place during movement and water activities.',
+      'Built-In Chest Support: Integrated support cups provide added coverage and a secure, comfortable fit.',
+      'Stretch-Fit Fabric: Flexible fabric moves with your body for unrestricted movement while swimming or diving.',
+      'Full-Body Coverage: Provides comfortable coverage across the torso and upper legs for added protection in the water.'
+    ],
+    materials: 'Performance dive fabric with built-in cups.',
+    sizes: ['S', 'M', 'L'],
+    colors: [
+      { name: 'Ocean Navy', hex: '#003865' }
+    ],
+    stock: 15,
+    stockStatus: 'Low Stock',
+    shippingDetails: 'Standard shipping available.',
+    rating: 4.7,
+    reviewCount: 34,
   },
   {
-    id: 'womans-one-piece',
-    title: 'Womens Classic One Piece',
-    price: '$79.99',
-    image: womans,
-    category: 'Swimwear',
-    description: 'A timeless one-piece silhouette with modern performance fabrics for all-day water activities.',
+    id: 'product-unisex-shorts',
+    title: 'Unisex Dive Shorts',
+    name: 'Unisex Dive Shorts',
+    price: 1799,
+    oldPrice: 2199,
+    image: imgUnisexShortsFront,
+    images: [imgUnisexShortsFront, imgUnisexShortsBack],
+    category: 'Apparel',
+    tag: 'Comfort',
+    description: 'Experience seamless comfort with these dive shorts, designed without visible stitching to reduce irritation.',
+    features: [
+      'Seamless Comfort: Designed without visible seams or stitching that can rub against the skin during water activities.',
+      'Hip-Friendly Waistband: The smooth waist construction helps reduce irritation around the hips, especially during extended wear in the water.',
+      'Stretch-Fit Fabric: Flexible fabric moves naturally with your body for unrestricted movement while swimming or diving.',
+      'Lightweight & Quick-Dry: Lightweight fabric dries quickly after getting wet, keeping you comfortable in and out of the water.'
+    ],
+    materials: 'Seamless stretch fabric.',
+    sizes: ['M', 'L', 'XL', 'XXL'],
+    colors: [
+      { name: 'Ocean Navy', hex: '#003865' }
+    ],
+    stock: 50,
+    stockStatus: 'In Stock',
+    shippingDetails: 'Standard shipping available.',
+    rating: 4.9,
+    reviewCount: 112,
   },
   {
-    id: 'dive-shorts',
-    title: 'Minimalist Dive Shorts',
-    price: '$35.00',
-    image: shorts,
-    category: 'Bottoms',
-    description: 'Quick-drying, minimalist shorts designed for maximum mobility underwater.',
+    id: 'product-unisex-shirt',
+    title: 'Unisex Dive Shirt',
+    name: 'Unisex Dive Shirt',
+    price: 2299,
+    oldPrice: 2799,
+    image: imgUnisexShirtFront,
+    images: [imgUnisexShirtFront, imgUnisexShirtBack],
+    category: 'Apparel',
+    tag: 'Essential',
+    description: 'A versatile, lightweight dive shirt featuring hidden neck seams and quick-dry fabric for all-day comfort.',
+    features: [
+      'Hidden Neck Seams: Seams are finished and tucked inside the collar to prevent stitching from rubbing against the neck.',
+      'Quick-Dry Fabric: Dries quickly after getting wet, helping you stay comfortable in and out of the water.',
+      '4-Way Stretch: Flexible fabric moves with your body for unrestricted movement during swimming and diving.',
+      'Lightweight & Breathable: Lightweight construction allows airflow and keeps you comfortable during extended wear.'
+    ],
+    materials: 'Breathable 4-way stretch technical fabric.',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: [
+      { name: 'Ocean Navy', hex: '#003865' }
+    ],
+    stock: 45,
+    stockStatus: 'In Stock',
+    shippingDetails: 'Standard shipping available.',
+    rating: 4.8,
+    reviewCount: 76,
   },
+  {
+    id: 'product-full-suit',
+    title: 'Full-Body Dive Suit',
+    name: 'Full-Body Dive Suit',
+    price: 6999,
+    oldPrice: 8999,
+    image: imgDiveSuitFront,
+    images: [imgDiveSuitFront, imgDiveSuitBack],
+    category: 'Gear',
+    tag: 'Premium',
+    description: 'Ultimate full-body protection with grip panels on the knees and seat, front zip closure, and stirrup foot straps.',
+    features: [
+      'Grip Panels: Textured panels on the knees and seat provide added grip and support where you need it most.',
+      'Front Zip Closure: A full-length front zipper makes the suit easier to put on and take off while providing a secure fit.',
+      'Stirrup Foot Straps: Integrated foot straps help keep the suit securely in place and prevent the legs from riding up during movement.',
+      'Full-Body Coverage: Provides extended coverage from the neck to the ankles for added protection and comfort in the water.'
+    ],
+    materials: 'Premium neoprene with textured grip panels.',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: [
+      { name: 'Ocean Navy', hex: '#003865' }
+    ],
+    stock: 12,
+    stockStatus: 'Low Stock',
+    shippingDetails: 'Free shipping on orders over ₹4000.',
+    rating: 5.0,
+    reviewCount: 28,
+  }
 ]
