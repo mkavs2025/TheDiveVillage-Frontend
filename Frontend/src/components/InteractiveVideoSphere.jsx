@@ -2,7 +2,7 @@ import { useState, useEffect, Suspense, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, useVideoTexture } from '@react-three/drei'
 import * as THREE from 'three'
-import videoFile from '../assets/VID_20260525_095921_00_220.mp4'
+import videoFile from '../assets/Hero.mp4'
 
 function SphereMesh({ autoRotate }) {
   const meshRef = useRef()

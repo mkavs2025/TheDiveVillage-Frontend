@@ -1,141 +1,25 @@
 import { useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { motion, useReducedMotion } from 'framer-motion'
 import Button from '../components/Button'
 import SafeImage from '../components/SafeImage'
 import { IMAGES, CAROUSEL_IMAGES } from '../utils/images'
 
-const SERVICES_DATA = [
-  {
-    id: 'service-1',
-    category: 'diving',
-    title: 'Try Dive',
-    subtitle: 'Beginner / Try Experiences',
-    badge: 'Popular',
-    desc: 'Experience scuba safely in shallow water with professional supervision. Perfect for absolute beginners.',
-    duration: '1 Day',
-    price: 'Contact Us',
-    inclusions: ['Professional supervision', 'Shallow water training', 'Equipment included', 'Min Age 8'],
-    image: IMAGES.scubaHero,
-    link: '/courses/scuba',
-    ctaText: 'Book Now',
-  },
-  {
-    id: 'service-2',
-    category: 'diving',
-    title: 'PADI Open Water Diver',
-    subtitle: 'Certification Pathway',
-    badge: 'Certification',
-    desc: 'Learn essential dive theory and complete open water dives to become a certified diver.',
-    duration: '3-4 Days',
-    price: 'Contact Us',
-    inclusions: ['Dive theory', 'Open water dives', 'PADI Certification', 'Equipment handling'],
-    image: CAROUSEL_IMAGES[1],
-    link: '/book-us',
-    ctaText: 'Start Course',
-  },
-  {
-    id: 'service-3',
-    category: 'snorkeling',
-    title: 'Discover Snorkeling',
-    subtitle: 'Non-Divers',
-    badge: 'Relaxing',
-    desc: 'Explore the reef from the surface. Discover snorkeling and experience the ocean up close.',
-    duration: 'Half Day',
-    price: 'Contact Us',
-    inclusions: ['Snorkel guide', 'Mask & fins', 'Reef exploration', 'No experience needed'],
-    image: IMAGES.snorkelingHero,
-    link: '/courses/snorkeling',
-    ctaText: 'Explore',
-  },
-  {
-    id: 'service-4',
-    category: 'freediving',
-    title: 'PADI Skin Diver',
-    subtitle: 'Certification Pathway',
-    badge: 'Breath-hold',
-    desc: 'Focus on breath-hold diving and safe descents. Explore the ocean with just your natural abilities.',
-    duration: '1-2 Days',
-    price: 'Contact Us',
-    inclusions: ['Breath-hold training', 'Safe descents', 'Equipment provided', 'Certification'],
-    image: IMAGES.surfingHero,
-    link: '/courses/surfing',
-    ctaText: 'Learn More',
-  },
-  {
-    id: 'service-5',
-    category: 'combos',
-    title: 'PADI DSD + Open Water',
-    subtitle: 'Bundled Options',
-    badge: 'Combo',
-    desc: 'Combine Discover Scuba Dive with the full Open Water certification for a comprehensive experience.',
-    duration: '3-4 Days',
-    price: 'Contact Us',
-    inclusions: ['DSD Experience', 'Open Water Course', 'Bundled discount', 'PADI Certification'],
-    image: IMAGES.gear1,
-    link: '/book-us',
-    ctaText: 'Book Combo',
-  },
-  {
-    id: 'service-6',
-    category: 'pro',
-    title: 'PADI Divemaster',
-    subtitle: 'Career Path',
-    badge: 'Professional',
-    desc: 'Take the first step in your dive career. Learn to lead dives and assist instructors.',
-    duration: '20-25 Days',
-    price: 'Contact Us',
-    inclusions: ['Professional training', 'Dive leadership', 'Safety protocols', 'Career guidance'],
-    image: CAROUSEL_IMAGES[0],
-    link: '/contact',
-    ctaText: 'Go Pro',
-  },
-  {
-    id: 'service-7',
-    category: 'diving',
-    title: 'Fun Dives',
-    subtitle: 'Leisure Add-ons',
-    badge: 'Packages',
-    desc: 'Flexible fun dive packages including Night Dives and Dawn Dives for certified divers.',
-    duration: '1 to 12 Dives',
-    price: 'Contact Us',
-    inclusions: ['Guided dives', 'Night/Dawn options', 'Flexible scheduling', 'Equipment rental available'],
-    image: CAROUSEL_IMAGES[5],
-    link: '/contact',
-    ctaText: 'View Packages',
-  },
-  {
-    id: 'service-8',
-    category: 'diving',
-    title: 'PADI Rescue Diver',
-    subtitle: 'Certification Pathway',
-    badge: 'Advanced',
-    desc: 'Learn to manage dive emergencies. A crucial step in expanding your diving knowledge and experience.',
-    duration: '3-4 Days',
-    price: 'Contact Us',
-    inclusions: ['Emergency management', 'Rescue scenarios', 'First response', 'Confidence building'],
-    image: CAROUSEL_IMAGES[4],
-    link: '/contact',
-    ctaText: 'Learn Rescue',
-  },
-]
-
-const CATEGORIES = [
-  { key: 'all', label: 'All Services' },
-  { key: 'diving', label: 'Scuba Diving' },
-  { key: 'snorkeling', label: 'Snorkeling' },
-  { key: 'freediving', label: 'Freediving' },
-  { key: 'combos', label: 'Combos' },
-  { key: 'pro', label: 'Pro Courses' },
-]
+import { CATEGORIES, SERVICES_DATA } from '../data/servicesData'
 
 export default function Services() {
   const [activeTab, setActiveTab] = useState('all')
+  const navigate = useNavigate()
   const reduce = useReducedMotion()
 
   const filtered = activeTab === 'all' 
     ? SERVICES_DATA 
     : SERVICES_DATA.filter((s) => s.category === activeTab)
+
+  const grouped = CATEGORIES.slice(1).map(cat => ({
+    category: cat,
+    services: filtered.filter(s => s.category === cat.key)
+  })).filter(g => g.services.length > 0)
 
   return (
     <div className="bg-[#FAFAFA] min-h-screen text-navy font-body pt-24 sm:pt-32 pb-24 overflow-x-hidden" style={{ textShadow: 'none' }}>
@@ -174,81 +58,65 @@ export default function Services() {
         </div>
 
         {/* 3. SERVICES GRID */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 sm:gap-10 mb-24">
-          {filtered.map((service, i) => (
-            <motion.div
-              key={service.id}
-              initial={reduce ? false : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
-              className="group rounded-[36px] bg-white border border-navy/5 overflow-hidden shadow-card hover:shadow-float transition duration-300 flex flex-col justify-between"
-            >
-              <div>
-                {/* Image header */}
-                <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-navy/10">
-                  <SafeImage
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover transition duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
-                  <div className="absolute top-4 left-4 flex gap-2">
-                    <span className="rounded-full bg-white/90 backdrop-blur-md px-3 py-1 text-xs font-bold text-navy shadow-sm">
-                      {service.badge}
-                    </span>
-                  </div>
-                  <div className="absolute bottom-4 left-6 right-6 flex items-end justify-between text-white">
-                    <div>
-                      <span className="text-xs uppercase tracking-widest text-accent font-bold block mb-1">
-                        {service.subtitle}
-                      </span>
-                      <h3 className="font-heading text-2xl font-bold">{service.title}</h3>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-6 sm:p-8">
-                  <p className="text-sm text-navy/75 leading-relaxed mb-6">
-                    {service.desc}
-                  </p>
-
-                  <div className="grid grid-cols-1 gap-4 py-4 border-y border-navy/10 mb-6 bg-[#FAFAFA] rounded-2xl p-4">
-                    <div>
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-navy/50 block">Duration</span>
-                      <span className="font-bold text-navy text-sm">{service.duration}</span>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-navy/60 mb-3">Key Inclusions:</h4>
-                    <ul className="space-y-2 mb-6">
-                      {service.inclusions.map((inc, idx) => (
-                        <li key={idx} className="flex items-center gap-2.5 text-xs sm:text-sm text-navy/80">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00AEC7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
-                            <polyline points="20 6 9 17 4 12" />
-                          </svg>
-                          <span>{inc}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Action Button */}
-              <div className="px-6 pb-6 sm:px-8 sm:pb-8 pt-0">
-                <Button
-                  as={Link}
-                  to={service.link}
-                  className="w-full justify-center bg-navy text-white hover:bg-accent hover:text-white transition-all shadow-sm"
+        {grouped.map((group) => (
+          <div key={group.category.key} className="mb-24">
+            <div className="mb-10">
+              <span className="inline-block bg-black/5 rounded-full px-4 py-1.5 text-xs font-bold text-navy/60 uppercase tracking-widest mb-3">
+                Category
+              </span>
+              <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-navy leading-none">
+                {group.category.label}
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {group.services.map((service, i) => (
+                <motion.div
+                  key={service.id}
+                  initial={reduce ? false : { opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ delay: (i % 4) * 0.05 }}
+                  onClick={() => navigate(`/services/${service.id}`)}
+                  onMouseEnter={(e) => e.currentTarget.querySelector('video')?.play().catch(() => {})}
+                  onMouseLeave={(e) => {
+                    const vid = e.currentTarget.querySelector('video')
+                    if (vid) {
+                      vid.pause()
+                      vid.currentTime = 0
+                    }
+                  }}
+                  className="group rounded-[32px] bg-white border border-navy/5 shadow-sm hover:shadow-float transition duration-300 flex flex-col justify-between cursor-pointer overflow-hidden relative"
                 >
-                  {service.ctaText} →
-                </Button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                  <div className="relative h-48 w-full overflow-hidden bg-navy/10 shrink-0">
+                    {service.video ? (
+                      <video src={service.video} loop muted playsInline className="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                    ) : (
+                      <SafeImage src={service.image} alt={service.title} className="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
+                    <div className="absolute bottom-4 left-5">
+                       <span className="text-[10px] font-bold uppercase tracking-wider text-accent mb-1 block">
+                        {CATEGORIES.find(c => c.key === service.category)?.label}
+                      </span>
+                      <h3 className="font-heading text-xl font-bold text-white leading-tight">{service.title}</h3>
+                    </div>
+                  </div>
+                  <div className="p-5 sm:p-6 flex-1 flex flex-col">
+                    <p className="text-sm text-navy/70 leading-relaxed font-medium">
+                      {service.short_desc}
+                    </p>
+                  </div>
+                  <div className="px-5 pb-5 sm:px-6 sm:pb-6 pt-0 mt-2">
+                    <div className="text-sm font-bold text-navy flex items-center justify-between">
+                      <span>View Details</span>
+                      <span className="text-xl group-hover:translate-x-1 transition-transform text-accent">→</span>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        ))}
 
         {/* 4. WHY CHOOSE OUR SERVICES */}
         <div className="rounded-[40px] bg-[#F0F2F5] p-8 sm:p-14 mb-24">

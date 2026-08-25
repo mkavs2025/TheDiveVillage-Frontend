@@ -122,27 +122,6 @@ export default function Shop() {
         </div>
       </section>
 
-      {/* 2. FEATURES MARQUEE */}
-      <section className="bg-navy text-white py-3.5 w-full overflow-hidden flex">
-        <div className="flex animate-marquee min-w-max">
-          <div className="flex items-center gap-12 px-6 text-xs sm:text-sm font-bold tracking-wider uppercase">
-            <span>🌊 Premium Limestone Neoprene</span>
-            <span>☀️ UPF 50+ Sun Protection</span>
-            <span>👕 GOTS Certified Organic Cotton</span>
-            <span>🧵 4-Way Hyper-Stretch</span>
-            <span>🤿 Ocean Tested in Lakshadweep & Andamans</span>
-            <span>🔒 100% Genuine Branded Gear</span>
-          </div>
-          <div className="flex items-center gap-12 px-6 text-xs sm:text-sm font-bold tracking-wider uppercase">
-            <span>🌊 Premium Limestone Neoprene</span>
-            <span>☀️ UPF 50+ Sun Protection</span>
-            <span>👕 GOTS Certified Organic Cotton</span>
-            <span>🧵 4-Way Hyper-Stretch</span>
-            <span>🤿 Ocean Tested in Lakshadweep & Andamans</span>
-            <span>🔒 100% Genuine Branded Gear</span>
-          </div>
-        </div>
-      </section>
 
       {/* 3. STORE CONTROLS (SEARCH, FILTER & SORT) */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-6">
@@ -336,8 +315,8 @@ export default function Shop() {
         <div className="rounded-[40px] bg-white border border-navy/5 p-8 sm:p-14 shadow-card grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="flex flex-col items-center text-center">
             <span className="text-3xl mb-3">🚚</span>
-            <h4 className="font-heading text-lg font-bold text-navy">Free Express Delivery</h4>
-            <p className="text-xs text-navy/70 mt-1">Complimentary shipping across India on all orders over ₹1,999.</p>
+            <h4 className="font-heading text-lg font-bold text-navy">Delivery</h4>
+            <p className="text-xs text-navy/70 mt-1">Delivery date and time will be confirmed through whatsapp.</p>
           </div>
           <div className="flex flex-col items-center text-center">
             <span className="text-3xl mb-3">🔄</span>

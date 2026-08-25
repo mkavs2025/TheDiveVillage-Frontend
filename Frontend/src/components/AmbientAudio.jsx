@@ -29,7 +29,7 @@ export default function AmbientAudio() {
       <audio ref={audioRef} src={audioSrc} loop playsInline />
       <button
         onClick={togglePlay}
-        className="fixed bottom-6 right-6 z-[9000] flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-white shadow-soft transition-all duration-300 hover:scale-110 hover:border-accent hover:text-accent"
+        className="fixed bottom-6 right-6 z-[9000] flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-white shadow-soft transition-all duration-300 hover:scale-110 hover:border-accent hover:text-accent"
         aria-label={isPlaying ? 'Pause ambient sound' : 'Play ambient sound'}
       >
         {isPlaying ? <SoundOnIcon /> : <SoundOffIcon />}
@@ -40,7 +40,7 @@ export default function AmbientAudio() {
 
 function SoundOnIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
         d="M11 5L6 9H2V15H6L11 19V5Z"
         stroke="currentColor"
@@ -61,7 +61,7 @@ function SoundOnIcon() {
 
 function SoundOffIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path
         d="M11 5L6 9H2V15H6L11 19V5Z"
         stroke="currentColor"

@@ -305,8 +305,8 @@ export default function ProductDetail() {
               <div className="flex items-start gap-3">
                 <span className="text-base">🚚</span>
                 <div>
-                  <span className="font-bold text-navy block">Shipping Details</span>
-                  <span>{product.shippingDetails || 'Free Standard Shipping on all orders over ₹1,999. Delivered in 3-5 business days across India.'}</span>
+                  <span className="font-bold text-navy block">Delivery Details</span>
+                  <span>Delivery date and time will be confirmed through whatsapp.</span>
                 </div>
               </div>
               <div className="flex items-start gap-3 pt-2 border-t border-navy/10">
@@ -415,9 +415,8 @@ export default function ProductDetail() {
 
           {activeTab === 'shipping' && (
             <div className="space-y-4 max-w-2xl text-sm text-navy/80 leading-relaxed">
-              <h3 className="font-heading text-2xl font-bold text-navy">Shipping & Return Guidelines</h3>
-              <p>• <strong>Free Domestic Shipping:</strong> Applicable on all orders exceeding ₹1,999 across India.</p>
-              <p>• <strong>Dispatch Timeline:</strong> Orders placed before 2 PM IST are dispatched on the same business day.</p>
+              <h3 className="font-heading text-2xl font-bold text-navy">Delivery & Return Guidelines</h3>
+              <p>• <strong>Delivery:</strong> Delivery date and time will be confirmed through whatsapp.</p>
               <p>• <strong>Island Delivery:</strong> We ship directly to island hubs in Lakshadweep and Andaman & Nicobar.</p>
               <p>• <strong>15-Day Exchange:</strong> If sizing does not fit perfectly, initiate an exchange request with free reverse pickup.</p>
             </div>

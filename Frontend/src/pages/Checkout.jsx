@@ -68,7 +68,7 @@ export default function Checkout() {
           <div className="bg-[#F0F4F8] rounded-3xl p-6 mb-8 text-left text-xs space-y-3">
             <div className="flex justify-between border-b border-navy/10 pb-2">
               <span className="text-navy/60">Estimated Delivery</span>
-              <strong className="text-navy">3-5 Business Days</strong>
+              <strong className="text-navy">Confirmed via WhatsApp</strong>
             </div>
             <div className="flex justify-between border-b border-navy/10 pb-2">
               <span className="text-navy/60">Confirmation Sent To</span>
@@ -267,8 +267,8 @@ export default function Checkout() {
                         className="w-4 h-4 text-navy"
                       />
                       <div>
-                        <p className="text-xs sm:text-sm font-bold text-navy">Standard Surface (3-5 Days)</p>
-                        <p className="text-[11px] text-navy/60">Dispatched via Blue Dart / Delhivery</p>
+                        <p className="text-xs sm:text-sm font-bold text-navy">Standard Delivery</p>
+                        <p className="text-[11px] text-navy/60">Delivery date and time will be confirmed through whatsapp.</p>
                       </div>
                     </div>
                     <span className="text-xs font-bold text-emerald-700">
@@ -291,8 +291,8 @@ export default function Checkout() {
                         className="w-4 h-4 text-navy"
                       />
                       <div>
-                        <p className="text-xs sm:text-sm font-bold text-navy">Express Air Courier (1-2 Days)</p>
-                        <p className="text-[11px] text-navy/60">Priority air dispatch & island transfer</p>
+                        <p className="text-xs sm:text-sm font-bold text-navy">Express Delivery</p>
+                        <p className="text-[11px] text-navy/60">Delivery date and time will be confirmed through whatsapp.</p>
                       </div>
                     </div>
                     <span className="text-xs font-bold text-navy">₹199</span>

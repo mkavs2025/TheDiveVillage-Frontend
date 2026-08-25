@@ -23,12 +23,10 @@ import AdminOrders from '../pages/admin/Orders'
 import AdminCustomers from '../pages/admin/Customers'
 import AdminContent from '../pages/admin/Content'
 
-import AllCourses from '../pages/AllCourses'
-import Scuba from '../pages/Scuba'
-import Snorkeling from '../pages/Snorkeling'
-import Surfing from '../pages/Surfing'
+
 import About from '../pages/About'
 import Services from '../pages/Services'
+import ServiceDetail from '../pages/ServiceDetail'
 import Gallery from '../pages/Gallery'
 
 function PageLiquid({ children }) {
@@ -52,6 +50,7 @@ export default function AppRouter() {
           />
           <Route path="about" element={<PageLiquid><About /></PageLiquid>} />
           <Route path="services" element={<PageLiquid><Services /></PageLiquid>} />
+          <Route path="services/:id" element={<PageLiquid><ServiceDetail /></PageLiquid>} />
           <Route path="gallery" element={<PageLiquid><Gallery /></PageLiquid>} />
           <Route path="book-us" element={<PageLiquid><BookUs /></PageLiquid>} />
           <Route path="shop" element={<PageLiquid><Shop /></PageLiquid>} />
@@ -62,11 +61,6 @@ export default function AppRouter() {
           <Route path="login" element={<PageLiquid><Login /></PageLiquid>} />
           <Route path="signup" element={<PageLiquid><Signup /></PageLiquid>} />
           <Route path="profile" element={<Navigate to="/dashboard/profile" replace />} />
-          
-          <Route path="courses" element={<PageLiquid><AllCourses /></PageLiquid>} />
-          <Route path="courses/scuba" element={<PageLiquid><Scuba /></PageLiquid>} />
-          <Route path="courses/snorkeling" element={<PageLiquid><Snorkeling /></PageLiquid>} />
-          <Route path="courses/surfing" element={<PageLiquid><Surfing /></PageLiquid>} />
         </Route>
 
         <Route

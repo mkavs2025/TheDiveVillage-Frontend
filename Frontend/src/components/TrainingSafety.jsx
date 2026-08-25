@@ -21,7 +21,7 @@ const SAFETY_PROMISES = [
 
 export default function TrainingSafety() {
   return (
-    <section className="relative py-16 sm:py-20 text-white pointer-events-auto">
+    <section id="training-safety-section" className="relative py-16 sm:py-20 text-white pointer-events-auto">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionReveal className="mb-12 text-center">
           <h2 className="font-heading text-h2 font-extrabold">

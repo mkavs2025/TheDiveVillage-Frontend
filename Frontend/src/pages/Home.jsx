@@ -9,7 +9,6 @@ const ProgramsPreview = lazy(() => import('../components/ProgramsPreview'))
 const TrainingSafety = lazy(() => import('../components/TrainingSafety'))
 const GalleryPreview = lazy(() => import('../components/GalleryPreview'))
 const InteractiveDiveMap = lazy(() => import('../components/InteractiveDiveMap'))
-import Joystick from '../components/Joystick'
 
 const POWER = [
   {
@@ -35,7 +34,7 @@ const HIGHLIGHTS_DATA = [
     title: 'Introductory Programs',
     desc: 'Experience scuba safely in shallow water with professional supervision.',
     image: IMAGES.scubaHero,
-    link: '/courses/scuba',
+    link: '/book-us',
     btnText: 'Explore Scuba'
   },
   {
@@ -43,7 +42,7 @@ const HIGHLIGHTS_DATA = [
     title: 'Guided Snorkeling',
     desc: 'Discover snorkeling and explore the ocean up close. The ocean welcomes all.',
     image: IMAGES.snorkelingHero,
-    link: '/courses/snorkeling',
+    link: '/book-us',
     btnText: 'Explore Snorkeling'
   },
   {
@@ -51,15 +50,15 @@ const HIGHLIGHTS_DATA = [
     title: 'Certified Courses',
     desc: 'From your very first breath underwater to professional divemaster certifications.',
     image: IMAGES.hero,
-    link: '/courses',
-    btnText: 'View Courses'
+    link: '/services',
+    btnText: 'View Services'
   },
   {
     id: 'surfing',
     title: 'Freediving',
     desc: 'Breath-hold freediving to explore the ocean with just your natural abilities.',
     image: IMAGES.surfingHero,
-    link: '/courses/surfing',
+    link: '/book-us',
     btnText: 'Explore Freediving'
   },
   {
@@ -79,7 +78,7 @@ export default function Home() {
     <div className="overflow-x-hidden relative isolate pointer-events-none">
 
       {/* 1. HERO */}
-      <section className="relative -mt-16 flex min-h-screen items-center justify-start pt-16 sm:-mt-[72px] sm:pt-[72px] pointer-events-none">
+      <section className="relative -mt-16 flex min-h-screen items-end justify-start pb-8 pt-32 sm:-mt-[72px] sm:pb-16 sm:pt-[120px] pointer-events-none">
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pointer-events-none">
           <div className="max-w-3xl">
@@ -89,25 +88,26 @@ export default function Home() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="pointer-events-auto"
             >
-              <span className="inline-flex rounded-full bg-white/20 px-4 py-1.5 text-[11px] font-heading font-bold uppercase tracking-[0.18em] text-white backdrop-blur-sm">
-                More Than a Destination
-              </span>
-              <h1 className="mt-5 font-heading text-5xl font-extrabold tracking-wide text-white text-balance sm:text-6xl md:text-[5.5rem] md:leading-[1.1]">
-                It's a <em className="not-italic font-heading italic font-bold text-white">Community</em>
+              <h1 className="mt-5 font-tall text-[4rem] sm:text-[5rem] md:text-[6rem] lg:text-[7rem] font-normal uppercase tracking-normal text-white leading-[0.85] flex flex-col">
+                <span className="block">THE DIVE VILLAGE</span>
+                <span className="block text-white/90">IT'S A</span>
+                <span className="block text-[#FFCD00]">COMMUNITY</span>
               </h1>
-              <p className="mt-6 max-w-xl text-lg text-white/90 sm:text-xl">
+              <p className="mt-8 max-w-xl text-base sm:text-lg font-medium text-white/70">
                 The Dive Village was born from a simple belief: that the life-changing magic of the ocean is a feeling meant to be shared.
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-4">
-                <Button as={Link} to="/book-us" className="bg-accent text-navy hover:bg-white hover:text-navy border-none shadow-none">
+                <Link
+                  to="/book-us"
+                  className="rounded-[30px] bg-accent px-8 py-4 font-body text-sm font-bold text-navy transition-all duration-300 hover:scale-105 hover:bg-white"
+                >
                   Book Your Dive
-                  <ArrowIcon />
-                </Button>
+                </Link>
                 <Link
                   to="/shop"
-                  className="font-heading text-sm font-bold text-white transition duration-hover hover:text-accent"
+                  className="rounded-[30px] border border-white/20 bg-white/5 backdrop-blur-md px-8 py-4 font-body text-sm font-bold text-white transition-all duration-300 hover:bg-white/10"
                 >
-                  Explore Shop →
+                  Explore Shop
                 </Link>
               </div>
             </motion.div>
@@ -147,11 +147,11 @@ export default function Home() {
 
 
       {/* 4. WHO CAN DIVE */}
-      <section className="relative py-24 sm:py-32 pointer-events-auto">
+      <section id="who-can-dive-section" className="relative py-24 sm:py-32 pointer-events-auto">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionReveal className="mb-16 text-center">
             <h2 className="font-heading text-h2 font-extrabold text-white">
-              The Ocean <em className="font-heading italic font-bold text-accent">Welcomes All</em>
+              The Ocean <em className="font-heading italic font-bold text-cta">Welcomes All</em>
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-white/70">
               You don't need to be an athlete or an expert to dive — only curious enough to explore.
@@ -196,7 +196,7 @@ export default function Home() {
 
           <SectionReveal className="mb-16 text-center">
             <h2 className="font-heading text-h2 font-extrabold text-white">
-              The Power of <em className="font-heading italic font-bold text-accent">Diving</em>
+              The Power of <em className="font-heading italic font-bold text-cta">Diving</em>
             </h2>
           </SectionReveal>
 
@@ -204,7 +204,7 @@ export default function Home() {
             {POWER.map((p, i) => (
               <StaggerItem key={i}>
                 <div className="h-full rounded-card glass-premium p-8 shadow-soft transition duration-hover hover:-translate-y-1 hover:shadow-card">
-                  <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-white font-bold text-lg">{i + 1}</span>
+                  <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-cta text-white font-bold text-lg">{i + 1}</span>
                   <h3 className="font-heading text-xl font-bold text-white">{p.title}</h3>
                   <p className="mt-3 text-sm text-white/70 leading-relaxed">{p.desc}</p>
                 </div>
@@ -214,26 +214,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5.5 INTERACTIVE MAP */}
-      <div className="pointer-events-auto">
-        <Suspense fallback={<div className="py-20 text-center text-navy/50">Loading Dive Map...</div>}>
-          <section className="relative py-24 sm:py-32">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <SectionReveal className="mb-16 text-center">
-                <h2 className="font-heading text-h2 font-extrabold text-white">
-                  Explore Our <em className="font-heading italic font-bold text-accent">Dive Sites</em>
-                </h2>
-                <p className="mx-auto mt-4 max-w-2xl text-white/70">
-                  Interact with the globe to discover the underwater wonders waiting for you across our island bases.
-                </p>
-              </SectionReveal>
-              <SectionReveal>
-                <InteractiveDiveMap />
-              </SectionReveal>
-            </div>
-          </section>
-        </Suspense>
-      </div>
+
 
       {/* 5. COURSES & TRIPS PREVIEW */}
       <div id="programs-section" className="pointer-events-auto">
@@ -254,7 +235,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionReveal className="text-center mb-16">
             <h2 className="font-heading text-h2 font-extrabold text-white">
-              From Airport to Airport — <em className="font-heading italic font-bold text-accent">We've Got You Covered</em>
+              From Airport to Airport — <em className="font-heading italic font-bold text-cta">We've Got You Covered</em>
             </h2>
           </SectionReveal>
           <div className="grid gap-8 lg:gap-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -281,7 +262,7 @@ export default function Home() {
       </section>
 
       {/* 8. GALLERY PREVIEW */}
-      <div className="pointer-events-auto">
+      <div id="gallery-section" className="pointer-events-auto">
         <Suspense fallback={<div className="py-20 text-center text-navy/50">Loading Gallery...</div>}>
           <GalleryPreview />
         </Suspense>
@@ -296,8 +277,6 @@ export default function Home() {
           </SectionReveal>
         </div>
       </section>
-
-      <Joystick />
     </div>
   )
 }

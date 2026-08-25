@@ -11,7 +11,7 @@ export default function Logo({ className = '', compact = false, light = false })
       <img 
         src={LogoImg} 
         alt="The Dive Village" 
-        className={`h-9 w-auto object-contain transition duration-hover group-hover:scale-105 ${light ? 'brightness-0 invert' : ''}`} 
+        className={`h-9 w-auto object-contain transition duration-hover group-hover:scale-105 ${light ? 'invert brightness-0' : ''}`} 
       />
       {!compact && (
         <span className={`font-heading font-extrabold text-lg tracking-wide ${light ? 'text-white' : 'text-navy'}`}>

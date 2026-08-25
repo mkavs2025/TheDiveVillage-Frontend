@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../hooks/useAuth'
 import { IMAGES } from '../utils/images'
-import InteractiveVideoSphere from '../components/InteractiveVideoSphere'
+import vid2 from '../assets/2.mp4'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -42,9 +42,9 @@ export default function Login() {
   return (
     <div className="min-h-screen flex bg-[#FAFAFA] text-navy font-body">
       
-      {/* Left side - Interactive Video (hidden on mobile) */}
+      {/* Left side - Background Video (hidden on mobile) */}
       <div className="hidden lg:block lg:w-1/2 relative bg-navy overflow-hidden">
-        <InteractiveVideoSphere autoRotate={true} />
+        <video src={vid2} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-80" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent pointer-events-none" />
         <div className="absolute bottom-16 left-16 max-w-lg pointer-events-none z-10">
           <h2 className="font-heading text-5xl font-extrabold text-white leading-tight mb-4 text-balance drop-shadow-md">

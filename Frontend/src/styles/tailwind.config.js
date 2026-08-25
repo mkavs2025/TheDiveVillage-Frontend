@@ -5,13 +5,14 @@ export default {
     extend: {
       colors: {
         navy: '#003865',
-        accent: '#00AEC7',
+        accent: '#FFCD00',
         white: '#FFFFFF',
         cta: '#FF6106',
       },
       fontFamily: {
-        heading: ['"Playfair Display"', 'serif'],
-        body: ['Inter', 'sans-serif'],
+        heading: ['Outfit', 'sans-serif'],
+        body: ['Outfit', 'sans-serif'],
+        tall: ['"Bebas Neue"', 'sans-serif'],
       },
       fontSize: {
         h1: ['clamp(2rem, 5vw, 3.5rem)', { lineHeight: '1.15', letterSpacing: '0.02em' }],

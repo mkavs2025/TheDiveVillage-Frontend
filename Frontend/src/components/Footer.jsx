@@ -4,7 +4,6 @@ import Logo from './Logo'
 const QUICK = [
   { to: '/about', label: 'About Us' },
   { to: '/services', label: 'Services' },
-  { to: '/courses', label: 'All Courses' },
   { to: '/gallery', label: 'Gallery' },
   { to: '/shop', label: 'Shop' },
   { to: '/contact', label: 'Contact Us' },
@@ -105,7 +104,7 @@ export default function Footer() {
               </a>
             ))}
           </div>
-          <p>© {new Date().getFullYear()} TheDiveVillage. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} TheDiveVillage. Copyright - A Brand Of CAF Sourcing.</p>
           <p>
             Designed &amp; Developed by{' '}
             <span className="text-accent">mKavs Global Tech</span>

@@ -9,7 +9,7 @@ const DIVE_SITES = [
   { id: 4, name: 'Maldives', lon: 73.22, lat: 3.2, height: 2000000, desc: 'Stunning atolls and crystal clear warm waters.', depth: '10m - 30m', life: 'Whale Sharks, Turtles', img: IMAGES.scubaFeat2 },
 ]
 
-export default function InteractiveDiveMap() {
+export default function InteractiveDiveMap({ onSiteSelect }) {
   const containerRef = useRef(null)
   const viewerRef = useRef(null)
   const [selectedSite, setSelectedSite] = useState(null)
@@ -97,6 +97,7 @@ export default function InteractiveDiveMap() {
           const site = DIVE_SITES.find(s => s.id === siteId)
           if (site) {
             setSelectedSite(site)
+            onSiteSelect?.(site)
             // Fly to the specific location
             viewer.camera.flyTo({
               destination: window.Cesium.Cartesian3.fromDegrees(site.lon, site.lat, site.height),
@@ -106,6 +107,7 @@ export default function InteractiveDiveMap() {
         }
       } else {
         setSelectedSite(null)
+        onSiteSelect?.(null)
       }
     }, window.Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
@@ -175,6 +177,7 @@ export default function InteractiveDiveMap() {
             
             <button onClick={() => {
                setSelectedSite(null)
+               onSiteSelect?.(null)
                if(viewerRef.current) {
                  viewerRef.current.camera.flyTo({
                    destination: window.Cesium.Cartesian3.fromDegrees(100.0, 0.0, 25000000),

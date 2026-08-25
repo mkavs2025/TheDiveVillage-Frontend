@@ -4,7 +4,10 @@ import Button from '../components/Button'
 import SafeImage from '../components/SafeImage'
 import SectionReveal, { StaggerGrid, StaggerItem } from '../components/SectionReveal'
 import { IMAGES, CAROUSEL_IMAGES } from '../utils/images'
-
+import vid1 from '../assets/1.mp4'
+import vid2 from '../assets/2.mp4'
+import vid3 from '../assets/3.mp4'
+import vid4 from '../assets/4.mp4'
 const VALUES = [
   {
     title: 'Safety Without Compromise',
@@ -100,54 +103,69 @@ export default function About() {
   const reduce = useReducedMotion()
 
   return (
-    <div className="bg-[#FAFAFA] min-h-screen text-navy font-body pt-24 sm:pt-32 pb-24 overflow-x-hidden" style={{ textShadow: 'none' }}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
-        {/* 1. HERO BANNER */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-16">
+    <div className="bg-transparent min-h-screen font-body overflow-x-hidden pointer-events-none">
+      
+      {/* 1. HERO BANNER (Transparent to show VideoSphere) */}
+      <div className="pt-32 pb-48 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pointer-events-auto text-white">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6">
           <div>
-            <span className="inline-block bg-black/5 rounded-full px-4 py-1.5 text-xs font-bold text-navy/60 uppercase tracking-widest mb-4">
+            <span className="inline-block bg-white/20 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-4 backdrop-blur-md">
               Who We Are
             </span>
-            <h1 className="font-heading text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight text-navy leading-none">
+            <h1 className="font-heading text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight leading-none text-white drop-shadow-lg">
               About Us
             </h1>
           </div>
-          <p className="max-w-md text-base sm:text-lg font-medium text-navy/70 leading-relaxed lg:pb-4">
+          <p className="max-w-md text-base sm:text-lg font-medium text-white/90 leading-relaxed lg:pb-4 drop-shadow-lg">
             More than a dive center — The Dive Village is an ocean-loving community united by discovery, passion, and deep respect for the sea.
           </p>
         </div>
+      </div>
 
-        {/* 2. HERO IMAGE GRID */}
+      {/* 2. SOLID CONTENT AREA */}
+      <div className="bg-[#FAFAFA] text-navy rounded-t-[40px] pt-16 sm:pt-24 pb-24 shadow-[0_-20px_40px_rgba(0,0,0,0.1)] pointer-events-auto relative z-10 mt-[-40px]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+
+        {/* 2. HERO VIDEO GRID */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
           <div className="md:col-span-2 relative h-[380px] sm:h-[480px] rounded-[32px] overflow-hidden shadow-float group">
-            <SafeImage
-              src={IMAGES.scubaHero}
-              alt="Diver exploring reef"
+            <video
+              src={vid1}
+              autoPlay
+              loop
+              muted
+              playsInline
               className="w-full h-full object-cover transition duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
-            <div className="absolute bottom-8 left-8 right-8 text-white">
+            <div className="absolute bottom-8 left-8 right-8 text-white pointer-events-none">
               <span className="text-xs font-bold uppercase tracking-widest text-accent mb-2 block">Our Sanctuary</span>
               <h3 className="font-heading text-2xl sm:text-3xl font-bold">A Home Beneath the Waves</h3>
             </div>
           </div>
           <div className="flex flex-col gap-6">
             <div className="relative h-[180px] sm:h-[228px] rounded-[32px] overflow-hidden shadow-card group">
-              <SafeImage
-                src={CAROUSEL_IMAGES[0]}
-                alt="Ocean life"
+              <video
+                src={vid2}
+                autoPlay
+                loop
+                muted
+                playsInline
                 className="w-full h-full object-cover transition duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-navy/20" />
+              <div className="absolute inset-0 bg-navy/20 pointer-events-none" />
             </div>
             <div className="relative h-[180px] sm:h-[228px] rounded-[32px] overflow-hidden shadow-card group">
-              <SafeImage
-                src={CAROUSEL_IMAGES[3]}
-                alt="Diving team"
+              <video
+                src={vid3}
+                autoPlay
+                loop
+                muted
+                playsInline
                 className="w-full h-full object-cover transition duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-navy/20" />
+              <div className="absolute inset-0 bg-navy/20 pointer-events-none" />
             </div>
           </div>
         </div>
@@ -260,60 +278,7 @@ export default function About() {
           </div>
         </div>
 
-        {/* 5. MEET THE TEAM */}
-        <div className="mb-24">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-accent font-bold tracking-widest uppercase text-xs mb-3 block">
-              Certified Professionals
-            </span>
-            <h2 className="font-heading text-3xl sm:text-5xl font-extrabold text-navy">
-              Meet Your Instructors
-            </h2>
-            <p className="mt-4 text-navy/70">
-              Experienced, passionate, and patient mentors dedicated to making your dive safe and unforgettable.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {TEAM.map((member, i) => (
-              <div key={i} className="group rounded-3xl bg-white border border-navy/5 overflow-hidden shadow-card hover:shadow-float transition duration-300">
-                <div className="aspect-[4/3] w-full overflow-hidden bg-navy/10">
-                  <SafeImage
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                  />
-                </div>
-                <div className="p-8">
-                  <span className="text-xs font-bold text-accent uppercase tracking-widest block mb-1">
-                    {member.role}
-                  </span>
-                  <h3 className="font-heading text-2xl font-bold text-navy mb-3">{member.name}</h3>
-                  <p className="text-sm text-navy/70 leading-relaxed">{member.bio}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* 6. TIMELINE / JOURNEY */}
-        <div className="mb-24 rounded-[40px] bg-[#F0F2F5] p-8 sm:p-14">
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <span className="text-navy/60 font-bold tracking-widest uppercase text-xs mb-3 block">Our Journey</span>
-            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-navy">Milestones of The Village</h2>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {MILESTONES.map((m, i) => (
-              <div key={i} className="bg-white rounded-3xl p-6 shadow-soft">
-                <span className="font-heading text-3xl font-extrabold text-accent block mb-2">{m.year}</span>
-                <h4 className="font-bold text-navy text-lg mb-2">{m.title}</h4>
-                <p className="text-xs text-navy/70 leading-relaxed">{m.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
+        {/* Sections removed as requested */}
         {/* 6.5. TESTIMONIALS */}
         <div className="mb-24">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -354,29 +319,41 @@ export default function About() {
         </div>
 
         {/* 7. CALL TO ACTION (CTA) */}
-        <div className="rounded-[40px] bg-navy text-white p-10 sm:p-16 lg:p-20 relative overflow-hidden shadow-lift">
-          <div className="absolute -right-20 -bottom-20 w-96 h-96 bg-accent/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="rounded-[40px] text-white p-10 sm:p-16 lg:p-20 relative overflow-hidden shadow-lift group">
+          <video
+            src={vid4}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-[10000ms] group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-navy/60 pointer-events-none" />
+          
+          <div className="absolute -right-20 -bottom-20 w-96 h-96 bg-accent/30 rounded-full blur-3xl pointer-events-none mix-blend-overlay" />
+          
           <div className="relative z-10 max-w-3xl">
-            <span className="inline-block bg-white/10 rounded-full px-4 py-1.5 text-xs font-bold text-accent uppercase tracking-widest mb-6">
+            <span className="inline-block bg-white/10 rounded-full px-4 py-1.5 text-xs font-bold text-accent uppercase tracking-widest mb-6 backdrop-blur-sm border border-white/10">
               Join Our Community
             </span>
-            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-6">
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-6 drop-shadow-md">
               Ready to Explore the Ocean With Us?
             </h2>
-            <p className="text-lg text-white/80 max-w-xl mb-10 leading-relaxed">
+            <p className="text-lg text-white/90 max-w-xl mb-10 leading-relaxed drop-shadow-md">
               Whether it's your very first breath underwater or your next technical certification, we are ready to guide you every step of the way.
             </p>
             <div className="flex flex-wrap gap-4 items-center">
-              <Button as={Link} to="/book-us" className="bg-accent text-navy hover:bg-white hover:text-navy border-none">
+              <Button as={Link} to="/book-us" className="bg-accent text-navy hover:bg-white hover:text-navy border-none shadow-lg">
                 Book Your Dive Now →
               </Button>
-              <Button as={Link} to="/contact" variant="secondary" className="!border-white/30 !text-white hover:!bg-white/10">
+              <Button as={Link} to="/contact" variant="secondary" className="!border-white/30 !text-white hover:!bg-white/10 backdrop-blur-sm">
                 Contact Our Team
               </Button>
             </div>
           </div>
         </div>
 
+        </div>
       </div>
     </div>
   )
