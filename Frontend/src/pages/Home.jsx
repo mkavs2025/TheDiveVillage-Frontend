@@ -39,7 +39,7 @@ const HIGHLIGHTS_DATA = [
     desc: 'Experience scuba safely in shallow water with professional supervision.',
     image: IMAGES.scubaHero,
     link: '/services',
-    btnText: 'Explore Programs'
+    btnText: 'Explore'
   },
   {
     id: 'snorkeling',
@@ -47,7 +47,7 @@ const HIGHLIGHTS_DATA = [
     desc: 'Discover snorkeling and explore the ocean up close. The ocean welcomes all.',
     image: IMAGES.snorkelingHero,
     link: '/services',
-    btnText: 'Explore Programs'
+    btnText: 'Explore'
   },
   {
     id: 'courses',
@@ -55,7 +55,7 @@ const HIGHLIGHTS_DATA = [
     desc: 'From your very first breath underwater to professional divemaster certifications.',
     image: IMAGES.hero,
     link: '/services',
-    btnText: 'Explore Programs'
+    btnText: 'Explore'
   },
   {
     id: 'surfing',
@@ -63,7 +63,7 @@ const HIGHLIGHTS_DATA = [
     desc: 'Breath-hold freediving to explore the ocean with just your natural abilities.',
     image: IMAGES.surfingHero,
     link: '/services',
-    btnText: 'Explore Programs'
+    btnText: 'Explore'
   },
   {
     id: 'products',
@@ -71,7 +71,7 @@ const HIGHLIGHTS_DATA = [
     desc: 'Every experience is a step deeper into the world of the ocean.',
     image: IMAGES.gear1,
     link: '/services',
-    btnText: 'Explore Programs'
+    btnText: 'Explore'
   },
 ]
 
