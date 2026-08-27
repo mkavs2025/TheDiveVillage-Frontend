@@ -10,7 +10,7 @@ import img2 from '../assets/2.png'
 import img3 from '../assets/3.png'
 import img4 from '../assets/4.png'
 const ProgramsPreview = lazy(() => import('../components/ProgramsPreview'))
-const TrainingSafety = lazy(() => import('../components/TrainingSafety'))
+
 const GalleryPreview = lazy(() => import('../components/GalleryPreview'))
 const InteractiveDiveMap = lazy(() => import('../components/InteractiveDiveMap'))
 
@@ -73,6 +73,27 @@ const HIGHLIGHTS_DATA = [
     link: '/services',
     btnText: 'Explore Programs'
   },
+]
+
+const TESTIMONIALS = [
+  {
+    name: "Alex Johnson",
+    role: "PADI Open Water Diver",
+    text: "The Dive Village completely changed my perspective on the ocean. The instructors were incredibly patient, and the focus on safety made my first dive an unforgettable and peaceful experience.",
+    image: CAROUSEL_IMAGES[1]
+  },
+  {
+    name: "Maria Garcia",
+    role: "Marine Biologist",
+    text: "I've dived all over the world, but the dedication to eco-stewardship here is unmatched. It's inspiring to see a dive center that truly cares about coral restoration and leaving no trace.",
+    image: CAROUSEL_IMAGES[2]
+  },
+  {
+    name: "David Chen",
+    role: "Advanced Adventurer",
+    text: "From the seamless booking process to the personalized dive charters, everything was flawless. A vibrant community that genuinely feels like a second home beneath the waves.",
+    image: CAROUSEL_IMAGES[0]
+  }
 ]
 
 export default function Home() {
@@ -247,12 +268,48 @@ export default function Home() {
         </div>
       </section >
 
-      {/* 7. TRAINING & SAFETY */}
-      < div id="training-safety-section" className="pointer-events-auto" >
-        <Suspense fallback={<div className="py-20 text-center text-navy/50">Loading Training...</div>}>
-          <TrainingSafety />
-        </Suspense>
-      </div >
+      {/* 7. TESTIMONIALS */}
+      <section className="relative py-24 sm:py-32 pointer-events-auto">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionReveal className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-[#FFCD00] font-bold tracking-widest uppercase text-xs mb-3 block">
+              Community Voices
+            </span>
+            <h2 className="font-heading text-3xl sm:text-5xl font-bold text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">
+              What Our Divers Say
+            </h2>
+            <p className="mt-4 text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+              Don't just take our word for it. Hear from the community of ocean lovers who have dived with us.
+            </p>
+          </SectionReveal>
+
+          <StaggerGrid className="grid md:grid-cols-3 gap-8">
+            {TESTIMONIALS.map((t, i) => (
+              <StaggerItem key={i}>
+                <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20 shadow-card hover:-translate-y-2 transition duration-500">
+                  <div className="flex gap-1 mb-6">
+                    {[...Array(5)].map((_, j) => (
+                      <svg key={j} className="w-5 h-5 text-[#FFCD00]" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <p className="text-white/90 italic mb-8 leading-relaxed">"{t.text}"</p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/30">
+                      <SafeImage src={t.image} alt={t.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white text-sm">{t.name}</h4>
+                      <span className="text-xs text-white/60">{t.role}</span>
+                    </div>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerGrid>
+        </div>
+      </section>
 
       {/* 5. COURSES & TRIPS PREVIEW */}
       < div id="programs-section" className="pointer-events-auto relative z-10" >

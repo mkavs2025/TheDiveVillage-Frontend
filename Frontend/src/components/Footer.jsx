@@ -30,7 +30,7 @@ export default function Footer() {
     <footer className="bg-navy/40 backdrop-blur-xl border-t border-white/20 text-white mt-auto relative z-10 pointer-events-auto">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div>
-          <Logo light />
+          <Logo light compact />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/75">
             More than a destination — it's a community.
           </p>
@@ -84,10 +84,10 @@ export default function Footer() {
             </li>
             <li>
               <a
-                href="mailto:hello@thedivevillage.co"
+                href="mailto:sanjeev.bajaj@thedivevillage.co"
                 className="transition duration-hover hover:text-accent"
               >
-                hello@thedivevillage.co
+                sanjeev.bajaj@thedivevillage.co
               </a>
             </li>
             <li>1st Cross Rd, Ranka Nagar, Kaval Bairasandra, Bengaluru, Karnataka 560032</li>

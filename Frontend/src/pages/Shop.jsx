@@ -5,12 +5,11 @@ import { SHOP_PRODUCTS } from '../utils/products'
 import { useCart } from '../hooks/useCart'
 import { formatCurrency } from '../utils/formatCurrency'
 import Button from '../components/Button'
+import picture3 from '../assets/Picture3.png'
 
 const CATEGORIES = [
   { key: 'all', label: 'All Merchandise' },
-  { key: 'Branded Merch', label: 'Branded Merch' },
-  { key: 'Wetsuits', label: 'Wetsuits' },
-  { key: 'Rash Guards', label: 'Rash Guards' },
+  { key: 'Tops', label: 'Tops' },
   { key: 'Swimwear', label: 'Swimwear' },
   { key: 'Bottoms', label: 'Bottoms' },
   { key: 'Accessories', label: 'Accessories & Bags' },
@@ -98,22 +97,19 @@ export default function Shop() {
 
       {/* 1. HERO BANNER */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="relative rounded-[40px] overflow-hidden bg-navy text-white p-8 sm:p-16 shadow-lift border border-white/10 flex flex-col justify-center min-h-[300px]">
-          <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-transparent z-10" />
+        <div className="relative rounded-[40px] overflow-hidden bg-navy text-white shadow-lift border border-white/10 flex flex-col justify-center min-h-[340px]">
           <img
-            src={SHOP_PRODUCTS[0]?.image}
-            alt="Hero Merch"
-            className="absolute right-0 top-0 h-full w-1/2 object-cover opacity-30 mix-blend-luminosity hidden md:block"
+            src={picture3}
+            alt="Merchandise"
+            className="absolute inset-0 w-full h-full object-cover opacity-50"
           />
-          <div className="relative z-20 max-w-xl">
-            <span className="inline-block bg-accent/20 border border-accent/40 rounded-full px-4 py-1 text-xs font-bold text-accent tracking-widest uppercase mb-4">
-              Official Merchandise
-            </span>
-            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4">
-              Equip Your <span className="text-accent italic">Adventure</span>
+          <div className="absolute inset-0 bg-gradient-to-r from-navy/80 via-navy/50 to-transparent" />
+          <div className="relative z-10 p-8 sm:p-16 max-w-xl">
+            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-3">
+              Merchandise
             </h1>
-            <p className="text-sm sm:text-base text-white/80 leading-relaxed max-w-md">
-              Engineered for comfort, UV protection, and high durability both in and out of the water.
+            <p className="text-sm sm:text-base text-white/80 leading-relaxed">
+              Gear up with The Dive Village.
             </p>
           </div>
         </div>

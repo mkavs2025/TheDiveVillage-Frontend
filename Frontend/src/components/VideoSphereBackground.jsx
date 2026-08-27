@@ -292,7 +292,7 @@ export default function VideoSphereBackground() {
           </Canvas>
         </div>
       </div>
-      {location.pathname !== '/book-us' && <JoystickOverlay joystickVelocity={joystickVelocity} />}
+      {location.pathname !== '/book-us' && location.pathname !== '/login' && location.pathname !== '/signup' && <JoystickOverlay joystickVelocity={joystickVelocity} />}
       <AudioToggle isMuted={isMuted} onToggle={() => setIsMuted(!isMuted)} />
     </>
   )

@@ -48,7 +48,7 @@ export default function InteractiveVideoSphere({ autoRotate = true, className = 
           rotateSpeed={-0.5} 
         />
       </Canvas>
-      <div className="absolute top-4 left-4 pointer-events-none">
+      <div className="absolute bottom-4 right-4 pointer-events-none">
         <span className="inline-flex rounded-full bg-black/40 backdrop-blur-md px-3 py-1 text-[10px] font-bold text-white uppercase tracking-wider border border-white/10 shadow-sm">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1.5"><path d="M2 12a10 10 0 1 0 20 0 10 10 0 1 0-20 0"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
           360° Interactive (Drag to explore)
