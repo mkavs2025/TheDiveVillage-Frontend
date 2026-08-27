@@ -58,7 +58,7 @@ export default function Checkout() {
           <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full mb-3 inline-block">
             Order Confirmed
           </span>
-          <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-navy mb-2">
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-navy mb-2">
             Thank You for Your Order!
           </h2>
           <p className="text-navy/70 text-sm mb-6 leading-relaxed">
@@ -107,7 +107,7 @@ export default function Checkout() {
         <div className="mb-10 border-b border-navy/10 pb-6 flex items-end justify-between">
           <div>
             <span className="text-xs font-bold uppercase tracking-widest text-accent mb-1 block">Final Step</span>
-            <h1 className="font-heading text-4xl sm:text-5xl font-extrabold text-navy tracking-tight">Secure Checkout</h1>
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-navy tracking-tight">Secure Checkout</h1>
           </div>
           <Link to="/cart" className="text-xs sm:text-sm font-bold text-navy hover:text-accent transition underline">
             ← Return to Cart
@@ -146,7 +146,7 @@ export default function Checkout() {
                       type="tel"
                       name="phone"
                       required
-                      placeholder="+91 98765 43210"
+                      placeholder="+91 89710 01010"
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full rounded-2xl bg-[#F0F2F5] px-4 py-3.5 text-xs sm:text-sm text-navy outline-none focus:ring-2 focus:ring-accent/50"
@@ -308,10 +308,31 @@ export default function Checkout() {
                 </div>
 
                 <div className="space-y-3 mb-6">
-                  {/* Unified Online Option */}
+                  {/* Payment Options */}
                   <label
                     className={`rounded-2xl border p-4 block cursor-pointer transition ${
-                      paymentMethod === 'card' ? 'border-navy bg-navy/5' : 'border-navy/15'
+                      paymentMethod === 'upi' ? 'border-navy bg-navy/5' : 'border-navy/15 hover:border-navy/40'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          value="upi"
+                          checked={paymentMethod === 'upi'}
+                          onChange={() => setPaymentMethod('upi')}
+                          className="w-4 h-4 text-navy"
+                        />
+                        <span className="text-xs sm:text-sm font-bold text-navy">UPI (GPay, PhonePe, Paytm)</span>
+                      </div>
+                      <span className="text-xs font-bold text-emerald-600">Instant</span>
+                    </div>
+                  </label>
+
+                  <label
+                    className={`rounded-2xl border p-4 block cursor-pointer transition ${
+                      paymentMethod === 'card' ? 'border-navy bg-navy/5' : 'border-navy/15 hover:border-navy/40'
                     }`}
                   >
                     <div className="flex items-center justify-between">
@@ -324,28 +345,38 @@ export default function Checkout() {
                           onChange={() => setPaymentMethod('card')}
                           className="w-4 h-4 text-navy"
                         />
-                        <span className="text-xs sm:text-sm font-bold text-navy">All Online Methods</span>
+                        <span className="text-xs sm:text-sm font-bold text-navy">Credit / Debit Card</span>
                       </div>
-                      <div className="flex gap-1.5 text-xs text-navy/60 font-mono">
-                        <span>UPI</span> • <span>Visa</span> • <span>Mastercard</span> • <span>etc.</span>
+                      <div className="flex gap-1 text-[10px] text-navy/60 font-mono">
+                        <span>Visa</span> • <span>Mastercard</span>
                       </div>
                     </div>
-
-                    {paymentMethod === 'card' && (
-                      <div className="mt-4 pt-4 border-t border-navy/10">
-                         <p className="text-xs text-navy/70 leading-relaxed">
-                           You will be securely redirected to our payment gateway to complete your transaction using your preferred method (UPI, Credit/Debit Card, NetBanking, or Wallets).
-                         </p>
-                      </div>
-                    )}
                   </label>
 
-
+                  <label
+                    className={`rounded-2xl border p-4 block cursor-pointer transition ${
+                      paymentMethod === 'netbanking' ? 'border-navy bg-navy/5' : 'border-navy/15 hover:border-navy/40'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          value="netbanking"
+                          checked={paymentMethod === 'netbanking'}
+                          onChange={() => setPaymentMethod('netbanking')}
+                          className="w-4 h-4 text-navy"
+                        />
+                        <span className="text-xs sm:text-sm font-bold text-navy">Netbanking</span>
+                      </div>
+                    </div>
+                  </label>
 
                   {/* Cash on Delivery / Pay at Island */}
                   <label
                     className={`rounded-2xl border p-4 block cursor-pointer transition ${
-                      paymentMethod === 'cod' ? 'border-navy bg-navy/5' : 'border-navy/15'
+                      paymentMethod === 'cod' ? 'border-navy bg-navy/5' : 'border-navy/15 hover:border-navy/40'
                     }`}
                   >
                     <div className="flex items-center justify-between">

@@ -28,7 +28,7 @@ export default function GalleryPreview() {
     <section id="gallery" className="relative py-16 sm:py-20 scroll-mt-20 pointer-events-auto">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionReveal className="mb-12 text-center">
-          <h2 className="font-heading text-h2 font-extrabold text-white">
+          <h2 className="font-heading text-h2 font-bold text-white">
             The Dive Village <em className="font-heading italic font-bold text-accent">Gallery</em>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-white/80">
@@ -36,40 +36,17 @@ export default function GalleryPreview() {
           </p>
         </SectionReveal>
 
-        <div className="perspective-[800px] mx-auto w-full max-w-lg sm:max-w-2xl h-[400px] sm:h-[500px] flex items-center justify-center overflow-visible mt-16 mb-8">
-          <div className="relative w-full h-full preserve-3d animate-spin-carousel">
-            {GALLERY_IMAGES.slice(0, 6).map((img, i) => (
-              <div 
-                key={img.id}
-                className="absolute inset-0 flex items-center justify-center backface-hidden"
-                style={{
-                  // Decreased translateZ even further to pull images very close together
-                  transform: `rotateY(${i * 60}deg) translateZ(clamp(200px, 35vw, 320px))`
-                }}
-              >
-                <div 
-                  // Increased width of the cards to reduce the empty space between them
-                  className="w-[220px] sm:w-[320px] aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl relative border border-white/20 bg-navy/10 group cursor-pointer transition duration-300 hover:scale-105 hover:-translate-y-2"
-                  onClick={() => setIsOpen(true)}
-                >
-                  <SafeImage
-                    src={img.src}
-                    alt={img.alt}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-                  <span className="absolute bottom-4 left-4 rounded-full bg-white/20 px-3 py-1 text-xs font-bold text-white opacity-0 backdrop-blur-md transition duration-300 group-hover:opacity-100">
-                    {img.location}
-                  </span>
-                </div>
-              </div>
-            ))}
+        <div className="perspective-[1200px] mx-auto w-full h-[350px] sm:h-[500px] flex items-center justify-center overflow-visible mt-8 mb-8">
+          <div className="relative flex items-center justify-center preserve-3d" style={{ transform: 'scale(min(1, 100vw / 1000))' }}>
+            <div className="relative w-[900px] h-[300px] preserve-3d animate-spin-carousel">
+              {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((img, i) => (
+                <CurvedCard key={`${img.id}-${i}`} img={img} index={i} setIsOpen={setIsOpen} />
+              ))}
+            </div>
           </div>
         </div>
 
-        <SectionReveal className="mt-12 text-center">
+        <SectionReveal className="mt-8 text-center">
           <Button onClick={() => setIsOpen(true)} variant="secondary" className="!border-white/20 !bg-white/10 !text-white backdrop-blur-md hover:!border-accent hover:!text-accent">
             View Full Gallery
           </Button>
@@ -114,6 +91,74 @@ export default function GalleryPreview() {
         )}
       </AnimatePresence>
     </section>
+  )
+}
+
+const RADIUS = 450;
+const CARD_WIDTH = 220;
+const CARD_HEIGHT = 320;
+const SLICES = 24; // Increased slices for ultra-smooth curve
+
+const cardAngleRad = 2 * Math.asin(CARD_WIDTH / 2 / RADIUS);
+const cardAngleDeg = cardAngleRad * (180 / Math.PI);
+const sliceAngleDeg = cardAngleDeg / SLICES;
+const sliceWidth = 2 * RADIUS * Math.sin((sliceAngleDeg / 2) * (Math.PI / 180));
+const safeSliceWidth = sliceWidth + 1.5; // wider overlap to absolutely guarantee no seams
+const imageSliceWidth = CARD_WIDTH / SLICES;
+
+function CurvedCard({ img, index, setIsOpen }) {
+  return (
+    <div 
+      className="absolute top-1/2 left-1/2 flex items-center justify-center pointer-events-auto group cursor-pointer preserve-3d"
+      style={{ transform: `rotateY(${index * 30}deg)` }}
+      onClick={() => setIsOpen(true)}
+    >
+      <div className="relative preserve-3d transition-transform duration-300 group-hover:scale-105 group-hover:-translate-y-4">
+        {Array.from({ length: SLICES }).map((_, i) => {
+          const angle = -cardAngleDeg / 2 + (i + 0.5) * sliceAngleDeg;
+          const bgX = -(i * imageSliceWidth);
+          return (
+            <div
+              key={i}
+              className="absolute top-1/2 left-1/2 backface-hidden bg-navy/20"
+              style={{
+                width: `${safeSliceWidth}px`,
+                height: `${CARD_HEIGHT}px`,
+                marginLeft: `${-safeSliceWidth / 2}px`,
+                marginTop: `${-CARD_HEIGHT / 2}px`,
+                backgroundImage: `linear-gradient(to top, rgba(0,20,40,0.8) 0%, rgba(0,20,40,0) 40%), url(${img.src})`,
+                backgroundSize: `100% 100%, ${CARD_WIDTH}px ${CARD_HEIGHT}px`,
+                backgroundPosition: `center, ${bgX}px center`,
+                transform: `rotateY(${angle}deg) translateZ(${RADIUS}px)`,
+                borderTopLeftRadius: i === 0 ? '16px' : '0',
+                borderBottomLeftRadius: i === 0 ? '16px' : '0',
+                borderTopRightRadius: i === SLICES - 1 ? '16px' : '0',
+                borderBottomRightRadius: i === SLICES - 1 ? '16px' : '0',
+                borderTop: '2px solid rgba(255,255,255,0.2)',
+                borderBottom: '2px solid rgba(255,255,255,0.2)',
+                borderLeft: i === 0 ? '2px solid rgba(255,255,255,0.2)' : 'none',
+                borderRight: i === SLICES - 1 ? '2px solid rgba(255,255,255,0.2)' : 'none',
+              }}
+            />
+          )
+        })}
+
+        <div 
+          className="absolute top-1/2 left-1/2 backface-hidden flex items-end justify-start pb-4 pl-4 pointer-events-none"
+          style={{ 
+            width: `${CARD_WIDTH}px`, 
+            height: `${CARD_HEIGHT}px`,
+            marginLeft: `${-CARD_WIDTH / 2}px`,
+            marginTop: `${-CARD_HEIGHT / 2}px`,
+            transform: `translateZ(${RADIUS + 2}px)` 
+          }}
+        >
+          <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-bold text-white backdrop-blur-md opacity-80 group-hover:opacity-100 transition-opacity shadow-lg">
+            {img.location}
+          </span>
+        </div>
+      </div>
+    </div>
   )
 }
 

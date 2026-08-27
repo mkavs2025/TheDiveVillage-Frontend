@@ -122,36 +122,62 @@ export default function ProductDetail() {
         {/* Main Product Details Split */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
           
-          {/* Left Column: Multi-Image Showcase */}
-          <div className="lg:col-span-7 flex gap-4 flex-col-reverse sm:flex-row">
-            {/* Thumbnail Selectors */}
-            <div className="flex sm:flex-col gap-3 overflow-x-auto sm:overflow-visible shrink-0">
-              {productImages.map((img, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveImage(img)}
-                  className={`flex-shrink-0 w-20 h-24 rounded-2xl overflow-hidden border-2 transition ${
-                    activeImage === img ? 'border-navy shadow-md ring-2 ring-navy/20' : 'border-transparent hover:border-navy/30 bg-[#F0F2F5]'
-                  }`}
-                >
-                  <img src={img} alt={`Thumbnail ${i + 1}`} className="w-full h-full object-cover bg-white" />
-                </button>
-              ))}
+          {/* Left Column: Multi-Image Showcase & Video */}
+          <div className="lg:col-span-7 flex flex-col gap-6">
+            <div className="flex gap-4 flex-col-reverse sm:flex-row">
+              {/* Thumbnail Selectors */}
+              <div className="flex sm:flex-col gap-3 overflow-x-auto sm:overflow-visible shrink-0">
+                {productImages.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveImage(img)}
+                    className={`flex-shrink-0 w-20 h-24 rounded-2xl overflow-hidden border-2 transition ${
+                      activeImage === img ? 'border-navy shadow-md ring-2 ring-navy/20' : 'border-transparent hover:border-navy/30 bg-[#F0F2F5]'
+                    }`}
+                  >
+                    <img src={img} alt={`Thumbnail ${i + 1}`} className="w-full h-full object-cover bg-white" />
+                  </button>
+                ))}
+              </div>
+
+              {/* Large Active Image */}
+              <div className="flex-1 rounded-[32px] overflow-hidden bg-white border border-navy/5 aspect-[4/5] relative shadow-card group">
+                <img
+                  src={activeImage}
+                  alt={product.title}
+                  className="w-full h-full object-contain p-6 transition duration-500 group-hover:scale-105"
+                />
+                {product.tag && (
+                  <span className="absolute top-6 left-6 bg-white/95 backdrop-blur-md px-3.5 py-1 text-xs font-bold text-navy rounded-full shadow-sm">
+                    {product.tag}
+                  </span>
+                )}
+              </div>
             </div>
 
-            {/* Large Active Image */}
-            <div className="flex-1 rounded-[32px] overflow-hidden bg-white border border-navy/5 aspect-[4/5] relative shadow-card group">
-              <img
-                src={activeImage}
-                alt={product.title}
-                className="w-full h-full object-contain p-6 transition duration-500 group-hover:scale-105"
-              />
-              {product.tag && (
-                <span className="absolute top-6 left-6 bg-white/95 backdrop-blur-md px-3.5 py-1 text-xs font-bold text-navy rounded-full shadow-sm">
-                  {product.tag}
-                </span>
-              )}
-            </div>
+            {/* Video Showcase under pictures */}
+            {product.video && (
+              <div className="rounded-[32px] overflow-hidden bg-white border border-navy/5 p-5 shadow-card">
+                <div className="mb-3 flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wider text-accent flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse" />
+                    Live Fit & Motion Video
+                  </span>
+                  <span className="text-[11px] text-navy/50 font-semibold">In-Water Demonstration</span>
+                </div>
+                <div className="aspect-video w-full rounded-2xl overflow-hidden bg-black/5 relative">
+                  <video
+                    src={product.video}
+                    controls
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Right Column: Product Specifications & Actions */}
@@ -169,7 +195,7 @@ export default function ProductDetail() {
             </div>
 
             {/* Product Name */}
-            <h1 className="font-heading text-3xl sm:text-4xl font-extrabold text-navy leading-tight mb-3 text-balance">
+            <h1 className="font-heading text-3xl sm:text-4xl font-bold text-navy leading-tight mb-3 text-balance">
               {product.title}
             </h1>
 
@@ -194,7 +220,7 @@ export default function ProductDetail() {
               <div className="mb-6 pt-4 border-t border-navy/10">
                 <div className="flex justify-between items-center mb-3">
                   <p className="text-xs font-bold uppercase tracking-wider text-navy/70">
-                    Available Colour: <span className="font-extrabold text-navy normal-case text-sm ml-1">{selectedColor.name}</span>
+                    Available Colour: <span className="font-bold text-navy normal-case text-sm ml-1">{selectedColor.name}</span>
                   </p>
                 </div>
                 <div className="flex gap-3">
@@ -226,7 +252,7 @@ export default function ProductDetail() {
               <div className="mb-6">
                 <div className="flex justify-between items-center mb-3">
                   <p className="text-xs font-bold uppercase tracking-wider text-navy/70">
-                    Select Size: <span className="font-extrabold text-navy normal-case text-sm ml-1">{selectedSize}</span>
+                    Select Size: <span className="font-bold text-navy normal-case text-sm ml-1">{selectedSize}</span>
                   </p>
                   <button onClick={() => setActiveTab('sizeGuide')} className="text-xs font-bold text-accent hover:underline">
                     Size Guide & Chart 📐
@@ -272,7 +298,7 @@ export default function ProductDetail() {
                   </button>
                 </div>
                 <span className="text-xs text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-3 py-2 rounded-xl">
-                  ✓ {product.stockStatus || 'In Stock & Ready to Dispatch'}
+                  ✓ {product.stockStatus || 'In Stock'}
                 </span>
               </div>
             </div>
@@ -300,27 +326,20 @@ export default function ProductDetail() {
               </button>
             </div>
 
-            {/* Shipping & Assurance Details Box */}
+            {/* Assurances Box */}
             <div className="rounded-2xl bg-[#F0F2F5] p-5 space-y-3 text-xs text-navy/80">
               <div className="flex items-start gap-3">
-                <span className="text-base">🚚</span>
-                <div>
-                  <span className="font-bold text-navy block">Delivery Details</span>
-                  <span>Delivery date and time will be confirmed through whatsapp.</span>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 pt-2 border-t border-navy/10">
                 <span className="text-base">🔄</span>
                 <div>
                   <span className="font-bold text-navy block">Easy 15-Day Exchange</span>
-                  <span>Need another size? Return or swap within 15 days of delivery.</span>
+                  <span>Need another size? Return or swap within 15 days.</span>
                 </div>
               </div>
               <div className="flex items-start gap-3 pt-2 border-t border-navy/10">
                 <span className="text-base">🛡️</span>
                 <div>
                   <span className="font-bold text-navy block">100% Genuine Branded Merchandise</span>
-                  <span>Directly made and tested by The Dive Village team.</span>
+                  <span>Directly tested by The Dive Village team.</span>
                 </div>
               </div>
             </div>
@@ -333,16 +352,14 @@ export default function ProductDetail() {
           <div className="flex border-b border-navy/10 mb-8 overflow-x-auto scrollbar-none gap-2">
             {[
               { key: 'details', label: 'Product Features' },
-              { key: 'materials', label: 'Materials & Care' },
               { key: 'sizeGuide', label: 'Size Guide & Fit' },
-              { key: 'shipping', label: 'Shipping & Returns' },
             ].map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
                 className={`pb-4 px-6 font-heading font-bold text-sm whitespace-nowrap transition border-b-2 ${
                   activeTab === tab.key
-                    ? 'border-navy text-navy font-extrabold'
+                    ? 'border-navy text-navy font-bold'
                     : 'border-transparent text-navy/50 hover:text-navy'
                 }`}
               >
@@ -370,22 +387,6 @@ export default function ProductDetail() {
             </div>
           )}
 
-          {activeTab === 'materials' && (
-            <div className="space-y-4 max-w-2xl">
-              <h3 className="font-heading text-2xl font-bold text-navy">Sustainable Fabric & Construction</h3>
-              <p className="text-navy/80 text-sm leading-relaxed">
-                <strong>Material Composition:</strong> {product.materials || 'High-grade technical fabrics engineered for saltwater durability and ultraviolet protection.'}
-              </p>
-              <div className="bg-[#FAFAFA] rounded-2xl p-5 border border-navy/5 space-y-2 text-xs text-navy/75 mt-4">
-                <p><strong>Care Instructions:</strong></p>
-                <p>• Rinse with fresh cold water after each dive or surf session.</p>
-                <p>• Hang dry in shade. Avoid direct prolonged sunlight exposure when drying.</p>
-                <p>• Do not machine wash with harsh detergents or bleach.</p>
-                <p>• Store flat or on wide-shoulder wetsuit hangers.</p>
-              </div>
-            </div>
-          )}
-
           {activeTab === 'sizeGuide' && (
             <div className="space-y-4">
               <h3 className="font-heading text-2xl font-bold text-navy">Universal Sizing Chart (in inches)</h3>
@@ -410,15 +411,6 @@ export default function ProductDetail() {
                   </tbody>
                 </table>
               </div>
-            </div>
-          )}
-
-          {activeTab === 'shipping' && (
-            <div className="space-y-4 max-w-2xl text-sm text-navy/80 leading-relaxed">
-              <h3 className="font-heading text-2xl font-bold text-navy">Delivery & Return Guidelines</h3>
-              <p>• <strong>Delivery:</strong> Delivery date and time will be confirmed through whatsapp.</p>
-              <p>• <strong>Island Delivery:</strong> We ship directly to island hubs in Lakshadweep and Andaman & Nicobar.</p>
-              <p>• <strong>15-Day Exchange:</strong> If sizing does not fit perfectly, initiate an exchange request with free reverse pickup.</p>
             </div>
           )}
         </div>
@@ -464,7 +456,7 @@ export default function ProductDetail() {
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-navy/5 flex justify-between items-baseline">
-                  <span className="font-heading font-extrabold text-navy text-base">
+                  <span className="font-heading font-bold text-navy text-base">
                     
                   </span>
                   <span className="text-xs font-bold text-accent group-hover:underline">

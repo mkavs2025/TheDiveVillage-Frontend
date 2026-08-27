@@ -69,7 +69,7 @@ export default function AllCourses() {
             <span className="inline-block bg-white/10 rounded-full px-4 py-1.5 text-xs font-bold text-accent uppercase tracking-widest mb-6">
               Start Your Certification
             </span>
-            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-6">
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white mb-6">
               Not Sure Which Program is Right for You?
             </h2>
             <p className="text-lg text-white/80 max-w-xl mb-10 leading-relaxed">

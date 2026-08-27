@@ -8,7 +8,7 @@ export default function Contact() {
     name: '',
     phone: '',
     email: '',
-    subject: 'General Inquiry',
+    subject: 'General Enquiry',
     message: '',
   })
   const [loading, setLoading] = useState(false)
@@ -46,7 +46,7 @@ export default function Contact() {
         name: '',
         phone: '',
         email: '',
-        subject: 'General Inquiry',
+        subject: 'General Enquiry',
         message: '',
       })
     } catch (err) {
@@ -64,7 +64,7 @@ export default function Contact() {
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-16">
           <div>
             <span className="inline-block bg-black/5 rounded-full px-4 py-1.5 text-xs font-bold text-navy/60 uppercase tracking-widest mb-6">Plan Trip</span>
-            <h1 className="font-heading text-6xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight text-navy leading-none">Contact Us</h1>
+            <h1 className="font-heading text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-navy leading-none">Contact Us</h1>
           </div>
           <p className="max-w-xs text-sm font-medium text-navy/70 leading-relaxed lg:pb-4">
             Tell us when and where you'd like to go and we'll confirm availability within 24 hours.
@@ -120,7 +120,7 @@ export default function Contact() {
                   <input
                     type="tel"
                     name="phone"
-                    placeholder="+91 8971001010"
+                    placeholder="+91 89710 01010"
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full rounded-2xl bg-[#F0F2F5] px-5 py-4 text-sm text-navy outline-none focus:ring-2 focus:ring-accent/50 transition placeholder:text-navy/30"
@@ -134,10 +134,12 @@ export default function Contact() {
                     onChange={handleChange}
                     className="w-full rounded-2xl bg-[#F0F2F5] px-5 py-4 text-sm text-navy outline-none focus:ring-2 focus:ring-accent/50 transition appearance-none"
                   >
-                    <option value="General Inquiry">General Inquiry</option>
-                    <option value="Programs Question">Programs Question</option>
-                    <option value="Partnership">Partnership</option>
-                    <option value="Feedback">Feedback</option>
+                    <option value="General Enquiry">General Enquiry</option>
+                    <option value="Post Update">Post Update</option>
+                    <option value="Certifications">Certifications</option>
+                    <option value="Special Request">Special Request</option>
+                    <option value="Support">Support</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
               </div>
@@ -200,8 +202,8 @@ export default function Contact() {
                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <h4 className="font-bold text-navy mb-2">Visit Us</h4>
-            <span className="text-xs text-navy/60">Ranka Park,</span>
-            <span className="text-xs text-navy/60">Lakshadweep</span>
+            <span className="text-xs text-navy/60">1st Cross Rd, Ranka Nagar,</span>
+            <span className="text-xs text-navy/60">Kaval Bairasandra, Bengaluru, Karnataka 560032</span>
           </div>
 
           <div className="flex flex-col items-center">
@@ -238,7 +240,7 @@ export default function Contact() {
            <div className="grid lg:grid-cols-2 gap-12">
              <div className="flex flex-col justify-center">
                <span className="inline-block self-start bg-black/5 rounded-full px-4 py-1.5 text-xs font-bold text-navy/60 uppercase tracking-widest mb-6">Start now</span>
-               <h2 className="font-heading text-4xl sm:text-5xl font-extrabold text-navy leading-tight tracking-tight mb-4">Discover your next<br/>perfect ocean escape</h2>
+               <h2 className="font-heading text-4xl sm:text-5xl font-bold text-navy leading-tight tracking-tight mb-4">Discover your next<br/>perfect ocean escape</h2>
                <p className="text-sm font-medium text-navy/70 leading-relaxed max-w-sm">
                  Plan your trip in minutes and enjoy every moment of your dive adventure.
                </p>

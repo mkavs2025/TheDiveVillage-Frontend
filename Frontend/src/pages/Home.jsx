@@ -5,6 +5,10 @@ import Button from '../components/Button'
 import SafeImage from '../components/SafeImage'
 import SectionReveal, { StaggerGrid, StaggerItem } from '../components/SectionReveal'
 import { IMAGES, CAROUSEL_IMAGES } from '../utils/images'
+import img1 from '../assets/1.png'
+import img2 from '../assets/2.png'
+import img3 from '../assets/3.png'
+import img4 from '../assets/4.png'
 const ProgramsPreview = lazy(() => import('../components/ProgramsPreview'))
 const TrainingSafety = lazy(() => import('../components/TrainingSafety'))
 const GalleryPreview = lazy(() => import('../components/GalleryPreview'))
@@ -34,16 +38,16 @@ const HIGHLIGHTS_DATA = [
     title: 'Introductory Programs',
     desc: 'Experience scuba safely in shallow water with professional supervision.',
     image: IMAGES.scubaHero,
-    link: '/book-us',
-    btnText: 'Explore Scuba'
+    link: '/services',
+    btnText: 'Explore Programs'
   },
   {
     id: 'snorkeling',
     title: 'Guided Snorkeling',
     desc: 'Discover snorkeling and explore the ocean up close. The ocean welcomes all.',
     image: IMAGES.snorkelingHero,
-    link: '/book-us',
-    btnText: 'Explore Snorkeling'
+    link: '/services',
+    btnText: 'Explore Programs'
   },
   {
     id: 'courses',
@@ -51,23 +55,23 @@ const HIGHLIGHTS_DATA = [
     desc: 'From your very first breath underwater to professional divemaster certifications.',
     image: IMAGES.hero,
     link: '/services',
-    btnText: 'View Services'
+    btnText: 'Explore Programs'
   },
   {
     id: 'surfing',
     title: 'Freediving',
     desc: 'Breath-hold freediving to explore the ocean with just your natural abilities.',
     image: IMAGES.surfingHero,
-    link: '/book-us',
-    btnText: 'Explore Freediving'
+    link: '/services',
+    btnText: 'Explore Programs'
   },
   {
     id: 'products',
     title: 'Flexible Fun Dives',
     desc: 'Every experience is a step deeper into the world of the ocean.',
     image: IMAGES.gear1,
-    link: '/shop',
-    btnText: 'View Packages'
+    link: '/services',
+    btnText: 'Explore Programs'
   },
 ]
 
@@ -88,53 +92,58 @@ export default function Home() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="pointer-events-auto"
             >
-              <h1 className="mt-5 font-tall text-[4rem] sm:text-[5rem] md:text-[6rem] lg:text-[7rem] font-normal uppercase tracking-normal text-white leading-[0.85] flex flex-col">
-                <span className="block">THE DIVE VILLAGE</span>
-                <span className="block text-white/90">IT'S A</span>
-                <span className="block text-[#FFCD00]">COMMUNITY</span>
+              <h1 className="mt-5 font-heading text-[3.5rem] sm:text-[4.5rem] md:text-[5.5rem] lg:text-[7rem] font-bold uppercase tracking-normal text-white leading-[0.9] flex flex-col drop-shadow-2xl">
+                <span className="block text-[0.35em] tracking-[0.1em] mb-2 opacity-90">MORE THAN A DESTINATION</span>
+                <span className="block text-white mb-2">IT IS A</span>
+                <span className="block text-[#FFCD00]">COMMUNITY.</span>
               </h1>
-              <p className="mt-8 max-w-xl text-base sm:text-lg font-medium text-white/70">
-                The Dive Village was born from a simple belief: that the life-changing magic of the ocean is a feeling meant to be shared.
+              <div className="mt-6 h-1 w-20 bg-[#FFCD00]"></div>
+              <p className="mt-8 max-w-2xl text-lg sm:text-xl md:text-2xl font-medium text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] leading-relaxed">
+                The life-changing magic of the ocean<br />Is a feeling meant to be shared.
               </p>
-              <div className="mt-10 flex flex-wrap items-center gap-4">
+              <div className="mt-10 flex flex-wrap items-center gap-6">
                 <Link
                   to="/book-us"
-                  className="rounded-[30px] bg-accent px-8 py-4 font-body text-sm font-bold text-navy transition-all duration-300 hover:scale-105 hover:bg-white"
+                  className="rounded-full bg-accent px-8 py-4 font-body text-xs sm:text-sm tracking-widest font-bold text-navy uppercase transition-all duration-300 hover:scale-105 hover:bg-white flex items-center gap-3"
                 >
                   Book Your Dive
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                 </Link>
                 <Link
                   to="/shop"
-                  className="rounded-[30px] border border-white/20 bg-white/5 backdrop-blur-md px-8 py-4 font-body text-sm font-bold text-white transition-all duration-300 hover:bg-white/10"
+                  className="rounded-full border border-white bg-white px-8 py-4 font-body text-xs sm:text-sm tracking-widest font-bold text-navy uppercase transition-all duration-300 hover:bg-navy hover:text-white"
                 >
-                  Explore Shop
+                  Shop Merch
                 </Link>
               </div>
             </motion.div>
           </div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Bottom Bar overlay */}
         <motion.div
           initial={reduce ? false : { opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1, repeat: Infinity, repeatType: "reverse" }}
-          className="absolute bottom-8 left-1/2 flex -translate-x-1/2 justify-center text-white/70"
+          transition={{ duration: 1, delay: 1 }}
+          className="absolute bottom-2 left-0 right-0 w-full px-6 lg:px-12 flex items-center justify-center pointer-events-none text-white font-body text-xs tracking-widest font-bold uppercase opacity-80"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" stroke="currentColor" strokeWidth="2">
-            <path d="M12 5v14M5 12l7 7 7-7" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          {/* Center: Scroll to explore */}
+          <div className="flex flex-col items-center gap-2">
+            <svg width="20" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mb-1"><rect x="5" y="2" width="14" height="20" rx="7"></rect><path d="M12 6v4"></path></svg>
+            <span className="text-[10px] text-white/70">SCROLL TO EXPLORE</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFCD00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+          </div>
         </motion.div>
-      </section>
+      </section >
 
       {/* HIGHLIGHTS */}
-      <section className="relative z-10 pb-24 pt-16 sm:pt-20 pointer-events-auto">
+      < section className="relative z-10 pb-24 pt-16 sm:pt-20 pointer-events-auto" >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionReveal className="mb-12 text-center">
-            <h2 className="font-heading text-h2 font-extrabold text-white">
-              Explore Our Programs
+          <SectionReveal className="mb-12 flex flex-col items-center text-center">
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] leading-tight">
+              Explore Our <span className="text-[#FFCD00] italic">Programs</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-white/70">
+            <p className="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-white/90 font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
               From your very first breath underwater to professional divemaster certifications.
             </p>
           </SectionReveal>
@@ -142,60 +151,121 @@ export default function Home() {
             <InteractiveHighlights />
           </SectionReveal>
         </div>
-      </section>
+      </section >
 
 
 
       {/* 4. WHO CAN DIVE */}
-      <section id="who-can-dive-section" className="relative py-24 sm:py-32 pointer-events-auto">
+      < section id="who-can-dive-section" className="relative py-24 sm:py-32 pointer-events-auto" >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionReveal className="mb-16 text-center">
-            <h2 className="font-heading text-h2 font-extrabold text-white">
-              The Ocean <em className="font-heading italic font-bold text-cta">Welcomes All</em>
+          <SectionReveal className="mb-16 flex flex-col items-center text-center">
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] leading-tight">
+              The Ocean <span className="text-[#FFCD00] italic">Welcomes All</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-white/70">
-              You don't need to be an athlete or an expert to dive — only curious enough to explore.
+            <p className="mt-4 max-w-2xl mx-auto text-base sm:text-lg text-white/90 font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+              You don't need to be an athlete or an expert to dive<br />Only curious enough to explore.
             </p>
           </SectionReveal>
 
-          <StaggerGrid className="grid gap-8 lg:gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <StaggerGrid className="grid gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-4 mt-24">
             {[
-              { t: 'Enthusiastic Beginners', img: CAROUSEL_IMAGES[0] },
-              { t: 'Families, Couples & Groups', img: CAROUSEL_IMAGES[1] },
-              { t: 'Professionals Across Industries', img: CAROUSEL_IMAGES[2] },
-              { t: 'Adventure Seekers', img: CAROUSEL_IMAGES[3] }
+              {
+                t: 'Enthusiastic Beginners',
+                img: img1,
+                desc: "New to diving? Start your journey with confidence. We'll guide you every step of the way."
+              },
+              {
+                t: 'Families, Couples & Groups',
+                img: img2,
+                desc: "Shared memories. Deeper connections. Perfect experiences for the people who matter most."
+              },
+              {
+                t: 'Professionals Across Industries',
+                img: img3,
+                desc: "For those who work beneath the surface. Training, support and solutions you can rely on."
+              },
+              {
+                t: 'Adventure Seekers',
+                img: img4,
+                desc: "For the bold, the curious and the ocean lovers. Explore more. Dive deeper. Live the adventure."
+              }
             ].map((item, i) => (
               <StaggerItem key={i}>
-                <div className="h-full rounded-card glass-premium p-4 shadow-soft transition duration-hover hover:-translate-y-1 hover:shadow-card flex flex-col gap-4">
-                  <div className="aspect-[4/3] w-full rounded-lg overflow-hidden">
-                    <img src={item.img} alt={item.t} className="w-full h-full object-cover" />
+                <div className="h-full group cursor-pointer relative mt-8 flex flex-col">
+                  
+                  {/* Floating transparent PNG image - dynamic sizing per user request */}
+                  <img 
+                    src={item.img} 
+                    alt={item.t} 
+                    className={`absolute left-1/2 -translate-x-1/2 h-auto object-contain transition-transform duration-500 group-hover:-translate-y-4 drop-shadow-2xl z-20 pointer-events-none ${
+                      i === 2 
+                        ? '-top-2 w-[75%] max-w-[180px]' 
+                        : '-top-10 w-[115%] max-w-[300px]'
+                    }`} 
+                  />
+                  
+                  {/* Actual Card Background & Content with overflow-hidden */}
+                  <div className="h-full w-full rounded-2xl overflow-hidden border border-white/20 relative flex flex-col p-6 sm:p-8 pt-48 sm:pt-56 z-10 transition duration-500 group-hover:border-white/40 bg-[#001D3D]">
+                    
+                    {/* Background Image - stays static */}
+                    <img 
+                      src={CAROUSEL_IMAGES[2]} 
+                      alt=""
+                      className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity z-0" 
+                    />
+                    
+                    {/* Content wrapper - pushed to bottom */}
+                    <div className="relative z-10 flex flex-col h-full mt-auto">
+                      <h3 className="font-heading text-lg sm:text-xl font-bold text-white uppercase tracking-wider mb-4 leading-tight text-left">
+                        {item.t}
+                      </h3>
+                      
+                      {/* Yellow divider */}
+                      <div className="w-8 h-[3px] bg-[#FFCD00] mb-5"></div>
+                      
+                      {/* Description text - justified */}
+                      <p className="text-white/80 text-sm font-medium mb-8 leading-relaxed text-justify">
+                        {item.desc}
+                      </p>
+                      
+                      {/* Button */}
+                      <div>
+                        <div className="inline-flex items-center gap-2 font-body text-xs font-bold uppercase tracking-widest bg-[#FFCD00] text-[#001D3D] border-2 border-[#FFCD00] rounded-full px-5 py-2.5 transition-all duration-300 group-hover:bg-white group-hover:border-white">
+                          <span>Dive In</span>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-1">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="font-heading text-lg font-bold text-white text-center">{item.t}</h3>
                 </div>
               </StaggerItem>
             ))}
           </StaggerGrid>
-
-          <SectionReveal className="mt-12 text-center">
-            <p className="font-heading text-lg font-bold text-white">
-              If you can breathe, you can dive. The sea has space for everyone.
-            </p>
-          </SectionReveal>
         </div>
-      </section>
+      </section >
 
-      {/* 5. WHAT IS DIVING & POWER OF DIVING */}
-      <section className="relative py-24 sm:py-32">
+      {/* 7. TRAINING & SAFETY */}
+      < div id="training-safety-section" className="pointer-events-auto" >
+        <Suspense fallback={<div className="py-20 text-center text-navy/50">Loading Training...</div>}>
+          <TrainingSafety />
+        </Suspense>
+      </div >
+
+      {/* 5. COURSES & TRIPS PREVIEW */}
+      < div id="programs-section" className="pointer-events-auto relative z-10" >
+        <Suspense fallback={<div className="py-20 text-center text-navy/50">Loading Programs...</div>}>
+          <ProgramsPreview />
+        </Suspense>
+      </div >
+
+      {/* 5. POWER OF DIVING */}
+      < section className="relative py-24 sm:py-32 pointer-events-auto" >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionReveal className="mb-20 rounded-3xl glass-premium p-8 sm:p-14">
-            <h2 className="font-heading text-3xl font-extrabold text-white text-center mb-6">What is Scuba Diving?</h2>
-            <p className="text-center text-lg text-white/70 max-w-4xl mx-auto leading-relaxed">
-              Scuba diving is a form of underwater diving where divers use a Self-Contained Underwater Breathing Apparatus (SCUBA) to breathe while exploring beneath the surface. Unlike snorkeling or freediving, scuba divers carry their own source of breathing gas in tanks, allowing extended time underwater.
-            </p>
-          </SectionReveal>
-
           <SectionReveal className="mb-16 text-center">
-            <h2 className="font-heading text-h2 font-extrabold text-white">
+            <h2 className="font-heading text-h2 font-bold text-white">
               The Power of <em className="font-heading italic font-bold text-cta">Diving</em>
             </h2>
           </SectionReveal>
@@ -212,29 +282,13 @@ export default function Home() {
             ))}
           </StaggerGrid>
         </div>
-      </section>
-
-
-
-      {/* 5. COURSES & TRIPS PREVIEW */}
-      <div id="programs-section" className="pointer-events-auto">
-        <Suspense fallback={<div className="py-20 text-center text-navy/50">Loading Programs...</div>}>
-          <ProgramsPreview />
-        </Suspense>
-      </div>
-
-      {/* 7. TRAINING & SAFETY */}
-      <div className="pointer-events-auto">
-        <Suspense fallback={<div className="py-20 text-center text-navy/50">Loading Training...</div>}>
-          <TrainingSafety />
-        </Suspense>
-      </div>
+      </section >
 
       {/* 6. WHY DIVE VILLAGE */}
-      <section className="relative py-24 text-white sm:py-32 pointer-events-auto">
+      < section className="relative py-24 text-white sm:py-32 pointer-events-auto" >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionReveal className="text-center mb-16">
-            <h2 className="font-heading text-h2 font-extrabold text-white">
+            <h2 className="font-heading text-h2 font-bold text-white">
               From Airport to Airport — <em className="font-heading italic font-bold text-cta">We've Got You Covered</em>
             </h2>
           </SectionReveal>
@@ -259,34 +313,40 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* 8. GALLERY PREVIEW */}
-      <div id="gallery-section" className="pointer-events-auto">
+      < div id="gallery-section" className="pointer-events-auto" >
         <Suspense fallback={<div className="py-20 text-center text-navy/50">Loading Gallery...</div>}>
           <GalleryPreview />
         </Suspense>
-      </div>
+      </div >
 
 
       {/* CLOSING CTA WITH CAROUSEL */}
-      <section className="py-16 sm:py-24 bg-transparent pointer-events-auto">
+      < section className="py-16 sm:py-24 bg-transparent pointer-events-auto" >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionReveal>
             <AutoCarousel images={CAROUSEL_IMAGES} />
           </SectionReveal>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   )
 }
 
 function InteractiveHighlights() {
   return (
-    <div className="perspective-[1500px] mx-auto w-full max-w-[95vw] lg:max-w-7xl h-[450px] sm:h-[550px] flex items-center justify-center overflow-visible my-12">
+    <div
+      className="perspective-[1500px] mx-auto w-full max-w-[95vw] lg:max-w-7xl h-[450px] sm:h-[550px] flex items-center justify-center overflow-visible my-12"
+      style={{
+        WebkitMaskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
+        maskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)'
+      }}
+    >
       <div className="relative w-full h-full preserve-3d animate-spin-carousel hover:[animation-play-state:paused]">
         {[...HIGHLIGHTS_DATA, ...HIGHLIGHTS_DATA].map((current, i) => (
-          <div 
+          <div
             key={`${current.id}-${i}`}
             className="absolute inset-0 flex items-center justify-center backface-hidden"
             style={{
@@ -300,12 +360,12 @@ function InteractiveHighlights() {
                 className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent opacity-90 transition duration-300" />
-              
+
               <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">
                 <span className="inline-block text-accent font-heading font-bold uppercase tracking-widest text-[10px] mb-2">
                   Featured
                 </span>
-                <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-white leading-tight mb-3">
+                <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white leading-tight mb-3">
                   {current.title}
                 </h3>
                 <p className="text-white/80 text-xs sm:text-sm mb-6 line-clamp-3">
@@ -353,15 +413,15 @@ function AutoCarousel({ images, showContent = true }) {
       </AnimatePresence>
       <div className="absolute inset-0 bg-navy/10 mix-blend-multiply z-10" />
       <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/40 to-transparent z-10" />
-      
+
       {showContent && (
         <div className="absolute inset-0 z-20 flex flex-col justify-center p-8 sm:p-12 lg:p-16">
           <div className="max-w-xl">
             <span className="inline-block text-accent font-heading font-bold uppercase tracking-widest text-xs mb-4">
               The Sea is Calling
             </span>
-            <h3 className="font-heading text-4xl sm:text-5xl lg:text-5xl font-extrabold text-white leading-[1.1] mb-6 tracking-tight">
-              Come for the adventure.<br/>
+            <h3 className="font-heading text-4xl sm:text-5xl lg:text-5xl font-bold text-white leading-[1.1] mb-6 tracking-tight">
+              Come for the adventure.<br />
               <span className="text-white/60">Stay for the calm.</span>
             </h3>
             <p className="text-white/80 font-medium text-base sm:text-lg mb-8 max-w-sm">

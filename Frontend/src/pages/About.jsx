@@ -112,7 +112,7 @@ export default function About() {
             <span className="inline-block bg-white/20 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-4 backdrop-blur-md">
               Who We Are
             </span>
-            <h1 className="font-heading text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight leading-none text-white drop-shadow-lg">
+            <h1 className="font-heading text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-none text-white drop-shadow-lg">
               About Us
             </h1>
           </div>
@@ -172,7 +172,7 @@ export default function About() {
 
         {/* 2.5 WHAT DIVING TRULY MEANS */}
         <div className="mx-auto max-w-4xl text-center mb-24 bg-white rounded-[40px] p-10 sm:p-16 shadow-soft border border-navy/5">
-          <h2 className="font-heading text-3xl sm:text-5xl font-extrabold text-navy">
+          <h2 className="font-heading text-3xl sm:text-5xl font-bold text-navy">
             What Diving <em className="font-heading italic font-bold text-accent">Truly Means</em>
           </h2>
           <p className="mt-6 text-lg sm:text-xl text-navy/70 leading-relaxed max-w-3xl mx-auto">
@@ -190,7 +190,7 @@ export default function About() {
               <span className="inline-block bg-accent/10 text-accent font-bold text-xs uppercase tracking-widest px-3.5 py-1 rounded-full mb-4">
                 Founder's Story
               </span>
-              <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy leading-tight">
+              <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-navy leading-tight">
                 Born From a Passion for the Deep Blue
               </h2>
               <p className="mt-6 text-navy/70 leading-relaxed">
@@ -249,7 +249,7 @@ export default function About() {
             <span className="text-accent font-bold tracking-widest uppercase text-xs mb-3 block">
               Guiding Principles
             </span>
-            <h2 className="font-heading text-3xl sm:text-5xl font-extrabold text-navy">
+            <h2 className="font-heading text-3xl sm:text-5xl font-bold text-navy">
               What Defines Us
             </h2>
             <p className="mt-4 text-navy/70">
@@ -285,7 +285,7 @@ export default function About() {
             <span className="text-accent font-bold tracking-widest uppercase text-xs mb-3 block">
               Community Voices
             </span>
-            <h2 className="font-heading text-3xl sm:text-5xl font-extrabold text-navy">
+            <h2 className="font-heading text-3xl sm:text-5xl font-bold text-navy">
               What Our Divers Say
             </h2>
             <p className="mt-4 text-navy/70">
@@ -336,7 +336,7 @@ export default function About() {
             <span className="inline-block bg-white/10 rounded-full px-4 py-1.5 text-xs font-bold text-accent uppercase tracking-widest mb-6 backdrop-blur-sm border border-white/10">
               Join Our Community
             </span>
-            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-6 drop-shadow-md">
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white mb-6 drop-shadow-md">
               Ready to Explore the Ocean With Us?
             </h2>
             <p className="text-lg text-white/90 max-w-xl mb-10 leading-relaxed drop-shadow-md">

@@ -53,10 +53,13 @@ export default function InteractiveDiveMap({ onSiteSelect }) {
     // Configure globe aesthetics
     viewer.scene.globe.enableLighting = true
     viewer.scene.globe.depthTestAgainstTerrain = true
-    
+
+    // Limit zoom distance to prevent zooming out too far
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 15000000;
+
     // Zoom out initially
     viewer.camera.flyTo({
-      destination: window.Cesium.Cartesian3.fromDegrees(100.0, 0.0, 25000000),
+      destination: window.Cesium.Cartesian3.fromDegrees(100.0, 0.0, 15000000),
       duration: 0
     })
 
@@ -65,12 +68,17 @@ export default function InteractiveDiveMap({ onSiteSelect }) {
       viewer.entities.add({
         id: `site-${site.id}`,
         position: window.Cesium.Cartesian3.fromDegrees(site.lon, site.lat),
-        point: {
-          pixelSize: 14,
-          color: window.Cesium.Color.fromCssColorString('#2dd4bf'), // Tailwind accent color
-          outlineColor: window.Cesium.Color.WHITE,
-          outlineWidth: 2,
-          disableDepthTestDistance: Number.POSITIVE_INFINITY // Always visible
+        billboard: {
+          image: "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
+            <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 2C9.373 2 4 7.373 4 14c0 9 12 16 12 16s12-7 12-16c0-6.627-5.373-12-12-12z" fill="#ef4444" stroke="white" stroke-width="2"/>
+              <polygon points="16,8 18.5,13.5 24.5,14 20,18.5 21,24.5 16,21.5 11,24.5 12,18.5 7.5,14 13.5,13.5" fill="white"/>
+            </svg>
+          `),
+          width: 32,
+          height: 32,
+          verticalOrigin: window.Cesium.VerticalOrigin.BOTTOM,
+          disableDepthTestDistance: Number.POSITIVE_INFINITY
         },
         label: {
           text: site.name,
@@ -144,7 +152,7 @@ export default function InteractiveDiveMap({ onSiteSelect }) {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
-            className="absolute top-4 bottom-4 left-4 z-10 w-[90%] sm:w-[350px] p-6 rounded-3xl glass-premium border border-white/20 shadow-2xl flex flex-col pointer-events-auto"
+            className="absolute top-4 left-4 z-10 w-[90%] sm:w-[350px] p-6 rounded-3xl glass-premium border border-white/20 shadow-2xl flex flex-col pointer-events-auto"
           >
             <button
               onClick={() => setSelectedSite(null)}
@@ -157,49 +165,53 @@ export default function InteractiveDiveMap({ onSiteSelect }) {
               Dive Site
             </span>
             <h3 className="font-heading text-2xl font-bold text-white mb-2">{selectedSite.name}</h3>
-            
-            <p className="text-sm text-white/70 mb-4">{selectedSite.desc}</p>
-            
-            <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-6 mt-auto shrink-0">
-              <img src={selectedSite.img} alt={selectedSite.name} className="w-full h-full object-cover" />
-            </div>
 
-            <div className="space-y-3 text-sm shrink-0">
-              <div className="flex justify-between border-b border-white/10 pb-2">
-                <span className="text-white/60">Depth Range</span>
-                <strong className="text-white">{selectedSite.depth}</strong>
-              </div>
-              <div className="flex justify-between border-b border-white/10 pb-2">
-                <span className="text-white/60">Marine Life</span>
-                <strong className="text-white text-right max-w-[60%]">{selectedSite.life}</strong>
-              </div>
-            </div>
-            
             <button onClick={() => {
-               setSelectedSite(null)
-               onSiteSelect?.(null)
-               if(viewerRef.current) {
-                 viewerRef.current.camera.flyTo({
-                   destination: window.Cesium.Cartesian3.fromDegrees(100.0, 0.0, 25000000),
-                   duration: 2.0
-                 })
-               }
+              setSelectedSite(null)
+              onSiteSelect?.(null)
+              if (viewerRef.current) {
+                viewerRef.current.camera.flyTo({
+                  destination: window.Cesium.Cartesian3.fromDegrees(100.0, 0.0, 25000000),
+                  duration: 2.0
+                })
+              }
             }} className="w-full mt-6 rounded-full bg-accent py-3 text-sm font-bold text-navy transition hover:bg-white shrink-0">
               Back to Overview
             </button>
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       {/* Instruction Overlay */}
       <div className="absolute top-6 right-6 pointer-events-none z-10">
         <span className="inline-flex items-center gap-2 rounded-full bg-black/60 backdrop-blur-md px-4 py-2 text-xs font-bold text-white border border-white/10 shadow-lg">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8z" />
-            <path d="M12 6v6l4 2" />
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 11-.32-9.26l-5.37 5.37" />
           </svg>
-          Drag globe to explore
+          Drag to spin the globe
         </span>
+      </div>
+
+      {/* Joystick Overlay */}
+      <div className="absolute bottom-6 right-6 z-10 flex flex-col items-center gap-2 pointer-events-auto">
+        <span className="text-[10px] font-bold text-white/70 uppercase tracking-widest bg-navy/50 px-2 py-1 rounded-md backdrop-blur-md">
+          360° Toggle
+        </span>
+        <div className="relative w-16 h-16 rounded-full border-2 border-white/20 bg-white/10 backdrop-blur-md flex items-center justify-center shadow-lg">
+          <motion.div
+            drag
+            dragConstraints={{ top: -16, bottom: 16, left: -16, right: 16 }}
+            dragSnapToOrigin={true}
+            dragElastic={0.2}
+            onDrag={(e, info) => {
+              if (viewerRef.current) {
+                viewerRef.current.camera.rotateLeft(info.delta.x * -0.005)
+                viewerRef.current.camera.rotateUp(info.delta.y * -0.005)
+              }
+            }}
+            className="w-8 h-8 rounded-full bg-white/80 shadow-soft cursor-grab active:cursor-grabbing border border-white/50"
+          />
+        </div>
       </div>
     </div>
   )

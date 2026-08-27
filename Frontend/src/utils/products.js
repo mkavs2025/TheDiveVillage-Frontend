@@ -10,8 +10,15 @@ import imgUnisexShortsFront from '../assets/Products/Unisex Shorts front upscale
 import imgUnisexShortsBack from '../assets/Products/Unisex shorts back upscaled.png'
 import imgUnisexShirtFront from '../assets/Products/unisex front upscaled.png'
 import imgUnisexShirtBack from '../assets/Products/Unisex back upscaled.png'
-import imgDiveSuitFront from '../assets/Products/Dive Suit Front.png'
-import imgDiveSuitBack from '../assets/Products/Dive suit back.png'
+import imgSkinSuitFront from '../assets/Products/Dive Suit Front.png'
+import imgSkinSuitBack from '../assets/Products/Dive suit back.png'
+
+import videoWomensShirt from '../assets/Products/sweetheart.mp4'
+import videoWomensPants from '../assets/Products/womens pants.mp4'
+import videoWomensStrap from '../assets/Products/this_product_make_a_video_wher (2).mp4'
+import videoUnisexShorts from '../assets/Products/unisex shorts.mp4'
+import videoUnisexShirt from '../assets/Products/unisex unfront.mp4'
+import videoSkinSuit from '../assets/Products/Dive suit.mp4'
 
 export const SHOP_PRODUCTS = [
   {
@@ -22,6 +29,7 @@ export const SHOP_PRODUCTS = [
     oldPrice: 2999,
     image: imgWomensShirtFront,
     images: [imgWomensShirtFront, imgWomensShirtBack],
+    video: videoWomensShirt,
     category: 'Apparel',
     tag: 'New Arrival',
     description: 'Stay protected and stylish in the water. Features a sweetheart neckline, premium stretch, and sun protection.',
@@ -31,14 +39,12 @@ export const SHOP_PRODUCTS = [
       '4-Way Stretch: Flexible fabric allows easy movement without restricting your mobility.',
       'Lightweight & Breathable: Lightweight fabric allows airflow and keeps you comfortable during extended wear.'
     ],
-    materials: 'High-grade stretch fabric with UPF 50+.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Ocean Navy', hex: '#003865' }
     ],
     stock: 35,
     stockStatus: 'In Stock',
-    shippingDetails: 'Standard shipping available.',
     rating: 4.9,
     reviewCount: 42,
   },
@@ -50,6 +56,7 @@ export const SHOP_PRODUCTS = [
     oldPrice: 3499,
     image: imgWomensPantsFront,
     images: [imgWomensPantsFront, imgWomensPantsBack],
+    video: videoWomensPants,
     category: 'Apparel',
     tag: 'Bestseller',
     description: 'High-waisted dive pants offering full-length coverage and thigh-smoothing panels for ultimate comfort and confidence.',
@@ -59,14 +66,12 @@ export const SHOP_PRODUCTS = [
       'Thigh-Smoothing Panels: Designed to provide extra coverage and create a smoother appearance around the thighs.',
       'Full-Length Coverage: Offers extended coverage for your legs while providing comfort and protection during water activities.'
     ],
-    materials: 'Premium stretch fabric.',
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Ocean Navy', hex: '#003865' }
     ],
     stock: 20,
     stockStatus: 'In Stock',
-    shippingDetails: 'Standard shipping available.',
     rating: 4.8,
     reviewCount: 89,
   },
@@ -78,6 +83,7 @@ export const SHOP_PRODUCTS = [
     oldPrice: 2499,
     image: imgWomensStrapFront,
     images: [imgWomensStrapFront, imgWomensStrapBack],
+    video: videoWomensStrap,
     category: 'Apparel',
     tag: 'Essential',
     description: 'Supportive and comfortable dive top featuring heavy-duty Velcro straps and built-in chest support.',
@@ -87,14 +93,12 @@ export const SHOP_PRODUCTS = [
       'Stretch-Fit Fabric: Flexible fabric moves with your body for unrestricted movement while swimming or diving.',
       'Full-Body Coverage: Provides comfortable coverage across the torso and upper legs for added protection in the water.'
     ],
-    materials: 'Performance dive fabric with built-in cups.',
     sizes: ['S', 'M', 'L'],
     colors: [
       { name: 'Ocean Navy', hex: '#003865' }
     ],
     stock: 15,
     stockStatus: 'Low Stock',
-    shippingDetails: 'Standard shipping available.',
     rating: 4.7,
     reviewCount: 34,
   },
@@ -106,6 +110,7 @@ export const SHOP_PRODUCTS = [
     oldPrice: 2199,
     image: imgUnisexShortsFront,
     images: [imgUnisexShortsFront, imgUnisexShortsBack],
+    video: videoUnisexShorts,
     category: 'Apparel',
     tag: 'Comfort',
     description: 'Experience seamless comfort with these dive shorts, designed without visible stitching to reduce irritation.',
@@ -115,14 +120,12 @@ export const SHOP_PRODUCTS = [
       'Stretch-Fit Fabric: Flexible fabric moves naturally with your body for unrestricted movement while swimming or diving.',
       'Lightweight & Quick-Dry: Lightweight fabric dries quickly after getting wet, keeping you comfortable in and out of the water.'
     ],
-    materials: 'Seamless stretch fabric.',
     sizes: ['M', 'L', 'XL', 'XXL'],
     colors: [
       { name: 'Ocean Navy', hex: '#003865' }
     ],
     stock: 50,
     stockStatus: 'In Stock',
-    shippingDetails: 'Standard shipping available.',
     rating: 4.9,
     reviewCount: 112,
   },
@@ -134,6 +137,7 @@ export const SHOP_PRODUCTS = [
     oldPrice: 2799,
     image: imgUnisexShirtFront,
     images: [imgUnisexShirtFront, imgUnisexShirtBack],
+    video: videoUnisexShirt,
     category: 'Apparel',
     tag: 'Essential',
     description: 'A versatile, lightweight dive shirt featuring hidden neck seams and quick-dry fabric for all-day comfort.',
@@ -143,25 +147,24 @@ export const SHOP_PRODUCTS = [
       '4-Way Stretch: Flexible fabric moves with your body for unrestricted movement during swimming and diving.',
       'Lightweight & Breathable: Lightweight construction allows airflow and keeps you comfortable during extended wear.'
     ],
-    materials: 'Breathable 4-way stretch technical fabric.',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: [
       { name: 'Ocean Navy', hex: '#003865' }
     ],
     stock: 45,
     stockStatus: 'In Stock',
-    shippingDetails: 'Standard shipping available.',
     rating: 4.8,
     reviewCount: 76,
   },
   {
     id: 'product-full-suit',
-    title: 'Full-Body Dive Suit',
-    name: 'Full-Body Dive Suit',
+    title: 'Full-Body Skin Suit',
+    name: 'Full-Body Skin Suit',
     price: 6999,
     oldPrice: 8999,
-    image: imgDiveSuitFront,
-    images: [imgDiveSuitFront, imgDiveSuitBack],
+    image: imgSkinSuitFront,
+    images: [imgSkinSuitFront, imgSkinSuitBack],
+    video: videoSkinSuit,
     category: 'Gear',
     tag: 'Premium',
     description: 'Ultimate full-body protection with grip panels on the knees and seat, front zip closure, and stirrup foot straps.',
@@ -171,14 +174,12 @@ export const SHOP_PRODUCTS = [
       'Stirrup Foot Straps: Integrated foot straps help keep the suit securely in place and prevent the legs from riding up during movement.',
       'Full-Body Coverage: Provides extended coverage from the neck to the ankles for added protection and comfort in the water.'
     ],
-    materials: 'Premium neoprene with textured grip panels.',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: [
       { name: 'Ocean Navy', hex: '#003865' }
     ],
     stock: 12,
     stockStatus: 'Low Stock',
-    shippingDetails: 'Free shipping on orders over ₹4000.',
     rating: 5.0,
     reviewCount: 28,
   }

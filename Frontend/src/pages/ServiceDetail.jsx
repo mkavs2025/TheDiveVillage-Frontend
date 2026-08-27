@@ -54,7 +54,7 @@ export default function ServiceDetail() {
             <span className="inline-block bg-white/20 backdrop-blur-md rounded-full px-4 py-1.5 text-xs font-bold text-white uppercase tracking-widest mb-4">
               {categoryLabel}
             </span>
-            <h1 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-navy leading-none mb-4">
+            <h1 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-navy leading-none mb-4">
               {service.title}
             </h1>
             <p className="max-w-2xl text-lg sm:text-xl font-medium text-navy/80 leading-relaxed">
@@ -219,7 +219,7 @@ export default function ServiceDetail() {
         <div className="rounded-[40px] bg-[#F0F2F5] p-8 sm:p-14">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-navy/60 font-bold tracking-widest uppercase text-xs mb-3 block">Why The Village</span>
-            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-navy">The Dive Village Difference</h2>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-navy">The Dive Village Difference</h2>
           </div>
           <div className="grid sm:grid-cols-3 gap-8">
             <div className="bg-white rounded-3xl p-8 shadow-soft text-center hover:-translate-y-2 transition-transform duration-300">

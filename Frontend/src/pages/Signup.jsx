@@ -47,7 +47,7 @@ export default function Signup() {
         <img src={IMAGES.gear1} alt="Diver underwater" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent" />
         <div className="absolute bottom-16 left-16 max-w-lg">
-          <h2 className="font-heading text-5xl font-extrabold text-white leading-tight mb-4 text-balance">
+          <h2 className="font-heading text-5xl font-bold text-white leading-tight mb-4 text-balance">
             Join the Village.
           </h2>
           <p className="text-white/80 font-medium">Create an account to book dives, purchase gear, and track your history.</p>
@@ -58,7 +58,7 @@ export default function Signup() {
       <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-20">
         <div className="w-full max-w-md">
           <div className="mb-10 text-center lg:text-left">
-            <h1 className="font-heading text-4xl sm:text-5xl font-extrabold text-navy tracking-tight mb-3">Create Account</h1>
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-navy tracking-tight mb-3">Create Account</h1>
             <p className="text-navy/60 text-sm font-medium">Enter your details to get started.</p>
           </div>
 

@@ -10,9 +10,8 @@ export default {
         cta: '#FF6106',
       },
       fontFamily: {
-        heading: ['Outfit', 'sans-serif'],
-        body: ['Outfit', 'sans-serif'],
-        tall: ['"Bebas Neue"', 'sans-serif'],
+        heading: ['Antonio'],
+        body: ['"Google Sans Flex"'],
       },
       fontSize: {
         h1: ['clamp(2rem, 5vw, 3.5rem)', { lineHeight: '1.15', letterSpacing: '0.02em' }],

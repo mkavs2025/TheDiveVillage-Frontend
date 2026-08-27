@@ -42,7 +42,7 @@ export default function Cart() {
         <div className="mb-10 border-b border-navy/10 pb-6 flex items-end justify-between">
           <div>
             <span className="text-xs font-bold uppercase tracking-widest text-accent mb-1 block">Shopping Bag</span>
-            <h1 className="font-heading text-4xl sm:text-5xl font-extrabold text-navy tracking-tight">Your Cart</h1>
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-navy tracking-tight">Your Cart</h1>
             <p className="mt-1 text-sm text-navy/60 font-medium">{itemCount} item{itemCount !== 1 && 's'} in your bag</p>
           </div>
           <Link to="/shop" className="text-xs sm:text-sm font-bold text-navy hover:text-accent transition underline decoration-2 underline-offset-4">
@@ -199,7 +199,7 @@ export default function Cart() {
               <div className="space-y-3 mb-6 text-sm font-medium text-navy/70">
                 <div className="flex justify-between text-navy pt-4 border-t border-navy/10">
                   <span className="font-bold text-lg">Total Items</span>
-                  <span className="font-heading font-extrabold text-2xl text-navy">
+                  <span className="font-heading font-bold text-2xl text-navy">
                     {items.length}
                   </span>
                 </div>

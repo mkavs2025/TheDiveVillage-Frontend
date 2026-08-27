@@ -79,7 +79,7 @@ export default function Footer() {
           <ul className="mt-4 space-y-3 text-sm text-white/80">
             <li>
               <a href="tel:+918971001010" className="transition duration-hover hover:text-accent">
-                +91 8971001010
+                +91 89710 01010
               </a>
             </li>
             <li>
@@ -90,7 +90,7 @@ export default function Footer() {
                 hello@thedivevillage.co
               </a>
             </li>
-            <li>Ranka Park, Lakshadweep</li>
+            <li>1st Cross Rd, Ranka Nagar, Kaval Bairasandra, Bengaluru, Karnataka 560032</li>
           </ul>
         </div>
       </div>
@@ -104,7 +104,7 @@ export default function Footer() {
               </a>
             ))}
           </div>
-          <p>© {new Date().getFullYear()} TheDiveVillage. Copyright - A Brand Of CAF Sourcing.</p>
+          <p>© {new Date().getFullYear()} TheDiveVillage. Copyright CAF Sourcing.</p>
           <p>
             Designed &amp; Developed by{' '}
             <span className="text-accent">mKavs Global Tech</span>

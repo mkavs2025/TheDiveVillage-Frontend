@@ -9,7 +9,7 @@ export default function AboutSection() {
             <span className="inline-flex rounded-full bg-white/10 px-4 py-1.5 text-[11px] font-heading font-bold uppercase tracking-[0.18em] text-white/80 border border-white/20 backdrop-blur-md">
               Our Story
             </span>
-            <h2 className="mt-4 font-heading text-h2 font-extrabold text-white">
+            <h2 className="mt-4 font-heading text-h2 font-bold text-white">
               About <em className="font-heading italic font-bold text-accent">Sanjeev</em> and His Passion for Diving
             </h2>
             <p className="mt-6 text-lg text-white/90 leading-relaxed">

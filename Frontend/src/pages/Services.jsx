@@ -31,7 +31,7 @@ export default function Services() {
             <span className="inline-block bg-black/5 rounded-full px-4 py-1.5 text-xs font-bold text-navy/60 uppercase tracking-widest mb-4">
               What We Offer
             </span>
-            <h1 className="font-heading text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight text-navy leading-none">
+            <h1 className="font-heading text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-navy leading-none">
               Our Services
             </h1>
           </div>
@@ -64,7 +64,7 @@ export default function Services() {
               <span className="inline-block bg-black/5 rounded-full px-4 py-1.5 text-xs font-bold text-navy/60 uppercase tracking-widest mb-3">
                 Category
               </span>
-              <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-navy leading-none">
+              <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-navy leading-none">
                 {group.category.label}
               </h2>
             </div>
@@ -122,7 +122,7 @@ export default function Services() {
         <div className="rounded-[40px] bg-[#F0F2F5] p-8 sm:p-14 mb-24">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-navy/60 font-bold tracking-widest uppercase text-xs mb-3 block">Why The Village</span>
-            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-navy">The Dive Village Difference</h2>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-navy">The Dive Village Difference</h2>
           </div>
 
           <div className="grid sm:grid-cols-3 gap-8">
@@ -165,7 +165,7 @@ export default function Services() {
             <span className="inline-block bg-white/10 rounded-full px-4 py-1.5 text-xs font-bold text-accent uppercase tracking-widest mb-6">
               Custom Requirements?
             </span>
-            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white mb-6">
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white mb-6">
               Need a Custom Group or Private Charter?
             </h2>
             <p className="text-lg text-white/80 max-w-xl mb-10 leading-relaxed">

@@ -5,7 +5,7 @@ export default function Wishlist() {
   
   return (
     <div>
-      <h1 className="font-heading text-3xl font-extrabold text-navy">
+      <h1 className="font-heading text-3xl font-bold text-navy">
         Wishlist
       </h1>
       <p className="mt-2 text-navy/60 font-medium">Keep track of the gear you're eyeing.</p>

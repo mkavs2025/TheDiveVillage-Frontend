@@ -14,9 +14,14 @@ export default function Logo({ className = '', compact = false, light = false })
         className={`h-9 w-auto object-contain transition duration-hover group-hover:scale-105 ${light ? 'invert brightness-0' : ''}`} 
       />
       {!compact && (
-        <span className={`font-heading font-extrabold text-lg tracking-wide ${light ? 'text-white' : 'text-navy'}`}>
-          THE DIVE VILLAGE
-        </span>
+        <div className="flex flex-col items-center justify-center -mt-1">
+          <span className={`font-heading text-lg sm:text-xl tracking-wider leading-none ${light ? 'text-white' : 'text-navy'}`}>
+            THE DIVE VILLAGE
+          </span>
+          <span className={`font-body text-[8px] sm:text-[9px] font-bold tracking-[0.2em] leading-none ${light ? 'text-white/80' : 'text-navy/80'}`}>
+            SCUBA EXPERIENCES
+          </span>
+        </div>
       )}
     </Link>
   )

@@ -80,7 +80,7 @@ export default function BookUs() {
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-16">
           <div>
             <span className="inline-block bg-black/5 rounded-full px-4 py-1.5 text-xs font-bold text-navy/60 uppercase tracking-widest mb-6">Plan Trip</span>
-            <h1 className="font-heading text-6xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight text-navy leading-none text-balance">Book Your Dive</h1>
+            <h1 className="font-heading text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-navy leading-none text-balance">Book Your Dive</h1>
           </div>
           <p className="max-w-xs text-sm font-medium text-navy/70 leading-relaxed lg:pb-4">
             Select your program and preferred dates. We will confirm your spot within 24 hours.
@@ -293,7 +293,7 @@ export default function BookUs() {
 
           {/* Right Globe */}
           <div className="relative w-full aspect-[3/4] lg:aspect-auto h-full rounded-[40px] overflow-hidden bg-navy flex flex-col pt-8">
-            <h3 className="text-center font-heading text-2xl font-extrabold text-white z-10 mb-4">Pick dive location</h3>
+            <h3 className="text-center font-heading text-2xl font-bold text-white z-10 mb-4">Pick dive location</h3>
             <div className="flex-1 relative">
               <InteractiveDiveMap onSiteSelect={handleSiteSelect} />
             </div>

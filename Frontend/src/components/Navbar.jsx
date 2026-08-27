@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import Logo from './Logo'
+import ThemeToggle from './ThemeToggle'
 import { useCart } from '../hooks/useCart'
 import { useAuth } from '../hooks/useAuth'
 
@@ -52,53 +53,79 @@ export default function Navbar() {
   const bgSoft = isDarkBackground ? 'bg-transparent' : 'bg-transparent'
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 w-full bg-transparent transition-all duration-300`}
-    >
-      <div className="flex h-[88px] w-full items-center justify-between px-6 lg:px-12 mx-auto max-w-[1400px]">
-        <Logo light={isDarkBackground} />
-
-        <div className="flex items-center gap-6 lg:gap-10">
-          <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
-          {NAV.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.end}
-              className={({ isActive }) =>
-                `relative font-body text-[15px] font-bold tracking-wide transition-colors duration-200 ${
-                  item.highlight
-                    ? 'text-accent'
-                    : isActive
-                    ? textColor
-                    : `${textMuted} ${hoverText}`
-                }`
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
-          
-          <button 
-            onClick={toggleNightDive} 
-            className={`flex items-center justify-center ml-2 px-5 py-2.5 rounded-full border ${borderColor} text-sm font-bold ${textColor} transition-all duration-300 hover:border-accent hover:text-accent ${hoverBg}`}
+    <header className="fixed top-4 left-0 right-0 z-[9999] w-full px-4 flex justify-center pointer-events-none transition-all duration-300">
+      <div className={`pointer-events-auto relative grid grid-cols-[1fr_auto_1fr] h-[72px] lg:h-[80px] w-full max-w-[1400px] items-center px-6 lg:px-8 rounded-full shadow-float border border-white/10 ${location.pathname === '/' ? 'bg-navy/40 backdrop-blur-xl' : 'bg-[#003865]'}`}>
+        
+        {/* Left Side: Home, Book Us, Contact Us */}
+        <div className="flex items-center justify-evenly w-full">
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              `relative whitespace-nowrap font-body text-[15px] font-bold tracking-wide transition-all duration-300 ${
+                isActive 
+                  ? 'text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent' 
+                  : 'text-white hover:text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300'
+              }`
+            }
           >
-            {isNightDive ? '☀️ Day' : '🌙 Night'}
-          </button>
-        </nav>
+            Home
+          </NavLink>
+          <NavLink
+            to="/book-us"
+            className={({ isActive }) =>
+              `relative whitespace-nowrap font-body text-[15px] font-bold tracking-wide transition-all duration-300 ${
+                isActive 
+                  ? 'text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent' 
+                  : 'text-white hover:text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300'
+              }`
+            }
+          >
+            Book Us
+            <span className="absolute -top-1 -right-3 flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+            </span>
+          </NavLink>
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              `hidden lg:block relative whitespace-nowrap font-body text-[15px] font-bold tracking-wide transition-all duration-300 ${
+                isActive 
+                  ? 'text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent' 
+                  : 'text-white hover:text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300'
+              }`
+            }
+          >
+            Contact Us
+          </NavLink>
+        </div>
 
-        <div className="flex items-center gap-2 sm:gap-4">
+        {/* Middle: Logo (Absolute Center) */}
+        <div className="flex justify-center items-center px-4 shrink-0">
+          <Logo light={true} compact={true} className="[&>img]:h-10 sm:[&>img]:h-12" />
+        </div>
+
+        {/* Right Side: Phone, Night toggle, profile, menu */}
+        <div className="flex items-center justify-evenly w-full">
+
           <a
             href="tel:+918971001010"
-            className={`flex h-10 w-10 lg:w-auto items-center justify-center gap-2 rounded-full border ${borderColor} ${bgSoft} lg:px-5 text-[15px] font-bold ${textColor} backdrop-blur-md transition duration-hover hover:border-accent ${hoverBg}`}
+            className="flex h-10 items-center justify-center gap-2 rounded-xl border border-white/30 px-3 text-white transition duration-hover hover:bg-white/10 hover:border-white"
+            aria-label="Call Us"
           >
             <PhoneIcon />
-            <span className="hidden lg:inline">+91 89710 01010</span>
+            <span className="hidden xl:inline text-[14px] font-bold tracking-wide whitespace-nowrap">Call +91 89710 01010</span>
           </a>
+
+          <div className="flex h-10 items-center justify-center gap-2 rounded-xl border border-white/30 px-3 text-white transition duration-hover hover:bg-white/10 hover:border-white shrink-0">
+            <ThemeToggle isNightDive={isNightDive} onToggle={toggleNightDive} />
+            <span className="hidden xl:inline text-[14px] font-bold tracking-wide whitespace-nowrap">Night Mode</span>
+          </div>
 
           <Link
             to={isAuthenticated ? '/dashboard/profile' : '/login'}
-            className={`flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border ${borderColor} ${textColor} transition duration-hover hover:scale-105 hover:border-accent hover:text-accent`}
+            className="flex h-10 items-center justify-center gap-2 rounded-xl border border-white/30 px-3 text-white transition duration-hover hover:bg-white/10 hover:border-white shrink-0"
             aria-label={isAuthenticated ? 'Account' : 'Login'}
             title={user?.displayName || user?.email || 'Account'}
           >
@@ -106,41 +133,23 @@ export default function Navbar() {
               <img
                 src={user.photoURL}
                 alt={user.displayName || 'Profile'}
-                className="h-full w-full object-cover"
+                className="h-6 w-6 rounded-full object-cover shrink-0"
               />
             ) : (
               <UserIcon />
             )}
-          </Link>
-
-          <Link
-            to="/cart"
-            className={`relative flex h-10 w-10 items-center justify-center rounded-full border ${borderColor} ${textColor} transition duration-hover hover:scale-105 hover:border-cta hover:text-cta`}
-            aria-label={`Cart, ${itemCount} items`}
-          >
-            <CartIcon />
-            {itemCount > 0 && (
-              <motion.span
-                key={itemCount}
-                initial={reduce ? false : { scale: 0.6 }}
-                animate={{ scale: 1 }}
-                className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-cta px-1 text-[10px] font-bold text-white"
-              >
-                {itemCount > 99 ? '99+' : itemCount}
-              </motion.span>
-            )}
+            <span className="hidden xl:inline text-[14px] font-bold tracking-wide whitespace-nowrap">Profile</span>
           </Link>
 
           <button
             type="button"
-            className={`flex h-10 w-10 items-center justify-center rounded-full border ${borderColor} ${textColor} transition duration-hover hover:border-accent hover:text-accent lg:hidden`}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/30 text-white transition duration-hover hover:bg-white/10 hover:border-white lg:hidden"
             aria-label="Toggle menu"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
             {open ? <CloseIcon /> : <MenuIcon />}
           </button>
-        </div>
         </div>
       </div>
 
