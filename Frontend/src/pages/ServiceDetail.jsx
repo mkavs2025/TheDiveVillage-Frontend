@@ -34,30 +34,35 @@ export default function ServiceDetail() {
   const categoryLabel = CATEGORIES.find(c => c.key === service.category)?.label
 
   return (
-    <div className="bg-[#FAFAFA] min-h-screen text-navy font-body overflow-x-hidden pt-20" style={{ textShadow: 'none' }}>
+    <div className="bg-[#FAFAFA] min-h-screen text-navy font-body overflow-x-hidden" style={{ textShadow: 'none' }}>
       
       {/* 1. HERO BANNER */}
-      <div className="relative w-full h-[50vh] sm:h-[60vh] lg:h-[70vh] bg-navy overflow-hidden">
+      <div className="relative w-full min-h-[60vh] sm:min-h-[70vh] bg-navy overflow-hidden flex flex-col justify-end pt-32 pb-16 sm:pb-24">
         {service.video ? (
-          <video src={service.video} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-70" />
+          <video src={service.video} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-75" />
         ) : (
-          <SafeImage src={service.image} alt={service.title} className="absolute inset-0 w-full h-full object-cover opacity-70" />
+          <SafeImage src={service.image} alt={service.title} className="absolute inset-0 w-full h-full object-cover opacity-75" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#FAFAFA] via-navy/30 to-transparent" />
         
-        <div className="absolute bottom-0 left-0 w-full p-6 sm:p-12 lg:px-24 max-w-7xl mx-auto flex flex-col justify-end h-full z-10 pb-12 sm:pb-16">
+        {/* Top gradient overlay for navbar contrast */}
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-navy/90 via-navy/50 to-transparent pointer-events-none z-10" />
+        
+        {/* Bottom smooth fade into page background */}
+        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#FAFAFA] via-[#FAFAFA]/80 via-navy/30 to-transparent pointer-events-none z-10" />
+        
+        <div className="relative z-20 w-full px-6 sm:px-12 lg:px-24 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block bg-white/20 backdrop-blur-md rounded-full px-4 py-1.5 text-xs font-bold text-white uppercase tracking-widest mb-4">
+            <span className="inline-block bg-accent/20 border border-accent/40 backdrop-blur-md rounded-full px-4 py-1.5 text-xs font-bold text-accent uppercase tracking-widest mb-4">
               {categoryLabel}
             </span>
-            <h1 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-navy leading-none mb-4">
+            <h1 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-none mb-4 drop-shadow-lg">
               {service.title}
             </h1>
-            <p className="max-w-2xl text-lg sm:text-xl font-medium text-navy/80 leading-relaxed">
+            <p className="max-w-2xl text-lg sm:text-xl font-medium text-white/90 leading-relaxed drop-shadow-md">
               {service.short_desc}
             </p>
           </motion.div>

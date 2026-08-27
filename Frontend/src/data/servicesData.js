@@ -24,7 +24,7 @@ export const CATEGORIES = [
 const RAW_SERVICES_DATA = [
   // 1. Recreation (Try Dive / DSD)
   {
-    id: 'prog-1', category: 'recreation',
+    id: 'prog-1', category: 'recreation', categories: ['recreation', 'programs'],
     title: 'Try Dive',
     short_desc: 'A short introduction dives for beginners.',
     long_desc: 'Experience scuba safely in shallow water with a briefing, shallow water training and a guided dive upto 4 meters for 10 minutes.',
@@ -33,7 +33,7 @@ const RAW_SERVICES_DATA = [
     days_min: '', days_max: '', min_age: 8
   },
   {
-    id: 'prog-2', category: 'recreation',
+    id: 'prog-2', category: 'recreation', categories: ['recreation', 'programs'],
     title: 'DSD Lite',
     short_desc: 'A lighter version of Discover Scuba Dive.',
     long_desc: 'Includes a briefing, shallow water training, and a guided dive upto 12 meters for a maximum of 20 minutes.',
@@ -42,7 +42,7 @@ const RAW_SERVICES_DATA = [
     days_min: '', days_max: '', min_age: 10
   },
   {
-    id: 'prog-3', category: 'recreation',
+    id: 'prog-3', category: 'recreation', categories: ['recreation', 'programs'],
     title: 'PADI Discover Scuba Dive',
     short_desc: 'The official PADI Discover Scuba Diving program.',
     long_desc: 'PADI\'s official introductory scuba diving program where you will learn the basics of scuba diving, practice skills in confined water, and do an open water dive under upto 12 meters for 45 mins under the close supervision of a PADI Instructor.',
@@ -51,7 +51,7 @@ const RAW_SERVICES_DATA = [
     days_min: '', days_max: '', min_age: ''
   },
   {
-    id: 'prog-5', category: 'recreation',
+    id: 'prog-5', category: 'recreation', categories: ['recreation', 'programs'],
     title: 'Additional Dive after DSD',
     short_desc: 'Extra guided dive after DSD.',
     long_desc: 'Extend your Discover Scuba Dive experience with a guided dive with a PADI Pro.',
@@ -61,7 +61,7 @@ const RAW_SERVICES_DATA = [
   },
   // 2. Bubblemaker
   {
-    id: 'prog-4', category: 'bubble',
+    id: 'prog-4', category: 'bubble', categories: ['bubble', 'programs'],
     title: 'PADI Bubblemaker',
     short_desc: 'Scuba fun for kids aged between 8 to 10.',
     long_desc: 'The PADI Bubblemaker introduces children to scuba in a safe pool like environment.',
@@ -69,9 +69,9 @@ const RAW_SERVICES_DATA = [
     highlights: 'Max Depth: 2m | Dive Time: 30 mins | PADI registration included',
     days_min: '', days_max: '', min_age: 8
   },
-  // 2. Snorkeling
+  // 3. Snorkeling
   {
-    id: 'snork-1', category: 'snorkeling',
+    id: 'snork-1', category: 'snorkeling', categories: ['snorkeling', 'programs'],
     title: 'Discover Snorkeling',
     short_desc: 'Learn the basics of snorkeling in a safe, guided setting.',
     long_desc: 'Includes briefing, equipment use orientation, and a 1 hour open water snorkeling session with a professional leading you.',
@@ -80,7 +80,7 @@ const RAW_SERVICES_DATA = [
     days_min: '', days_max: '', min_age: ''
   },
   {
-    id: 'snork-2', category: 'snorkeling',
+    id: 'snork-2', category: 'snorkeling', categories: ['snorkeling', 'programs'],
     title: 'Reef Explorer',
     short_desc: 'Guided reef snorkeling for beginners.',
     long_desc: 'Perfect shallow-water snorkel trip to see colorful reef fish, corals, and safe lagoon sites.',
@@ -89,7 +89,7 @@ const RAW_SERVICES_DATA = [
     days_min: '', days_max: '', min_age: ''
   },
   {
-    id: 'snork-3', category: 'snorkeling',
+    id: 'snork-3', category: 'snorkeling', categories: ['snorkeling', 'programs'],
     title: 'Ocean Explorer',
     short_desc: 'Snorkel further into the blue.',
     long_desc: 'Explore deeper reef areas, spot turtles and bigger marine life, with guided safety.',

@@ -12,13 +12,19 @@ export default function Services() {
   const navigate = useNavigate()
   const reduce = useReducedMotion()
 
+  const isMatch = (service, catKey) => {
+    if (service.category === catKey) return true
+    if (Array.isArray(service.categories) && service.categories.includes(catKey)) return true
+    return false
+  }
+
   const filtered = activeTab === 'all' 
     ? SERVICES_DATA 
-    : SERVICES_DATA.filter((s) => s.category === activeTab)
+    : SERVICES_DATA.filter((s) => isMatch(s, activeTab))
 
   const grouped = CATEGORIES.slice(1).map(cat => ({
     category: cat,
-    services: filtered.filter(s => s.category === cat.key)
+    services: (activeTab === 'all' ? SERVICES_DATA : filtered).filter(s => isMatch(s, cat.key))
   })).filter(g => g.services.length > 0)
 
   return (
@@ -118,43 +124,48 @@ export default function Services() {
           </div>
         ))}
 
-        {/* 4. WHY CHOOSE OUR SERVICES */}
+        {/* 4. THE POWER OF DIVING */}
         <div className="rounded-[40px] bg-[#F0F2F5] p-8 sm:p-14 mb-24">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-navy/60 font-bold tracking-widest uppercase text-xs mb-3 block">Why The Village</span>
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-navy">The Dive Village Difference</h2>
+            <span className="text-navy/60 font-bold tracking-widest uppercase text-xs mb-3 block">Transformative Growth</span>
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-navy">The Power of Diving</h2>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-8">
-            <div className="bg-white rounded-3xl p-8 shadow-soft text-center">
-              <div className="w-14 h-14 rounded-full bg-accent/10 text-accent flex items-center justify-center mx-auto mb-5 text-2xl font-bold">
-                1
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                num: 1,
+                title: 'Unique Skill Development',
+                desc: 'Builds confidence, discipline, and responsibility through mastering safety protocols and equipment handling.',
+              },
+              {
+                num: 2,
+                title: 'STEM Integration',
+                desc: 'Directly connects to biology (self and marine ecosystems), physics (pressure, buoyancy) and environmental science (conservation).',
+              },
+              {
+                num: 3,
+                title: 'Physical & Mental Growth',
+                desc: 'Enhances fitness, focus, and stress management while encouraging mindfulness in nature.',
+              },
+              {
+                num: 4,
+                title: 'Global Citizenship',
+                desc: 'Instils respect for oceans and sustainability, aligning with modern educational goals.',
+              },
+            ].map((p) => (
+              <div key={p.num} className="bg-white rounded-3xl p-6 sm:p-8 shadow-soft flex flex-col justify-between hover:-translate-y-1 transition duration-300">
+                <div>
+                  <div className="w-12 h-12 rounded-full bg-navy text-accent flex items-center justify-center mb-5 text-lg font-bold">
+                    {p.num}
+                  </div>
+                  <h3 className="font-heading text-xl font-bold text-navy mb-3 leading-tight">{p.title}</h3>
+                  <p className="text-xs sm:text-sm text-navy/70 leading-relaxed font-medium">
+                    {p.desc}
+                  </p>
+                </div>
               </div>
-              <h3 className="font-heading text-lg font-bold text-navy mb-2">Small Group Ratios</h3>
-              <p className="text-xs text-navy/70 leading-relaxed">
-                Maximum 4 divers per instructor for personalized attention, relaxed pacing, and supreme safety.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-3xl p-8 shadow-soft text-center">
-              <div className="w-14 h-14 rounded-full bg-accent/10 text-accent flex items-center justify-center mx-auto mb-5 text-2xl font-bold">
-                2
-              </div>
-              <h3 className="font-heading text-lg font-bold text-navy mb-2">Pristine Dive Sites</h3>
-              <p className="text-xs text-navy/70 leading-relaxed">
-                Access to uncrowded coral walls, clear lagoons, and thriving marine sanctuaries away from tourist hordes.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-3xl p-8 shadow-soft text-center">
-              <div className="w-14 h-14 rounded-full bg-accent/10 text-accent flex items-center justify-center mx-auto mb-5 text-2xl font-bold">
-                3
-              </div>
-              <h3 className="font-heading text-lg font-bold text-navy mb-2">End-to-End Care</h3>
-              <p className="text-xs text-navy/70 leading-relaxed">
-                From your flight landing to your logbook signing, we take care of permits, transport, gear, and stay.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
 

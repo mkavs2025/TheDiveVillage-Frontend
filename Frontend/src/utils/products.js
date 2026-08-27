@@ -12,6 +12,10 @@ import imgUnisexShirtFront from '../assets/Products/unisex front upscaled.png'
 import imgUnisexShirtBack from '../assets/Products/Unisex back upscaled.png'
 import imgSkinSuitFront from '../assets/Products/Dive Suit Front.png'
 import imgSkinSuitBack from '../assets/Products/Dive suit back.png'
+import imgCapFront from '../assets/Products/catf.png'
+import imgCapBack from '../assets/Products/capb.png'
+import imgBagFront from '../assets/Products/bagf.png'
+import imgBagBack from '../assets/Products/bagb.png'
 
 import videoWomensShirt from '../assets/Products/sweetheart.mp4'
 import videoWomensPants from '../assets/Products/womens pants.mp4'
@@ -19,6 +23,7 @@ import videoWomensStrap from '../assets/Products/this_product_make_a_video_wher 
 import videoUnisexShorts from '../assets/Products/unisex shorts.mp4'
 import videoUnisexShirt from '../assets/Products/unisex unfront.mp4'
 import videoSkinSuit from '../assets/Products/Dive suit.mp4'
+import videoCap from '../assets/Products/cap.mp4'
 
 export const SHOP_PRODUCTS = [
   {
@@ -30,7 +35,7 @@ export const SHOP_PRODUCTS = [
     image: imgWomensShirtFront,
     images: [imgWomensShirtFront, imgWomensShirtBack],
     video: videoWomensShirt,
-    category: 'Apparel',
+    category: 'Tops',
     tag: 'New Arrival',
     description: 'Stay protected and stylish in the water. Features a sweetheart neckline, premium stretch, and sun protection.',
     features: [
@@ -57,7 +62,7 @@ export const SHOP_PRODUCTS = [
     image: imgWomensPantsFront,
     images: [imgWomensPantsFront, imgWomensPantsBack],
     video: videoWomensPants,
-    category: 'Apparel',
+    category: 'Bottoms',
     tag: 'Bestseller',
     description: 'High-waisted dive pants offering full-length coverage and thigh-smoothing panels for ultimate comfort and confidence.',
     features: [
@@ -84,7 +89,7 @@ export const SHOP_PRODUCTS = [
     image: imgWomensStrapFront,
     images: [imgWomensStrapFront, imgWomensStrapBack],
     video: videoWomensStrap,
-    category: 'Apparel',
+    category: 'Tops',
     tag: 'Essential',
     description: 'Supportive and comfortable dive top featuring heavy-duty Velcro straps and built-in chest support.',
     features: [
@@ -111,7 +116,7 @@ export const SHOP_PRODUCTS = [
     image: imgUnisexShortsFront,
     images: [imgUnisexShortsFront, imgUnisexShortsBack],
     video: videoUnisexShorts,
-    category: 'Apparel',
+    category: 'Bottoms',
     tag: 'Comfort',
     description: 'Experience seamless comfort with these dive shorts, designed without visible stitching to reduce irritation.',
     features: [
@@ -138,7 +143,7 @@ export const SHOP_PRODUCTS = [
     image: imgUnisexShirtFront,
     images: [imgUnisexShirtFront, imgUnisexShirtBack],
     video: videoUnisexShirt,
-    category: 'Apparel',
+    category: 'Tops',
     tag: 'Essential',
     description: 'A versatile, lightweight dive shirt featuring hidden neck seams and quick-dry fabric for all-day comfort.',
     features: [
@@ -165,7 +170,7 @@ export const SHOP_PRODUCTS = [
     image: imgSkinSuitFront,
     images: [imgSkinSuitFront, imgSkinSuitBack],
     video: videoSkinSuit,
-    category: 'Gear',
+    category: 'Swimwear',
     tag: 'Premium',
     description: 'Ultimate full-body protection with grip panels on the knees and seat, front zip closure, and stirrup foot straps.',
     features: [
@@ -182,5 +187,60 @@ export const SHOP_PRODUCTS = [
     stockStatus: 'Low Stock',
     rating: 5.0,
     reviewCount: 28,
+  },
+  {
+    id: 'product-dive-cap',
+    title: 'The Dive Village Ocean Cap',
+    name: 'Ocean Cap',
+    price: 1299,
+    oldPrice: 1599,
+    image: imgCapFront,
+    images: [imgCapFront, imgCapBack],
+    video: videoCap,
+    category: 'Accessories',
+    tag: 'New Arrival',
+    description: 'Durable, quick-dry ocean cap with sun glare protection and adjustable strap for beach, boat, and water activities.',
+    features: [
+      'UV Sun Protection: Shields your head, face, and eyes from intense glare and sun exposure on the boat and shore.',
+      'Quick-Dry Breathable Fabric: Fast-drying material resists saltwater staining and allows maximum airflow.',
+      'Adjustable Secure Strap: Custom fit rear strap ensures your cap stays secure even in windy boat conditions.',
+      'Saltwater-Resistant Construction: Anti-corrosive eyelets and durable stitching engineered for maritime environments.'
+    ],
+    sizes: ['One Size'],
+    colors: [
+      { name: 'Ocean Navy', hex: '#003865' }
+    ],
+    stock: 40,
+    stockStatus: 'In Stock',
+    rating: 4.9,
+    reviewCount: 25,
+  },
+  {
+    id: 'product-ocean-bag',
+    title: 'The Dive Village Expedition Bag',
+    name: 'Expedition Bag',
+    price: 3499,
+    oldPrice: 3999,
+    image: imgBagFront,
+    images: [imgBagFront, imgBagBack],
+    video: null,
+    category: 'Accessories',
+    tag: 'Essential',
+    description: 'Heavy-duty waterproof gear bag designed for carrying wetsuits, towels, dive equipment, and beach essentials.',
+    features: [
+      'Water-Resistant Marine Fabric: High-density tarpaulin/nylon keeps wet gear isolated and dry gear protected.',
+      'Spacious High-Capacity Storage: Generous main compartment easily holds towels, change of clothes, fins, and masks.',
+      'Reinforced Carry Handles & Straps: Heavy-duty webbing and padded shoulder straps for comfortable transport.',
+      'Quick-Drain & Breathable Mesh: Allows damp gear to air out easily while preventing odor accumulation.'
+    ],
+    sizes: ['Standard'],
+    colors: [
+      { name: 'Ocean Navy', hex: '#003865' }
+    ],
+    stock: 25,
+    stockStatus: 'In Stock',
+    rating: 4.8,
+    reviewCount: 19,
   }
 ]
+
