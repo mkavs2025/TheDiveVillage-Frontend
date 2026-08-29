@@ -34,6 +34,13 @@
     cursor: none !important;
   }
 
+  /* Magnetic button hover effect when cursor is within proximity radius */
+  .proximity-active {
+    transform: translateY(-2px) scale(1.04) !important;
+    box-shadow: 0 12px 24px -6px rgba(0, 174, 199, 0.35) !important;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
   h1,
   h2,
   h3,

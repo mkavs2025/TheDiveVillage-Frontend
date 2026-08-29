@@ -66,14 +66,23 @@ export const EXPERIENCE_LABELS = {
 export function getEligiblePrograms(ageInput, expLevel) {
   const age = parseInt(ageInput, 10)
   
+  // Rule 1: Age below 1 year -> no available programs
+  if (isNaN(age) || age < 1) {
+    return []
+  }
+
   return PROGRAMS_CATALOG.filter((prog) => {
-    // 1. Age Check (Only if age limit is specified)
-    if (!isNaN(age)) {
-      if (prog.minAge !== null && age < prog.minAge) return false
-      if (prog.maxAge !== null && age > prog.maxAge) return false
+    // Rule 3: For anything above 10 -> show everything except what is 8 to 10 specific (maxAge === 10)
+    if (age > 10 && prog.maxAge !== null && prog.maxAge <= 10) {
+      return false
     }
 
-    // 2. Experience Level Check
+    // Rule 2: For ages 8 to 10 -> exclude programs requiring minAge > age (e.g. 10+ or 12+)
+    if (prog.minAge !== null && age < prog.minAge) {
+      return false
+    }
+
+    // Experience Level Check
     if (prog.expReq === 'all') return true
     if (Array.isArray(prog.expReq)) {
       return prog.expReq.includes(expLevel || 'beginner')
@@ -434,16 +443,29 @@ export default function BookUs() {
                               <select
                                 value={p.selectedProgram}
                                 onChange={(e) => handleParticipantChange(idx, 'selectedProgram', e.target.value)}
-                                required
+                                required={eligible.length > 0}
                                 className="w-full rounded-2xl bg-white border border-navy/10 px-4 py-4 text-sm font-bold text-navy outline-none focus:ring-2 focus:ring-accent/50 transition appearance-none shadow-sm mb-3"
                               >
-                                <option value="" disabled>Select an eligible course...</option>
-                                {eligible.map((prog) => (
-                                  <option key={prog.id} value={prog.id}>
-                                    {prog.name} {prog.minAge ? `(Age ${prog.minAge}+)` : ''} — {prog.desc}
-                                  </option>
-                                ))}
+                                {eligible.length === 0 ? (
+                                  <option value="">No available programs for this age</option>
+                                ) : (
+                                  <>
+                                    <option value="" disabled>Select an eligible course...</option>
+                                    {eligible.map((prog) => (
+                                      <option key={prog.id} value={prog.id}>
+                                        {prog.name} {prog.minAge ? `(Age ${prog.minAge}+)` : ''} — {prog.desc}
+                                      </option>
+                                    ))}
+                                  </>
+                                )}
                               </select>
+
+                              {eligible.length === 0 && (
+                                <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold flex items-center gap-2">
+                                  <span>⚠️</span>
+                                  <span>No available programs for age {p.age || 'below 1'} year(s). Minimum age for introductory programs (e.g. Try Dive / Bubblemaker) is 8 years.</span>
+                                </div>
+                              )}
 
                               {/* Selected Program Preview Card */}
                               {p.selectedProgram && (

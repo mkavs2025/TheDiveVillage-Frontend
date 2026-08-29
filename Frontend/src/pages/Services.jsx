@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import Button from '../components/Button'
 import SafeImage from '../components/SafeImage'
 import { IMAGES, CAROUSEL_IMAGES } from '../utils/images'
+import video2Bg from '../assets/2.mp4'
 
 import { CATEGORIES, SERVICES_DATA } from '../data/servicesData'
 
@@ -169,26 +170,43 @@ export default function Services() {
           </div>
         </div>
 
-        {/* 5. CALL TO ACTION */}
-        <div className="rounded-[40px] bg-navy text-white p-10 sm:p-16 lg:p-20 relative overflow-hidden shadow-lift">
-          <div className="absolute -right-20 -top-20 w-96 h-96 bg-accent/20 rounded-full blur-3xl pointer-events-none" />
+        {/* 5. CALL TO ACTION WITH 2.MP4 VIDEO BACKGROUND */}
+        <div 
+          onClick={() => navigate('/contact')}
+          className="rounded-[40px] bg-navy text-white p-10 sm:p-16 lg:p-20 relative overflow-hidden shadow-lift cursor-pointer group border border-white/10"
+        >
+          {/* Video Background */}
+          <video
+            src={video2Bg}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover z-0 opacity-50 transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/80 to-navy/40 z-0" />
+
           <div className="relative z-10 max-w-3xl">
-            <span className="inline-block bg-white/10 rounded-full px-4 py-1.5 text-xs font-bold text-accent uppercase tracking-widest mb-6">
-              Custom Requirements?
+            <span className="inline-block bg-white/10 backdrop-blur-md rounded-full px-4 py-1.5 text-xs font-bold text-accent uppercase tracking-widest mb-6 border border-white/10">
+              Custom Requirements
             </span>
-            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white mb-6">
-              Need a Custom Group or Private Charter?
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white mb-6 group-hover:text-accent transition">
+              Have a custom requirement?
             </h2>
-            <p className="text-lg text-white/80 max-w-xl mb-10 leading-relaxed">
-              We organize private boat charters, corporate team ocean retreats, family dive camps, and personalized multi-day dive expeditions.
+            <p className="text-lg sm:text-xl text-white/80 max-w-xl mb-10 leading-relaxed font-medium">
+              We organize private boat charters, corporate team retreats, family dive camps, and personalized multi-day dive expeditions.
             </p>
             <div className="flex flex-wrap gap-4 items-center">
-              <Button as={Link} to="/contact" className="bg-accent text-navy hover:bg-white hover:text-navy border-none">
-                Request Custom Package →
-              </Button>
+              <Link
+                to="/contact"
+                className="rounded-full bg-accent px-8 py-4 text-sm font-bold text-navy transition hover:bg-white shadow-lg flex items-center gap-2 border border-transparent hover:border-accent"
+              >
+                Contact us for more information →
+              </Link>
               <a
                 href="tel:+918971001010"
-                className="rounded-full border border-white/30 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-white/10 flex items-center gap-2"
+                onClick={(e) => e.stopPropagation()}
+                className="rounded-full border border-white/30 backdrop-blur-md px-6 py-4 text-sm font-bold text-white transition hover:bg-white/10 flex items-center gap-2"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>

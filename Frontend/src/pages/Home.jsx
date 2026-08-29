@@ -183,65 +183,72 @@ export default function Home() {
               {
                 t: 'Enthusiastic Beginners',
                 img: img1,
+                bgImg: CAROUSEL_IMAGES[0],
                 desc: "New to diving? Start your journey with confidence. We'll guide you every step of the way."
               },
               {
                 t: 'Families, Couples & Groups',
                 img: img2,
+                bgImg: CAROUSEL_IMAGES[1],
                 desc: "Shared memories. Deeper connections. Perfect experiences for the people who matter most."
               },
               {
                 t: 'Professionals Across Industries',
                 img: img3,
+                bgImg: CAROUSEL_IMAGES[2],
                 desc: "For those who work beneath the surface. Training, support and solutions you can rely on."
               },
               {
                 t: 'Adventure Seekers',
                 img: img4,
+                bgImg: CAROUSEL_IMAGES[3],
                 desc: "For the bold, the curious and the ocean lovers. Explore more. Dive deeper. Live the adventure."
               }
             ].map((item, i) => (
               <StaggerItem key={i}>
                 <div className="h-full group cursor-pointer relative mt-8 flex flex-col">
                   
-                  {/* Floating transparent PNG image - dynamic positioning & sizing */}
+                  {/* Floating transparent PNG image - lowered positioning for images 1, 2, 4 */}
                   <img 
                     src={item.img} 
                     alt={item.t} 
-                    className={`absolute left-1/2 -translate-x-1/2 h-auto object-contain transition-transform duration-500 group-hover:-translate-y-4 drop-shadow-2xl z-20 pointer-events-none ${
+                    className={`absolute left-1/2 -translate-x-1/2 h-auto object-contain transition-transform duration-500 group-hover:-translate-y-2 drop-shadow-2xl z-20 pointer-events-none ${
                       i === 2 
                         ? 'top-2 w-[75%] max-w-[180px]' 
-                        : 'top-2 sm:top-4 w-[100%] max-w-[260px]'
+                        : 'top-12 sm:top-16 w-[100%] max-w-[260px]'
                     }`} 
                   />
                   
-                  {/* Actual Card Background & Content with overflow-hidden */}
-                  <div className="h-full w-full rounded-2xl overflow-hidden border border-white/20 relative flex flex-col p-6 sm:p-8 pt-44 sm:pt-48 z-10 transition duration-500 group-hover:border-white/40 bg-[#001D3D]">
+                  {/* Actual Card Background & Content - Panel 1, 2, 3, 4 images as background */}
+                  <div className="h-full w-full rounded-2xl overflow-hidden border border-white/30 relative flex flex-col p-6 sm:p-8 pt-56 sm:pt-60 z-10 transition duration-500 group-hover:border-white/60 shadow-2xl justify-end">
                     
-                    {/* Background Image - stays static */}
+                    {/* Panel Background Image (panel1, panel2, panel3, panel4) */}
                     <img 
-                      src={CAROUSEL_IMAGES[2]} 
-                      alt=""
-                      className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity z-0" 
+                      src={item.bgImg} 
+                      alt={item.t}
+                      className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-110 opacity-90" 
                     />
                     
-                    {/* Content wrapper - pushed to bottom */}
-                    <div className="relative z-10 flex flex-col h-full mt-auto">
-                      <h3 className="font-heading text-lg sm:text-xl font-bold text-white uppercase tracking-wider mb-4 leading-tight text-left">
+                    {/* Bottom gradient overlay for crystal clear text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/70 to-navy/10 z-0" />
+                    
+                    {/* Content wrapper - lowered and aligned */}
+                    <div className="relative z-10 flex flex-col justify-end h-full mt-auto">
+                      <h3 className="font-heading text-lg sm:text-xl font-bold text-white uppercase tracking-wider mb-3 leading-tight text-left drop-shadow-md min-h-[56px] flex items-end">
                         {item.t}
                       </h3>
                       
                       {/* Yellow divider */}
-                      <div className="w-8 h-[3px] bg-[#FFCD00] mb-5"></div>
+                      <div className="w-8 h-[3px] bg-[#FFCD00] mb-4 shadow-sm shrink-0"></div>
                       
-                      {/* Description text - justified */}
-                      <p className="text-white/80 text-sm font-medium mb-8 leading-relaxed text-justify">
+                      {/* Description text - consistent height block */}
+                      <p className="text-white/90 text-sm font-medium mb-6 leading-relaxed text-left drop-shadow-sm min-h-[72px] flex items-start">
                         {item.desc}
                       </p>
                       
-                      {/* Button */}
-                      <div>
-                        <div className="inline-flex items-center gap-2 font-body text-xs font-bold uppercase tracking-widest bg-[#FFCD00] text-[#001D3D] border-2 border-[#FFCD00] rounded-full px-5 py-2.5 transition-all duration-300 group-hover:bg-white group-hover:border-white">
+                      {/* Button - aligned on exact same horizontal level line across all 4 cards */}
+                      <div className="mt-auto shrink-0 pt-1">
+                        <div className="inline-flex items-center gap-2 font-body text-xs font-bold uppercase tracking-widest bg-[#FFCD00] text-navy border-2 border-[#FFCD00] rounded-full px-5 py-2.5 transition-all duration-300 group-hover:bg-white group-hover:border-white shadow-md">
                           <span>Dive In</span>
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-1">
                             <path d="M5 12h14"></path>
