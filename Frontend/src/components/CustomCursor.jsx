@@ -1,19 +1,39 @@
 import { useEffect, useState } from 'react'
 import { motion, useMotionValue } from 'framer-motion'
 import cursorImg from '../assets/cursor.png'
+import cursorHoverImg from '../assets/cursor hover.png'
 
 export default function CustomCursor() {
   const cursorX = useMotionValue(-100)
   const cursorY = useMotionValue(-100)
   const [hidden, setHidden] = useState(true)
+  const [isHovered, setIsHovered] = useState(false)
 
   useEffect(() => {
     document.body.classList.add('hide-cursors')
+
+    const checkHover = (target) => {
+      if (!target || !(target instanceof Element)) return false
+      
+      // Check if target or parent is a clickable element
+      const interactiveEl = target.closest(
+        'button, a, select, input, [role="button"], .cursor-pointer, [data-clickable="true"]'
+      )
+      if (interactiveEl) return true
+
+      try {
+        const style = window.getComputedStyle(target)
+        return style && style.cursor === 'pointer'
+      } catch {
+        return false
+      }
+    }
 
     const moveCursor = (e) => {
       cursorX.set(e.clientX)
       cursorY.set(e.clientY)
       setHidden(false)
+      setIsHovered(checkHover(e.target))
     }
 
     const handleMouseLeave = () => setHidden(true)
@@ -37,13 +57,14 @@ export default function CustomCursor() {
 
   return (
     <motion.img
-      src={cursorImg}
+      src={isHovered ? cursorHoverImg : cursorImg}
       alt=""
-      className="pointer-events-none fixed top-0 left-0 z-[10000] w-10 h-auto"
+      className="pointer-events-none fixed top-0 left-0 z-[10000] w-10 h-auto transition-transform duration-150"
       style={{
         x: cursorX,
         y: cursorY,
         opacity: hidden ? 0 : 1,
+        scale: isHovered ? 1.15 : 1,
       }}
     />
   )
