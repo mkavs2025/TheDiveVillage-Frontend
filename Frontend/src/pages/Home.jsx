@@ -187,13 +187,13 @@ export default function Home() {
                 desc: "New to diving? Start your journey with confidence. We'll guide you every step of the way."
               },
               {
-                t: 'Families, Couples & Groups',
+                t: 'Families & Groups',
                 img: img2,
                 bgImg: CAROUSEL_IMAGES[1],
                 desc: "Shared memories. Deeper connections. Perfect experiences for the people who matter most."
               },
               {
-                t: 'Professionals Across Industries',
+                t: 'Professionals',
                 img: img3,
                 bgImg: CAROUSEL_IMAGES[2],
                 desc: "For those who work beneath the surface. Training, support and solutions you can rely on."

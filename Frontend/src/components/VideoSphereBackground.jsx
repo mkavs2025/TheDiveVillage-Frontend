@@ -338,7 +338,12 @@ function AudioToggle({ isMuted, onToggle }) {
   )
 }
 
-function JoystickOverlay({ joystickVelocity }) {
+function JoystickControl({ joystickVelocity }) {
+  const location = useLocation()
+  if (location.pathname.startsWith('/shop')) {
+    return null
+  }
+
   const containerRef = useRef(null)
   const isDragging = useRef(false)
   const [thumbPos, setThumbPos] = useState({ x: 0, y: 0 })

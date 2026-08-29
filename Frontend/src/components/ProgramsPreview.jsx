@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router'
 import SectionReveal, { StaggerGrid, StaggerItem } from './SectionReveal'
 import { CAROUSEL_IMAGES } from '../utils/images'
+import diveSuitVid from '../assets/Products/Dive suit.mp4'
 
 const PROGRAMS = [
   {
@@ -9,6 +10,7 @@ const PROGRAMS = [
     tag: 'Official Gear',
     desc: 'Take a piece of the ocean home with our exclusive dive apparel, suits, and accessories.',
     img: CAROUSEL_IMAGES[2],
+    video: diveSuitVid,
     link: '/services',
     btnText: 'Explore Services',
   },
@@ -41,7 +43,7 @@ export default function ProgramsPreview() {
             Featured Offerings
           </span>
           <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-lg">
-            Explore Our <span className="text-accent italic font-bold">Programs</span>
+            Explore <span className="text-accent italic font-bold">The Dive Village</span>
           </h2>
           <p className="mt-4 max-w-xl mx-auto text-base sm:text-lg text-white/90 font-medium drop-shadow-md">
             From your very first breath underwater to professional divemaster certifications.
@@ -77,11 +79,22 @@ function Card({ program }) {
     >
       {/* Image Container */}
       <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden mb-6 bg-black/20 shrink-0">
-        <img
-          src={program.img}
-          alt={program.title}
-          className="w-full h-full object-cover transition duration-700 group-hover:scale-105"
-        />
+        {program.video ? (
+          <video
+            src={program.video}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover transition duration-700 group-hover:scale-105"
+          />
+        ) : (
+          <img
+            src={program.img}
+            alt={program.title}
+            className="w-full h-full object-cover transition duration-700 group-hover:scale-105"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent pointer-events-none" />
         <span className="absolute top-3 left-3 bg-navy/80 backdrop-blur-md border border-white/20 text-accent text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm">
           {program.tag}
