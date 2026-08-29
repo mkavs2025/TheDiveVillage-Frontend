@@ -59,12 +59,13 @@ export default function CustomCursor() {
     <motion.img
       src={isHovered ? cursorHoverImg : cursorImg}
       alt=""
-      className="pointer-events-none fixed top-0 left-0 z-[10000] w-10 h-auto transition-transform duration-150"
+      className="pointer-events-none fixed top-0 left-0 z-[10000] w-20 sm:w-28 h-auto transition-transform duration-150 drop-shadow-lg"
       style={{
         x: cursorX,
         y: cursorY,
         opacity: hidden ? 0 : 1,
-        scale: isHovered ? 1.15 : 1,
+        scale: isHovered ? 1.3 : 1,
+        filter: isHovered ? 'invert(100%) drop-shadow(0 4px 10px rgba(0,0,0,0.4))' : 'none',
       }}
     />
   )
