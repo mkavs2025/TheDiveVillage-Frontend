@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState, useEffect } from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
 import Button from '../components/Button'
 import SafeImage from '../components/SafeImage'
@@ -14,24 +14,7 @@ const ProgramsPreview = lazy(() => import('../components/ProgramsPreview'))
 const GalleryPreview = lazy(() => import('../components/GalleryPreview'))
 const InteractiveDiveMap = lazy(() => import('../components/InteractiveDiveMap'))
 
-const POWER = [
-  {
-    title: 'Unique Skill Development',
-    desc: 'It Builds confidence, discipline, and responsibility through mastering safety protocols and equipment handling.',
-  },
-  {
-    title: 'STEM Integration',
-    desc: 'Directly connects to biology (self and marine ecosystems), physics (pressure, buoyancy) and environmental science (conservation).',
-  },
-  {
-    title: 'Physical & Mental Growth',
-    desc: 'Enhances fitness, focus, and stress management while encouraging mindfulness in nature.',
-  },
-  {
-    title: 'Global Citizenship',
-    desc: 'Instils respect for oceans and sustainability, aligning with modern educational goals.',
-  },
-]
+
 const HIGHLIGHTS_DATA = [
   {
     id: 'scuba',
@@ -98,6 +81,7 @@ const TESTIMONIALS = [
 
 export default function Home() {
   const reduce = useReducedMotion()
+  const navigate = useNavigate()
 
   return (
     <div className="overflow-x-hidden relative isolate pointer-events-none">
@@ -158,7 +142,13 @@ export default function Home() {
       </section >
 
       {/* HIGHLIGHTS */}
-      < section className="relative z-10 pb-24 pt-16 sm:pt-20 pointer-events-auto" >
+      <section 
+        onClick={() => {
+          navigate('/services')
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }}
+        className="relative z-10 pb-24 pt-16 sm:pt-20 pointer-events-auto cursor-pointer"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionReveal className="mb-12 flex flex-col items-center text-center">
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] leading-tight">
@@ -172,7 +162,7 @@ export default function Home() {
             <InteractiveHighlights />
           </SectionReveal>
         </div>
-      </section >
+      </section>
 
 
 
@@ -214,19 +204,19 @@ export default function Home() {
               <StaggerItem key={i}>
                 <div className="h-full group cursor-pointer relative mt-8 flex flex-col">
                   
-                  {/* Floating transparent PNG image - dynamic sizing per user request */}
+                  {/* Floating transparent PNG image - dynamic positioning & sizing */}
                   <img 
                     src={item.img} 
                     alt={item.t} 
                     className={`absolute left-1/2 -translate-x-1/2 h-auto object-contain transition-transform duration-500 group-hover:-translate-y-4 drop-shadow-2xl z-20 pointer-events-none ${
                       i === 2 
-                        ? '-top-2 w-[75%] max-w-[180px]' 
-                        : '-top-10 w-[115%] max-w-[300px]'
+                        ? 'top-2 w-[75%] max-w-[180px]' 
+                        : 'top-2 sm:top-4 w-[100%] max-w-[260px]'
                     }`} 
                   />
                   
                   {/* Actual Card Background & Content with overflow-hidden */}
-                  <div className="h-full w-full rounded-2xl overflow-hidden border border-white/20 relative flex flex-col p-6 sm:p-8 pt-48 sm:pt-56 z-10 transition duration-500 group-hover:border-white/40 bg-[#001D3D]">
+                  <div className="h-full w-full rounded-2xl overflow-hidden border border-white/20 relative flex flex-col p-6 sm:p-8 pt-44 sm:pt-48 z-10 transition duration-500 group-hover:border-white/40 bg-[#001D3D]">
                     
                     {/* Background Image - stays static */}
                     <img 
@@ -318,59 +308,86 @@ export default function Home() {
         </Suspense>
       </div >
 
-      {/* 5. POWER OF DIVING */}
-      < section className="relative py-24 sm:py-32 pointer-events-auto" >
+
+      {/* 6. AIRPORT TO AIRPORT - HOSPITALITY */}
+      <section className="relative py-24 text-white sm:py-32 pointer-events-auto">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionReveal className="mb-16 text-center">
-            <h2 className="font-heading text-h2 font-bold text-white">
-              The Power of <em className="font-heading italic font-bold text-cta">Diving</em>
+          <SectionReveal className="text-center mb-16 max-w-3xl mx-auto">
+            <span className="inline-block bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-1.5 text-xs font-bold text-accent uppercase tracking-widest mb-4 shadow-sm">
+              End-to-End Island Care
+            </span>
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-lg mb-4">
+              From Airport to Airport — <span className="text-accent italic font-bold">We've Got You Covered</span>
             </h2>
+            <p className="text-base sm:text-lg text-white/80 font-medium leading-relaxed drop-shadow-md">
+              Relax and immerse yourself in the ocean. We handle every detail of your island holiday from arrival to departure.
+            </p>
           </SectionReveal>
 
-          <StaggerGrid className="grid gap-8 lg:gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {POWER.map((p, i) => (
+          <StaggerGrid className="grid gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                num: '01',
+                title: 'Travel Logistics',
+                desc: 'Seamless assistance with flight bookings, mandatory entry permits, and local island boat transfers.',
+                img: CAROUSEL_IMAGES[4],
+                tag: 'Flights & Permits'
+              },
+              {
+                num: '02',
+                title: 'Comfortable Stays',
+                desc: 'Handpicked oceanfront stays, eco-lodges, and boutique beach resorts steps away from the water.',
+                img: CAROUSEL_IMAGES[5],
+                tag: 'Beach Resorts'
+              },
+              {
+                num: '03',
+                title: 'Local Cuisine',
+                desc: 'Authentic coastal meals and fresh island dining prepared with warmth and local culinary traditions.',
+                img: CAROUSEL_IMAGES[0],
+                tag: 'Island Flavors'
+              },
+              {
+                num: '04',
+                title: 'Personal Itineraries',
+                desc: 'Tailored daily schedules built around your personal diving goals, travel rhythm, and group needs.',
+                img: CAROUSEL_IMAGES[1],
+                tag: 'Custom Plans'
+              },
+            ].map((item, i) => (
               <StaggerItem key={i}>
-                <div className="h-full rounded-card glass-premium p-8 shadow-soft transition duration-hover hover:-translate-y-1 hover:shadow-card">
-                  <span className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-cta text-white font-bold text-lg">{i + 1}</span>
-                  <h3 className="font-heading text-xl font-bold text-white">{p.title}</h3>
-                  <p className="mt-3 text-sm text-white/70 leading-relaxed">{p.desc}</p>
+                <div className="group h-full rounded-[32px] bg-navy/90 backdrop-blur-xl border border-white/20 p-6 shadow-2xl transition duration-500 hover:-translate-y-2 hover:border-accent/60 hover:shadow-float flex flex-col justify-between">
+                  <div>
+                    {/* Top Image Card Frame */}
+                    <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden mb-6 bg-black/20 shrink-0">
+                      <img
+                        src={item.img}
+                        alt={item.title}
+                        className="w-full h-full object-cover transition duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent pointer-events-none" />
+                      <span className="absolute top-3 left-3 bg-navy/80 backdrop-blur-md border border-white/20 text-accent text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm">
+                        {item.tag}
+                      </span>
+                      <span className="absolute bottom-3 right-3 bg-black/40 backdrop-blur-md text-white font-heading font-bold text-xs px-2.5 py-1 rounded-lg border border-white/10">
+                        {item.num}
+                      </span>
+                    </div>
+
+                    <h3 className="font-heading text-2xl font-bold text-white tracking-tight mb-2 leading-tight">
+                      {item.title}
+                    </h3>
+                    <div className="w-8 h-1 bg-accent rounded-full mb-4" />
+                    <p className="text-white/80 text-sm leading-relaxed font-medium">
+                      {item.desc}
+                    </p>
+                  </div>
                 </div>
               </StaggerItem>
             ))}
           </StaggerGrid>
         </div>
-      </section >
-
-      {/* 6. WHY DIVE VILLAGE */}
-      < section className="relative py-24 text-white sm:py-32 pointer-events-auto" >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionReveal className="text-center mb-16">
-            <h2 className="font-heading text-h2 font-bold text-white">
-              From Airport to Airport — <em className="font-heading italic font-bold text-cta">We've Got You Covered</em>
-            </h2>
-          </SectionReveal>
-          <div className="grid gap-8 lg:gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { title: 'Travel Logistics', desc: 'Guidance on flights, permits, and island transfers.', img: CAROUSEL_IMAGES[4] },
-              { title: 'Comfortable Stays', desc: 'Comfortable beachside stays and eco-lodges.', img: CAROUSEL_IMAGES[5] },
-              { title: 'Local Cuisine', desc: 'Local cuisine prepared with warmth and authenticity.', img: CAROUSEL_IMAGES[0] },
-              { title: 'Personal Itineraries', desc: 'Personalized itineraries for solo travelers, couples, or groups.', img: CAROUSEL_IMAGES[1] },
-            ].map((item, i) => (
-              <SectionReveal key={i} delay={i * 0.1}>
-                <div className="h-full rounded-card glass-premium p-8 shadow-soft text-center flex flex-col gap-6 items-center">
-                  <div className="aspect-square w-24 rounded-full overflow-hidden border-2 border-white/20">
-                    <img src={item.img} alt={item.title} className="w-full h-full object-cover" />
-                  </div>
-                  <div>
-                    <h3 className="font-heading text-xl font-bold text-white">{item.title}</h3>
-                    <p className="mt-3 text-sm text-white/70">{item.desc}</p>
-                  </div>
-                </div>
-              </SectionReveal>
-            ))}
-          </div>
-        </div>
-      </section >
+      </section>
 
       {/* 8. GALLERY PREVIEW */}
       < div id="gallery-section" className="pointer-events-auto" >
@@ -393,48 +410,60 @@ export default function Home() {
 }
 
 function InteractiveHighlights() {
+  const navigate = useNavigate()
+
+  const handleNavigate = (e, targetLink) => {
+    if (e) e.stopPropagation()
+    const destination = targetLink || '/services'
+    navigate(destination)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
-    <div
-      className="perspective-[1500px] mx-auto w-full max-w-[95vw] lg:max-w-7xl h-[450px] sm:h-[550px] flex items-center justify-center overflow-visible my-12"
+    <div 
+      className="perspective-[1500px] mx-auto w-full max-w-[95vw] lg:max-w-7xl h-[450px] sm:h-[550px] flex items-center justify-center overflow-visible my-12 pointer-events-auto"
       style={{
-        WebkitMaskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)',
-        maskImage: 'linear-gradient(to right, transparent, black 5%, black 95%, transparent)'
+        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 2.5%, black 97.5%, transparent 100%)',
+        maskImage: 'linear-gradient(to right, transparent 0%, black 2.5%, black 97.5%, transparent 100%)'
       }}
     >
-      <div className="relative w-full h-full preserve-3d animate-spin-carousel hover:[animation-play-state:paused]">
+      <div className="relative w-full h-full preserve-3d animate-spin-carousel hover:[animation-play-state:paused] pointer-events-auto">
         {[...HIGHLIGHTS_DATA, ...HIGHLIGHTS_DATA].map((current, i) => (
           <div
             key={`${current.id}-${i}`}
-            className="absolute inset-0 flex items-center justify-center backface-hidden"
+            className="absolute inset-0 flex items-center justify-center backface-hidden pointer-events-auto"
             style={{
               transform: `rotateY(${i * 36}deg) translateZ(clamp(300px, 60vw, 650px))`
             }}
           >
-            <div className="w-[260px] sm:w-[320px] h-[360px] sm:h-[420px] rounded-2xl overflow-hidden shadow-2xl relative border border-white/20 bg-navy/10 group">
+            <div
+              onClick={(e) => handleNavigate(e, current.link)}
+              className="w-[260px] sm:w-[320px] h-[360px] sm:h-[420px] rounded-2xl overflow-hidden shadow-2xl relative border border-white/20 bg-navy/10 group cursor-pointer pointer-events-auto z-20"
+            >
               <img
                 src={current.image}
                 alt={current.title}
                 className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent opacity-90 transition duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent opacity-90 transition duration-300 pointer-events-none" />
 
-              <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">
-                <span className="inline-block text-accent font-heading font-bold uppercase tracking-widest text-[10px] mb-2">
+              <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end pointer-events-auto">
+                <span className="inline-block text-accent font-heading font-bold uppercase tracking-widest text-[10px] mb-2 pointer-events-none">
                   Featured
                 </span>
-                <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white leading-tight mb-3">
+                <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white leading-tight mb-3 pointer-events-none">
                   {current.title}
                 </h3>
-                <p className="text-white/80 text-xs sm:text-sm mb-6 line-clamp-3">
+                <p className="text-white/80 text-xs sm:text-sm mb-6 line-clamp-3 pointer-events-none">
                   {current.desc}
                 </p>
-                <Button
-                  as={Link}
-                  to={current.link}
-                  className="bg-accent text-navy border-none py-2.5 px-4 text-sm w-full shadow-sm hover:bg-white transition-all duration-300"
+                <button
+                  type="button"
+                  onClick={(e) => handleNavigate(e, current.link)}
+                  className="bg-accent text-navy font-bold border-none py-2.5 px-4 text-sm w-full rounded-full shadow-md hover:bg-white transition-all duration-300 pointer-events-auto cursor-pointer relative z-30"
                 >
-                  {current.btnText}
-                </Button>
+                  {current.btnText || 'Explore'}
+                </button>
               </div>
             </div>
           </div>
