@@ -40,12 +40,25 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex bg-[#FAFAFA] text-navy font-body">
+    <div className="min-h-screen flex bg-[#FAFAFA] text-navy font-body relative">
       
       {/* Left side - Background Video (hidden on mobile) */}
-      <div className="hidden lg:block lg:w-1/2 relative bg-navy overflow-hidden">
+      <div className="hidden lg:block lg:w-[62%] relative bg-navy overflow-hidden">
         <video src={vid2} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover opacity-80" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent pointer-events-none" />
+        
+        {/* Return to Home on Video Side */}
+        <Link
+          to="/"
+          className="absolute top-8 left-8 z-20 inline-flex items-center gap-2 rounded-full bg-black/40 backdrop-blur-md border border-white/20 px-5 py-2.5 text-xs font-bold text-white uppercase tracking-wider hover:bg-white hover:text-navy transition duration-300 shadow-lg"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M19 12H5" />
+            <path d="m12 19-7-7 7-7" />
+          </svg>
+          <span>Return to Home</span>
+        </Link>
+
         <div className="absolute bottom-16 left-16 max-w-lg pointer-events-none z-10">
           <h2 className="font-heading text-5xl font-bold text-white leading-tight mb-4 text-balance drop-shadow-md">
             Welcome back to the deep blue.
@@ -55,9 +68,21 @@ export default function Login() {
       </div>
 
       {/* Right side - Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-20">
+      <div className="w-full lg:w-[38%] flex items-center justify-center p-6 sm:p-12 lg:p-12 relative">
         <div className="w-full max-w-md">
-          <div className="mb-10 text-center lg:text-left">
+          
+          {/* Mobile Return to Home */}
+          <div className="mb-6 lg:hidden">
+            <Link to="/" className="inline-flex items-center gap-2 text-xs font-bold text-navy/70 hover:text-navy transition">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M19 12H5" />
+                <path d="m12 19-7-7 7-7" />
+              </svg>
+              <span>Return to Home</span>
+            </Link>
+          </div>
+
+          <div className="mb-8 text-center lg:text-left">
             <h1 className="font-heading text-4xl sm:text-5xl font-bold text-navy tracking-tight mb-3">Sign In</h1>
             <p className="text-navy/60 text-sm font-medium">Enter your details to proceed.</p>
           </div>

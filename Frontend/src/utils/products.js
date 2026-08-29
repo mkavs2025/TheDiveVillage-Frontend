@@ -46,7 +46,7 @@ export const SHOP_PRODUCTS = [
     ],
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     colors: [
-      { name: 'Ocean Navy', hex: '#003865' }
+      { name: 'Black', hex: '#000000' }
     ],
     stock: 35,
     stockStatus: 'In Stock',
@@ -73,7 +73,7 @@ export const SHOP_PRODUCTS = [
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
-      { name: 'Ocean Navy', hex: '#003865' }
+      { name: 'Black', hex: '#000000' }
     ],
     stock: 20,
     stockStatus: 'In Stock',
@@ -100,7 +100,7 @@ export const SHOP_PRODUCTS = [
     ],
     sizes: ['S', 'M', 'L'],
     colors: [
-      { name: 'Ocean Navy', hex: '#003865' }
+      { name: 'Black', hex: '#000000' }
     ],
     stock: 15,
     stockStatus: 'Low Stock',
@@ -127,7 +127,7 @@ export const SHOP_PRODUCTS = [
     ],
     sizes: ['M', 'L', 'XL', 'XXL'],
     colors: [
-      { name: 'Ocean Navy', hex: '#003865' }
+      { name: 'Black', hex: '#000000' }
     ],
     stock: 50,
     stockStatus: 'In Stock',
@@ -154,7 +154,7 @@ export const SHOP_PRODUCTS = [
     ],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: [
-      { name: 'Ocean Navy', hex: '#003865' }
+      { name: 'Black', hex: '#000000' }
     ],
     stock: 45,
     stockStatus: 'In Stock',
@@ -181,7 +181,7 @@ export const SHOP_PRODUCTS = [
     ],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: [
-      { name: 'Ocean Navy', hex: '#003865' }
+      { name: 'Black', hex: '#000000' }
     ],
     stock: 12,
     stockStatus: 'Low Stock',
@@ -208,7 +208,7 @@ export const SHOP_PRODUCTS = [
     ],
     sizes: ['One Size'],
     colors: [
-      { name: 'Ocean Navy', hex: '#003865' }
+      { name: 'Black', hex: '#000000' }
     ],
     stock: 40,
     stockStatus: 'In Stock',
@@ -235,7 +235,7 @@ export const SHOP_PRODUCTS = [
     ],
     sizes: ['Standard'],
     colors: [
-      { name: 'Ocean Navy', hex: '#003865' }
+      { name: 'Black', hex: '#000000' }
     ],
     stock: 25,
     stockStatus: 'In Stock',

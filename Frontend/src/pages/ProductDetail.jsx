@@ -12,14 +12,23 @@ export default function ProductDetail() {
   const { addItem } = useCart()
 
   const product = SHOP_PRODUCTS.find((p) => p.id === id) || SHOP_PRODUCTS[0]
+  const relatedProducts = SHOP_PRODUCTS.filter((p) => p.id !== product.id).slice(0, 4)
 
-  const productImages = product.images && product.images.length > 0 
-    ? product.images 
-    : [product.image]
+  const mediaItems = []
+  if (product.images && product.images.length > 0) {
+    product.images.forEach((img, idx) => {
+      mediaItems.push({ type: 'image', src: img, id: `img-${idx}` })
+    })
+  } else if (product.image) {
+    mediaItems.push({ type: 'image', src: product.image, id: 'img-0' })
+  }
+  if (product.video) {
+    mediaItems.push({ type: 'video', src: product.video, id: 'video-0' })
+  }
 
-  const [activeImage, setActiveImage] = useState(productImages[0])
+  const [activeMedia, setActiveMedia] = useState(mediaItems[0] || null)
   const [selectedSize, setSelectedSize] = useState(product.sizes?.[0] || 'M')
-  const [selectedColor, setSelectedColor] = useState(product.colors?.[0] || { name: 'Ocean Navy', hex: '#003865' })
+  const [selectedColor, setSelectedColor] = useState(product.colors?.[0] || { name: 'Black', hex: '#000000' })
   const [quantity, setQuantity] = useState(1)
   const [activeTab, setActiveTab] = useState('details')
   const [toastMessage, setToastMessage] = useState(null)
@@ -27,11 +36,16 @@ export default function ProductDetail() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
+    const initialItems = []
     if (product.images && product.images.length > 0) {
-      setActiveImage(product.images[0])
-    } else {
-      setActiveImage(product.image)
+      product.images.forEach((img, idx) => initialItems.push({ type: 'image', src: img, id: `img-${idx}` }))
+    } else if (product.image) {
+      initialItems.push({ type: 'image', src: product.image, id: 'img-0' })
     }
+    if (product.video) {
+      initialItems.push({ type: 'video', src: product.video, id: 'video-0' })
+    }
+    setActiveMedia(initialItems[0] || null)
     if (product.sizes && product.sizes.length > 0) {
       setSelectedSize(product.sizes[0])
     }
@@ -50,7 +64,7 @@ export default function ProductDetail() {
         id: product.id,
         name: product.title || product.name,
         price: product.price,
-        image: activeImage || product.image,
+        image: activeMedia?.type === 'image' ? activeMedia.src : product.image,
         selectedSize,
         selectedColor: selectedColor.name,
       },
@@ -71,7 +85,7 @@ export default function ProductDetail() {
         id: product.id,
         name: product.title || product.name,
         price: product.price,
-        image: activeImage || product.image,
+        image: activeMedia?.type === 'image' ? activeMedia.src : product.image,
         selectedSize,
         selectedColor: selectedColor.name,
       },
@@ -79,10 +93,19 @@ export default function ProductDetail() {
     navigate('/checkout')
   }
 
-  const relatedProducts = SHOP_PRODUCTS.filter((p) => p.id !== product.id).slice(0, 4)
+  if (!product) {
+    return (
+      <div className="min-h-screen bg-[#FAFAFA] pt-32 pb-24 text-center">
+        <h2 className="text-2xl font-bold text-navy mb-4">Product Not Found</h2>
+        <Link to="/shop" className="text-accent hover:underline font-bold">
+          ← Back to Merchandise Store
+        </Link>
+      </div>
+    )
+  }
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] text-navy pt-24 sm:pt-32 pb-24 font-body" style={{ textShadow: 'none' }}>
+    <div className="bg-[#FAFAFA] min-h-screen text-navy font-body pt-24 sm:pt-32 pb-24 overflow-x-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         {/* Toast Notification */}
@@ -122,62 +145,63 @@ export default function ProductDetail() {
         {/* Main Product Details Split */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
           
-          {/* Left Column: Multi-Image Showcase & Video */}
+          {/* Left Column: Integrated Multi-Media Showcase (Photos + Video) */}
           <div className="lg:col-span-7 flex flex-col gap-6">
             <div className="flex gap-4 flex-col-reverse sm:flex-row">
               {/* Thumbnail Selectors */}
               <div className="flex sm:flex-col gap-3 overflow-x-auto sm:overflow-visible shrink-0">
-                {productImages.map((img, i) => (
+                {mediaItems.map((item, i) => (
                   <button
-                    key={i}
-                    onClick={() => setActiveImage(img)}
-                    className={`flex-shrink-0 w-20 h-24 rounded-2xl overflow-hidden border-2 transition ${
-                      activeImage === img ? 'border-navy shadow-md ring-2 ring-navy/20' : 'border-transparent hover:border-navy/30 bg-[#F0F2F5]'
+                    key={item.id || i}
+                    onClick={() => setActiveMedia(item)}
+                    className={`flex-shrink-0 w-20 h-24 rounded-2xl overflow-hidden border-2 transition relative ${
+                      activeMedia?.src === item.src
+                        ? 'border-navy shadow-md ring-2 ring-navy/20'
+                        : 'border-transparent hover:border-navy/30 bg-[#F0F2F5]'
                     }`}
                   >
-                    <img src={img} alt={`Thumbnail ${i + 1}`} className="w-full h-full object-cover bg-white" />
+                    {item.type === 'image' ? (
+                      <img src={item.src} alt={`Thumbnail ${i + 1}`} className="w-full h-full object-cover bg-white" />
+                    ) : (
+                      <div className="relative w-full h-full bg-black flex items-center justify-center">
+                        <video src={item.src} className="w-full h-full object-cover opacity-70 pointer-events-none" muted />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                          <span className="w-7 h-7 rounded-full bg-accent text-navy flex items-center justify-center text-xs font-bold shadow-sm">
+                            ▶
+                          </span>
+                        </div>
+                      </div>
+                    )}
                   </button>
                 ))}
               </div>
 
-              {/* Large Active Image */}
+              {/* Main Product Card Media Display (Fits Box Size) */}
               <div className="flex-1 rounded-[32px] overflow-hidden bg-white border border-navy/5 aspect-[4/5] relative shadow-card group">
-                <img
-                  src={activeImage}
-                  alt={product.title}
-                  className="w-full h-full object-contain p-6 transition duration-500 group-hover:scale-105"
-                />
-                {product.tag && (
-                  <span className="absolute top-6 left-6 bg-white/95 backdrop-blur-md px-3.5 py-1 text-xs font-bold text-navy rounded-full shadow-sm">
-                    {product.tag}
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* Video Showcase under pictures */}
-            {product.video && (
-              <div className="rounded-[32px] overflow-hidden bg-white border border-navy/5 p-5 shadow-card">
-                <div className="mb-3 flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-accent flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-accent animate-pulse" />
-                    Live Fit & Motion Video
-                  </span>
-                  <span className="text-[11px] text-navy/50 font-semibold">In-Water Demonstration</span>
-                </div>
-                <div className="aspect-video w-full rounded-2xl overflow-hidden bg-black/5 relative">
+                {activeMedia?.type === 'video' ? (
                   <video
-                    src={product.video}
+                    src={activeMedia.src}
                     controls
                     autoPlay
                     muted
                     loop
                     playsInline
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-[32px]"
                   />
-                </div>
+                ) : (
+                  <img
+                    src={activeMedia?.src || product.image}
+                    alt={product.title}
+                    className="w-full h-full object-contain p-6 transition duration-500 group-hover:scale-105"
+                  />
+                )}
+                {product.tag && (
+                  <span className="absolute top-6 left-6 bg-white/95 backdrop-blur-md px-3.5 py-1 text-xs font-bold text-navy rounded-full shadow-sm z-10 pointer-events-none">
+                    {product.tag}
+                  </span>
+                )}
               </div>
-            )}
+            </div>
           </div>
 
           {/* Right Column: Product Specifications & Actions */}
@@ -199,16 +223,7 @@ export default function ProductDetail() {
               {product.title}
             </h1>
 
-            {/* Rating */}
-            <div className="flex items-center gap-2 mb-5 text-sm">
-              <div className="flex text-amber-500">
-                {'★★★★★'.split('').map((star, i) => (
-                  <span key={i}>{star}</span>
-                ))}
-              </div>
-              <span className="font-bold text-navy">{product.rating || '4.9'}</span>
-              <span className="text-navy/50">({product.reviewCount || 140} verified buyer reviews)</span>
-            </div>
+
 
             {/* Product Description */}
             <p className="text-navy/80 text-sm leading-relaxed mb-6">
@@ -326,23 +341,7 @@ export default function ProductDetail() {
               </button>
             </div>
 
-            {/* Assurances Box */}
-            <div className="rounded-2xl bg-[#F0F2F5] p-5 space-y-3 text-xs text-navy/80">
-              <div className="flex items-start gap-3">
-                <span className="text-base">🔄</span>
-                <div>
-                  <span className="font-bold text-navy block">Easy 15-Day Exchange</span>
-                  <span>Need another size? Return or swap within 15 days.</span>
-                </div>
-              </div>
-              <div className="flex items-start gap-3 pt-2 border-t border-navy/10">
-                <span className="text-base">🛡️</span>
-                <div>
-                  <span className="font-bold text-navy block">100% Genuine Branded Merchandise</span>
-                  <span>Directly tested by The Dive Village team.</span>
-                </div>
-              </div>
-            </div>
+
 
           </div>
         </div>

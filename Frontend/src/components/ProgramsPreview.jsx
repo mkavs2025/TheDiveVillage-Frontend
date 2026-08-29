@@ -1,33 +1,34 @@
-import { useRef } from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import SectionReveal, { StaggerGrid, StaggerItem } from './SectionReveal'
-import Button from './Button'
 import { CAROUSEL_IMAGES } from '../utils/images'
 
 const PROGRAMS = [
   {
     id: 'merch',
     title: 'Dive Village Merch',
-    desc: 'Take a piece of the ocean home with our exclusive dive apparel and accessories.',
+    tag: 'Official Gear',
+    desc: 'Take a piece of the ocean home with our exclusive dive apparel, suits, and accessories.',
     img: CAROUSEL_IMAGES[2],
-    link: '/shop',
-    btnText: 'Shop Now',
+    link: '/services',
+    btnText: 'Explore Services',
   },
   {
     id: 'try-experiences',
     title: 'Try Experiences',
-    desc: 'Perfect for beginners. Experience scuba safely in shallow water with professional supervision.',
+    tag: 'For Beginners',
+    desc: 'Perfect for first-timers. Experience scuba safely in shallow water with professional 1-on-1 supervision.',
     img: CAROUSEL_IMAGES[0],
-    link: '/book-us?program=try-experiences',
-    btnText: 'Book This Program',
+    link: '/services',
+    btnText: 'Explore Services',
   },
   {
     id: 'certification',
     title: 'Certification Pathway',
-    desc: 'From PADI Scuba Diver to Advanced Open Water, start or continue your certification journey.',
+    tag: 'PADI Courses',
+    desc: 'From Open Water Diver to Divemaster, start or advance your international dive certification.',
     img: CAROUSEL_IMAGES[1],
-    link: '/book-us?program=certification',
-    btnText: 'Book This Program',
+    link: '/services',
+    btnText: 'Explore Services',
   },
 ]
 
@@ -36,18 +37,25 @@ export default function ProgramsPreview() {
     <section id="programs" className="relative py-24 sm:py-32 scroll-mt-20 pointer-events-auto">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionReveal className="mb-16 flex flex-col items-center text-center">
-          <h2 className="font-heading text-h2 font-bold text-white">
-            <em className="font-heading italic font-bold text-accent">Explore</em>
+          <span className="inline-block bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-1.5 text-xs font-bold text-accent uppercase tracking-widest mb-4 shadow-sm">
+            Featured Offerings
+          </span>
+          <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-lg">
+            Explore Our <span className="text-accent italic font-bold">Programs</span>
           </h2>
-          <p className="mt-3 max-w-lg mx-auto text-white/70">
+          <p className="mt-4 max-w-xl mx-auto text-base sm:text-lg text-white/90 font-medium drop-shadow-md">
             From your very first breath underwater to professional divemaster certifications.
           </p>
-          <Link to="/book-us" className="mt-6 font-heading text-sm font-bold text-accent transition duration-hover hover:text-white whitespace-nowrap">
-            View Full Schedule →
+          <Link
+            to="/services"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 px-6 py-3 text-xs font-bold text-white uppercase tracking-widest transition-all duration-300 hover:border-accent hover:text-accent shadow-sm"
+          >
+            <span>View All Services</span>
+            <span className="text-accent text-sm">→</span>
           </Link>
         </SectionReveal>
 
-        <StaggerGrid className="grid gap-6 md:grid-cols-3">
+        <StaggerGrid className="grid gap-8 md:grid-cols-3">
           {PROGRAMS.map((program) => (
             <StaggerItem key={program.id}>
               <Card program={program} />
@@ -60,21 +68,54 @@ export default function ProgramsPreview() {
 }
 
 function Card({ program }) {
+  const navigate = useNavigate()
+
   return (
-    <div className="flex h-full flex-col rounded-card glass-premium p-4 shadow-soft transition duration-hover hover:-translate-y-1 hover:shadow-card">
-      <div className="aspect-video w-full rounded-lg overflow-hidden mb-5">
-        <img src={program.img} alt={program.title} className="w-full h-full object-cover" />
+    <div 
+      onClick={() => navigate(program.link || '/services')}
+      className="group flex h-full flex-col rounded-[32px] bg-navy/90 backdrop-blur-xl border border-white/20 p-6 sm:p-7 shadow-2xl transition duration-500 hover:-translate-y-2 hover:border-accent/60 hover:shadow-float cursor-pointer"
+    >
+      {/* Image Container */}
+      <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden mb-6 bg-black/20 shrink-0">
+        <img
+          src={program.img}
+          alt={program.title}
+          className="w-full h-full object-cover transition duration-700 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent pointer-events-none" />
+        <span className="absolute top-3 left-3 bg-navy/80 backdrop-blur-md border border-white/20 text-accent text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm">
+          {program.tag}
+        </span>
       </div>
-      <h3 className="font-heading text-xl font-bold text-white">{program.title}</h3>
-      <p className="mt-3 flex-1 text-sm text-white/70">{program.desc}</p>
-      <Button
-        as={Link}
-        to={program.link}
-        variant="secondary"
-        className="mt-6 w-full justify-center !border-0 !bg-white/20 !text-white hover:!bg-accent hover:!text-white backdrop-blur-sm"
-      >
-        {program.btnText}
-      </Button>
+
+      {/* Content */}
+      <div className="flex flex-col flex-1">
+        <h3 className="font-heading text-2xl font-bold text-white tracking-tight mb-2 leading-tight">
+          {program.title}
+        </h3>
+        
+        {/* Accent Bar */}
+        <div className="w-8 h-1 bg-accent rounded-full mb-4"></div>
+
+        <p className="text-white/80 text-sm leading-relaxed font-medium mb-8 flex-1">
+          {program.desc}
+        </p>
+
+        {/* Button */}
+        <Link
+          to={program.link || '/services'}
+          onClick={(e) => {
+            e.stopPropagation()
+          }}
+          className="w-full py-3.5 px-6 rounded-full bg-accent hover:bg-white text-navy font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-md flex items-center justify-center gap-2 group-hover:shadow-lg mt-auto"
+        >
+          <span>{program.btnText}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-1">
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </Link>
+      </div>
     </div>
   )
 }
