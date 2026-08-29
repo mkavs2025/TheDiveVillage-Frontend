@@ -219,32 +219,7 @@ export default function ServiceDetail() {
         </div>
       </div>
 
-      {/* 3. TRUST BANNER */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="rounded-[40px] bg-[#F0F2F5] p-8 sm:p-14">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-navy/60 font-bold tracking-widest uppercase text-xs mb-3 block">Why The Village</span>
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-navy">The Dive Village Difference</h2>
-          </div>
-          <div className="grid sm:grid-cols-3 gap-8">
-            <div className="bg-white rounded-3xl p-8 shadow-soft text-center hover:-translate-y-2 transition-transform duration-300">
-              <div className="w-14 h-14 rounded-full bg-accent/10 text-accent flex items-center justify-center mx-auto mb-5 text-2xl font-bold">1</div>
-              <h3 className="font-heading text-lg font-bold text-navy mb-2">Small Group Ratios</h3>
-              <p className="text-xs text-navy/70 leading-relaxed">Maximum 4 divers per instructor for personalized attention, relaxed pacing, and supreme safety.</p>
-            </div>
-            <div className="bg-white rounded-3xl p-8 shadow-soft text-center hover:-translate-y-2 transition-transform duration-300">
-              <div className="w-14 h-14 rounded-full bg-accent/10 text-accent flex items-center justify-center mx-auto mb-5 text-2xl font-bold">2</div>
-              <h3 className="font-heading text-lg font-bold text-navy mb-2">Pristine Dive Sites</h3>
-              <p className="text-xs text-navy/70 leading-relaxed">Access to uncrowded coral walls, clear lagoons, and thriving marine sanctuaries.</p>
-            </div>
-            <div className="bg-white rounded-3xl p-8 shadow-soft text-center hover:-translate-y-2 transition-transform duration-300">
-              <div className="w-14 h-14 rounded-full bg-accent/10 text-accent flex items-center justify-center mx-auto mb-5 text-2xl font-bold">3</div>
-              <h3 className="font-heading text-lg font-bold text-navy mb-2">End-to-End Care</h3>
-              <p className="text-xs text-navy/70 leading-relaxed">From your flight landing to your logbook signing, we take care of permits, transport, and gear.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+
 
     </div>
   )
