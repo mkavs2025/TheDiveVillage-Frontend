@@ -13,7 +13,7 @@ export default function Profile() {
   if (!user) {
     return (
       <div className="mx-auto max-w-lg text-center">
-        <h1 className="font-heading text-3xl font-extrabold text-navy">
+        <h1 className="font-heading text-3xl font-bold text-navy">
           Not Logged In
         </h1>
         <p className="mt-2 text-navy/70 font-medium">
@@ -42,14 +42,14 @@ export default function Profile() {
               className="h-28 w-28 rounded-full border border-navy/10 object-cover shadow-sm"
             />
           ) : (
-            <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-[#F0F2F5] font-heading text-4xl font-extrabold text-navy border border-navy/5">
+            <div className="flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-[#F0F2F5] font-heading text-4xl font-bold text-navy border border-navy/5">
               {(user.displayName || user.email || 'D')[0].toUpperCase()}
             </div>
           )}
 
           <div className="flex-1 text-center sm:text-left pt-2">
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 mb-2">
-              <h1 className="font-heading text-3xl font-extrabold text-navy">
+              <h1 className="font-heading text-3xl font-bold text-navy">
                 {user.displayName || 'Diver'}
               </h1>
               <span className="rounded-full bg-navy text-white px-3 py-1 text-[10px] font-bold uppercase tracking-wider">
@@ -75,14 +75,14 @@ export default function Profile() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="rounded-2xl bg-[#F0F2F5] p-5 border border-navy/5">
               <span className="block text-[10px] font-bold uppercase tracking-wider text-navy/50">Auth Provider</span>
-              <span className="mt-1 block font-heading text-base font-extrabold text-navy capitalize">
+              <span className="mt-1 block font-heading text-base font-bold text-navy capitalize">
                 {user.providerId === 'google.com' ? 'Google Account' : user.providerId || 'Password'}
               </span>
             </div>
 
             <div className="rounded-2xl bg-[#F0F2F5] p-5 border border-navy/5">
               <span className="block text-[10px] font-bold uppercase tracking-wider text-navy/50">Email Status</span>
-              <span className={`mt-1 block font-heading text-base font-extrabold ${user.emailVerified ? 'text-emerald-700' : 'text-amber-600'}`}>
+              <span className={`mt-1 block font-heading text-base font-bold ${user.emailVerified ? 'text-emerald-700' : 'text-amber-600'}`}>
                 {user.emailVerified ? 'Verified Account' : 'Unverified'}
               </span>
             </div>
@@ -90,7 +90,7 @@ export default function Profile() {
             {user.creationTime && (
               <div className="rounded-2xl bg-[#F0F2F5] p-5 border border-navy/5">
                 <span className="block text-[10px] font-bold uppercase tracking-wider text-navy/50">Member Since</span>
-                <span className="mt-1 block font-heading text-base font-extrabold text-navy">
+                <span className="mt-1 block font-heading text-base font-bold text-navy">
                   {new Date(user.creationTime).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
                 </span>
               </div>
@@ -99,7 +99,7 @@ export default function Profile() {
             {user.lastSignInTime && (
               <div className="rounded-2xl bg-[#F0F2F5] p-5 border border-navy/5">
                 <span className="block text-[10px] font-bold uppercase tracking-wider text-navy/50">Last Active</span>
-                <span className="mt-1 block font-heading text-base font-extrabold text-navy">
+                <span className="mt-1 block font-heading text-base font-bold text-navy">
                   {new Date(user.lastSignInTime).toLocaleString(undefined, { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                 </span>
               </div>

@@ -30,7 +30,7 @@ export default function ExperienceCard({ item }) {
               <PinIcon />
               {item.location}
             </p>
-            <p className="mt-2 font-heading text-sm font-extrabold text-white">
+            <p className="mt-2 font-heading text-sm font-bold text-white">
               From {formatCurrency(item.price)}
             </p>
           </div>

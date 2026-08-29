@@ -53,7 +53,7 @@ export default function ProductCard({ product }) {
           <p className="mt-1 text-sm text-white/70">{product.category}</p>
         </Link>
         <div className="mt-auto flex items-center justify-between gap-3">
-          <p className="font-heading text-lg font-extrabold text-white">
+          <p className="font-heading text-lg font-bold text-white">
             {formatCurrency(product.price)}
           </p>
           <Button type="button" onClick={onAdd} className="!px-4 !py-2 text-xs">

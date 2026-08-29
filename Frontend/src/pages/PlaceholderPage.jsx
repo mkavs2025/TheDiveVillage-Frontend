@@ -4,7 +4,7 @@ export default function PlaceholderPage({ title, accent, blurb }) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
       <SectionReveal>
-        <h1 className="font-heading text-h1 font-extrabold text-white">
+        <h1 className="font-heading text-h1 font-bold text-white">
           {title}{' '}
           {accent && (
             <em className="font-heading italic font-bold text-accent">{accent}</em>

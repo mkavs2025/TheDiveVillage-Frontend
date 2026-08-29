@@ -7,8 +7,6 @@ export default function CustomCursor() {
   const cursorX = useMotionValue(-100)
   const cursorY = useMotionValue(-100)
   const [hidden, setHidden] = useState(true)
-  const [fishes, setFishes] = useState([])
-  
   const location = useLocation()
   const isHomePage = location.pathname === '/'
 
@@ -24,7 +22,7 @@ export default function CustomCursor() {
       cursorX.set(e.clientX)
       cursorY.set(e.clientY)
       
-      const isClickableHovered = e.target.closest('header, footer, a, button, [role="button"]')
+      const isClickableHovered = e.target.closest('header, footer, a, button, [role="button"], #dive-map-container')
       
       // If over the header/footer or any clickable element, show standard cursor
       if (isClickableHovered) {
@@ -36,41 +34,16 @@ export default function CustomCursor() {
       }
     }
 
-    const handleClick = (e) => {
-      if (hidden) return // Don't spawn fish if custom cursor is hidden (e.g. over toolbar)
-      
-      const id = Date.now() + Math.random()
-      const size = Math.floor(Math.random() * (70 - 24 + 1)) + 24 // Smaller sizes: between 24px and 70px
-      
-      // Calculate a random position within a distinct circular ring around the click
-      const maxRadius = 150
-      const minRadius = 50
-      const angle = Math.random() * Math.PI * 2
-      // Using sqrt for a more even distribution within the circular area
-      const distance = Math.sqrt(Math.random()) * (maxRadius - minRadius) + minRadius
-      
-      const finalX = e.clientX + Math.cos(angle) * distance
-      const finalY = e.clientY + Math.sin(angle) * distance
-      
-      setFishes((prev) => [...prev, { id, x: finalX, y: finalY, size }])
-
-      // Pop out after 1.5 seconds
-      setTimeout(() => {
-        setFishes((prev) => prev.filter((f) => f.id !== id))
-      }, 1500)
-    }
 
     const handleMouseLeave = () => setHidden(true)
     const handleMouseEnter = () => setHidden(false)
 
     window.addEventListener('mousemove', moveCursor)
-    window.addEventListener('click', handleClick)
     window.addEventListener('mouseleave', handleMouseLeave)
     window.addEventListener('mouseenter', handleMouseEnter)
 
     return () => {
       window.removeEventListener('mousemove', moveCursor)
-      window.removeEventListener('click', handleClick)
       window.removeEventListener('mouseleave', handleMouseLeave)
       window.removeEventListener('mouseenter', handleMouseEnter)
       document.body.classList.remove('hide-cursors')
@@ -88,18 +61,6 @@ export default function CustomCursor() {
   return (
     <>
       <AnimatePresence>
-        {fishes.map((fish) => (
-          <motion.img
-            key={fish.id}
-            src={cursorImg}
-            initial={{ scale: 0, opacity: 0, x: fish.x - (fish.size / 2), y: fish.y - (fish.size / 2) }}
-            animate={{ scale: 1, opacity: 1, y: fish.y - (fish.size / 2) - 30 }}
-            exit={{ scale: 0, opacity: 0, y: fish.y - (fish.size / 2) - 60 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            className="pointer-events-none fixed top-0 left-0 z-[9999]"
-            style={{ width: fish.size, height: 'auto' }}
-          />
-        ))}
       </AnimatePresence>
       <motion.img
         src={cursorImg}

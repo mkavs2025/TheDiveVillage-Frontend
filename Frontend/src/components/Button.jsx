@@ -3,13 +3,13 @@ import { motion, useReducedMotion, useMotionValue, useSpring } from 'framer-moti
 
 const variants = {
   primary:
-    'bg-cta text-white shadow-soft hover:shadow-lift active:scale-[0.98]',
+    'bg-accent text-navy shadow-soft hover:shadow-lift hover:bg-white active:scale-[0.98]',
   secondary:
-    'bg-white/10 backdrop-blur-md border border-white/20 text-white border-2 border-accent hover:bg-accent/10 active:scale-[0.98]',
+    'bg-white/10 backdrop-blur-md border border-white/20 text-white border-2 border-accent hover:bg-accent hover:text-navy active:scale-[0.98]',
   ghost:
     'bg-transparent text-white hover:text-accent active:scale-[0.98]',
   navy:
-    'bg-navy text-white shadow-soft hover:shadow-lift active:scale-[0.98]',
+    'bg-navy text-white shadow-soft hover:shadow-lift hover:bg-accent hover:text-navy active:scale-[0.98]',
 }
 
 const Button = forwardRef(function Button(
