@@ -183,8 +183,8 @@ function VideoSphere({ videoSrc, isMuted, joystickVelocity }) {
       previousPointer.current = { x: e.clientX, y: e.clientY }
       
       // Update drag offsets
-      dragOffset.current.y -= dx * 0.005 
-      dragOffset.current.x -= dy * 0.005
+      dragOffset.current.y += dx * 0.005 
+      dragOffset.current.x += dy * 0.005
     }
     
     const onPointerUp = () => {
@@ -209,8 +209,8 @@ function VideoSphere({ videoSrc, isMuted, joystickVelocity }) {
       // Apply Joystick Velocity
       if (joystickVelocity && joystickVelocity.current) {
         // Multiply by delta for framerate independence, and a speed factor
-        dragOffset.current.y -= joystickVelocity.current.x * delta * 0.4
-        dragOffset.current.x -= joystickVelocity.current.y * delta * 0.4
+        dragOffset.current.y += joystickVelocity.current.x * delta * 0.4
+        dragOffset.current.x += joystickVelocity.current.y * delta * 0.4
       }
 
       // Combine programmatic scroll rotation with user's manual drag offset
@@ -292,7 +292,7 @@ export default function VideoSphereBackground() {
           </Canvas>
         </div>
       </div>
-      {location.pathname !== '/book-us' && location.pathname !== '/login' && location.pathname !== '/signup' && <JoystickOverlay joystickVelocity={joystickVelocity} />}
+      {location.pathname !== '/book-us' && location.pathname !== '/login' && location.pathname !== '/signup' && <JoystickControl joystickVelocity={joystickVelocity} />}
       <AudioToggle isMuted={isMuted} onToggle={() => setIsMuted(!isMuted)} />
     </>
   )

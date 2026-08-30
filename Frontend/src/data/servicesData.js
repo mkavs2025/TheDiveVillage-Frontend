@@ -19,6 +19,7 @@ export const CATEGORIES = [
   { key: 'pro', label: 'Pro Courses' },
   { key: 'freediving', label: 'Freediving' },
   { key: 'snorkeling', label: 'Snorkeling' },
+  { key: 'surfing', label: 'Surfing' },
 ]
 
 const RAW_SERVICES_DATA = [
@@ -426,6 +427,34 @@ const RAW_SERVICES_DATA = [
     banner: 'assets/bg-video.mp4',
     highlights: 'Duration: 2–3 days | Includes confined + open water',
     days_min: 2, days_max: 3, min_age: ''
+  },
+  // 9. Surfing
+  {
+    id: 'surf-1', category: 'surfing', categories: ['surfing', 'programs'],
+    title: 'Discover Surfing',
+    short_desc: 'Introductory surfboard lesson for beginners.',
+    long_desc: 'Learn pop-up techniques, wave timing, board balance, and safety in shallow ocean breaks with an experienced instructor.',
+    banner: 'assets/bg-video.mp4',
+    highlights: 'Duration: 2 hrs | Includes surfboard, rashguard & instructor',
+    days_min: '', days_max: '', min_age: 8
+  },
+  {
+    id: 'surf-2', category: 'surfing', categories: ['surfing', 'programs'],
+    title: 'Surf Safari & Reef Break Trip',
+    short_desc: 'Guided surfing session at premier Andaman surf spots.',
+    long_desc: 'Catch uncrowded tropical waves with guided boat transport, spot breakdown, and safety watch.',
+    banner: 'assets/bg-video.mp4',
+    highlights: 'Duration: Half Day | Includes boat trip & equipment',
+    days_min: '', days_max: '', min_age: 12
+  },
+  {
+    id: 'surf-3', category: 'surfing', categories: ['surfing', 'courses'],
+    title: '3-Day Surf Academy Course',
+    short_desc: 'Master wave reading, paddling, and maneuvers.',
+    long_desc: 'Comprehensive 3-day surfing course covering ocean currents, line-up positioning, turns, and riding green waves.',
+    banner: 'assets/bg-video.mp4',
+    highlights: 'Duration: 3 Days | Video analysis & surf log included',
+    days_min: 3, days_max: 3, min_age: 10
   }
 ]
 

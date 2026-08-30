@@ -284,10 +284,8 @@ function CallModal({ isOpen, onClose }) {
       title: 'Phone Call',
       subtitle: '+91 89710 01010',
       href: 'tel:+918971001010',
-      bgColor: 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700',
-      borderColor: 'border-emerald-500/30',
       icon: (
-        <svg className="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+        <svg className="w-5 h-5 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
           <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
         </svg>
       )
@@ -297,10 +295,8 @@ function CallModal({ isOpen, onClose }) {
       title: 'WhatsApp Message',
       subtitle: 'Instant Chat (+91 89710 01010)',
       href: 'https://wa.me/918971001010',
-      bgColor: 'bg-green-500/10 hover:bg-green-500/20 text-green-700',
-      borderColor: 'border-green-500/30',
       icon: (
-        <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 text-navy" fill="currentColor" viewBox="0 0 24 24">
           <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
         </svg>
       )
@@ -310,10 +306,8 @@ function CallModal({ isOpen, onClose }) {
       title: 'Facebook Messenger',
       subtitle: 'Message us on Facebook',
       href: 'https://m.me/thedivevillage',
-      bgColor: 'bg-blue-500/10 hover:bg-blue-500/20 text-blue-700',
-      borderColor: 'border-blue-500/30',
       icon: (
-        <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 text-navy" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.497 1.745 6.616 4.472 8.652V24l4.074-2.238c1.099.304 2.262.47 3.454.47 6.627 0 12-4.975 12-11.121C24 4.974 18.627 0 12 0zm1.191 14.963l-3.055-3.26-5.963 3.26 6.559-6.963 3.13 3.259 5.889-3.259-6.56 6.963z"/>
         </svg>
       )
@@ -323,10 +317,8 @@ function CallModal({ isOpen, onClose }) {
       title: 'Email Us',
       subtitle: 'sanjeev.bajaj@thedivevillage.co',
       href: 'mailto:sanjeev.bajaj@thedivevillage.co',
-      bgColor: 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-700',
-      borderColor: 'border-amber-500/30',
       icon: (
-        <svg className="w-6 h-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+        <svg className="w-5 h-5 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
           <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       )
@@ -336,10 +328,8 @@ function CallModal({ isOpen, onClose }) {
       title: 'Viber',
       subtitle: 'Connect via Viber (+91 89710 01010)',
       href: 'viber://chat?number=%2B918971001010',
-      bgColor: 'bg-purple-500/10 hover:bg-purple-500/20 text-purple-700',
-      borderColor: 'border-purple-500/30',
       icon: (
-        <svg className="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 text-navy" fill="currentColor" viewBox="0 0 24 24">
           <path d="M19.39 14.88c-.64-.26-3.76-1.85-4.35-2.07-.59-.22-1.02-.33-1.45.33-.43.66-1.68 2.07-2.07 2.51-.39.44-.78.5-1.42.22-3.64-1.57-6.03-5.26-6.42-5.92-.39-.66.39-.66 1.13-2.14.15-.3.07-.56-.04-.78-.11-.22-.98-2.36-1.34-3.23-.35-.85-.71-.73-1-.75l-.85-.02c-.3 0-.78.11-1.19.56-.41.45-1.56 1.52-1.56 3.71 0 2.19 1.6 4.31 1.82 4.61.22.3 3.15 4.81 7.63 6.75 3.7 1.6 4.45 1.28 5.25 1.2.8-.08 2.57-1.05 2.93-2.07.36-1.02.36-1.89.25-2.07-.11-.18-.41-.29-1.05-.55z"/>
         </svg>
       )
@@ -350,27 +340,27 @@ function CallModal({ isOpen, onClose }) {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 pointer-events-auto">
-          {/* Backdrop */}
+          {/* Transparent Glassmorphism Website Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-navy/80 backdrop-blur-md cursor-pointer"
+            className="fixed inset-0 bg-navy/30 backdrop-blur-xl cursor-pointer"
           />
 
-          {/* Modal Window */}
+          {/* White Modal Box with Dark Blue Theme Accents */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-md bg-white rounded-[36px] p-6 sm:p-8 shadow-2xl border border-navy/10 z-10 text-navy pointer-events-auto"
+            className="relative w-full max-w-md bg-white rounded-[36px] p-6 sm:p-8 shadow-[0_24px_64px_rgba(0,56,101,0.25)] border border-navy/10 z-10 text-navy pointer-events-auto"
           >
             {/* Header */}
             <div className="flex items-center justify-between border-b border-navy/10 pb-4 mb-6">
               <div>
-                <span className="text-accent text-[10px] font-bold uppercase tracking-widest block">Get in Touch</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-navy/60 block">Get in Touch</span>
                 <h3 className="font-heading text-2xl font-bold text-navy">Connect With Us</h3>
               </div>
               <button
@@ -379,14 +369,14 @@ function CallModal({ isOpen, onClose }) {
                   e.stopPropagation()
                   onClose()
                 }}
-                className="w-9 h-9 rounded-full bg-[#F0F2F5] text-navy font-bold flex items-center justify-center hover:bg-navy hover:text-white transition cursor-pointer"
+                className="w-9 h-9 rounded-full bg-navy/5 text-navy font-bold flex items-center justify-center hover:bg-navy hover:text-white transition cursor-pointer"
                 aria-label="Close"
               >
                 ✕
               </button>
             </div>
 
-            {/* Options Grid */}
+            {/* Options Grid (Dark Blue Navy Theme Only) */}
             <div className="space-y-3">
               {options.map((opt) => (
                 <a
@@ -395,18 +385,18 @@ function CallModal({ isOpen, onClose }) {
                   target={opt.id === 'phone' || opt.id === 'email' ? '_self' : '_blank'}
                   rel="noopener noreferrer"
                   onClick={onClose}
-                  className={`flex items-center justify-between p-4 rounded-2xl border transition duration-200 ${opt.bgColor} ${opt.borderColor} group shadow-sm cursor-pointer`}
+                  className="flex items-center justify-between p-4 rounded-2xl bg-navy/5 hover:bg-navy/10 border border-navy/10 transition duration-200 group shadow-sm cursor-pointer"
                 >
                   <div className="flex items-center gap-3.5">
-                    <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-white border border-navy/10 flex items-center justify-center shadow-sm shrink-0">
                       {opt.icon}
                     </div>
                     <div>
-                      <h4 className="font-bold text-navy text-sm group-hover:text-black">{opt.title}</h4>
-                      <p className="text-xs text-navy/60 font-medium">{opt.subtitle}</p>
+                      <h4 className="font-bold text-navy text-sm group-hover:text-black transition-colors">{opt.title}</h4>
+                      <p className="text-xs text-navy/70 font-medium">{opt.subtitle}</p>
                     </div>
                   </div>
-                  <span className="text-lg font-bold text-navy/40 group-hover:translate-x-1 transition-transform">
+                  <span className="text-lg font-bold text-navy/40 group-hover:text-navy group-hover:translate-x-1 transition-all">
                     →
                   </span>
                 </a>

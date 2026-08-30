@@ -208,29 +208,29 @@ export default function Home() {
               <StaggerItem key={i}>
                 <div className="h-full group cursor-pointer relative mt-8 flex flex-col">
                   
-                  {/* Floating transparent PNG image - lowered positioning for images 1, 2, 4 */}
+                  {/* Floating transparent PNG image - 3rd image sticks to right edge, hover triggers slow up/down float */}
                   <img 
                     src={item.img} 
                     alt={item.t} 
-                    className={`absolute left-1/2 -translate-x-1/2 h-auto object-contain transition-transform duration-500 group-hover:-translate-y-2 drop-shadow-2xl z-20 pointer-events-none ${
+                    className={`absolute h-auto object-contain drop-shadow-2xl z-20 pointer-events-none hover-float-png transition-all duration-500 ${
                       i === 2 
-                        ? 'top-2 w-[75%] max-w-[180px]' 
-                        : 'top-12 sm:top-16 w-[100%] max-w-[260px]'
+                        ? 'top-2 right-0 w-[80%] max-w-[210px]' 
+                        : 'top-12 sm:top-16 left-1/2 -translate-x-1/2 w-[100%] max-w-[260px]'
                     }`} 
                   />
                   
                   {/* Actual Card Background & Content - Panel 1, 2, 3, 4 images as background */}
                   <div className="h-full w-full rounded-2xl overflow-hidden border border-white/30 relative flex flex-col p-6 sm:p-8 pt-56 sm:pt-60 z-10 transition duration-500 group-hover:border-white/60 shadow-2xl justify-end">
                     
-                    {/* Panel Background Image (panel1, panel2, panel3, panel4) */}
+                    {/* Panel Background Image (panel1, panel2, panel3, panel4) - Stable background without zoom */}
                     <img 
                       src={item.bgImg} 
                       alt={item.t}
-                      className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-110 opacity-90" 
+                      className="absolute inset-0 w-full h-full object-cover z-0 opacity-90" 
                     />
                     
-                    {/* Bottom gradient overlay for crystal clear text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/70 to-navy/10 z-0" />
+                    {/* Bottom gradient overlay restricted strictly to bottom half of panel */}
+                    <div className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-navy/95 via-navy/70 to-transparent z-0 pointer-events-none" />
                     
                     {/* Content wrapper - lowered and aligned */}
                     <div className="relative z-10 flex flex-col justify-end h-full mt-auto">
@@ -308,14 +308,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. COURSES & TRIPS PREVIEW */}
-      < div id="programs-section" className="pointer-events-auto relative z-10" >
-        <Suspense fallback={<div className="py-20 text-center text-navy/50">Loading Programs...</div>}>
-          <ProgramsPreview />
-        </Suspense>
-      </div >
-
-
       {/* 6. AIRPORT TO AIRPORT - HOSPITALITY */}
       <section className="relative py-24 text-white sm:py-32 pointer-events-auto">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -324,7 +316,8 @@ export default function Home() {
               End-to-End Island Care
             </span>
             <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-lg mb-4">
-              From Airport to Airport — <span className="text-accent italic font-bold">We've Got You Covered</span>
+              From Airport to Airport – <br />
+              <span className="text-accent italic font-bold">We've Got You Covered</span>
             </h2>
             <p className="text-base sm:text-lg text-white/80 font-medium leading-relaxed drop-shadow-md">
               Relax and immerse yourself in the ocean. We handle every detail of your island holiday from arrival to departure.
@@ -336,59 +329,59 @@ export default function Home() {
               {
                 num: '01',
                 title: 'Travel Logistics',
-                desc: 'Seamless assistance with flight bookings, mandatory entry permits, and local island boat transfers.',
                 img: CAROUSEL_IMAGES[4],
-                tag: 'Flights & Permits'
+                rotate: 'sm:-rotate-1'
               },
               {
                 num: '02',
                 title: 'Comfortable Stays',
-                desc: 'Handpicked oceanfront stays, eco-lodges, and boutique beach resorts steps away from the water.',
                 img: CAROUSEL_IMAGES[5],
-                tag: 'Beach Resorts'
+                rotate: 'sm:rotate-1'
               },
               {
                 num: '03',
                 title: 'Local Cuisine',
-                desc: 'Authentic coastal meals and fresh island dining prepared with warmth and local culinary traditions.',
                 img: CAROUSEL_IMAGES[0],
-                tag: 'Island Flavors'
+                rotate: 'sm:-rotate-1'
               },
               {
                 num: '04',
                 title: 'Personal Itineraries',
-                desc: 'Tailored daily schedules built around your personal diving goals, travel rhythm, and group needs.',
                 img: CAROUSEL_IMAGES[1],
-                tag: 'Custom Plans'
+                rotate: 'sm:rotate-1'
               },
             ].map((item, i) => (
               <StaggerItem key={i}>
-                <div className="group h-full rounded-[32px] bg-navy/90 backdrop-blur-xl border border-white/20 p-6 shadow-2xl transition duration-500 hover:-translate-y-2 hover:border-accent/60 hover:shadow-float flex flex-col justify-between">
-                  <div>
-                    {/* Top Image Card Frame */}
-                    <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden mb-6 bg-black/20 shrink-0">
+                <div className={`group relative h-full rounded-[32px] bg-navy/90 backdrop-blur-xl border border-white/20 p-6 sm:p-7 shadow-2xl transition-all duration-500 hover:-translate-y-3 hover:border-accent/60 hover:shadow-float flex flex-col justify-between cursor-pointer ${item.rotate}`}>
+                  
+                  {/* Top Pin / Hole Grommet */}
+                  <div className="w-3.5 h-3.5 rounded-full bg-white/20 border border-white/40 shadow-inner mx-auto mb-4 shrink-0 flex items-center justify-center">
+                    <div className="w-1.5 h-1.5 rounded-full bg-accent" />
+                  </div>
+
+                  {/* Card Content Container */}
+                  <div className="flex flex-col flex-1">
+                    {/* Card Top Number */}
+                    <span className="font-heading font-bold text-xs sm:text-sm text-accent tracking-widest block mb-2">
+                      {item.num}
+                    </span>
+
+                    {/* Main Heading Text */}
+                    <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight leading-tight mb-6 text-left drop-shadow-md group-hover:text-accent transition-colors">
+                      {item.title}
+                    </h3>
+
+                    {/* Clean Ocean Image Frame - No Text Badge Overlay */}
+                    <div className="relative aspect-[16/11] w-full rounded-2xl overflow-hidden bg-black/20 mt-auto border border-white/10 shadow-lg">
                       <img
                         src={item.img}
                         alt={item.title}
                         className="w-full h-full object-cover transition duration-700 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent pointer-events-none" />
-                      <span className="absolute top-3 left-3 bg-navy/80 backdrop-blur-md border border-white/20 text-accent text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm">
-                        {item.tag}
-                      </span>
-                      <span className="absolute bottom-3 right-3 bg-black/40 backdrop-blur-md text-white font-heading font-bold text-xs px-2.5 py-1 rounded-lg border border-white/10">
-                        {item.num}
-                      </span>
+                      <div className="absolute inset-0 bg-gradient-to-t from-navy/50 via-transparent to-transparent pointer-events-none" />
                     </div>
-
-                    <h3 className="font-heading text-2xl font-bold text-white tracking-tight mb-2 leading-tight">
-                      {item.title}
-                    </h3>
-                    <div className="w-8 h-1 bg-accent rounded-full mb-4" />
-                    <p className="text-white/80 text-sm leading-relaxed font-medium">
-                      {item.desc}
-                    </p>
                   </div>
+
                 </div>
               </StaggerItem>
             ))}

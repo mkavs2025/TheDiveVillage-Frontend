@@ -24,9 +24,22 @@
   }
 
   body {
-    @apply font-body text-body text-white bg-navy antialiased;
+    @apply font-body text-body text-white bg-navy antialiased select-none;
     font-optical-sizing: auto;
     font-variation-settings: "slnt" 0, "wdth" 100, "GRAD" 0, "ROND" 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  input,
+  textarea,
+  [contenteditable="true"] {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
   }
 
   .hide-cursors,
@@ -41,6 +54,19 @@
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
+  @keyframes floatPngSlow {
+    0%, 100% {
+      transform: translateY(0px) scale(1.04);
+    }
+    50% {
+      transform: translateY(-12px) scale(1.08);
+    }
+  }
+
+  .group:hover .hover-float-png {
+    animation: floatPngSlow 2.2s ease-in-out infinite !important;
+  }
+
   h1,
   h2,
   h3,
@@ -48,10 +74,24 @@
     @apply font-heading font-bold;
   }
 
-  /* Fix for dropdown options rendering white on white in some browsers */
-  select option {
+  /* Magazine-style justified text alignment across all body text */
+  p, article, section p, div p {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  /* Fix for dropdown options & phone country select rendering in all browsers */
+  select option,
+  .PhoneInputCountrySelect option {
     background-color: #003865;
     color: white;
+    padding: 8px 12px;
+    font-weight: 600;
+  }
+
+  .PhoneInputCountrySelect {
+    cursor: pointer;
+    background: transparent;
   }
 
   ::selection {
@@ -146,17 +186,84 @@
   }
 }
 
+/* --- NIGHT DIVE MODE (DARK THEME OVERRIDES) --- */
 .night-dive,
 .night-dive body,
 .night-dive .glass-premium,
 .night-dive section,
 .night-dive footer,
-.night-dive header {
+.night-dive header,
+.night-dive main {
   background-color: #030a12 !important;
+  color: #f8fafc !important;
+}
+
+.night-dive .bg-\[\#FAFAFA\],
+.night-dive .bg-white,
+.night-dive .bg-\[\#F0F2F5\],
+.night-dive .bg-slate-50 {
+  background-color: #0b1726 !important;
+  color: #f8fafc !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.night-dive .bg-\[\#FAFAFA\] .bg-white,
+.night-dive .bg-\[\#F0F2F5\] .bg-white,
+.night-dive .bg-white .bg-\[\#F0F2F5\] {
+  background-color: #112236 !important;
+  color: #f8fafc !important;
+}
+
+.night-dive .text-navy,
+.night-dive h1.text-navy,
+.night-dive h2.text-navy,
+.night-dive h3.text-navy,
+.night-dive h4.text-navy,
+.night-dive p.text-navy,
+.night-dive label.text-navy,
+.night-dive span.text-navy,
+.night-dive div.text-navy {
+  color: #f8fafc !important;
+}
+
+.night-dive .text-navy\/90,
+.night-dive .text-navy\/80,
+.night-dive .text-navy\/70,
+.night-dive .text-navy\/60,
+.night-dive .text-navy\/50,
+.night-dive .text-navy\/40,
+.night-dive .text-navy\/30 {
+  color: rgba(248, 250, 252, 0.75) !important;
+}
+
+.night-dive .border-navy\/5,
+.night-dive .border-navy\/10,
+.night-dive .border-navy\/20 {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.night-dive input,
+.night-dive select,
+.night-dive textarea,
+.night-dive .PhoneInputInput {
+  background-color: #112236 !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.night-dive input::placeholder,
+.night-dive textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+.night-dive select option,
+.night-dive .PhoneInputCountrySelect option {
+  background-color: #0b1726 !important;
+  color: #ffffff !important;
 }
 
 .night-dive {
-  filter: brightness(0.9) contrast(1.1);
+  filter: brightness(0.95) contrast(1.05);
 }
 
 :root {

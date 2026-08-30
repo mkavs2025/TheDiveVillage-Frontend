@@ -100,7 +100,7 @@ export default function CustomCursor() {
 
       isHovered = !!activeProximityEl
 
-      const transformStr = `translate3d(${mouseX}px, ${mouseY}px, 0)`
+      const transformStr = `translate3d(${mouseX}px, ${mouseY}px, 0) rotate(45deg)`
 
       if (normalRef.current) {
         normalRef.current.style.transform = transformStr

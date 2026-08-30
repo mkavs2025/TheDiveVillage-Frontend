@@ -1,16 +1,24 @@
+import { useState } from 'react'
 import { BrowserRouter } from 'react-router'
+import { AnimatePresence } from 'framer-motion'
 import { AuthProvider } from './contexts/AuthProvider'
 import { CartProvider } from './contexts/CartProvider'
 import { WishlistProvider } from './contexts/WishlistProvider'
 import AppRouter from './router/AppRouter'
 import CustomCursor from './components/CustomCursor'
+import Preloader from './components/Preloader'
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true)
+
   return (
     <BrowserRouter>
       <AuthProvider>
         <CartProvider>
           <WishlistProvider>
+            <AnimatePresence mode="wait">
+              {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+            </AnimatePresence>
             <CustomCursor />
             <AppRouter />
           </WishlistProvider>

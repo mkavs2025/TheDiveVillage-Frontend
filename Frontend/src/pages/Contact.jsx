@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
+import PhoneInput from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
 import { IMAGES, CAROUSEL_IMAGES } from '../utils/images'
 import InteractiveVideoSphere from '../components/InteractiveVideoSphere'
 
@@ -117,13 +119,12 @@ export default function Contact() {
               <div className="grid sm:grid-cols-2 gap-6">
                 <div>
                   <label className="mb-3 block text-xs font-bold text-navy/70">Phone Number</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="+91 89710 01010"
+                  <PhoneInput
+                    defaultCountry="IN"
+                    placeholder="89710 01010"
                     value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full rounded-2xl bg-[#F0F2F5] px-5 py-4 text-sm text-navy outline-none focus:ring-2 focus:ring-accent/50 transition placeholder:text-navy/30"
+                    onChange={(val) => setFormData((prev) => ({ ...prev, phone: val }))}
+                    className="w-full rounded-2xl bg-[#F0F2F5] px-5 py-4 text-sm font-bold text-navy outline-none focus-within:ring-2 focus-within:ring-accent/50 transition [&_.PhoneInputCountryIcon]:rounded-sm [&_.PhoneInputInput]:bg-transparent [&_.PhoneInputInput]:outline-none [&_.PhoneInputInput]:border-none [&_.PhoneInputCountrySelect]:outline-none [&_.PhoneInputCountryIcon--border]:border-none [&_.PhoneInputInput]:ml-3"
                   />
                 </div>
                 <div>

@@ -1,10 +1,12 @@
-import { useState, useMemo, useRef } from 'react'
+import { useState, useMemo, useRef, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { motion, AnimatePresence } from 'framer-motion'
 import { SHOP_PRODUCTS } from '../utils/products'
 import { useCart } from '../hooks/useCart'
 import Button from '../components/Button'
 import picture3 from '../assets/Picture3.png'
+import pop1 from '../assets/Products/pop1.jpeg'
+import pop2 from '../assets/Products/pop2.jpeg'
 
 const CATEGORIES = [
   { key: 'all', label: 'All Merchandise' },
@@ -65,20 +67,30 @@ export default function Shop() {
 
       {/* 1. HERO BANNER */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="relative rounded-[40px] overflow-hidden bg-navy text-white shadow-lift border border-white/10 flex flex-col justify-center min-h-[340px]">
+        <div className="relative rounded-[40px] overflow-hidden bg-navy text-white shadow-lift border border-white/10 flex flex-col md:flex-row items-center justify-between min-h-[380px] p-8 sm:p-12 lg:p-14 gap-8">
           <img
             src={picture3}
             alt="Merchandise"
             className="absolute inset-0 w-full h-full object-cover opacity-50"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy/80 via-navy/50 to-transparent" />
-          <div className="relative z-10 p-8 sm:p-16 max-w-xl">
-            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-3">
+          <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/60 to-navy/30" />
+          
+          {/* Left Column: Title & Text */}
+          <div className="relative z-10 max-w-xl">
+            <span className="inline-block bg-accent/20 border border-accent/40 backdrop-blur-md rounded-full px-4 py-1.5 text-xs font-bold text-accent uppercase tracking-widest mb-4">
+              Official Gear & Apparel
+            </span>
+            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-3 text-white drop-shadow-lg">
               Merchandise
             </h1>
-            <p className="text-sm sm:text-base text-white/80 leading-relaxed">
+            <p className="text-sm sm:text-base text-white/80 leading-relaxed max-w-lg">
               Gear up with The Dive Village. High-performance apparel, dive suits, caps, and accessories.
             </p>
+          </div>
+
+          {/* Right Column: 3D Flipping Product Tag */}
+          <div className="relative z-10 shrink-0 self-center md:self-auto py-2">
+            <FlippingProductTag />
           </div>
         </div>
       </section>
@@ -286,4 +298,53 @@ function ProductCardItem({ product, onQuickAdd }) {
 
 function programTag(tag) {
   return tag || 'Official'
+}
+
+function FlippingProductTag() {
+  return (
+    <div className="relative flex flex-col items-center justify-center pointer-events-auto group cursor-pointer">
+      {/* Hanging Cord */}
+      <div className="w-0.5 h-6 bg-gradient-to-b from-white/40 via-accent to-white/60 shadow-sm mb-[-2px] relative z-20">
+        <div className="w-2 h-2 rounded-full bg-accent -top-1.5 -left-[3px] absolute shadow-sm" />
+      </div>
+
+      {/* 3D Perspective Container matched to exact 447x864 image aspect ratio */}
+      <div className="perspective-1000 h-[280px] sm:h-[340px] aspect-[447/864] relative">
+        <motion.div
+          animate={{ rotateY: 360 }}
+          transition={{
+            duration: 8,
+            ease: 'linear',
+            repeat: Number.POSITIVE_INFINITY,
+          }}
+          className="w-full h-full preserve-3d relative rounded-2xl shadow-[0_15px_35px_rgba(0,0,0,0.4)]"
+          style={{ transformStyle: 'preserve-3d' }}
+        >
+          {/* FRONT SIDE (pop1.jpeg) */}
+          <div
+            className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden backface-hidden bg-transparent"
+            style={{ backfaceVisibility: 'hidden' }}
+          >
+            <img
+              src={pop1}
+              alt="Product Tag Front"
+              className="w-full h-full object-fill rounded-2xl group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+
+          {/* BACK SIDE (pop2.jpeg) */}
+          <div
+            className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden backface-hidden bg-transparent"
+            style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+          >
+            <img
+              src={pop2}
+              alt="Product Tag Back"
+              className="w-full h-full object-fill rounded-2xl group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  )
 }

@@ -77,8 +77,7 @@ export default function InteractiveDiveMap({ onSiteSelect }) {
           `),
           width: 32,
           height: 32,
-          verticalOrigin: window.Cesium.VerticalOrigin.BOTTOM,
-          disableDepthTestDistance: Number.POSITIVE_INFINITY
+          verticalOrigin: window.Cesium.VerticalOrigin.BOTTOM
         },
         label: {
           text: site.name,
@@ -88,8 +87,7 @@ export default function InteractiveDiveMap({ onSiteSelect }) {
           outlineColor: window.Cesium.Color.fromCssColorString('#021426'), // Navy
           outlineWidth: 4,
           verticalOrigin: window.Cesium.VerticalOrigin.BOTTOM,
-          pixelOffset: new window.Cesium.Cartesian2(0, -20),
-          disableDepthTestDistance: Number.POSITIVE_INFINITY
+          pixelOffset: new window.Cesium.Cartesian2(0, -20)
         }
       })
     })
