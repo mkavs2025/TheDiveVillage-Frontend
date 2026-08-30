@@ -210,9 +210,9 @@ export default function Contact() {
             <div className="w-12 h-12 rounded-full border border-navy/10 flex items-center justify-center mb-6">
                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
             </div>
-            <h4 className="font-bold text-navy mb-2">Working Hours</h4>
-            <span className="text-xs text-navy/60">Daily: 8am-5pm</span>
-            <span className="text-xs text-navy/60">Sunday: Closed</span>
+            <h4 className="font-bold text-navy mb-2">Always Available</h4>
+            <span className="text-xs font-bold text-navy/90">24/7 Round-the-Clock Support</span>
+            <span className="text-[11px] text-navy/60 mt-0.5">Always here for your ocean adventures</span>
           </div>
         </div>
 

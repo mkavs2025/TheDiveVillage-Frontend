@@ -362,6 +362,10 @@ function CallModal({ isOpen, onClose }) {
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-navy/60 block">Get in Touch</span>
                 <h3 className="font-heading text-2xl font-bold text-navy">Connect With Us</h3>
+                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5 mt-1.5 shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  24/7 Round-the-Clock Support — Always Available
+                </span>
               </div>
               <button
                 type="button"
