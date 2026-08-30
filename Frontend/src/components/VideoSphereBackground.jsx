@@ -5,7 +5,7 @@ import { OrbitControls, useVideoTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import { useLocation } from 'react-router'
 import videoFile from '../assets/Hero.mp4'
-import divingFile from '../assets/Diving.mp4'
+import divingFile from '../assets/diving.mp4'
 import bookFile from '../assets/Book.mp4'
 
 function VideoSphere({ videoSrc, isMuted, joystickVelocity }) {
