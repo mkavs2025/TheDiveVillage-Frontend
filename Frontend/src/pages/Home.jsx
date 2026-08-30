@@ -215,7 +215,7 @@ export default function Home() {
                     className={`absolute h-auto object-contain drop-shadow-2xl z-20 pointer-events-none hover-float-png transition-all duration-500 ${
                       i === 2 
                         ? 'top-2 right-0 w-[80%] max-w-[210px]' 
-                        : 'top-12 sm:top-16 left-1/2 -translate-x-1/2 w-[100%] max-w-[260px]'
+                        : 'top-12 sm:top-16 left-0 right-0 mx-auto w-[100%] max-w-[260px]'
                     }`} 
                   />
                   

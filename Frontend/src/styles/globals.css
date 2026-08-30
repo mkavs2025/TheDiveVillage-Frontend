@@ -56,15 +56,15 @@
 
   @keyframes floatPngSlow {
     0%, 100% {
-      transform: translateY(0px) scale(1.04);
+      transform: translateY(0px) scale(1.02);
     }
     50% {
-      transform: translateY(-12px) scale(1.08);
+      transform: translateY(-8px) scale(1.05);
     }
   }
 
   .group:hover .hover-float-png {
-    animation: floatPngSlow 2.2s ease-in-out infinite !important;
+    animation: floatPngSlow 2.5s ease-in-out infinite !important;
   }
 
   h1,
