@@ -180,27 +180,6 @@ export default function Shop() {
           </div>
         )}
       </section>
-
-      {/* 4. STORE ASSURANCES */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <div className="rounded-[40px] bg-white border border-navy/5 p-8 sm:p-14 shadow-card grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="flex flex-col items-center text-center">
-            <span className="text-3xl mb-3">🔄</span>
-            <h4 className="font-heading text-lg font-bold text-navy">15-Day Free Returns</h4>
-            <p className="text-xs text-navy/70 mt-1">Hassle-free size exchange and easy returns if the fit isn't 100% perfect.</p>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <span className="text-3xl mb-3">🔒</span>
-            <h4 className="font-heading text-lg font-bold text-navy">256-Bit SSL Checkout</h4>
-            <p className="text-xs text-navy/70 mt-1">Secure payment processing via Stripe, UPI, Cards, and Net Banking.</p>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <span className="text-3xl mb-3">🤿</span>
-            <h4 className="font-heading text-lg font-bold text-navy">Direct Team Tested</h4>
-            <p className="text-xs text-navy/70 mt-1">All apparel and gear are rigorously tested by our divemasters in Andaman marine conditions.</p>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

@@ -74,7 +74,7 @@ export default function Footer() {
 
         <div>
           <h3 className="font-heading text-sm font-bold uppercase tracking-widest text-accent">
-            Contact & Availability
+            Contact
           </h3>
           <ul className="mt-4 space-y-3 text-sm text-white/80">
             <li>
@@ -91,10 +91,6 @@ export default function Footer() {
               </a>
             </li>
             <li>1st Cross Rd, Ranka Nagar, Kaval Bairasandra, Bengaluru, Karnataka 560032</li>
-            <li className="pt-2 border-t border-white/10 text-xs text-accent font-bold flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              24/7 Support — Always Available
-            </li>
           </ul>
         </div>
       </div>

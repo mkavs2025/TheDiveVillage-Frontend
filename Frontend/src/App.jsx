@@ -7,12 +7,14 @@ import { WishlistProvider } from './contexts/WishlistProvider'
 import AppRouter from './router/AppRouter'
 import CustomCursor from './components/CustomCursor'
 import Preloader from './components/Preloader'
+import ScrollToTop from './components/ScrollToTop'
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true)
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AuthProvider>
         <CartProvider>
           <WishlistProvider>

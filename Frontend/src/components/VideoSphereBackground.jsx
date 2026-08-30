@@ -78,33 +78,28 @@ function VideoSphere({ videoSrc, isMuted, joystickVelocity }) {
       const programsEl = document.getElementById('programs-section')
       
       const diveSectionEl = document.getElementById('who-can-dive-section')
-      const trainingEl = document.getElementById('training-safety-section')
+      const testimonialsEl = document.getElementById('testimonials-section')
 
-      if (diveSectionEl && trainingEl && isHome) {
-        const diveRect = diveSectionEl.getBoundingClientRect()
-        const trainingRect = trainingEl.getBoundingClientRect()
-        
-        const fadeStart = window.innerHeight * 0.9
-        const fadeEnd = window.innerHeight * 0.2
+      if (isHome) {
+        const fadeStart = window.innerHeight * 0.85
+        const fadeEnd = window.innerHeight * 0.25
 
-        if (diveRect.top < fadeStart) {
-          if (diveRect.top < fadeEnd) {
-            targetOpacity2.current = 1
+        if (diveSectionEl) {
+          const diveRect = diveSectionEl.getBoundingClientRect()
+          if (diveRect.top < fadeStart) {
+            targetOpacity2.current = diveRect.top < fadeEnd ? 1 : 1 - (diveRect.top - fadeEnd) / (fadeStart - fadeEnd)
           } else {
-            targetOpacity2.current = 1 - (diveRect.top - fadeEnd) / (fadeStart - fadeEnd)
+            targetOpacity2.current = 0
           }
-        } else {
-          targetOpacity2.current = 0
         }
 
-        if (trainingRect.top < fadeStart) {
-          if (trainingRect.top < fadeEnd) {
-            targetOpacity3.current = 1
+        if (testimonialsEl) {
+          const testRect = testimonialsEl.getBoundingClientRect()
+          if (testRect.top < fadeStart) {
+            targetOpacity3.current = testRect.top < fadeEnd ? 1 : 1 - (testRect.top - fadeEnd) / (fadeStart - fadeEnd)
           } else {
-            targetOpacity3.current = 1 - (trainingRect.top - fadeEnd) / (fadeStart - fadeEnd)
+            targetOpacity3.current = 0
           }
-        } else {
-          targetOpacity3.current = 0
         }
       }
 
