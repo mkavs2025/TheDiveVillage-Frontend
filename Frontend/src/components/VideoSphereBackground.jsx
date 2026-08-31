@@ -335,7 +335,7 @@ function AudioToggle({ isMuted, onToggle }) {
 
 function JoystickControl({ joystickVelocity }) {
   const location = useLocation()
-  if (location.pathname.startsWith('/shop')) {
+  if (location.pathname.startsWith('/shop') || location.pathname.startsWith('/contact')) {
     return null
   }
 

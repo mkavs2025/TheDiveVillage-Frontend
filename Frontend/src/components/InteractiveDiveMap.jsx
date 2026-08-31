@@ -78,7 +78,7 @@ export default function InteractiveDiveMap({ onSiteSelect }) {
           width: 32,
           height: 32,
           verticalOrigin: window.Cesium.VerticalOrigin.BOTTOM,
-          disableDepthTestDistance: Number.POSITIVE_INFINITY
+          eyeOffset: new window.Cesium.Cartesian3(0, 0, -50)
         },
         label: {
           text: site.name,
@@ -89,7 +89,7 @@ export default function InteractiveDiveMap({ onSiteSelect }) {
           outlineWidth: 4,
           verticalOrigin: window.Cesium.VerticalOrigin.BOTTOM,
           pixelOffset: new window.Cesium.Cartesian2(0, -45),
-          disableDepthTestDistance: Number.POSITIVE_INFINITY
+          eyeOffset: new window.Cesium.Cartesian3(0, 0, -60)
         }
       })
     })
@@ -193,25 +193,77 @@ export default function InteractiveDiveMap({ onSiteSelect }) {
       </div>
 
       {/* Joystick Overlay */}
-      <div className="absolute bottom-6 right-6 z-10 flex flex-col items-center gap-2 pointer-events-auto">
-        <span className="text-[10px] font-bold text-white/70 uppercase tracking-widest bg-navy/50 px-2 py-1 rounded-md backdrop-blur-md">
-          360° Toggle
-        </span>
-        <div className="relative w-16 h-16 rounded-full border-2 border-white/20 bg-white/10 backdrop-blur-md flex items-center justify-center shadow-lg">
-          <motion.div
-            drag
-            dragConstraints={{ top: -14, bottom: 14, left: -14, right: 14 }}
-            dragSnapToOrigin={true}
-            dragElastic={0.2}
-            onDrag={(e, info) => {
-              if (viewerRef.current) {
-                viewerRef.current.camera.rotateLeft(info.delta.x * -0.005)
-                viewerRef.current.camera.rotateUp(info.delta.y * -0.005)
-              }
-            }}
-            className="w-8 h-8 rounded-full bg-white/80 shadow-soft cursor-grab active:cursor-grabbing border border-white/50"
-          />
-        </div>
+      <GlobeJoystick viewerRef={viewerRef} />
+    </div>
+  )
+}
+
+function GlobeJoystick({ viewerRef }) {
+  const containerRef = useRef(null)
+  const isDragging = useRef(false)
+  const [thumbPos, setThumbPos] = useState({ x: 0, y: 0 })
+  const MAX_RADIUS = 14
+
+  const handlePointerDown = (e) => {
+    isDragging.current = true
+    updateJoystick(e)
+    try {
+      e.target.setPointerCapture(e.pointerId)
+    } catch {}
+  }
+
+  const handlePointerMove = (e) => {
+    if (!isDragging.current) return
+    updateJoystick(e)
+  }
+
+  const handlePointerUp = (e) => {
+    isDragging.current = false
+    setThumbPos({ x: 0, y: 0 })
+    try {
+      e.target.releasePointerCapture(e.pointerId)
+    } catch {}
+  }
+
+  const updateJoystick = (e) => {
+    if (!containerRef.current) return
+    const rect = containerRef.current.getBoundingClientRect()
+    const centerX = rect.left + rect.width / 2
+    const centerY = rect.top + rect.height / 2
+    let dx = e.clientX - centerX
+    let dy = e.clientY - centerY
+    const distance = Math.sqrt(dx * dx + dy * dy)
+    if (distance > MAX_RADIUS) {
+      dx = (dx / distance) * MAX_RADIUS
+      dy = (dy / distance) * MAX_RADIUS
+    }
+    setThumbPos({ x: dx, y: dy })
+    if (viewerRef.current) {
+      viewerRef.current.camera.rotateLeft(dx * 0.003)
+      viewerRef.current.camera.rotateUp(dy * 0.003)
+    }
+  }
+
+  return (
+    <div className="absolute bottom-6 right-6 z-10 flex flex-col items-center gap-2 pointer-events-auto">
+      <span className="text-[10px] font-bold text-white/70 uppercase tracking-widest bg-navy/50 px-2 py-1 rounded-md backdrop-blur-md">
+        360° Toggle
+      </span>
+      <div 
+        ref={containerRef}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        className="relative w-16 h-16 rounded-full border-2 border-white/20 bg-white/10 backdrop-blur-md flex items-center justify-center shadow-lg cursor-grab active:cursor-grabbing touch-none select-none"
+      >
+        <div
+          className="w-8 h-8 rounded-full bg-white/80 shadow-soft border border-white/50"
+          style={{ 
+            transform: `translate(${thumbPos.x}px, ${thumbPos.y}px)`, 
+            transition: isDragging.current ? 'none' : 'transform 0.2s ease-out' 
+          }}
+        />
       </div>
     </div>
   )

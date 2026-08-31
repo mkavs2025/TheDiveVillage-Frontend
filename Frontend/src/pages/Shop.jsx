@@ -284,13 +284,22 @@ function ProductCardItem({ product, onQuickAdd, isWishlisted, onToggleWishlist }
           <button
             type="button"
             onClick={onToggleWishlist}
-            className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-sm shadow-md z-10 transition ${
-              isWishlisted ? 'bg-rose-500 text-white' : 'bg-white/90 text-navy/70 hover:bg-white hover:text-navy'
-            }`}
+            className="absolute top-3 right-3 w-9 h-9 rounded-full bg-navy border border-white/20 flex items-center justify-center shadow-md z-10 transition duration-200 hover:scale-110 active:scale-95 cursor-pointer"
             aria-label="Wishlist"
             title={isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}
           >
-            {isWishlisted ? '❤️' : '🤍'}
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill={isWishlisted ? '#FFCD00' : 'none'}
+              stroke={isWishlisted ? '#FFCD00' : 'white'}
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+            </svg>
           </button>
         </div>
 

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState, useEffect } from 'react'
+import { lazy, Suspense, useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
 import Button from '../components/Button'

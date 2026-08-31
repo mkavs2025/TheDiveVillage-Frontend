@@ -356,15 +356,22 @@ export default function ProductDetail() {
               <button
                 type="button"
                 onClick={() => toggleWishlist(product)}
-                className={`w-14 h-14 shrink-0 rounded-full border transition flex items-center justify-center text-lg shadow-md cursor-pointer ${
-                  isWishlisted(product.id)
-                    ? 'bg-rose-500 text-white border-rose-500'
-                    : 'bg-white text-navy/70 border-navy/20 hover:border-navy hover:text-navy'
-                }`}
+                className="w-14 h-14 shrink-0 rounded-full bg-navy border border-white/20 transition duration-200 flex items-center justify-center shadow-md hover:scale-105 active:scale-95 cursor-pointer"
                 title={isWishlisted(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
                 aria-label="Wishlist"
               >
-                {isWishlisted(product.id) ? '❤️' : '🤍'}
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill={isWishlisted(product.id) ? '#FFCD00' : 'none'}
+                  stroke={isWishlisted(product.id) ? '#FFCD00' : 'white'}
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+                </svg>
               </button>
             </div>
 

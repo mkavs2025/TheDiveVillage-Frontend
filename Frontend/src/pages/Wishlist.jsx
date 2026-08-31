@@ -15,7 +15,7 @@ export default function Wishlist() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-10 pb-6 border-b border-navy/10">
           <div>
-            <span className="inline-block bg-rose-50 text-rose-700 border border-rose-200 rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-widest mb-3">
+            <span className="inline-block bg-navy/10 text-navy border border-navy/20 rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-widest mb-3">
               Saved Items
             </span>
             <h1 className="font-heading text-4xl sm:text-5xl font-bold text-navy leading-tight">
@@ -32,8 +32,10 @@ export default function Wishlist() {
 
         {items.length === 0 ? (
           <div className="rounded-3xl bg-white p-12 sm:p-16 border border-navy/5 text-center shadow-card flex flex-col items-center justify-center max-w-2xl mx-auto my-12">
-            <div className="w-20 h-20 rounded-full bg-rose-50 flex items-center justify-center text-4xl mb-4 shadow-inner border border-rose-100">
-              🖤
+            <div className="w-20 h-20 rounded-full bg-navy flex items-center justify-center mb-4 shadow-md border border-white/20">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="#FFCD00" stroke="#FFCD00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+              </svg>
             </div>
             <h3 className="font-heading text-2xl font-bold text-navy mb-2">Your wishlist is empty</h3>
             <p className="text-navy/60 text-sm max-w-md mb-8 leading-relaxed">
