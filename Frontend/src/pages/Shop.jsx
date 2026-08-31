@@ -63,7 +63,7 @@ export default function Shop() {
   }, [selectedCategory, searchQuery, sortBy])
 
   return (
-    <div className="bg-[#FAFAFA] min-h-screen text-navy font-body pt-24 sm:pt-32 pb-24">
+    <div className="bg-[#FAFAFA] min-h-screen text-navy font-body pt-36 sm:pt-44 lg:pt-48 pb-24">
       {/* Toast Notification */}
       <AnimatePresence>
         {addedToast && (
