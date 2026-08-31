@@ -27,7 +27,7 @@ function VideoSphere({ videoSrc, isMuted, joystickVelocity }) {
   })
   texture.colorSpace = THREE.SRGBColorSpace
 
-  const texture2 = useVideoTexture(divingFile, {
+  const texture2 = useVideoTexture(bookFile, {
     crossOrigin: 'Anonymous',
     muted: true,
     loop: true,
@@ -36,7 +36,7 @@ function VideoSphere({ videoSrc, isMuted, joystickVelocity }) {
   })
   texture2.colorSpace = THREE.SRGBColorSpace
 
-  const texture3 = useVideoTexture(bookFile, {
+  const texture3 = useVideoTexture(divingFile, {
     crossOrigin: 'Anonymous',
     muted: true,
     loop: true,
