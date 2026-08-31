@@ -29,7 +29,7 @@ export default function Services() {
   })).filter(g => g.services.length > 0)
 
   return (
-    <div className="bg-[#FAFAFA] min-h-screen text-navy font-body pt-36 sm:pt-44 lg:pt-48 pb-24 overflow-x-hidden" style={{ textShadow: 'none' }}>
+    <div className="bg-[#FAFAFA] min-h-screen text-navy font-body pt-24 sm:pt-32 pb-24 overflow-x-hidden" style={{ textShadow: 'none' }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         {/* 1. HEADER */}

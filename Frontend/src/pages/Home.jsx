@@ -87,7 +87,7 @@ export default function Home() {
     <div className="overflow-x-hidden relative isolate pointer-events-none">
 
       {/* 1. HERO */}
-      <section className="relative flex min-h-screen items-end justify-start pb-8 pt-36 sm:pb-16 sm:pt-48 lg:pt-56 pointer-events-none">
+      <section className="relative -mt-16 flex min-h-screen items-end justify-start pb-8 pt-32 sm:-mt-[72px] sm:pb-16 sm:pt-[120px] pointer-events-none">
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pointer-events-none">
           <div className="max-w-3xl">

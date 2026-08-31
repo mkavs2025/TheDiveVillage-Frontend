@@ -99,7 +99,7 @@ export default function About() {
       </div>
 
       {/* 1. HERO BANNER — STAGGERED WORD ANIMATION (NO "ABOUT THE DIVE VILLAGE" TEXT) */}
-      <div className="pt-44 sm:pt-52 lg:pt-56 pb-32 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto pointer-events-auto text-white relative z-10">
+      <div className="pt-36 pb-32 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto pointer-events-auto text-white relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
