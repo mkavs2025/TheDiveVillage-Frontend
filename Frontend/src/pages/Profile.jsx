@@ -1,9 +1,14 @@
-import { useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../hooks/useAuth'
+import { useCart } from '../hooks/useCart'
+import { useWishlist } from '../hooks/useWishlist'
+import { formatCurrency } from '../utils/formatCurrency'
 
 export default function Profile() {
   const navigate = useNavigate()
   const { user, role, logout } = useAuth()
+  const { items: cartItems, itemCount, subtotal } = useCart()
+  const { count: wishlistCount } = useWishlist()
 
   const handleLogout = async () => {
     await logout()
@@ -30,7 +35,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="max-w-2xl">
+    <div className="max-w-3xl">
       <div className="space-y-10">
         
         {/* Main User Header */}
@@ -69,7 +74,51 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* Detailed Google Metadata Cards */}
+        {/* Profile Saved Cart & Wishlist Summary */}
+        <div className="rounded-3xl bg-white p-6 border border-navy/10 shadow-card">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="font-heading text-lg font-bold text-navy">Profile Shopping Cart</h2>
+            <div className="flex gap-2">
+              <Link to="/cart" className="rounded-full bg-accent px-4 py-1.5 text-xs font-bold text-navy hover:bg-white transition border border-accent">
+                View Cart ({itemCount})
+              </Link>
+              <Link to="/wishlist" className="rounded-full bg-[#F0F2F5] px-4 py-1.5 text-xs font-bold text-navy hover:bg-navy hover:text-white transition">
+                Wishlist ({wishlistCount})
+              </Link>
+            </div>
+          </div>
+
+          {cartItems.length === 0 ? (
+            <p className="text-xs text-navy/60 font-medium py-3">No active items in your profile cart yet.</p>
+          ) : (
+            <div className="space-y-3 pt-2">
+              {cartItems.slice(0, 3).map((item) => (
+                <div key={item.id} className="flex items-center justify-between p-3 rounded-2xl bg-[#FAFAFA] border border-navy/5">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={item.product?.image || item.image}
+                      alt={item.product?.name || item.product?.title || 'Product'}
+                      className="w-10 h-10 object-contain rounded-lg bg-white p-1"
+                    />
+                    <div>
+                      <p className="text-xs font-bold text-navy">{item.product?.name || item.product?.title || 'Dive Item'}</p>
+                      <p className="text-[10px] text-navy/50 font-medium">Qty: {item.quantity} {item.product?.selectedSize ? `• Size: ${item.product.selectedSize}` : ''}</p>
+                    </div>
+                  </div>
+                  <span className="text-xs font-bold text-navy">
+                    {formatCurrency((item.product?.price || item.price || 0) * (item.quantity || 1))}
+                  </span>
+                </div>
+              ))}
+              <div className="pt-2 flex justify-between items-center border-t border-navy/5 text-xs font-bold text-navy">
+                <span>Subtotal: {formatCurrency(subtotal)}</span>
+                <Link to="/checkout" className="text-accent hover:underline">Proceed to Checkout →</Link>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Detailed Metadata Cards */}
         <div>
           <h2 className="font-heading text-lg font-bold text-navy mb-4">Account Details</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

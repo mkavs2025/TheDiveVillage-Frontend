@@ -5,9 +5,11 @@ import Button from './Button'
 import SafeImage from './SafeImage'
 import { formatCurrency } from '../utils/formatCurrency'
 import { useCart } from '../hooks/useCart'
+import { useWishlist } from '../hooks/useWishlist'
 
 export default function ProductCard({ product }) {
   const { addItem } = useCart()
+  const { toggle: toggleWishlist, isWishlisted } = useWishlist()
   const reduce = useReducedMotion()
 
   const onAdd = (e) => {
@@ -24,6 +26,8 @@ export default function ProductCard({ product }) {
       },
     })
   }
+
+  const wishlisted = isWishlisted(product.id)
 
   return (
     <motion.article
@@ -43,6 +47,20 @@ export default function ProductCard({ product }) {
             <Badge tone={product.badgeTone || 'accent'}>{product.badge}</Badge>
           </div>
         )}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            toggleWishlist(product)
+          }}
+          className={`absolute right-3 top-3 w-8 h-8 rounded-full flex items-center justify-center text-sm shadow-md transition z-10 ${
+            wishlisted ? 'bg-rose-500 text-white' : 'bg-black/40 text-white hover:bg-white hover:text-navy'
+          }`}
+          aria-label="Wishlist"
+        >
+          {wishlisted ? '❤️' : '🤍'}
+        </button>
       </Link>
 
       <div className="flex flex-1 flex-col gap-3 p-4">

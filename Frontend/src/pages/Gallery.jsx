@@ -224,7 +224,7 @@ export default function Gallery() {
               <SafeImage
                 src={item.src}
                 alt={item.title}
-                className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/30 to-transparent opacity-60 sm:opacity-0 group-hover:opacity-100 transition duration-300" />
               

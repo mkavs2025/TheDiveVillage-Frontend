@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 import SectionReveal from './SectionReveal'
 import Button from './Button'
@@ -13,7 +14,48 @@ const GALLERY_IMAGES = [c1, c2, c3, c4, c5, c6]
 
 export default function GalleryPreview() {
   const navigate = useNavigate()
+  const scrollContainerRef = useRef(null)
+  const isDragging = useRef(false)
+  const startX = useRef(0)
+  const scrollLeft = useRef(0)
+
   const goToGallery = () => navigate('/gallery')
+
+  const handlePrev = (e) => {
+    e.stopPropagation()
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -320, behavior: 'smooth' })
+    }
+  }
+
+  const handleNext = (e) => {
+    e.stopPropagation()
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 320, behavior: 'smooth' })
+    }
+  }
+
+  const handlePointerDown = (e) => {
+    isDragging.current = true
+    startX.current = e.pageX - scrollContainerRef.current.offsetLeft
+    scrollLeft.current = scrollContainerRef.current.scrollLeft
+  }
+
+  const handlePointerLeave = () => {
+    isDragging.current = false
+  }
+
+  const handlePointerUp = () => {
+    isDragging.current = false
+  }
+
+  const handlePointerMove = (e) => {
+    if (!isDragging.current) return
+    e.preventDefault()
+    const x = e.pageX - scrollContainerRef.current.offsetLeft
+    const walk = (x - startX.current) * 2
+    scrollContainerRef.current.scrollLeft = scrollLeft.current - walk
+  }
 
   return (
     <section id="gallery" className="relative py-16 sm:py-20 scroll-mt-20 pointer-events-auto overflow-hidden">
@@ -28,25 +70,55 @@ export default function GalleryPreview() {
         </SectionReveal>
       </div>
 
-      {/* Infinite scroll marquee */}
-      <div className="relative w-full overflow-hidden cursor-pointer" onClick={goToGallery}>
+      {/* Infinite scroll marquee & drag gallery with navigation arrows */}
+      <div className="relative w-full overflow-hidden">
+        {/* Navigation Arrows */}
+        <button
+          type="button"
+          onClick={handlePrev}
+          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-navy/80 border border-white/30 text-white flex items-center justify-center shadow-2xl backdrop-blur-md hover:bg-accent hover:text-navy transition-all duration-300 cursor-pointer"
+          aria-label="Previous Gallery Image"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          onClick={handleNext}
+          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-navy/80 border border-white/30 text-white flex items-center justify-center shadow-2xl backdrop-blur-md hover:bg-accent hover:text-navy transition-all duration-300 cursor-pointer"
+          aria-label="Next Gallery Image"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+
         {/* Fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
           style={{ background: 'linear-gradient(to right, rgba(0,15,40,0.8), transparent)' }} />
         <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
           style={{ background: 'linear-gradient(to left, rgba(0,15,40,0.8), transparent)' }} />
 
-        <div className="flex gap-4 animate-marquee hover:[animation-play-state:paused]" style={{ width: 'max-content' }}>
-          {/* Duplicate for seamless loop */}
+        <div 
+          ref={scrollContainerRef}
+          onMouseDown={handlePointerDown}
+          onMouseLeave={handlePointerLeave}
+          onMouseUp={handlePointerUp}
+          onMouseMove={handlePointerMove}
+          className="flex gap-4 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing select-none py-2 px-6"
+        >
           {[...GALLERY_IMAGES, ...GALLERY_IMAGES, ...GALLERY_IMAGES].map((src, i) => (
             <div
               key={i}
-              className="relative flex-shrink-0 w-[280px] h-[380px] rounded-2xl overflow-hidden border border-white/20 shadow-2xl group"
+              onClick={goToGallery}
+              className="relative flex-shrink-0 w-[280px] h-[380px] rounded-2xl overflow-hidden border border-white/20 shadow-2xl group cursor-pointer"
             >
               <img
                 src={src}
                 alt={`Gallery ${(i % 6) + 1}`}
-                className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

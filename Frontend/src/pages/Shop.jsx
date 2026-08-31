@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router'
 import { motion, AnimatePresence } from 'framer-motion'
 import { SHOP_PRODUCTS } from '../utils/products'
 import { useCart } from '../hooks/useCart'
+import { useWishlist } from '../hooks/useWishlist'
 import Button from '../components/Button'
 import picture3 from '../assets/Picture3.png'
 import pop1 from '../assets/Products/pop1.jpeg'
@@ -22,12 +23,27 @@ export default function Shop() {
   const [sortBy, setSortBy] = useState('featured')
   const [addedToast, setAddedToast] = useState(null)
   const { addItem, itemCount } = useCart()
+  const { count: wishlistCount, toggle: toggleWishlist, isWishlisted } = useWishlist()
 
   const handleQuickAdd = (product, e) => {
     e.preventDefault()
     e.stopPropagation()
-    addItem(product, 1, product.colors?.[0]?.name, product.sizes?.[0])
-    setAddedToast(product.title)
+    const firstColor = product.colors?.[0]?.name || 'Standard'
+    const firstSize = product.sizes?.[0] || 'Standard'
+    addItem({
+      inventoryId: `${product.id}-${firstSize}-${firstColor}`,
+      quantity: 1,
+      product: {
+        id: product.id,
+        name: product.title || product.name,
+        title: product.title || product.name,
+        price: product.price,
+        image: product.image,
+        selectedSize: firstSize,
+        selectedColor: firstColor,
+      },
+    })
+    setAddedToast(product.title || product.name)
     setTimeout(() => setAddedToast(null), 3000)
   }
 
@@ -123,6 +139,21 @@ export default function Shop() {
             </select>
 
             <Link
+              to="/wishlist"
+              className="rounded-full bg-white hover:bg-navy hover:text-white text-navy font-bold px-5 py-2.5 text-xs sm:text-sm transition-all duration-200 shadow-md flex items-center gap-2 whitespace-nowrap border border-navy/15 cursor-pointer"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+              </svg>
+              <span>Wishlist</span>
+              {wishlistCount > 0 && (
+                <span className="bg-rose-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full ml-0.5">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+
+            <Link
               to="/cart"
               className="rounded-full bg-accent hover:bg-white text-navy font-bold px-5 py-2.5 text-xs sm:text-sm transition-all duration-200 shadow-md flex items-center gap-2 whitespace-nowrap border border-transparent hover:border-accent cursor-pointer"
             >
@@ -175,7 +206,17 @@ export default function Shop() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProducts.map((product) => (
-              <ProductCardItem key={product.id} product={product} onQuickAdd={handleQuickAdd} />
+              <ProductCardItem 
+                key={product.id} 
+                product={product} 
+                onQuickAdd={handleQuickAdd} 
+                isWishlisted={isWishlisted(product.id)}
+                onToggleWishlist={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  toggleWishlist(product)
+                }}
+              />
             ))}
           </div>
         )}
@@ -184,7 +225,7 @@ export default function Shop() {
   )
 }
 
-function ProductCardItem({ product, onQuickAdd }) {
+function ProductCardItem({ product, onQuickAdd, isWishlisted, onToggleWishlist }) {
   const navigate = useNavigate()
   const [isHovered, setIsHovered] = useState(false)
   const videoRef = useRef(null)
@@ -240,7 +281,17 @@ function ProductCardItem({ product, onQuickAdd }) {
               {programTag(product.tag)}
             </span>
           )}
-          <span className="absolute top-3 right-3 bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 text-[10px] font-bold rounded-full z-10">● In Stock</span>
+          <button
+            type="button"
+            onClick={onToggleWishlist}
+            className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-sm shadow-md z-10 transition ${
+              isWishlisted ? 'bg-rose-500 text-white' : 'bg-white/90 text-navy/70 hover:bg-white hover:text-navy'
+            }`}
+            aria-label="Wishlist"
+            title={isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}
+          >
+            {isWishlisted ? '❤️' : '🤍'}
+          </button>
         </div>
 
         <div className="mb-4">

@@ -77,7 +77,8 @@ export default function InteractiveDiveMap({ onSiteSelect }) {
           `),
           width: 32,
           height: 32,
-          verticalOrigin: window.Cesium.VerticalOrigin.BOTTOM
+          verticalOrigin: window.Cesium.VerticalOrigin.BOTTOM,
+          disableDepthTestDistance: Number.POSITIVE_INFINITY
         },
         label: {
           text: site.name,
@@ -87,7 +88,8 @@ export default function InteractiveDiveMap({ onSiteSelect }) {
           outlineColor: window.Cesium.Color.fromCssColorString('#021426'), // Navy
           outlineWidth: 4,
           verticalOrigin: window.Cesium.VerticalOrigin.BOTTOM,
-          pixelOffset: new window.Cesium.Cartesian2(0, -20)
+          pixelOffset: new window.Cesium.Cartesian2(0, -45),
+          disableDepthTestDistance: Number.POSITIVE_INFINITY
         }
       })
     })
@@ -198,7 +200,7 @@ export default function InteractiveDiveMap({ onSiteSelect }) {
         <div className="relative w-16 h-16 rounded-full border-2 border-white/20 bg-white/10 backdrop-blur-md flex items-center justify-center shadow-lg">
           <motion.div
             drag
-            dragConstraints={{ top: -16, bottom: 16, left: -16, right: 16 }}
+            dragConstraints={{ top: -14, bottom: 14, left: -14, right: 14 }}
             dragSnapToOrigin={true}
             dragElastic={0.2}
             onDrag={(e, info) => {

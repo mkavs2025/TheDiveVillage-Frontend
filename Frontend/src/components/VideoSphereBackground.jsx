@@ -343,7 +343,7 @@ function JoystickControl({ joystickVelocity }) {
   const isDragging = useRef(false)
   const [thumbPos, setThumbPos] = useState({ x: 0, y: 0 })
 
-  const MAX_RADIUS = 20
+  const MAX_RADIUS = 14
 
   const handlePointerDown = (e) => {
     isDragging.current = true
@@ -392,7 +392,7 @@ function JoystickControl({ joystickVelocity }) {
   return (
     <div className="fixed top-1/2 right-6 -translate-y-1/2 z-[8000] flex flex-col items-center gap-2 pointer-events-auto joystick-container">
       <span className="text-[10px] font-bold text-white/70 uppercase tracking-widest bg-navy/50 px-2 py-1 rounded-md backdrop-blur-md">
-        360° Drag
+        360° Toggle
       </span>
       <div 
         ref={containerRef}

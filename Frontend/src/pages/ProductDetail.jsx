@@ -1,8 +1,9 @@
 import { useParams, Link, useNavigate } from 'react-router'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { SHOP_PRODUCTS } from '../utils/products'
 import { useCart } from '../hooks/useCart'
+import { useWishlist } from '../hooks/useWishlist'
 import { formatCurrency } from '../utils/formatCurrency'
 import Button from '../components/Button'
 
@@ -10,6 +11,8 @@ export default function ProductDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { addItem } = useCart()
+  const { toggle: toggleWishlist, isWishlisted } = useWishlist()
+  const sizeChartRef = useRef(null)
 
   const product = SHOP_PRODUCTS.find((p) => p.id === id) || SHOP_PRODUCTS[0]
   const relatedProducts = SHOP_PRODUCTS.filter((p) => p.id !== product.id).slice(0, 4)
@@ -269,7 +272,17 @@ export default function ProductDetail() {
                   <p className="text-xs font-bold uppercase tracking-wider text-navy/70">
                     Select Size: <span className="font-bold text-navy normal-case text-sm ml-1">{selectedSize}</span>
                   </p>
-                  <button onClick={() => setActiveTab('sizeGuide')} className="text-xs font-bold text-accent hover:underline">
+                  <button 
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setActiveTab('sizeGuide')
+                      setTimeout(() => {
+                        sizeChartRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                      }, 50)
+                    }} 
+                    className="text-xs font-bold text-accent hover:underline cursor-pointer"
+                  >
                     Size Guide & Chart 📐
                   </button>
                 </div>
@@ -319,11 +332,11 @@ export default function ProductDetail() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 mb-6">
+            <div className="flex flex-col sm:flex-row gap-3 mb-6 items-center">
               <button
                 onClick={handleAddToCart}
                 disabled={isAdding}
-                className="flex-1 bg-navy hover:bg-accent text-white font-bold py-4 px-6 rounded-full transition shadow-md flex items-center justify-center gap-2 text-sm"
+                className="flex-1 w-full bg-navy hover:bg-accent text-white font-bold py-4 px-6 rounded-full transition shadow-md flex items-center justify-center gap-2 text-sm cursor-pointer"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
@@ -335,19 +348,31 @@ export default function ProductDetail() {
 
               <button
                 onClick={handleBuyNow}
-                className="flex-1 bg-accent hover:bg-white hover:text-navy text-navy font-bold py-4 px-6 rounded-full transition border border-accent shadow-md flex items-center justify-center gap-2 text-sm"
+                className="flex-1 w-full bg-accent hover:bg-white hover:text-navy text-navy font-bold py-4 px-6 rounded-full transition border border-accent shadow-md flex items-center justify-center gap-2 text-sm cursor-pointer"
               >
                 Buy Now ⚡
               </button>
+
+              <button
+                type="button"
+                onClick={() => toggleWishlist(product)}
+                className={`w-14 h-14 shrink-0 rounded-full border transition flex items-center justify-center text-lg shadow-md cursor-pointer ${
+                  isWishlisted(product.id)
+                    ? 'bg-rose-500 text-white border-rose-500'
+                    : 'bg-white text-navy/70 border-navy/20 hover:border-navy hover:text-navy'
+                }`}
+                title={isWishlisted(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+                aria-label="Wishlist"
+              >
+                {isWishlisted(product.id) ? '❤️' : '🤍'}
+              </button>
             </div>
-
-
 
           </div>
         </div>
 
         {/* Tabbed Specifications and Details */}
-        <div className="rounded-[40px] bg-white border border-navy/5 p-8 sm:p-14 shadow-card mb-20">
+        <div ref={sizeChartRef} className="rounded-[40px] bg-white border border-navy/5 p-8 sm:p-14 shadow-card mb-20">
           <div className="flex border-b border-navy/10 mb-8 overflow-x-auto scrollbar-none gap-2">
             {[
               { key: 'details', label: 'Product Features' },

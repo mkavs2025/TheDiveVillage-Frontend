@@ -1,10 +1,17 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { cartService } from '../services/cartService'
 import { CartContext } from './CartContext'
+import { useAuth } from '../hooks/useAuth'
 
-function loadLocalCart() {
+function getCartStorageKey(user) {
+  if (user?.uid) return `tdv_cart_user_${user.uid}`
+  if (user?.email) return `tdv_cart_user_${user.email}`
+  return 'tdv_cart_v1'
+}
+
+function loadLocalCart(storageKey) {
   try {
-    const raw = localStorage.getItem('tdv_cart_v1')
+    const raw = localStorage.getItem(storageKey)
     return raw ? JSON.parse(raw) : []
   } catch {
     return []
@@ -12,18 +19,47 @@ function loadLocalCart() {
 }
 
 export function CartProvider({ children }) {
-  const [items, setItems] = useState(() => loadLocalCart())
+  const { user } = useAuth()
+  const storageKey = useMemo(() => getCartStorageKey(user), [user])
+  const [items, setItems] = useState(() => {
+    const userCart = loadLocalCart(getCartStorageKey(user))
+    if (user && userCart.length === 0) {
+      // If logging in and user cart is empty, merge any guest cart items
+      const guestCart = loadLocalCart('tdv_cart_v1')
+      if (guestCart.length > 0) return guestCart
+    }
+    return userCart
+  })
   const [loading, setLoading] = useState(false)
 
+  // Sync state when storageKey/user changes
   useEffect(() => {
-    localStorage.setItem('tdv_cart_v1', JSON.stringify(items))
-  }, [items])
+    const loaded = loadLocalCart(storageKey)
+    if (loaded.length > 0) {
+      setItems(loaded)
+    } else if (user) {
+      const guestCart = loadLocalCart('tdv_cart_v1')
+      if (guestCart.length > 0) {
+        setItems(guestCart)
+      }
+    }
+  }, [storageKey, user])
+
+  // Save cart to local storage whenever items or storageKey change
+  useEffect(() => {
+    localStorage.setItem(storageKey, JSON.stringify(items))
+    if (user) {
+      localStorage.setItem('tdv_cart_v1', JSON.stringify(items))
+    }
+  }, [items, storageKey, user])
 
   const refresh = useCallback(async () => {
     setLoading(true)
     try {
       const { data } = await cartService.get()
-      if (Array.isArray(data?.items)) setItems(data.items)
+      if (Array.isArray(data?.items) && data.items.length > 0) {
+        setItems(data.items)
+      }
     } catch {
       /* keep local cart when API offline */
     } finally {
@@ -31,14 +67,47 @@ export function CartProvider({ children }) {
     }
   }, [])
 
-  const addItem = useCallback(async ({ inventoryId, quantity = 1, product }) => {
-    const id = inventoryId || product?.id
+  const addItem = useCallback(async (arg1, qtyParam, colorParam, sizeParam) => {
+    let inventoryId, quantity, rawProduct, selectedColor, selectedSize
+
+    if (arg1 && typeof arg1 === 'object' && ('product' in arg1 || 'inventoryId' in arg1)) {
+      inventoryId = arg1.inventoryId
+      quantity = typeof arg1.quantity === 'number' ? arg1.quantity : 1
+      rawProduct = arg1.product || arg1
+      selectedColor = arg1.product?.selectedColor || arg1.selectedColor
+      selectedSize = arg1.product?.selectedSize || arg1.selectedSize
+    } else if (arg1 && typeof arg1 === 'object') {
+      rawProduct = arg1
+      quantity = typeof qtyParam === 'number' ? qtyParam : 1
+      selectedColor = colorParam || arg1.colors?.[0]?.name || 'Standard'
+      selectedSize = sizeParam || arg1.sizes?.[0] || 'Standard'
+      inventoryId = `${arg1.id}-${selectedSize}-${selectedColor}`
+    } else {
+      return
+    }
+
+    const id = inventoryId || `${rawProduct.id || 'item'}-${Date.now()}`
+    const name = rawProduct.title || rawProduct.name || 'Dive Gear'
+    const price = typeof rawProduct.price === 'number' ? rawProduct.price : (rawProduct.product?.price || 0)
+    const image = rawProduct.image || (rawProduct.images && rawProduct.images[0]) || ''
+
+    const cleanProduct = {
+      ...rawProduct,
+      id: rawProduct.id || id,
+      name,
+      title: name,
+      price,
+      image,
+      selectedColor: selectedColor || rawProduct.selectedColor || 'Standard',
+      selectedSize: selectedSize || rawProduct.selectedSize || 'Standard',
+    }
+
     setItems((prev) => {
       const existing = prev.find((i) => i.inventoryId === id || i.id === id)
       if (existing) {
         return prev.map((i) =>
           i.inventoryId === id || i.id === id
-            ? { ...i, quantity: i.quantity + quantity }
+            ? { ...i, quantity: i.quantity + quantity, product: cleanProduct }
             : i
         )
       }
@@ -48,7 +117,7 @@ export function CartProvider({ children }) {
           id: `local-${id}-${Date.now()}`,
           inventoryId: id,
           quantity,
-          product: product || { id, name: 'Dive Item', price: 0 },
+          product: cleanProduct,
         },
       ]
     })

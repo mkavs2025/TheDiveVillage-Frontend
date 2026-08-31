@@ -448,6 +448,52 @@ export default function Home() {
 
 function InteractiveHighlights() {
   const navigate = useNavigate()
+  const [rotation, setRotation] = useState(0)
+  const isDragging = useRef(false)
+  const dragStartX = useRef(0)
+  const rotationAtStart = useRef(0)
+  const isHovered = useRef(false)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isDragging.current && !isHovered.current) {
+        setRotation((prev) => prev - 0.2)
+      }
+    }, 30)
+    return () => clearInterval(interval)
+  }, [])
+
+  const handlePointerDown = (e) => {
+    isDragging.current = true
+    dragStartX.current = e.clientX
+    rotationAtStart.current = rotation
+    e.currentTarget.setPointerCapture(e.pointerId)
+  }
+
+  const handlePointerMove = (e) => {
+    if (!isDragging.current) return
+    const deltaX = e.clientX - dragStartX.current
+    setRotation(rotationAtStart.current + deltaX * 0.2)
+  }
+
+  const handlePointerUp = (e) => {
+    if (isDragging.current) {
+      isDragging.current = false
+      try {
+        e.currentTarget.releasePointerCapture(e.pointerId)
+      } catch {}
+    }
+  }
+
+  const handlePrev = (e) => {
+    e.stopPropagation()
+    setRotation((prev) => prev + 36)
+  }
+
+  const handleNext = (e) => {
+    e.stopPropagation()
+    setRotation((prev) => prev - 36)
+  }
 
   const handleNavigate = (e, targetLink) => {
     if (e) e.stopPropagation()
@@ -457,54 +503,91 @@ function InteractiveHighlights() {
   }
 
   return (
-    <div 
-      className="perspective-[1500px] mx-auto w-full max-w-[95vw] lg:max-w-7xl h-[450px] sm:h-[550px] flex items-center justify-center overflow-visible my-12 pointer-events-auto"
-      style={{
-        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 2.5%, black 97.5%, transparent 100%)',
-        maskImage: 'linear-gradient(to right, transparent 0%, black 2.5%, black 97.5%, transparent 100%)'
-      }}
-    >
-      <div className="relative w-full h-full preserve-3d animate-spin-carousel hover:[animation-play-state:paused] pointer-events-auto">
-        {[...HIGHLIGHTS_DATA, ...HIGHLIGHTS_DATA].map((current, i) => (
-          <div
-            key={`${current.id}-${i}`}
-            className="absolute inset-0 flex items-center justify-center backface-hidden pointer-events-auto"
-            style={{
-              transform: `rotateY(${i * 36}deg) translateZ(clamp(300px, 60vw, 650px))`
-            }}
-          >
-            <div
-              onClick={(e) => handleNavigate(e, current.link)}
-              className="w-[260px] sm:w-[320px] h-[360px] sm:h-[420px] rounded-2xl overflow-hidden shadow-2xl relative border border-white/20 bg-navy/10 group cursor-pointer pointer-events-auto z-20"
-            >
-              <img
-                src={current.image}
-                alt={current.title}
-                className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent opacity-90 transition duration-300 pointer-events-none" />
+    <div className="relative w-full max-w-[95vw] lg:max-w-7xl mx-auto my-12 pointer-events-auto">
+      {/* Navigation Arrows */}
+      <button
+        type="button"
+        onClick={handlePrev}
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-navy/80 border border-white/30 text-white flex items-center justify-center shadow-2xl backdrop-blur-md hover:bg-accent hover:text-navy transition-all duration-300 cursor-pointer"
+        aria-label="Previous Slide"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
 
-              <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end pointer-events-auto">
-                <span className="inline-block text-accent font-heading font-bold uppercase tracking-widest text-[10px] mb-2 pointer-events-none">
-                  Featured
-                </span>
-                <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white leading-tight mb-3 pointer-events-none">
-                  {current.title}
-                </h3>
-                <p className="text-white/80 text-xs sm:text-sm mb-6 line-clamp-3 pointer-events-none">
-                  {current.desc}
-                </p>
-                <button
-                  type="button"
-                  onClick={(e) => handleNavigate(e, current.link)}
-                  className="bg-accent text-navy font-bold border-none py-2.5 px-4 text-sm w-full rounded-full shadow-md hover:bg-white transition-all duration-300 pointer-events-auto cursor-pointer relative z-30"
-                >
-                  {current.btnText || 'Explore'}
-                </button>
+      <button
+        type="button"
+        onClick={handleNext}
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-navy/80 border border-white/30 text-white flex items-center justify-center shadow-2xl backdrop-blur-md hover:bg-accent hover:text-navy transition-all duration-300 cursor-pointer"
+        aria-label="Next Slide"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
+
+      <div 
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        onMouseEnter={() => { isHovered.current = true }}
+        onMouseLeave={() => { isHovered.current = false }}
+        className="perspective-[1500px] w-full h-[450px] sm:h-[550px] flex items-center justify-center overflow-visible cursor-grab active:cursor-grabbing touch-none select-none"
+        style={{
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 2.5%, black 97.5%, transparent 100%)',
+          maskImage: 'linear-gradient(to right, transparent 0%, black 2.5%, black 97.5%, transparent 100%)'
+        }}
+      >
+        <div 
+          className="relative w-full h-full preserve-3d transition-transform ease-out"
+          style={{
+            transform: `rotateY(${rotation}deg)`,
+            transitionDuration: isDragging.current ? '0ms' : '300ms'
+          }}
+        >
+          {[...HIGHLIGHTS_DATA, ...HIGHLIGHTS_DATA].map((current, i) => (
+            <div
+              key={`${current.id}-${i}`}
+              className="absolute inset-0 flex items-center justify-center backface-hidden pointer-events-auto"
+              style={{
+                transform: `rotateY(${i * 36}deg) translateZ(clamp(300px, 60vw, 650px))`
+              }}
+            >
+              <div
+                onClick={(e) => handleNavigate(e, current.link)}
+                className="w-[260px] sm:w-[320px] h-[360px] sm:h-[420px] rounded-2xl overflow-hidden shadow-2xl relative border border-white/20 bg-navy/10 group cursor-pointer pointer-events-auto z-20"
+              >
+                <img
+                  src={current.image}
+                  alt={current.title}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent opacity-90 transition duration-300 pointer-events-none" />
+
+                <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end pointer-events-auto">
+                  <span className="inline-block text-accent font-heading font-bold uppercase tracking-widest text-[10px] mb-2 pointer-events-none">
+                    Featured
+                  </span>
+                  <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white leading-tight mb-3 pointer-events-none">
+                    {current.title}
+                  </h3>
+                  <p className="text-white/80 text-xs sm:text-sm mb-6 line-clamp-3 pointer-events-none">
+                    {current.desc}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={(e) => handleNavigate(e, current.link)}
+                    className="bg-accent text-navy font-bold border-none py-2.5 px-4 text-sm w-full rounded-full shadow-md hover:bg-white transition-all duration-300 pointer-events-auto cursor-pointer relative z-30"
+                  >
+                    {current.btnText || 'Explore'}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )

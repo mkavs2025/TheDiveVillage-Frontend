@@ -1,27 +1,126 @@
+import { Link, useNavigate } from 'react-router'
 import { useWishlist } from '../hooks/useWishlist'
+import { useCart } from '../hooks/useCart'
+import { formatCurrency } from '../utils/formatCurrency'
 
 export default function Wishlist() {
-  const { items, count } = useWishlist()
-  
+  const { items, count, remove } = useWishlist()
+  const { addItem } = useCart()
+  const navigate = useNavigate()
+
   return (
-    <div>
-      <h1 className="font-heading text-3xl font-bold text-navy">
-        Wishlist
-      </h1>
-      <p className="mt-2 text-navy/60 font-medium">Keep track of the gear you're eyeing.</p>
-      
-      {items.length === 0 ? (
-        <div className="mt-10 rounded-2xl bg-[#F0F2F5] p-12 border border-navy/5 text-center flex flex-col items-center justify-center">
-          <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-3xl mb-4 shadow-sm border border-navy/5">🖤</div>
-          <h3 className="font-heading text-lg font-bold text-navy mb-2">Your wishlist is empty</h3>
-          <p className="text-navy/60 text-sm max-w-md">Heart products from the shop to save them here for later.</p>
+    <div className="bg-[#FAFAFA] min-h-screen text-navy font-body pt-24 sm:pt-32 pb-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-10 pb-6 border-b border-navy/10">
+          <div>
+            <span className="inline-block bg-rose-50 text-rose-700 border border-rose-200 rounded-full px-3.5 py-1 text-xs font-bold uppercase tracking-widest mb-3">
+              Saved Items
+            </span>
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-navy leading-tight">
+              My Wishlist
+            </h1>
+          </div>
+          <Link
+            to="/shop"
+            className="text-xs font-bold text-accent hover:underline flex items-center gap-1"
+          >
+            ← Back to Store
+          </Link>
         </div>
-      ) : (
-        <div className="mt-10">
-           <p className="text-sm font-bold text-navy/60 mb-6">{count} item{count !== 1 && 's'} saved</p>
-           {/* Wishlist items grid would go here */}
-        </div>
-      )}
+
+        {items.length === 0 ? (
+          <div className="rounded-3xl bg-white p-12 sm:p-16 border border-navy/5 text-center shadow-card flex flex-col items-center justify-center max-w-2xl mx-auto my-12">
+            <div className="w-20 h-20 rounded-full bg-rose-50 flex items-center justify-center text-4xl mb-4 shadow-inner border border-rose-100">
+              🖤
+            </div>
+            <h3 className="font-heading text-2xl font-bold text-navy mb-2">Your wishlist is empty</h3>
+            <p className="text-navy/60 text-sm max-w-md mb-8 leading-relaxed">
+              Explore our gear, apparel, and accessories, and tap the heart icon on any product to save it here.
+            </p>
+            <Link
+              to="/shop"
+              className="rounded-full bg-navy hover:bg-accent text-white hover:text-navy font-bold px-8 py-3.5 text-sm transition-all duration-300 shadow-md"
+            >
+              Explore Shop Merchandise
+            </Link>
+          </div>
+        ) : (
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wider text-navy/60 mb-6">
+              {count} saved product{count !== 1 && 's'}
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {items.map((item) => (
+                <div
+                  key={item.id}
+                  className="rounded-[32px] bg-white border border-navy/5 p-6 shadow-card hover:shadow-float transition duration-300 flex flex-col justify-between group relative"
+                >
+                  <button
+                    type="button"
+                    onClick={() => remove(item.id)}
+                    className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-white/90 text-navy/60 hover:text-rose-600 hover:bg-rose-50 border border-navy/10 flex items-center justify-center text-sm shadow-sm transition"
+                    title="Remove from wishlist"
+                    aria-label="Remove item"
+                  >
+                    ✕
+                  </button>
+
+                  <div onClick={() => navigate(`/shop/${item.id}`)} className="cursor-pointer">
+                    <div className="aspect-[4/5] w-full rounded-2xl overflow-hidden bg-[#F0F2F5] flex items-center justify-center p-4 relative mb-4">
+                      <img
+                        src={item.image}
+                        alt={item.title || item.name}
+                        className="max-h-full max-w-full object-contain transition duration-500 group-hover:scale-105"
+                      />
+                    </div>
+
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-accent block mb-1">
+                      {item.category || 'Gear'}
+                    </span>
+                    <h3 className="font-heading text-xl font-bold text-navy leading-snug group-hover:text-accent transition mb-2">
+                      {item.title || item.name}
+                    </h3>
+                    <p className="font-heading text-lg font-bold text-navy mb-4">
+                      {formatCurrency(item.price)}
+                    </p>
+                  </div>
+
+                  <div className="flex gap-2 pt-3 border-t border-navy/5">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        addItem({
+                          inventoryId: item.inventoryId || item.id,
+                          quantity: 1,
+                          product: {
+                            id: item.id,
+                            name: item.title || item.name,
+                            price: item.price,
+                            image: item.image,
+                          },
+                        })
+                      }}
+                      className="flex-1 rounded-full bg-navy hover:bg-accent text-white font-bold py-3 px-4 text-xs transition shadow-sm flex items-center justify-center gap-1.5"
+                    >
+                      Add to Cart
+                    </button>
+
+                    <Link
+                      to={`/shop/${item.id}`}
+                      className="rounded-full bg-[#F0F2F5] hover:bg-navy hover:text-white text-navy font-bold py-3 px-4 text-xs transition flex items-center justify-center"
+                    >
+                      View Details
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
