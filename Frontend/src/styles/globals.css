@@ -74,10 +74,33 @@
     @apply font-heading font-bold;
   }
 
-  /* Magazine-style justified text alignment across all body text */
-  p, article, section p, div p {
+  /* Default justified alignment for multi-line body paragraphs */
+  p, article, .prose p {
     text-align: justify;
     text-justify: inter-word;
+    text-align-last: left;
+  }
+
+  /* Utility class overrides for centered, left, or right aligned text blocks & section headers */
+  .text-center,
+  .text-center p,
+  p.text-center {
+    text-align: center !important;
+    text-align-last: center !important;
+  }
+
+  .text-left,
+  .text-left p,
+  p.text-left {
+    text-align: left !important;
+    text-align-last: left !important;
+  }
+
+  .text-right,
+  .text-right p,
+  p.text-right {
+    text-align: right !important;
+    text-align-last: right !important;
   }
 
   /* Fix for dropdown options & phone country select rendering in all browsers */

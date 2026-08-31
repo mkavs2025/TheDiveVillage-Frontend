@@ -6,6 +6,10 @@ const variants = {
     'bg-accent text-navy shadow-soft hover:shadow-lift hover:bg-white active:scale-[0.98]',
   secondary:
     'bg-white/10 backdrop-blur-md border border-white/20 text-white border-2 border-accent hover:bg-accent hover:text-navy active:scale-[0.98]',
+  glass:
+    'bg-white/15 backdrop-blur-xl border border-white/40 text-white shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] hover:bg-[#FFCD00] hover:text-navy hover:border-[#FFCD00] hover:shadow-[0_12px_40px_rgba(255,205,0,0.6)] active:scale-[0.98]',
+  glassSecondary:
+    'bg-white/10 backdrop-blur-xl border border-white/25 text-white shadow-[0_8px_32px_0_rgba(0,0,0,0.25)] hover:bg-white/25 hover:border-white/60 hover:shadow-[0_8px_32px_0_rgba(255,255,255,0.2)] active:scale-[0.98]',
   ghost:
     'bg-transparent text-white hover:text-accent active:scale-[0.98]',
   navy:

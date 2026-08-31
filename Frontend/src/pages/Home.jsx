@@ -87,7 +87,7 @@ export default function Home() {
     <div className="overflow-x-hidden relative isolate pointer-events-none">
 
       {/* 1. HERO */}
-      <section className="relative -mt-16 flex min-h-screen items-end justify-start pb-8 pt-32 sm:-mt-[72px] sm:pb-16 sm:pt-[120px] pointer-events-none">
+      <section className="relative flex min-h-screen items-end justify-start pb-8 pt-36 sm:pb-16 sm:pt-48 lg:pt-56 pointer-events-none">
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pointer-events-none">
           <div className="max-w-3xl">
@@ -109,14 +109,14 @@ export default function Home() {
               <div className="mt-10 flex flex-wrap items-center gap-6">
                 <Link
                   to="/book-us"
-                  className="rounded-full bg-accent px-8 py-4 font-body text-xs sm:text-sm tracking-widest font-bold text-navy uppercase transition-all duration-300 hover:scale-105 hover:bg-white flex items-center gap-3"
+                  className="rounded-full bg-white/15 backdrop-blur-xl border border-white/40 px-8 py-4 font-body text-xs sm:text-sm tracking-widest font-bold text-white uppercase shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] transition-all duration-300 hover:scale-105 hover:bg-[#FFCD00] hover:text-navy hover:border-[#FFCD00] hover:shadow-[0_12px_40px_rgba(255,205,0,0.6)] flex items-center gap-3 active:scale-95 group"
                 >
                   Book Your Dive
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                 </Link>
                 <Link
                   to="/shop"
-                  className="rounded-full border border-white bg-white px-8 py-4 font-body text-xs sm:text-sm tracking-widest font-bold text-navy uppercase transition-all duration-300 hover:bg-navy hover:text-white"
+                  className="rounded-full bg-white/10 backdrop-blur-xl border border-white/25 px-8 py-4 font-body text-xs sm:text-sm tracking-widest font-bold text-white uppercase shadow-[0_8px_32px_0_rgba(0,0,0,0.25)] transition-all duration-300 hover:scale-105 hover:bg-white/25 hover:border-white/60 hover:text-white hover:shadow-[0_8px_32px_0_rgba(255,255,255,0.2)] active:scale-95"
                 >
                   Shop Merch
                 </Link>
@@ -142,7 +142,7 @@ export default function Home() {
       </section >
 
       {/* HIGHLIGHTS */}
-      <section 
+      <section
         onClick={() => {
           navigate('/services')
           window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -207,45 +207,44 @@ export default function Home() {
             ].map((item, i) => (
               <StaggerItem key={i}>
                 <div className="h-full group cursor-pointer relative mt-8 flex flex-col">
-                  
+
                   {/* Floating transparent PNG image - 3rd image sticks to right edge, hover triggers slow up/down float */}
-                  <img 
-                    src={item.img} 
-                    alt={item.t} 
-                    className={`absolute h-auto object-contain drop-shadow-2xl z-20 pointer-events-none hover-float-png transition-all duration-500 ${
-                      i === 2 
-                        ? 'top-2 right-0 w-[80%] max-w-[210px]' 
-                        : 'top-12 sm:top-16 left-0 right-0 mx-auto w-[100%] max-w-[260px]'
-                    }`} 
+                  <img
+                    src={item.img}
+                    alt={item.t}
+                    className={`absolute h-auto object-contain drop-shadow-2xl z-20 pointer-events-none hover-float-png transition-all duration-500 ${i === 2
+                      ? 'top-2 right-0 w-[80%] max-w-[210px]'
+                      : 'top-12 sm:top-16 left-0 right-0 mx-auto w-[100%] max-w-[260px]'
+                      }`}
                   />
-                  
+
                   {/* Actual Card Background & Content - Panel 1, 2, 3, 4 images as background */}
                   <div className="h-full w-full rounded-2xl overflow-hidden border border-white/30 relative flex flex-col p-6 sm:p-8 pt-56 sm:pt-60 z-10 transition duration-500 group-hover:border-white/60 shadow-2xl justify-end">
-                    
+
                     {/* Panel Background Image (panel1, panel2, panel3, panel4) - Stable background without zoom */}
-                    <img 
-                      src={item.bgImg} 
+                    <img
+                      src={item.bgImg}
                       alt={item.t}
-                      className="absolute inset-0 w-full h-full object-cover z-0 opacity-90" 
+                      className="absolute inset-0 w-full h-full object-cover z-0 opacity-90"
                     />
-                    
+
                     {/* Bottom gradient overlay restricted strictly to bottom half of panel */}
                     <div className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-navy/95 via-navy/70 to-transparent z-0 pointer-events-none" />
-                    
+
                     {/* Content wrapper - lowered and aligned */}
                     <div className="relative z-10 flex flex-col justify-end h-full mt-auto">
                       <h3 className="font-heading text-lg sm:text-xl font-bold text-white uppercase tracking-wider mb-3 leading-tight text-left drop-shadow-md min-h-[56px] flex items-end">
                         {item.t}
                       </h3>
-                      
+
                       {/* Yellow divider */}
                       <div className="w-8 h-[3px] bg-[#FFCD00] mb-4 shadow-sm shrink-0"></div>
-                      
+
                       {/* Description text - consistent height block */}
-                      <p className="text-white/90 text-sm font-medium mb-6 leading-relaxed text-left drop-shadow-sm min-h-[72px] flex items-start">
+                      <p className="text-white/90 text-sm font-medium mb-6 leading-relaxed text-justify drop-shadow-sm min-h-[72px] flex items-start">
                         {item.desc}
                       </p>
-                      
+
                       {/* Button - aligned on exact same horizontal level line across all 4 cards */}
                       <div className="mt-auto shrink-0 pt-1">
                         <div className="inline-flex items-center gap-2 font-body text-xs font-bold uppercase tracking-widest bg-[#FFCD00] text-navy border-2 border-[#FFCD00] rounded-full px-5 py-2.5 transition-all duration-300 group-hover:bg-white group-hover:border-white shadow-md">
@@ -276,7 +275,7 @@ export default function Home() {
               What Our Divers Say
             </h2>
             <p className="mt-4 text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
-              Don't just take our word for it. Hear from the community of ocean lovers who have dived with us.
+              Don't just take our word for it.<br />Hear from the community of ocean lovers who have dived with us.
             </p>
           </SectionReveal>
 
@@ -306,10 +305,10 @@ export default function Home() {
             ))}
           </StaggerGrid>
         </div>
-      </section>
+      </section >
 
       {/* 6. AIRPORT TO AIRPORT - HOSPITALITY */}
-      <section className="relative py-24 text-white sm:py-32 pointer-events-auto">
+      < section className="relative py-24 text-white sm:py-32 pointer-events-auto" >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionReveal className="text-center mb-16 max-w-3xl mx-auto">
             <span className="inline-block bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-1.5 text-xs font-bold text-accent uppercase tracking-widest mb-4 shadow-sm">
@@ -333,7 +332,7 @@ export default function Home() {
                 img: CAROUSEL_IMAGES[4],
                 icon: (
                   <svg className="w-5 h-5 text-[#00AEC7]" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                    <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
                   </svg>
                 )
               },
@@ -344,7 +343,7 @@ export default function Home() {
                 img: CAROUSEL_IMAGES[5],
                 icon: (
                   <svg className="w-5 h-5 text-[#00AEC7]" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/>
+                    <path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z" />
                   </svg>
                 )
               },
@@ -355,7 +354,7 @@ export default function Home() {
                 img: CAROUSEL_IMAGES[0],
                 icon: (
                   <svg className="w-5 h-5 text-[#00AEC7]" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.55 3.89 3.54 4.23L6.5 22h3l-.04-8.77C11.45 12.89 13 11.12 13 9V2h-2v7zm9-7h-1c-1.66 0-3 1.34-3 3v5c0 1.66 1.34 3 3 3h1v9h2V2h-2z"/>
+                    <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.55 3.89 3.54 4.23L6.5 22h3l-.04-8.77C11.45 12.89 13 11.12 13 9V2h-2v7zm9-7h-1c-1.66 0-3 1.34-3 3v5c0 1.66 1.34 3 3 3h1v9h2V2h-2z" />
                   </svg>
                 )
               },
@@ -366,13 +365,13 @@ export default function Home() {
                 img: CAROUSEL_IMAGES[1],
                 icon: (
                   <svg className="w-5 h-5 text-[#00AEC7]" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
+                    <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
                   </svg>
                 )
               },
             ].map((item, i) => (
               <StaggerItem key={i}>
-                <div 
+                <div
                   onClick={() => navigate('/contact')}
                   className="group relative h-full rounded-[32px] bg-[#00223D]/85 backdrop-blur-xl border border-[#00AEC7]/30 p-6 sm:p-7 shadow-2xl transition-all duration-500 hover:-translate-y-3 hover:border-[#00AEC7] hover:shadow-[0_20px_50px_rgba(0,174,199,0.3)] flex flex-col justify-between cursor-pointer"
                 >
@@ -393,7 +392,7 @@ export default function Home() {
                     </h3>
 
                     {/* Description Text */}
-                    <p className="text-white/70 text-xs sm:text-sm font-medium leading-relaxed mb-6 text-left min-h-[40px]">
+                    <p className="text-white/70 text-xs sm:text-sm font-medium leading-relaxed mb-6 text-justify min-h-[40px]">
                       {item.desc}
                     </p>
 
@@ -424,7 +423,7 @@ export default function Home() {
             ))}
           </StaggerGrid>
         </div>
-      </section>
+      </section >
 
       {/* 8. GALLERY PREVIEW */}
       < div id="gallery-section" className="pointer-events-auto" >
@@ -481,7 +480,7 @@ function InteractiveHighlights() {
       isDragging.current = false
       try {
         e.currentTarget.releasePointerCapture(e.pointerId)
-      } catch {}
+      } catch { }
     }
   }
 
@@ -527,7 +526,7 @@ function InteractiveHighlights() {
         </svg>
       </button>
 
-      <div 
+      <div
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
@@ -540,7 +539,7 @@ function InteractiveHighlights() {
           maskImage: 'linear-gradient(to right, transparent 0%, black 2.5%, black 97.5%, transparent 100%)'
         }}
       >
-        <div 
+        <div
           className="relative w-full h-full preserve-3d transition-transform ease-out"
           style={{
             transform: `rotateY(${rotation}deg)`,

@@ -57,15 +57,15 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-4 left-0 right-0 z-[9999] w-full px-4 flex justify-center pointer-events-none transition-all duration-300">
-      <div className={`pointer-events-auto relative grid grid-cols-[1fr_auto_1fr] h-[72px] lg:h-[80px] w-full max-w-[1400px] items-center px-6 lg:px-8 rounded-full shadow-float border border-white/10 ${location.pathname === '/' ? 'bg-navy/40 backdrop-blur-xl' : 'bg-[#003865]'}`}>
+      <div className={`pointer-events-auto relative grid grid-cols-[1fr_auto_1fr] h-[88px] sm:h-[96px] lg:h-[104px] w-full max-w-[1400px] items-center px-6 lg:px-10 rounded-full shadow-float border border-white/10 ${location.pathname === '/' ? 'bg-navy/40 backdrop-blur-xl' : 'bg-[#003865]'}`}>
         
         {/* Left Side: Home, Book Us, Contact Us */}
-        <div className="flex items-center justify-evenly w-full">
+        <div className="flex items-center justify-start gap-6 lg:gap-12 pl-2 sm:pl-4">
           <NavLink
             to="/"
             end
             className={({ isActive }) =>
-              `relative whitespace-nowrap font-body text-[15px] font-bold tracking-wide transition-all duration-300 ${
+              `relative whitespace-nowrap font-body text-[16px] sm:text-[17px] font-bold tracking-wide transition-all duration-300 ${
                 isActive 
                   ? 'text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent' 
                   : 'text-white hover:text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300'
@@ -77,7 +77,7 @@ export default function Navbar() {
           <NavLink
             to="/book-us"
             className={({ isActive }) =>
-              `relative whitespace-nowrap font-body text-[15px] font-bold tracking-wide transition-all duration-300 ${
+              `relative whitespace-nowrap font-body text-[16px] sm:text-[17px] font-bold tracking-wide transition-all duration-300 ${
                 isActive 
                   ? 'text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent' 
                   : 'text-white hover:text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300'
@@ -93,7 +93,7 @@ export default function Navbar() {
           <NavLink
             to="/contact"
             className={({ isActive }) =>
-              `hidden lg:block relative whitespace-nowrap font-body text-[15px] font-bold tracking-wide transition-all duration-300 ${
+              `hidden lg:block relative whitespace-nowrap font-body text-[16px] sm:text-[17px] font-bold tracking-wide transition-all duration-300 ${
                 isActive 
                   ? 'text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent' 
                   : 'text-white hover:text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300'
@@ -106,30 +106,30 @@ export default function Navbar() {
 
         {/* Middle: Logo (Absolute Center) */}
         <div className="flex justify-center items-center px-4 shrink-0">
-          <Logo light={true} compact={true} className="[&>img]:h-10 sm:[&>img]:h-12" />
+          <Logo light={true} compact={true} className="[&>img]:h-14 sm:[&>img]:h-16 lg:[&>img]:h-20" />
         </div>
 
         {/* Right Side: Phone, Night toggle, profile, menu */}
-        <div className="flex items-center justify-evenly w-full">
+        <div className="flex items-center justify-end gap-3 sm:gap-4 pr-2 sm:pr-4">
 
           <button
             type="button"
             onClick={() => setIsCallModalOpen(true)}
-            className="flex h-10 items-center justify-center gap-2 rounded-xl border border-white/30 px-3 text-white transition duration-hover hover:bg-white/10 hover:border-white cursor-pointer"
+            className="flex h-11 sm:h-12 items-center justify-center gap-2 rounded-xl border border-white/30 px-3.5 sm:px-4 text-white transition duration-hover hover:bg-white/10 hover:border-white cursor-pointer"
             aria-label="Call & Contact Options"
           >
             <PhoneIcon />
-            <span className="hidden xl:inline text-[14px] font-bold tracking-wide whitespace-nowrap">Call +91 89710 01010</span>
+            <span className="hidden xl:inline text-[15px] font-bold tracking-wide whitespace-nowrap">Get In Touch</span>
           </button>
 
-          <div className="flex h-10 items-center justify-center gap-2 rounded-xl border border-white/30 px-3 text-white transition duration-hover hover:bg-white/10 hover:border-white shrink-0">
+          <div className="flex h-11 sm:h-12 items-center justify-center gap-2 rounded-xl border border-white/30 px-3.5 sm:px-4 text-white transition duration-hover hover:bg-white/10 hover:border-white shrink-0">
             <ThemeToggle isNightDive={isNightDive} onToggle={toggleNightDive} />
-            <span className="hidden xl:inline text-[14px] font-bold tracking-wide whitespace-nowrap">Night Mode</span>
+            <span className="hidden xl:inline text-[15px] font-bold tracking-wide whitespace-nowrap">Night Dive</span>
           </div>
 
           <Link
             to={isAuthenticated ? '/dashboard/profile' : '/login'}
-            className="flex h-10 items-center justify-center gap-2 rounded-xl border border-white/30 px-3 text-white transition duration-hover hover:bg-white/10 hover:border-white shrink-0"
+            className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl border border-white/30 text-white transition duration-hover hover:bg-white/10 hover:border-white shrink-0"
             aria-label={isAuthenticated ? 'Account' : 'Login'}
             title={user?.displayName || user?.email || 'Account'}
           >
@@ -142,12 +142,11 @@ export default function Navbar() {
             ) : (
               <UserIcon />
             )}
-            <span className="hidden xl:inline text-[14px] font-bold tracking-wide whitespace-nowrap">Profile</span>
           </Link>
 
           <button
             type="button"
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/30 text-white transition duration-hover hover:bg-white/10 hover:border-white lg:hidden"
+            className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full border border-white/30 text-white transition duration-hover hover:bg-white/10 hover:border-white lg:hidden"
             aria-label="Toggle menu"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
