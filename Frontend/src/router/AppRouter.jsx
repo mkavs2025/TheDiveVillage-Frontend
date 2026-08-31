@@ -56,6 +56,7 @@ export default function AppRouter() {
           <Route path="shop" element={<PageLiquid><Shop /></PageLiquid>} />
           <Route path="shop/:id" element={<PageLiquid><ProductDetail /></PageLiquid>} />
           <Route path="cart" element={<PageLiquid><Cart /></PageLiquid>} />
+          <Route path="wishlist" element={<PageLiquid><Wishlist /></PageLiquid>} />
           <Route path="checkout" element={<PageLiquid><Checkout /></PageLiquid>} />
           <Route path="contact" element={<PageLiquid><Contact /></PageLiquid>} />
           <Route path="login" element={<PageLiquid><Login /></PageLiquid>} />
