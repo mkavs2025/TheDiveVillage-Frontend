@@ -218,13 +218,13 @@ function VideoSphere({ videoSrc, isMuted, joystickVelocity }) {
 
       if (meshRef2.current && isHome) {
         meshRef2.current.rotation.y = meshRef.current.rotation.y
-        meshRef2.current.rotation.x = meshRef.current.rotation.x - (Math.PI / 4.5)
+        meshRef2.current.rotation.x = meshRef.current.rotation.x + (Math.PI / 10)
         meshRef2.current.material.opacity += (targetOpacity2.current - meshRef2.current.material.opacity) * delta * 5
       }
 
       if (meshRef3.current && isHome) {
         meshRef3.current.rotation.y = meshRef.current.rotation.y
-        meshRef3.current.rotation.x = meshRef.current.rotation.x - (Math.PI / 4.5)
+        meshRef3.current.rotation.x = meshRef.current.rotation.x + (Math.PI / 10)
         meshRef3.current.material.opacity += (targetOpacity3.current - meshRef3.current.material.opacity) * delta * 5
       }
     }

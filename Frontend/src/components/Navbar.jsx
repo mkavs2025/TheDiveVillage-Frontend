@@ -57,18 +57,18 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-4 left-0 right-0 z-[9999] w-full px-4 flex justify-center pointer-events-none transition-all duration-300">
-      <div className={`pointer-events-auto relative grid grid-cols-[1fr_auto_1fr] h-[88px] sm:h-[96px] lg:h-[104px] w-full max-w-[1400px] items-center px-6 lg:px-10 rounded-full shadow-float border border-white/10 ${location.pathname === '/' ? 'bg-navy/40 backdrop-blur-xl' : 'bg-[#003865]'}`}>
+      <div className={`pointer-events-auto relative grid grid-cols-[1fr_auto_1fr] h-[56px] sm:h-[64px] lg:h-[70px] w-full max-w-[1400px] items-center px-4 lg:px-8 rounded-full shadow-float border border-white/10 ${location.pathname === '/' ? 'bg-navy/40 backdrop-blur-xl' : 'bg-[#003865]'}`}>
         
         {/* Left Side: Home, Book Us, Contact Us */}
-        <div className="flex items-center justify-start gap-6 lg:gap-12 pl-2 sm:pl-4">
+        <div className="flex items-center justify-start gap-4 lg:gap-8 pl-1 sm:pl-2">
           <NavLink
             to="/"
             end
             className={({ isActive }) =>
-              `relative whitespace-nowrap font-body text-[16px] sm:text-[17px] font-bold tracking-wide transition-all duration-300 ${
+              `relative whitespace-nowrap font-body text-[14px] sm:text-[15px] font-bold tracking-wide transition-all duration-300 ${
                 isActive 
-                  ? 'text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent' 
-                  : 'text-white hover:text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300'
+                  ? 'text-accent after:content-[""] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-accent' 
+                  : 'text-white hover:text-accent after:content-[""] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-accent after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300'
               }`
             }
           >
@@ -77,15 +77,15 @@ export default function Navbar() {
           <NavLink
             to="/book-us"
             className={({ isActive }) =>
-              `relative whitespace-nowrap font-body text-[16px] sm:text-[17px] font-bold tracking-wide transition-all duration-300 ${
+              `relative whitespace-nowrap font-body text-[14px] sm:text-[15px] font-bold tracking-wide transition-all duration-300 ${
                 isActive 
-                  ? 'text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent' 
-                  : 'text-white hover:text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300'
+                  ? 'text-accent after:content-[""] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-accent' 
+                  : 'text-white hover:text-accent after:content-[""] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-accent after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300'
               }`
             }
           >
             Book Us
-            <span className="absolute -top-1 -right-3 flex h-2 w-2">
+            <span className="absolute -top-1 -right-2.5 flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
             </span>
@@ -93,10 +93,10 @@ export default function Navbar() {
           <NavLink
             to="/contact"
             className={({ isActive }) =>
-              `hidden lg:block relative whitespace-nowrap font-body text-[16px] sm:text-[17px] font-bold tracking-wide transition-all duration-300 ${
+              `hidden lg:block relative whitespace-nowrap font-body text-[14px] sm:text-[15px] font-bold tracking-wide transition-all duration-300 ${
                 isActive 
-                  ? 'text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent' 
-                  : 'text-white hover:text-accent after:content-[""] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-accent after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300'
+                  ? 'text-accent after:content-[""] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-accent' 
+                  : 'text-white hover:text-accent after:content-[""] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-accent after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-300'
               }`
             }
           >
@@ -105,31 +105,31 @@ export default function Navbar() {
         </div>
 
         {/* Middle: Logo (Absolute Center) */}
-        <div className="flex justify-center items-center px-4 shrink-0">
-          <Logo light={true} compact={true} className="[&>img]:h-14 sm:[&>img]:h-16 lg:[&>img]:h-20" />
+        <div className="flex justify-center items-center px-3 shrink-0">
+          <Logo light={true} compact={true} className="[&>img]:h-9 sm:[&>img]:h-11 lg:[&>img]:h-13" />
         </div>
 
         {/* Right Side: Phone, Night toggle, profile, menu */}
-        <div className="flex items-center justify-end gap-3 sm:gap-4 pr-2 sm:pr-4">
+        <div className="flex items-center justify-end gap-2.5 sm:gap-3 pr-1 sm:pr-2">
 
           <button
             type="button"
             onClick={() => setIsCallModalOpen(true)}
-            className="flex h-11 sm:h-12 items-center justify-center gap-2 rounded-xl border border-white/30 px-3.5 sm:px-4 text-white transition duration-hover hover:bg-white/10 hover:border-white cursor-pointer"
+            className="flex h-9 sm:h-10 items-center justify-center gap-1.5 rounded-xl border border-white/30 px-3 text-white transition duration-hover hover:bg-white/10 hover:border-white cursor-pointer"
             aria-label="Call & Contact Options"
           >
             <PhoneIcon />
-            <span className="hidden xl:inline text-[15px] font-bold tracking-wide whitespace-nowrap">Get In Touch</span>
+            <span className="hidden xl:inline text-xs sm:text-sm font-bold tracking-wide whitespace-nowrap">Get In Touch</span>
           </button>
 
-          <div className="flex h-11 sm:h-12 items-center justify-center gap-2 rounded-xl border border-white/30 px-3.5 sm:px-4 text-white transition duration-hover hover:bg-white/10 hover:border-white shrink-0">
+          <div className="flex h-9 sm:h-10 items-center justify-center gap-1.5 rounded-xl border border-white/30 px-3 text-white transition duration-hover hover:bg-white/10 hover:border-white shrink-0">
             <ThemeToggle isNightDive={isNightDive} onToggle={toggleNightDive} />
-            <span className="hidden xl:inline text-[15px] font-bold tracking-wide whitespace-nowrap">Night Dive</span>
+            <span className="hidden xl:inline text-xs sm:text-sm font-bold tracking-wide whitespace-nowrap">Night Dive</span>
           </div>
 
           <Link
             to={isAuthenticated ? '/dashboard/profile' : '/login'}
-            className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl border border-white/30 text-white transition duration-hover hover:bg-white/10 hover:border-white shrink-0"
+            className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl border border-white/30 text-white transition duration-hover hover:bg-white/10 hover:border-white shrink-0"
             aria-label={isAuthenticated ? 'Account' : 'Login'}
             title={user?.displayName || user?.email || 'Account'}
           >
@@ -137,7 +137,7 @@ export default function Navbar() {
               <img
                 src={user.photoURL}
                 alt={user.displayName || 'Profile'}
-                className="h-6 w-6 rounded-full object-cover shrink-0"
+                className="h-5 w-5 rounded-full object-cover shrink-0"
               />
             ) : (
               <UserIcon />
@@ -146,7 +146,7 @@ export default function Navbar() {
 
           <button
             type="button"
-            className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full border border-white/30 text-white transition duration-hover hover:bg-white/10 hover:border-white lg:hidden"
+            className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full border border-white/30 text-white transition duration-hover hover:bg-white/10 hover:border-white lg:hidden"
             aria-label="Toggle menu"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
@@ -292,6 +292,17 @@ function CallModal({ isOpen, onClose }) {
       )
     },
     {
+      id: 'email',
+      title: 'Mail',
+      subtitle: 'sanjeev.bajaj@thedivevillage.co',
+      href: 'mailto:sanjeev.bajaj@thedivevillage.co',
+      icon: (
+        <svg className="w-5 h-5 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      )
+    },
+    {
       id: 'whatsapp',
       title: 'WhatsApp Message',
       subtitle: 'Instant Chat (+91 89710 01010)',
@@ -310,17 +321,6 @@ function CallModal({ isOpen, onClose }) {
       icon: (
         <svg className="w-5 h-5 text-navy" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.497 1.745 6.616 4.472 8.652V24l4.074-2.238c1.099.304 2.262.47 3.454.47 6.627 0 12-4.975 12-11.121C24 4.974 18.627 0 12 0zm1.191 14.963l-3.055-3.26-5.963 3.26 6.559-6.963 3.13 3.259 5.889-3.259-6.56 6.963z"/>
-        </svg>
-      )
-    },
-    {
-      id: 'email',
-      title: 'Email Us',
-      subtitle: 'sanjeev.bajaj@thedivevillage.co',
-      href: 'mailto:sanjeev.bajaj@thedivevillage.co',
-      icon: (
-        <svg className="w-5 h-5 text-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       )
     },

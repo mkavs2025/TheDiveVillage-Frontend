@@ -116,7 +116,7 @@ export default function Home() {
                 </Link>
                 <Link
                   to="/shop"
-                  className="rounded-full bg-white/10 backdrop-blur-xl border border-white/25 px-8 py-4 font-body text-xs sm:text-sm tracking-widest font-bold text-white uppercase shadow-[0_8px_32px_0_rgba(0,0,0,0.25)] transition-all duration-300 hover:scale-105 hover:bg-white/25 hover:border-white/60 hover:text-white hover:shadow-[0_8px_32px_0_rgba(255,255,255,0.2)] active:scale-95"
+                  className="rounded-full bg-white/10 backdrop-blur-xl border border-white/25 px-8 py-4 font-body text-xs sm:text-sm tracking-widest font-bold text-white uppercase shadow-[0_8px_32px_0_rgba(0,0,0,0.25)] transition-all duration-300 hover:scale-105 hover:bg-[#FFCD00] hover:text-navy hover:border-[#FFCD00] hover:shadow-[0_12px_40px_rgba(255,205,0,0.6)] active:scale-95"
                 >
                   Shop Merch
                 </Link>
@@ -142,13 +142,7 @@ export default function Home() {
       </section >
 
       {/* HIGHLIGHTS */}
-      <section
-        onClick={() => {
-          navigate('/services')
-          window.scrollTo({ top: 0, behavior: 'smooth' })
-        }}
-        className="relative z-10 pb-24 pt-16 sm:pt-20 pointer-events-auto cursor-pointer"
-      >
+      <section className="relative z-10 pb-24 pt-16 sm:pt-20 pointer-events-auto">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionReveal className="mb-12 flex flex-col items-center text-center">
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] leading-tight">
@@ -241,13 +235,13 @@ export default function Home() {
                       <div className="w-8 h-[3px] bg-[#FFCD00] mb-4 shadow-sm shrink-0"></div>
 
                       {/* Description text - consistent height block */}
-                      <p className="text-white/90 text-sm font-medium mb-6 leading-relaxed text-justify drop-shadow-sm min-h-[72px] flex items-start">
+                      <p className="text-white/90 text-sm font-medium mb-6 leading-relaxed text-left drop-shadow-sm min-h-[72px] flex items-start">
                         {item.desc}
                       </p>
 
-                      {/* Button - aligned on exact same horizontal level line across all 4 cards */}
-                      <div className="mt-auto shrink-0 pt-1">
-                        <div className="inline-flex items-center gap-2 font-body text-xs font-bold uppercase tracking-widest bg-[#FFCD00] text-navy border-2 border-[#FFCD00] rounded-full px-5 py-2.5 transition-all duration-300 group-hover:bg-white group-hover:border-white shadow-md">
+                      {/* Button - centered across all cards with glassmorphic style and #FFCD00 hover */}
+                      <div className="mt-auto shrink-0 pt-1 flex justify-center w-full">
+                        <div className="inline-flex items-center gap-2 font-body text-xs font-bold uppercase tracking-widest bg-white/15 backdrop-blur-xl border border-white/30 text-white rounded-full px-5 py-2.5 transition-all duration-300 group-hover:bg-[#FFCD00] group-hover:text-navy group-hover:border-[#FFCD00] shadow-md cursor-pointer">
                           <span>Dive In</span>
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-1">
                             <path d="M5 12h14"></path>
@@ -314,8 +308,7 @@ export default function Home() {
             <span className="inline-block bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-1.5 text-xs font-bold text-accent uppercase tracking-widest mb-4 shadow-sm">
               End-to-End Island Care
             </span>
-            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-lg mb-4">
-              From Airport to Airport – <br />
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-lg mb-4">From Airport to Airport<br />
               <span className="text-accent italic font-bold">We've Got You Covered</span>
             </h2>
             <p className="text-base sm:text-lg text-white/80 font-medium leading-relaxed drop-shadow-md">
@@ -392,7 +385,7 @@ export default function Home() {
                     </h3>
 
                     {/* Description Text */}
-                    <p className="text-white/70 text-xs sm:text-sm font-medium leading-relaxed mb-6 text-justify min-h-[40px]">
+                    <p className="text-white/70 text-xs sm:text-sm font-medium leading-relaxed mb-6 text-left min-h-[40px]">
                       {item.desc}
                     </p>
 
@@ -456,7 +449,7 @@ function InteractiveHighlights() {
   useEffect(() => {
     const interval = setInterval(() => {
       if (!isDragging.current && !isHovered.current) {
-        setRotation((prev) => prev - 0.2)
+        setRotation((prev) => prev + 0.45)
       }
     }, 30)
     return () => clearInterval(interval)
@@ -466,13 +459,15 @@ function InteractiveHighlights() {
     isDragging.current = true
     dragStartX.current = e.clientX
     rotationAtStart.current = rotation
-    e.currentTarget.setPointerCapture(e.pointerId)
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId)
+    } catch { }
   }
 
   const handlePointerMove = (e) => {
     if (!isDragging.current) return
     const deltaX = e.clientX - dragStartX.current
-    setRotation(rotationAtStart.current + deltaX * 0.2)
+    setRotation(rotationAtStart.current + deltaX * 0.25)
   }
 
   const handlePointerUp = (e) => {
@@ -485,29 +480,46 @@ function InteractiveHighlights() {
   }
 
   const handlePrev = (e) => {
-    e.stopPropagation()
-    setRotation((prev) => prev + 36)
-  }
-
-  const handleNext = (e) => {
-    e.stopPropagation()
+    if (e) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
     setRotation((prev) => prev - 36)
   }
 
+  const handleNext = (e) => {
+    if (e) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+    setRotation((prev) => prev + 36)
+  }
+
   const handleNavigate = (e, targetLink) => {
-    if (e) e.stopPropagation()
+    if (e) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
     const destination = targetLink || '/services'
     navigate(destination)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
-    <div className="relative w-full max-w-[95vw] lg:max-w-7xl mx-auto my-12 pointer-events-auto">
-      {/* Navigation Arrows */}
+    <div
+      onMouseEnter={() => { isHovered.current = true }}
+      onMouseLeave={() => { isHovered.current = false }}
+      className="relative w-full max-w-[90vw] lg:max-w-6xl mx-auto my-12 pointer-events-auto px-4 sm:px-8"
+    >
+
+
+      {/* Navigation Arrows positioned slightly closer to carousel */}
       <button
         type="button"
         onClick={handlePrev}
-        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-navy/80 border border-white/30 text-white flex items-center justify-center shadow-2xl backdrop-blur-md hover:bg-accent hover:text-navy transition-all duration-300 cursor-pointer"
+        onMouseEnter={(e) => { e.stopPropagation(); isHovered.current = true }}
+        onMouseLeave={(e) => { e.stopPropagation(); isHovered.current = true }}
+        className="carousel-arrow-btn absolute -left-3 sm:-left-8 lg:-left-14 xl:-left-18 top-1/2 -translate-y-1/2 z-40 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-navy/90 border border-white/40 text-white flex items-center justify-center shadow-2xl backdrop-blur-xl cursor-pointer select-none"
         aria-label="Previous Slide"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -518,7 +530,9 @@ function InteractiveHighlights() {
       <button
         type="button"
         onClick={handleNext}
-        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-navy/80 border border-white/30 text-white flex items-center justify-center shadow-2xl backdrop-blur-md hover:bg-accent hover:text-navy transition-all duration-300 cursor-pointer"
+        onMouseEnter={(e) => { e.stopPropagation(); isHovered.current = true }}
+        onMouseLeave={(e) => { e.stopPropagation(); isHovered.current = true }}
+        className="carousel-arrow-btn absolute -right-3 sm:-right-8 lg:-right-14 xl:-right-18 top-1/2 -translate-y-1/2 z-40 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-navy/90 border border-white/40 text-white flex items-center justify-center shadow-2xl backdrop-blur-xl cursor-pointer select-none"
         aria-label="Next Slide"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -531,12 +545,10 @@ function InteractiveHighlights() {
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
-        onMouseEnter={() => { isHovered.current = true }}
-        onMouseLeave={() => { isHovered.current = false }}
         className="perspective-[1500px] w-full h-[450px] sm:h-[550px] flex items-center justify-center overflow-visible cursor-grab active:cursor-grabbing touch-none select-none"
         style={{
-          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 2.5%, black 97.5%, transparent 100%)',
-          maskImage: 'linear-gradient(to right, transparent 0%, black 2.5%, black 97.5%, transparent 100%)'
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 1.5%, black 98.5%, transparent 100%)',
+          maskImage: 'linear-gradient(to right, transparent 0%, black 1.5%, black 98.5%, transparent 100%)'
         }}
       >
         <div
@@ -551,7 +563,7 @@ function InteractiveHighlights() {
               key={`${current.id}-${i}`}
               className="absolute inset-0 flex items-center justify-center backface-hidden pointer-events-auto"
               style={{
-                transform: `rotateY(${i * 36}deg) translateZ(clamp(300px, 60vw, 650px))`
+                transform: `rotateY(${i * 36}deg) translateZ(clamp(280px, 55vw, 600px))`
               }}
             >
               <div
@@ -578,9 +590,13 @@ function InteractiveHighlights() {
                   <button
                     type="button"
                     onClick={(e) => handleNavigate(e, current.link)}
-                    className="bg-accent text-navy font-bold border-none py-2.5 px-4 text-sm w-full rounded-full shadow-md hover:bg-white transition-all duration-300 pointer-events-auto cursor-pointer relative z-30"
+                    className="program-panel-btn py-2.5 px-4 text-sm w-full rounded-full shadow-md pointer-events-auto cursor-pointer relative z-30 flex items-center justify-center gap-2 group/btn"
                   >
-                    {current.btnText || 'Explore'}
+                    <span>{current.btnText || 'Explore'}</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover/btn:translate-x-1">
+                      <path d="M5 12h14"></path>
+                      <path d="m12 5 7 7-7 7"></path>
+                    </svg>
                   </button>
                 </div>
               </div>

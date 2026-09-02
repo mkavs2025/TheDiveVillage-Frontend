@@ -6,13 +6,14 @@ import { useCart } from '../hooks/useCart'
 import { useWishlist } from '../hooks/useWishlist'
 import Button from '../components/Button'
 import picture3 from '../assets/Picture3.png'
+import divingVid from '@video-optimized/diving.mp4'
 import pop1 from '../assets/Products/pop1.jpeg'
 import pop2 from '../assets/Products/pop2.jpeg'
 
 const CATEGORIES = [
   { key: 'all', label: 'All Merchandise' },
   { key: 'Tops', label: 'Tops' },
-  { key: 'Swimwear', label: 'Swimwear' },
+  { key: 'Skin Wear', label: 'Skin Wear' },
   { key: 'Bottoms', label: 'Bottoms' },
   { key: 'Accessories', label: 'Accessories & Bags' },
 ]
@@ -84,9 +85,12 @@ export default function Shop() {
       {/* 1. HERO BANNER */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-12">
         <div className="relative rounded-[40px] overflow-hidden bg-navy text-white shadow-lift border border-white/10 flex flex-col md:flex-row items-center justify-between min-h-[380px] p-8 sm:p-12 lg:p-14 gap-8">
-          <img
-            src={picture3}
-            alt="Merchandise"
+          <video
+            src={divingVid}
+            autoPlay
+            loop
+            muted
+            playsInline
             className="absolute inset-0 w-full h-full object-cover opacity-50"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/60 to-navy/30" />
@@ -105,7 +109,7 @@ export default function Shop() {
           </div>
 
           {/* Right Column: 3D Flipping Product Tag */}
-          <div className="relative z-10 shrink-0 self-center md:self-auto py-2">
+          <div className="relative z-10 shrink-0 self-center md:self-auto py-2 md:mr-16 lg:mr-28 xl:mr-36">
             <FlippingProductTag />
           </div>
         </div>
@@ -315,7 +319,7 @@ function ProductCardItem({ product, onQuickAdd, isWishlisted, onToggleWishlist }
               ))}
             </div>
             <div className="text-navy/60 font-semibold text-[11px]">
-              Sizes: {product.sizes?.slice(0, 3).join(', ')}{product.sizes?.length > 3 ? '+' : ''}
+              Size: {product.sizes?.[0] || 'One Size'}
             </div>
           </div>
         </div>
@@ -323,13 +327,10 @@ function ProductCardItem({ product, onQuickAdd, isWishlisted, onToggleWishlist }
 
       <div className="pt-4 border-t border-navy/10 flex items-center justify-between gap-3">
         <span className="text-[10px] text-emerald-600 font-bold">Inquire within</span>
-        <div className="flex items-center gap-2">
-          <span className="rounded-full bg-[#F0F2F5] px-3.5 py-2.5 text-xs font-bold text-navy group-hover:bg-navy/10 transition">Details</span>
-          <button onClick={(e) => onQuickAdd(product, e)} className="rounded-full bg-navy text-white px-4 py-2.5 text-xs font-bold hover:bg-accent transition shadow-sm flex items-center gap-1.5">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" /><line x1="3" y1="6" x2="21" y2="6" /><path d="M16 10a4 4 0 01-8 0" /></svg>
-            Add
-          </button>
-        </div>
+        <button onClick={(e) => onQuickAdd(product, e)} className="rounded-full bg-navy text-white px-5 py-2.5 text-xs font-bold hover:bg-accent hover:text-navy transition shadow-sm flex items-center gap-1.5 cursor-pointer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" /><line x1="3" y1="6" x2="21" y2="6" /><path d="M16 10a4 4 0 01-8 0" /></svg>
+          Add
+        </button>
       </div>
     </div>
   )
@@ -341,7 +342,7 @@ function programTag(tag) {
 
 function FlippingProductTag() {
   return (
-    <div className="relative flex flex-col items-center justify-center pointer-events-auto group cursor-pointer">
+    <div className="relative flex flex-col items-center justify-center select-none pointer-events-none">
       {/* Hanging Cord */}
       <div className="w-0.5 h-6 bg-gradient-to-b from-white/40 via-accent to-white/60 shadow-sm mb-[-2px] relative z-20">
         <div className="w-2 h-2 rounded-full bg-accent -top-1.5 -left-[3px] absolute shadow-sm" />
@@ -352,7 +353,7 @@ function FlippingProductTag() {
         <motion.div
           animate={{ rotateY: 360 }}
           transition={{
-            duration: 8,
+            duration: 18,
             ease: 'linear',
             repeat: Number.POSITIVE_INFINITY,
           }}
@@ -367,7 +368,7 @@ function FlippingProductTag() {
             <img
               src={pop1}
               alt="Product Tag Front"
-              className="w-full h-full object-fill rounded-2xl group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-full object-fill rounded-2xl"
             />
           </div>
 
@@ -379,7 +380,7 @@ function FlippingProductTag() {
             <img
               src={pop2}
               alt="Product Tag Back"
-              className="w-full h-full object-fill rounded-2xl group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-full object-fill rounded-2xl"
             />
           </div>
         </motion.div>

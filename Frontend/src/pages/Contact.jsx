@@ -202,8 +202,14 @@ export default function Contact() {
                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <h4 className="font-bold text-navy mb-2">Visit Us</h4>
-            <span className="text-xs text-navy/60">1st Cross Rd, Ranka Nagar,</span>
-            <span className="text-xs text-navy/60">Kaval Bairasandra, Bengaluru, Karnataka 560032</span>
+            <a
+              href="https://www.google.com/maps/place/2JG4%2B8WP,+C-101,+1st+Cross+Rd,+Ranka+Nagar,+Kaval+Bairasandra,+Bengaluru,+Karnataka+560032/@13.0259006,77.6070295,20.34z/data=!4m9!1m2!2m1!1sradhidhamma!3m5!1s0x3bae17a78cde34a9:0x7c9daf2e21647c11!8m2!3d13.0258219!4d77.6072606!16s%2Fg%2F11fy_3kdm6?entry=ttu&g_ep=EgoyMDI2MDgzMS4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-navy/60 hover:text-navy hover:underline transition text-center leading-relaxed"
+            >
+              No,11, 1st Cross Rd, Ranka Nagar, Kaval Bairasandra, Bengaluru, Karnataka 560032
+            </a>
           </div>
 
           <div className="flex flex-col items-center">

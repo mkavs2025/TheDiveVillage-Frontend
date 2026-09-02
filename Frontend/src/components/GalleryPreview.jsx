@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import SectionReveal from './SectionReveal'
 import Button from './Button'
@@ -18,8 +18,35 @@ export default function GalleryPreview() {
   const isDragging = useRef(false)
   const startX = useRef(0)
   const scrollLeft = useRef(0)
+  const [isHovered, setIsHovered] = useState(false)
 
   const goToGallery = () => navigate('/gallery')
+
+  // Auto scroll from left to right
+  useEffect(() => {
+    const el = scrollContainerRef.current
+    if (!el) return
+
+    const interval = setInterval(() => {
+      if (!isDragging.current && !isHovered && scrollContainerRef.current) {
+        // Decrease scrollLeft to shift content left to right
+        scrollContainerRef.current.scrollLeft -= 1.5
+        if (scrollContainerRef.current.scrollLeft <= 5) {
+          // Wrap around to middle position for infinite loop
+          scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth / 3
+        }
+      }
+    }, 20)
+
+    return () => clearInterval(interval)
+  }, [isHovered])
+
+  // Initialize scroll position in the middle so left-to-right scrolling works instantly
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft = scrollContainerRef.current.scrollWidth / 3
+    }
+  }, [])
 
   const handlePrev = (e) => {
     e.stopPropagation()
@@ -43,6 +70,7 @@ export default function GalleryPreview() {
 
   const handlePointerLeave = () => {
     isDragging.current = false
+    setIsHovered(false)
   }
 
   const handlePointerUp = () => {
@@ -71,7 +99,11 @@ export default function GalleryPreview() {
       </div>
 
       {/* Infinite scroll marquee & drag gallery with navigation arrows */}
-      <div className="relative w-full overflow-hidden">
+      <div 
+        className="relative w-full overflow-hidden"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         {/* Navigation Arrows */}
         <button
           type="button"
@@ -87,7 +119,7 @@ export default function GalleryPreview() {
         <button
           type="button"
           onClick={handleNext}
-          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-navy/80 border border-white/30 text-white flex items-center justify-center shadow-2xl backdrop-blur-md hover:bg-accent hover:text-navy transition-all duration-300 cursor-pointer"
+          className="absolute right-3 sm:left-auto sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-navy/80 border border-white/30 text-white flex items-center justify-center shadow-2xl backdrop-blur-md hover:bg-accent hover:text-navy transition-all duration-300 cursor-pointer"
           aria-label="Next Gallery Image"
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -107,9 +139,10 @@ export default function GalleryPreview() {
           onMouseLeave={handlePointerLeave}
           onMouseUp={handlePointerUp}
           onMouseMove={handlePointerMove}
-          className="flex gap-4 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing select-none py-2 px-6"
+          className="flex gap-4 overflow-x-auto scrollbar-none no-scrollbar cursor-grab active:cursor-grabbing select-none py-2 px-6"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {[...GALLERY_IMAGES, ...GALLERY_IMAGES, ...GALLERY_IMAGES].map((src, i) => (
+          {[...GALLERY_IMAGES, ...GALLERY_IMAGES, ...GALLERY_IMAGES, ...GALLERY_IMAGES].map((src, i) => (
             <div
               key={i}
               onClick={goToGallery}
@@ -132,7 +165,7 @@ export default function GalleryPreview() {
           <Button
             onClick={goToGallery}
             variant="secondary"
-            className="!border-white/20 !bg-white/10 !text-white backdrop-blur-md hover:!border-accent hover:!text-accent"
+            className="!border-white/30 !bg-white/15 !text-white backdrop-blur-xl transition-all duration-300 hover:!bg-[#FFCD00] hover:!text-navy hover:!border-[#FFCD00] shadow-md"
           >
             View Full Gallery
           </Button>
