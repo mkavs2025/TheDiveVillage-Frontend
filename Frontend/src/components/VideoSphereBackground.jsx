@@ -4,9 +4,9 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useVideoTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import { useLocation } from 'react-router'
-import videoFile from '../assets/Hero.mp4'
-import divingFile from '../assets/diving.mp4'
-import bookFile from '../assets/Book.mp4'
+import videoFile from '@video-optimized/Hero.mp4'
+import divingFile from '@video-optimized/diving.mp4'
+import bookFile from '@video-optimized/Book.mp4'
 
 function VideoSphere({ videoSrc, isMuted, joystickVelocity }) {
   const meshRef = useRef()

@@ -6,7 +6,7 @@ import SectionReveal, { StaggerGrid, StaggerItem } from '../components/SectionRe
 import { IMAGES, CAROUSEL_IMAGES } from '../utils/images'
 import img2 from '../assets/2.png'
 import panelImg from '../assets/panel3.png'
-import divingVid from '../assets/diving.mp4'
+import divingVid from '@video-optimized/diving.mp4'
 
 const SAFETY_PROMISES = [
   {

@@ -17,13 +17,13 @@ import imgCapBack from '../assets/Products/capb.png'
 import imgBagFront from '../assets/Products/bagf.png'
 import imgBagBack from '../assets/Products/bagb.png'
 
-import videoWomensShirt from '../assets/Products/sweetheart.mp4'
-import videoWomensPants from '../assets/Products/womens pants.mp4'
-import videoWomensStrap from '../assets/Products/this_product_make_a_video_wher (2).mp4'
-import videoUnisexShorts from '../assets/Products/unisex shorts.mp4'
-import videoUnisexShirt from '../assets/Products/unisex unfront.mp4'
-import videoSkinSuit from '../assets/Products/Dive suit.mp4'
-import videoCap from '../assets/Products/cap.mp4'
+import videoWomensShirt from '@video-optimized/Products/sweetheart.mp4'
+import videoWomensPants from '@video-optimized/Products/womens pants.mp4'
+import videoWomensStrap from '@video-optimized/Products/this_product_make_a_video_wher (2).mp4'
+import videoUnisexShorts from '@video-optimized/Products/unisex shorts.mp4'
+import videoUnisexShirt from '@video-optimized/Products/unisex unfront.mp4'
+import videoSkinSuit from '@video-optimized/Products/Dive suit.mp4'
+import videoCap from '@video-optimized/Products/cap.mp4'
 
 export const SHOP_PRODUCTS = [
   {
