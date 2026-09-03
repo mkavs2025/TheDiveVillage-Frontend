@@ -217,8 +217,8 @@ function VideoSphere({ videoSrc, isMuted, joystickVelocity }) {
       meshRef.current.rotation.x += (finalTargetX - meshRef.current.rotation.x) * delta * 5
 
       if (meshRef2.current && isHome) {
-        meshRef2.current.rotation.y = meshRef.current.rotation.y
-        meshRef2.current.rotation.x = meshRef.current.rotation.x + (Math.PI / 10)
+        meshRef2.current.rotation.y = meshRef.current.rotation.y - (Math.PI / 2.5)
+        meshRef2.current.rotation.x = meshRef.current.rotation.x - (Math.PI / 1.68)
         meshRef2.current.material.opacity += (targetOpacity2.current - meshRef2.current.material.opacity) * delta * 5
       }
 

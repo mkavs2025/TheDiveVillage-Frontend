@@ -309,10 +309,10 @@ export default function Home() {
               End-to-End Island Care
             </span>
             <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-lg mb-4">From Airport to Airport<br />
-              <span className="text-accent italic font-bold">We've Got You Covered</span>
+              <span className="text-accent font-bold">We've Got You Covered</span>
             </h2>
             <p className="text-base sm:text-lg text-white/80 font-medium leading-relaxed drop-shadow-md">
-              Relax and immerse yourself in the ocean. We handle every detail of your island holiday from arrival to departure.
+              Relax and immerse yourself in the ocean.<br />We handle every detail of your island holiday from arrival to departure.
             </p>
           </SectionReveal>
 
