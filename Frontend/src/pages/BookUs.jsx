@@ -5,88 +5,106 @@ import InteractiveDiveMap from '../components/InteractiveDiveMap'
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 
-// Master 44-Program Catalog with Eligibility Constraints
+// Master 44-Program Catalog with Exact Eligibility Constraints
 export const PROGRAMS_CATALOG = [
-  { id: 'try-dive', name: 'Try Dive', minAge: 8, maxAge: null, expReq: ['beginner', 'completed_dsd'], desc: 'Beginner — no prior diving experience specified' },
-  { id: 'dsd-lite', name: 'DSD Lite', minAge: 10, maxAge: null, expReq: ['beginner', 'completed_dsd'], desc: 'Beginner — no prior diving experience specified' },
-  { id: 'padi-dsd', name: 'PADI Discover Scuba Dive', minAge: null, maxAge: null, expReq: ['beginner', 'completed_dsd'], desc: 'Beginner — introductory program' },
-  { id: 'discover-snorkeling', name: 'Discover Snorkeling', minAge: null, maxAge: null, expReq: 'all', desc: 'Beginner — no prior experience specified' },
-  { id: 'padi-bubblemaker', name: 'PADI Bubblemaker', minAge: 8, maxAge: 10, expReq: ['beginner'], desc: 'Complete beginner / kids (8–10 yrs)' },
-  { id: 'add-dive-after-dsd', name: 'Additional Dive after DSD', minAge: null, maxAge: null, expReq: ['completed_dsd', 'open_water', 'advanced_open_water', 'advanced_efr', 'certified_diver'], desc: 'Must have completed DSD' },
-  { id: 'padi-skin-diver', name: 'PADI Skin Diver', minAge: null, maxAge: null, expReq: 'all', desc: 'Learning snorkeling & breath-hold diving' },
-  { id: 'padi-scuba-diver', name: 'PADI Scuba Diver', minAge: 10, maxAge: null, expReq: ['beginner', 'completed_dsd'], desc: 'Beginner — entry-level certification' },
-  { id: 'padi-open-water', name: 'PADI Open Water Diver', minAge: 10, maxAge: null, expReq: ['beginner', 'completed_dsd'], desc: 'Beginner — entry-level certification' },
-  { id: 'padi-adventure-diver', name: 'PADI Adventure Diver', minAge: 10, maxAge: null, expReq: ['open_water', 'advanced_open_water', 'advanced_efr', 'certified_diver'], desc: 'Open Water Diver required' },
-  { id: 'padi-advanced-ow', name: 'PADI Advanced Open Water', minAge: 12, maxAge: null, expReq: ['open_water', 'advanced_open_water', 'advanced_efr', 'certified_diver'], desc: 'Open Water Diver required' },
-  { id: 'efr-primary-secondary', name: 'EFR Primary & Secondary Care', minAge: null, maxAge: null, expReq: 'all', desc: 'Beginner — divers & non-divers' },
-  { id: 'padi-rescue-diver', name: 'PADI Rescue Diver', minAge: 12, maxAge: null, expReq: ['advanced_efr', 'advanced_open_water'], desc: 'Advanced + EFR required' },
-  { id: 'padi-reactivate', name: 'PADI Reactivate (with dive)', minAge: null, maxAge: null, expReq: ['certified_diver', 'open_water', 'advanced_open_water', 'advanced_efr'], desc: 'Existing certified diver needing a skills refresh' },
-  { id: 'full-refresher', name: 'Full Refresher (with dive)', minAge: null, maxAge: null, expReq: ['certified_diver', 'open_water', 'advanced_open_water', 'advanced_efr'], desc: 'Existing diver; skills practice/refresher' },
-  { id: 'lite-refresher', name: 'Lite Refresher (confined only)', minAge: null, maxAge: null, expReq: ['certified_diver', 'open_water', 'advanced_open_water', 'advanced_efr'], desc: 'Existing diver; confined-water skills refresh' },
-  { id: 'peak-buoyancy', name: 'Peak Performance Buoyancy', minAge: null, maxAge: null, expReq: ['open_water', 'advanced_open_water', 'advanced_efr', 'certified_diver'], desc: 'Open Water Diver required' },
-  { id: 'project-aware', name: 'Project AWARE', minAge: null, maxAge: null, expReq: 'all', desc: 'No diving experience specified; knowledge-based' },
-  { id: 'deep-diver', name: 'Deep Diver', minAge: null, maxAge: null, expReq: ['open_water', 'advanced_open_water', 'advanced_efr', 'certified_diver'], desc: 'Open Water Diver required' },
-  { id: 'wreck-diver', name: 'Wreck Diver', minAge: null, maxAge: null, expReq: ['open_water', 'advanced_open_water', 'advanced_efr', 'certified_diver'], desc: 'No prerequisite listed in file' },
-  { id: 'night-diver', name: 'Night Diver', minAge: null, maxAge: null, expReq: ['open_water', 'advanced_open_water', 'advanced_efr', 'certified_diver'], desc: 'No prerequisite listed in file' },
-  { id: 'enriched-air-nitrox', name: 'Enriched Air Nitrox', minAge: null, maxAge: null, expReq: ['open_water', 'advanced_open_water', 'advanced_efr', 'certified_diver'], desc: 'No prerequisite listed in file' },
-  { id: '1-dive', name: '1 Dive', minAge: null, maxAge: null, expReq: ['certified_diver', 'open_water', 'advanced_open_water', 'advanced_efr'], desc: 'Certified diver' },
-  { id: '2-dives', name: '2 Dives', minAge: null, maxAge: null, expReq: ['certified_diver', 'open_water', 'advanced_open_water', 'advanced_efr'], desc: 'Certified diver' },
-  { id: '4-dives', name: '4 Dives', minAge: null, maxAge: null, expReq: ['certified_diver', 'open_water', 'advanced_open_water', 'advanced_efr'], desc: 'Certified diver' },
-  { id: '6-dives', name: '6 Dives', minAge: null, maxAge: null, expReq: ['certified_diver', 'open_water', 'advanced_open_water', 'advanced_efr'], desc: 'Certified diver' },
-  { id: '8-dives', name: '8 Dives', minAge: null, maxAge: null, expReq: ['certified_diver', 'open_water', 'advanced_open_water', 'advanced_efr'], desc: 'Certified diver' },
-  { id: '10-dives', name: '10 Dives', minAge: null, maxAge: null, expReq: ['certified_diver', 'open_water', 'advanced_open_water', 'advanced_efr'], desc: 'Certified diver' },
-  { id: '12-dives', name: '12 Dives', minAge: null, maxAge: null, expReq: ['certified_diver', 'open_water', 'advanced_open_water', 'advanced_efr'], desc: 'Certified diver' },
-  { id: 'post-12-dives', name: 'Post 12 (extra 2 dives)', minAge: null, maxAge: null, expReq: ['certified_diver', 'open_water', 'advanced_open_water', 'advanced_efr'], desc: 'Existing certified diver / package participant' },
-  { id: 'night-dive', name: 'Night Dive', minAge: null, maxAge: null, expReq: ['open_water', 'advanced_open_water', 'advanced_efr', 'certified_diver'], desc: 'Open Water Diver required' },
-  { id: 'dawn-dive', name: 'Dawn Dive', minAge: null, maxAge: null, expReq: ['certified_diver', 'open_water', 'advanced_open_water', 'advanced_efr'], desc: 'Certified diver' },
-  { id: 'padi-dsd-ow-combo', name: 'PADI DSD + Open Water', minAge: null, maxAge: null, expReq: ['beginner', 'completed_dsd'], desc: 'Beginner → Open Water certification' },
-  { id: 'padi-ow-aow-combo', name: 'PADI OW + Advanced', minAge: null, maxAge: null, expReq: ['beginner', 'completed_dsd', 'open_water'], desc: 'Beginner → Open Water → Advanced' },
-  { id: 'efr-rescue-combo', name: 'EFR + Rescue Diver', minAge: null, maxAge: null, expReq: ['advanced_open_water', 'advanced_efr'], desc: 'Advanced Open Water required' },
-  { id: 'padi-divemaster', name: 'PADI Divemaster', minAge: null, maxAge: null, expReq: ['advanced_efr', 'advanced_open_water'], desc: 'Professional-level pathway' },
-  { id: 'efr-rescue-dm-combo', name: 'EFR + Rescue + Divemaster', minAge: null, maxAge: null, expReq: ['advanced_open_water', 'advanced_efr'], desc: 'Progression: EFR → Rescue → Divemaster' },
-  { id: 'efr-rescue-dm-prereqs', name: 'EFR + Rescue + DM (prereqs)', minAge: null, maxAge: null, expReq: ['advanced_open_water', 'advanced_efr'], desc: 'Prerequisites assumed/required' },
-  { id: 'zero-to-hero', name: 'Zero to Hero (OW to DM)', minAge: null, maxAge: null, expReq: ['beginner', 'completed_dsd', 'open_water', 'advanced_open_water'], desc: 'Beginner → Open Water → Divemaster' },
-  { id: 'padi-basic-freediver', name: 'PADI Basic Freediver', minAge: null, maxAge: null, expReq: 'all', desc: 'Beginner — basic freediving' },
-  { id: 'padi-freediver', name: 'PADI Freediver', minAge: null, maxAge: null, expReq: 'all', desc: 'Freediving experience / Basic Freediver' },
-  { id: 'reef-explorer', name: 'Reef Explorer', minAge: null, maxAge: null, expReq: 'all', desc: 'Beginner — suitable for all ages' },
-  { id: 'ocean-explorer', name: 'Ocean Explorer', minAge: null, maxAge: null, expReq: 'all', desc: 'Beginner / guided snorkeling' },
-  { id: 'drift-diver', name: 'Drift Diver', minAge: null, maxAge: null, expReq: ['open_water', 'advanced_open_water', 'advanced_efr', 'certified_diver'], desc: 'Open Water Diver required' },
+  { id: 'try-dive', name: 'Try Dive', category: 'Programs', minAge: 8, maxAge: null, certReq: 'none', certLabel: 'No certification required' },
+  { id: 'dsd-lite', name: 'DSD Lite', category: 'Programs', minAge: 8, maxAge: null, certReq: 'none', certLabel: 'No certification required' },
+  { id: 'padi-dsd', name: 'PADI Discover Scuba Dive', category: 'Programs', minAge: 10, maxAge: null, certReq: 'none', certLabel: 'No certification required' },
+  { id: 'discover-snorkeling', name: 'Discover Snorkeling', category: 'Snorkeling', minAge: 7, maxAge: null, certReq: 'none', certLabel: 'No certification required' },
+  { id: 'padi-bubblemaker', name: 'PADI Bubblemaker', category: 'Programs', minAge: 8, maxAge: 10, certReq: 'none', certLabel: 'No certification required' },
+  { id: 'add-dive-after-dsd', name: 'Additional Dive after DSD', category: 'Programs', minAge: 10, maxAge: null, certReq: 'completed_dsd', certLabel: 'Must have completed DSD / qualifying intro dive' },
+  { id: 'padi-skin-diver', name: 'PADI Skin Diver', category: 'Courses', minAge: 8, maxAge: null, certReq: 'none', certLabel: 'No certification required' },
+  { id: 'padi-scuba-diver', name: 'PADI Scuba Diver', category: 'Courses', minAge: 10, maxAge: null, certReq: 'none', certLabel: 'No prior scuba certification required' },
+  { id: 'padi-open-water', name: 'PADI Open Water Diver', category: 'Courses', minAge: 10, maxAge: null, certReq: 'none', certLabel: 'No prior scuba certification required' },
+  { id: 'padi-adventure-diver', name: 'PADI Adventure Diver', category: 'Courses', minAge: 10, maxAge: null, certReq: 'open_water', certLabel: 'Open Water Diver / Junior Open Water Diver' },
+  { id: 'padi-advanced-ow', name: 'PADI Advanced Open Water', category: 'Courses', minAge: 12, maxAge: null, certReq: 'open_water', certLabel: 'Open Water Diver / Junior Open Water Diver' },
+  { id: 'efr-primary-secondary', name: 'EFR Primary & Secondary Care', category: 'Courses', minAge: 7, maxAge: null, certReq: 'none', certLabel: 'No scuba certification required' },
+  { id: 'padi-rescue-diver', name: 'PADI Rescue Diver', category: 'Courses', minAge: 12, maxAge: null, certReq: 'advanced_open_water', certLabel: 'Advanced / Adventure Diver + EFR' },
+  { id: 'padi-reactivate', name: 'PADI Reactivate (with dive)', category: 'Courses', minAge: 10, maxAge: null, certReq: 'certified_diver', certLabel: 'Existing scuba certification' },
+  { id: 'full-refresher', name: 'Full Refresher (with dive)', category: 'Courses', minAge: 10, maxAge: null, certReq: 'certified_diver', certLabel: 'Existing scuba certification' },
+  { id: 'lite-refresher', name: 'Lite Refresher (confined only)', category: 'Courses', minAge: 10, maxAge: null, certReq: 'certified_diver', certLabel: 'Existing scuba certification' },
+  { id: 'peak-buoyancy', name: 'Peak Performance Buoyancy', category: 'Specialities', minAge: 10, maxAge: null, certReq: 'open_water', certLabel: 'Open Water Diver / Junior Open Water Diver' },
+  { id: 'project-aware', name: 'Project AWARE', category: 'Specialities', minAge: 10, maxAge: null, certReq: 'none', certLabel: 'No scuba certification required' },
+  { id: 'deep-diver', name: 'Deep Diver', category: 'Specialities', minAge: 15, maxAge: null, certReq: 'advanced_open_water', certLabel: 'Adventure / Advanced Diver' },
+  { id: 'wreck-diver', name: 'Wreck Diver', category: 'Specialities', minAge: 15, maxAge: null, certReq: 'open_water', certLabel: 'Open Water / prerequisite certification' },
+  { id: 'night-diver', name: 'Night Diver', category: 'Specialities', minAge: 12, maxAge: null, certReq: 'open_water', certLabel: 'Open Water Diver / Junior Open Water Diver' },
+  { id: 'enriched-air-nitrox', name: 'Enriched Air Nitrox', category: 'Specialities', minAge: 12, maxAge: null, certReq: 'open_water', certLabel: 'Open Water Diver / Junior Open Water Diver' },
+  { id: '1-dive', name: '1 Dive', category: 'Fun Dives', minAge: 10, maxAge: null, certReq: 'certified_diver', certLabel: 'Certified diver' },
+  { id: '2-dives', name: '2 Dives', category: 'Fun Dives', minAge: 10, maxAge: null, certReq: 'certified_diver', certLabel: 'Certified diver' },
+  { id: '4-dives', name: '4 Dives', category: 'Fun Dives', minAge: 10, maxAge: null, certReq: 'certified_diver', certLabel: 'Certified diver' },
+  { id: '6-dives', name: '6 Dives', category: 'Fun Dives', minAge: 10, maxAge: null, certReq: 'certified_diver', certLabel: 'Certified diver' },
+  { id: '8-dives', name: '8 Dives', category: 'Fun Dives', minAge: 10, maxAge: null, certReq: 'certified_diver', certLabel: 'Certified diver' },
+  { id: '10-dives', name: '10 Dives', category: 'Fun Dives', minAge: 10, maxAge: null, certReq: 'certified_diver', certLabel: 'Certified diver' },
+  { id: '12-dives', name: '12 Dives', category: 'Fun Dives', minAge: 10, maxAge: null, certReq: 'certified_diver', certLabel: 'Certified diver' },
+  { id: 'post-12-dives', name: 'Post 12 (extra 2 dives)', category: 'Fun Dives', minAge: 10, maxAge: null, certReq: 'certified_diver', certLabel: 'Certified diver + existing dive package' },
+  { id: 'night-dive', name: 'Night Dive', category: 'Fun Dives', minAge: 12, maxAge: null, certReq: 'open_water', certLabel: 'Open Water Diver / Junior Open Water Diver' },
+  { id: 'dawn-dive', name: 'Dawn Dive', category: 'Fun Dives', minAge: 10, maxAge: null, certReq: 'certified_diver', certLabel: 'Certified diver' },
+  { id: 'padi-dsd-ow-combo', name: 'PADI DSD + Open Water', category: 'Combos', minAge: 10, maxAge: null, certReq: 'none', certLabel: 'No prior certification required' },
+  { id: 'padi-ow-aow-combo', name: 'PADI OW + Advanced', category: 'Combos', minAge: 12, maxAge: null, certReq: 'none', certLabel: 'No prior certification required' },
+  { id: 'efr-rescue-combo', name: 'EFR + Rescue Diver', category: 'Combos', minAge: 12, maxAge: null, certReq: 'advanced_open_water', certLabel: 'Advanced Diver + EFR' },
+  { id: 'padi-divemaster', name: 'PADI Divemaster', category: 'Pro Courses', minAge: 18, maxAge: null, certReq: 'rescue_efr', certLabel: 'Rescue + EFR + required experience' },
+  { id: 'efr-rescue-dm-combo', name: 'EFR + Rescue + Divemaster', category: 'Pro Courses', minAge: 18, maxAge: null, certReq: 'advanced_open_water', certLabel: 'Advanced Open Water required' },
+  { id: 'efr-rescue-dm-prereqs', name: 'EFR + Rescue + DM (prereqs)', category: 'Pro Courses', minAge: 18, maxAge: null, certReq: 'rescue_efr', certLabel: 'Rescue / EFR / experience required' },
+  { id: 'zero-to-hero', name: 'Zero to Hero (OW to DM)', category: 'Pro Courses', minAge: 18, maxAge: null, certReq: 'none', certLabel: 'No prior certification required' },
+  { id: 'padi-basic-freediver', name: 'PADI Basic Freediver', category: 'Freediving', minAge: 12, maxAge: null, certReq: 'none', certLabel: 'No prior freediving certification required' },
+  { id: 'padi-freediver', name: 'PADI Freediver', category: 'Freediving', minAge: 15, maxAge: null, certReq: 'none', certLabel: 'No prior freediving certification required' },
+  { id: 'reef-explorer', name: 'Reef Explorer', category: 'Snorkeling', minAge: 7, maxAge: null, certReq: 'none', certLabel: 'No certification required' },
+  { id: 'ocean-explorer', name: 'Ocean Explorer', category: 'Snorkeling', minAge: 7, maxAge: null, certReq: 'none', certLabel: 'No certification required' },
+  { id: 'drift-diver', name: 'Drift Diver', category: 'Specialities', minAge: 15, maxAge: null, certReq: 'open_water', certLabel: 'Open Water / prerequisite certification' },
 ]
 
-export const EXPERIENCE_LABELS = {
-  beginner: 'Beginner (No prior experience)',
-  completed_dsd: 'Completed DSD (Discover Scuba)',
-  open_water: 'Open Water Diver Certified',
-  advanced_open_water: 'Advanced Open Water Certified',
-  advanced_efr: 'Advanced Open Water + EFR Certified',
-  certified_diver: 'Existing Certified Diver',
-  basic_freediver: 'Basic Freediver',
-}
+export const CERTIFICATION_OPTIONS = [
+  { key: 'none', label: 'None (No prior certification required)' },
+  { key: 'completed_dsd', label: 'Completed DSD / Introductory Dive' },
+  { key: 'open_water', label: 'Open Water Diver / Junior Open Water' },
+  { key: 'advanced_open_water', label: 'Advanced Open Water / Junior Advanced' },
+  { key: 'rescue_efr', label: 'Rescue Diver + EFR Certified' },
+  { key: 'certified_diver', label: 'Existing Certified Diver (Fun Dives)' },
+  { key: 'freediver', label: 'Basic Freediver / Freediver' },
+]
 
-export function getEligiblePrograms(ageInput, expLevel) {
+export function getEligiblePrograms(ageInput, certInput = 'none') {
   const age = parseInt(ageInput, 10)
   
-  // Rule 1: Age below 1 year -> no available programs
-  if (isNaN(age) || age < 1) {
+  // Rule 0: Age below 7 (0-6) -> NOT ALLOWED (0 programs)
+  if (isNaN(age) || age < 7) {
     return []
   }
 
   return PROGRAMS_CATALOG.filter((prog) => {
-    // Rule 3: For anything above 10 -> show everything except what is 8 to 10 specific (maxAge === 10)
-    if (age > 10 && prog.maxAge !== null && prog.maxAge <= 10) {
-      return false
-    }
-
-    // Rule 2: For ages 8 to 10 -> exclude programs requiring minAge > age (e.g. 10+ or 12+)
+    // Age Rule: Must satisfy minAge
     if (prog.minAge !== null && age < prog.minAge) {
       return false
     }
 
-    // Experience Level Check
-    if (prog.expReq === 'all') return true
-    if (Array.isArray(prog.expReq)) {
-      return prog.expReq.includes(expLevel || 'beginner')
+    // Age Rule: For maxAge (e.g. Bubblemaker 8-10)
+    if (prog.maxAge !== null && age > prog.maxAge) {
+      return false
     }
+
+    // Certification Prerequisite Check:
+    if (prog.certReq === 'none') return true
+
+    if (prog.certReq === 'completed_dsd') {
+      return ['completed_dsd', 'open_water', 'advanced_open_water', 'rescue_efr', 'certified_diver'].includes(certInput)
+    }
+
+    if (prog.certReq === 'open_water') {
+      return ['open_water', 'advanced_open_water', 'rescue_efr', 'certified_diver'].includes(certInput)
+    }
+
+    if (prog.certReq === 'advanced_open_water') {
+      return ['advanced_open_water', 'rescue_efr', 'certified_diver'].includes(certInput)
+    }
+
+    if (prog.certReq === 'rescue_efr') {
+      return ['rescue_efr'].includes(certInput)
+    }
+
+    if (prog.certReq === 'certified_diver') {
+      return ['open_water', 'advanced_open_water', 'rescue_efr', 'certified_diver'].includes(certInput)
+    }
+
     return true
   })
 }
@@ -358,13 +376,13 @@ export default function BookUs() {
                   </motion.div>
                 )}
 
-                {/* STEP 2: Name, Age & Experience Level for Each Person */}
+                {/* STEP 2: Name, Age & Certification Level for Each Person */}
                 {currentStep === 2 && (
                   <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
                     <div>
                       <span className="text-xs font-bold uppercase tracking-widest text-accent mb-1 block">Step 2 of 4</span>
                       <h3 className="font-heading text-3xl font-bold text-navy">Participant Details</h3>
-                      <p className="text-xs text-navy/60 mt-1">Enter age and experience level for each person to unlock matching programs.</p>
+                      <p className="text-xs text-navy/60 mt-1">Enter age and prior scuba certification level for each person to unlock eligible programs.</p>
                     </div>
 
                     <div className="space-y-6 max-h-[550px] overflow-y-auto pr-1">
@@ -411,18 +429,57 @@ export default function BookUs() {
                           </div>
 
                           <div>
-                            <label className="mb-2 block text-xs font-bold text-navy/70">Experience Level / Certification</label>
+                            <label className="mb-2 block text-xs font-bold text-navy/70">Prior Scuba / Freediving Certification Level</label>
                             <select
-                              value={p.experienceLevel}
+                              value={p.experienceLevel || 'none'}
                               onChange={(e) => handleParticipantChange(idx, 'experienceLevel', e.target.value)}
                               required
                               className="w-full rounded-2xl bg-white border border-navy/10 px-4 py-3.5 text-sm text-navy outline-none focus:ring-2 focus:ring-accent/50 transition appearance-none"
                             >
-                              {Object.entries(EXPERIENCE_LABELS).map(([key, label]) => (
-                                <option key={key} value={key}>{label}</option>
+                              {CERTIFICATION_OPTIONS.map((opt) => (
+                                <option key={opt.key} value={opt.key}>{opt.label}</option>
                               ))}
                             </select>
                           </div>
+
+                          {/* Dynamic Age Band Helper Banner */}
+                          {p.age !== '' && (
+                            parseInt(p.age, 10) < 7 ? (
+                              <div className="rounded-2xl bg-navy/[0.04] border border-navy/10 p-4 text-xs font-medium text-navy/80 flex items-start gap-3">
+                                <div className="w-5 h-5 rounded-full bg-navy/10 text-navy shrink-0 flex items-center justify-center font-bold text-[11px] mt-0.5">
+                                  !
+                                </div>
+                                <div>
+                                  <span className="font-bold text-navy block mb-0.5">Age Eligibility Notice (Age 0–6)</span>
+                                  <span className="text-navy/70 leading-relaxed">
+                                    Minimum age for ocean & water programs is 7 years. No programs are currently available for this age group.
+                                  </span>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="rounded-2xl bg-navy/[0.03] border border-navy/10 p-4 text-xs font-medium text-navy/80 flex items-start gap-3">
+                                <div className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 mt-1.5 animate-pulse" />
+                                <div>
+                                  <span className="font-bold text-navy block mb-0.5">
+                                    {parseInt(p.age, 10) === 7 && 'Age 7 Pathway: Snorkeling & Ocean Discovery'}
+                                    {(parseInt(p.age, 10) === 8 || parseInt(p.age, 10) === 9) && 'Age 8–9 Pathway: Try Dive, DSD Lite & Junior Scuba'}
+                                    {(parseInt(p.age, 10) === 10 || parseInt(p.age, 10) === 11) && 'Age 10–11 Pathway: PADI DSD, Open Water & Entry Courses'}
+                                    {(parseInt(p.age, 10) >= 12 && parseInt(p.age, 10) <= 14) && 'Age 12–14 Pathway: Advanced Open Water, Rescue & Nitrox'}
+                                    {(parseInt(p.age, 10) >= 15 && parseInt(p.age, 10) <= 17) && 'Age 15–17 Pathway: Deep, Wreck & Technical Specialities'}
+                                    {parseInt(p.age, 10) >= 18 && 'Age 18+ Pathway: All Courses & Professional Divemaster Track'}
+                                  </span>
+                                  <span className="text-navy/70 leading-relaxed">
+                                    {parseInt(p.age, 10) === 7 && 'Eligible for Discover Snorkeling, Reef Explorer & Ocean Explorer.'}
+                                    {(parseInt(p.age, 10) === 8 || parseInt(p.age, 10) === 9) && 'Eligible for Try Dive, DSD Lite, Bubblemaker, Skin Diver & Snorkeling.'}
+                                    {(parseInt(p.age, 10) === 10 || parseInt(p.age, 10) === 11) && 'Eligible for PADI DSD, Open Water Diver, Scuba Diver & Specialities.'}
+                                    {(parseInt(p.age, 10) >= 12 && parseInt(p.age, 10) <= 14) && 'Eligible for Advanced Open Water, Rescue Diver, Nitrox & Freediving.'}
+                                    {(parseInt(p.age, 10) >= 15 && parseInt(p.age, 10) <= 17) && 'Eligible for Deep Diver, Wreck Diver, Drift Diver & Freediver.'}
+                                    {parseInt(p.age, 10) >= 18 && 'Eligible for All Courses & Professional Divemaster Pathway.'}
+                                  </span>
+                                </div>
+                              </div>
+                            )
+                          )}
                         </div>
                       ))}
                     </div>
@@ -435,78 +492,123 @@ export default function BookUs() {
                     <div>
                       <span className="text-xs font-bold uppercase tracking-widest text-accent mb-1 block">Step 3 of 4</span>
                       <h3 className="font-heading text-3xl font-bold text-navy">Eligible Programs & Courses</h3>
-                      <p className="text-xs text-navy/60 mt-1">Based on age and experience level, select a program for each person.</p>
+                      <p className="text-xs text-navy/60 mt-1">Based on age and prerequisite certification eligibility matrix, select a program for each person.</p>
                     </div>
 
                     <div className="space-y-8 max-h-[550px] overflow-y-auto pr-1">
                       {participants.map((p, idx) => {
                         const eligible = getEligiblePrograms(p.age, p.experienceLevel)
+                        const certObj = CERTIFICATION_OPTIONS.find(c => c.key === (p.experienceLevel || 'none'))
+                        
                         return (
-                          <div key={p.id} className="rounded-3xl bg-[#FAFAFA] border border-navy/10 p-5 sm:p-6 space-y-4">
-                            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-navy/10 pb-3">
+                          <div key={p.id} className="rounded-3xl bg-[#FAFAFA] border border-navy/10 p-5 sm:p-6 space-y-5">
+                            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-navy/10 pb-4">
                               <div>
-                                <h4 className="font-heading font-bold text-navy text-lg">
+                                <h4 className="font-heading font-bold text-navy text-xl">
                                   {p.name || `Person ${idx + 1}`}
                                 </h4>
-                                <p className="text-xs text-navy/60">
-                                  Age: <span className="font-bold text-navy">{p.age || 'Not specified'}</span> • Experience: <span className="font-bold text-navy">{EXPERIENCE_LABELS[p.experienceLevel]}</span>
+                                <p className="text-xs text-navy/60 mt-0.5">
+                                  Age: <span className="font-bold text-navy">{p.age || 'Not specified'}</span> • Cert: <span className="font-bold text-navy">{certObj?.label || 'None'}</span>
                                 </p>
                               </div>
-                              <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">
-                                {eligible.length} Available Courses
+                              <span className="text-[11px] font-bold px-3.5 py-1 rounded-full bg-navy/[0.06] text-navy border border-navy/10">
+                                {eligible.length} Eligible Program(s)
                               </span>
                             </div>
 
-                            <div>
-                              <label className="mb-2 block text-xs font-bold text-navy/70 uppercase tracking-wider">
-                                Select Program for {p.name || `Person ${idx + 1}`}
-                              </label>
-                              <select
-                                value={p.selectedProgram}
-                                onChange={(e) => handleParticipantChange(idx, 'selectedProgram', e.target.value)}
-                                required={eligible.length > 0}
-                                className="w-full rounded-2xl bg-white border border-navy/10 px-4 py-4 text-sm font-bold text-navy outline-none focus:ring-2 focus:ring-accent/50 transition appearance-none shadow-sm mb-3"
-                              >
-                                {eligible.length === 0 ? (
-                                  <option value="">No available programs for this age</option>
-                                ) : (
-                                  <>
+                            {eligible.length === 0 ? (
+                              <div className="rounded-2xl bg-navy/[0.04] border border-navy/10 p-5 text-xs font-medium text-navy/80 flex items-start gap-3">
+                                <div className="w-5 h-5 rounded-full bg-navy/10 text-navy shrink-0 flex items-center justify-center font-bold text-[10px] mt-0.5">
+                                  i
+                                </div>
+                                <span>No water or diving programs available for age {p.age || '0–6'} year(s). Minimum age for Snorkeling is 7 years; minimum age for introductory diving is 8 years.</span>
+                              </div>
+                            ) : (
+                              <div className="space-y-4">
+                                <div className="flex justify-between items-center">
+                                  <label htmlFor={`select-program-${p.id}`} className="text-xs font-bold text-navy/70 uppercase tracking-wider">
+                                    Select Program for {p.name || `Person ${idx + 1}`}
+                                  </label>
+                                  <span className="text-[11px] text-navy/50 font-medium">Click a card or select from list</span>
+                                </div>
+
+                                {/* Accessible Native Select Dropdown */}
+                                <div className="relative">
+                                  <select
+                                    id={`select-program-${p.id}`}
+                                    value={p.selectedProgram}
+                                    onChange={(e) => handleParticipantChange(idx, 'selectedProgram', e.target.value)}
+                                    required={eligible.length > 0}
+                                    aria-label={`Select program for ${p.name || `Person ${idx + 1}`}`}
+                                    className="w-full rounded-2xl bg-white border border-navy/10 px-4 py-3.5 text-sm font-bold text-navy outline-none focus:ring-2 focus:ring-navy/20 transition appearance-none shadow-sm cursor-pointer pr-10"
+                                  >
                                     <option value="" disabled>Select an eligible course...</option>
                                     {eligible.map((prog) => (
                                       <option key={prog.id} value={prog.id}>
-                                        {prog.name} {prog.minAge ? `(Age ${prog.minAge}+)` : ''} — {prog.desc}
+                                        {prog.name} [{prog.category}] (Age {prog.minAge}+) — {prog.certLabel}
                                       </option>
                                     ))}
-                                  </>
-                                )}
-                              </select>
-
-                              {eligible.length === 0 && (
-                                <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold flex items-center gap-2">
-                                  <span>⚠️</span>
-                                  <span>No available programs for age {p.age || 'below 1'} year(s). Minimum age for introductory programs (e.g. Try Dive / Bubblemaker) is 8 years.</span>
-                                </div>
-                              )}
-
-                              {/* Selected Program Preview Card */}
-                              {p.selectedProgram && (
-                                <div className="rounded-2xl bg-navy text-white p-4 text-xs space-y-1">
-                                  <div className="flex justify-between items-center">
-                                    <span className="font-bold text-accent text-sm">
-                                      {PROGRAMS_CATALOG.find(pr => pr.id === p.selectedProgram)?.name}
-                                    </span>
-                                    <span className="text-[10px] bg-white/10 px-2.5 py-0.5 rounded-full text-white/80">
-                                      {PROGRAMS_CATALOG.find(pr => pr.id === p.selectedProgram)?.minAge 
-                                        ? `Age: ${PROGRAMS_CATALOG.find(pr => pr.id === p.selectedProgram)?.minAge}+` 
-                                        : 'All Ages'}
-                                    </span>
+                                  </select>
+                                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-navy/40">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
                                   </div>
-                                  <p className="text-white/80 leading-relaxed">
-                                    {PROGRAMS_CATALOG.find(pr => pr.id === p.selectedProgram)?.desc}
-                                  </p>
                                 </div>
-                              )}
-                            </div>
+
+                                {/* Interactive Program Cards Grid */}
+                                <div className="grid sm:grid-cols-2 gap-3 pt-2">
+                                  {eligible.slice(0, 6).map((prog) => {
+                                    const isSelected = p.selectedProgram === prog.id
+                                    return (
+                                      <div
+                                        key={prog.id}
+                                        onClick={() => handleParticipantChange(idx, 'selectedProgram', prog.id)}
+                                        className={`rounded-2xl p-4 border transition-all cursor-pointer flex flex-col justify-between gap-3 ${
+                                          isSelected
+                                            ? 'bg-navy text-white border-navy shadow-md ring-1 ring-navy'
+                                            : 'bg-white text-navy border-navy/10 hover:border-navy/30 hover:bg-navy/[0.02]'
+                                        }`}
+                                      >
+                                        <div className="flex justify-between items-start gap-2">
+                                          <div>
+                                            <span className={`text-[10px] font-bold uppercase tracking-widest block mb-1 ${
+                                              isSelected ? 'text-accent' : 'text-navy/50'
+                                            }`}>
+                                              {prog.category}
+                                            </span>
+                                            <h5 className="font-heading font-bold text-base leading-snug">
+                                              {prog.name}
+                                            </h5>
+                                          </div>
+                                          <div className={`w-5 h-5 rounded-full border shrink-0 flex items-center justify-center mt-0.5 ${
+                                            isSelected ? 'border-accent bg-accent text-navy' : 'border-navy/20 bg-transparent'
+                                          }`}>
+                                            {isSelected && <span className="text-[10px] font-bold">✓</span>}
+                                          </div>
+                                        </div>
+
+                                        <div className="flex flex-wrap items-center gap-2 pt-1 text-[10px]">
+                                          <span className={`px-2.5 py-0.5 rounded-full font-semibold ${
+                                            isSelected ? 'bg-white/10 text-white/90' : 'bg-navy/[0.05] text-navy/70'
+                                          }`}>
+                                            Age {prog.minAge}+
+                                          </span>
+                                          <span className={`truncate max-w-[170px] ${
+                                            isSelected ? 'text-white/70' : 'text-navy/50'
+                                          }`}>
+                                            Prereq: {prog.certLabel}
+                                          </span>
+                                        </div>
+                                      </div>
+                                    )
+                                  })}
+                                </div>
+                                {eligible.length > 6 && (
+                                  <p className="text-[11px] text-navy/50 italic text-center pt-1">
+                                    Showing top matches above. Use the dropdown menu to view all {eligible.length} eligible options.
+                                  </p>
+                                )}
+                              </div>
+                            )}
                           </div>
                         )
                       })}

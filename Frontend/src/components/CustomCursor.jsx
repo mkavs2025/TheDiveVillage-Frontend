@@ -146,7 +146,7 @@ export default function CustomCursor() {
         ref={normalRef}
         src={cursorImg}
         alt=""
-        className="pointer-events-none fixed top-0 left-0 z-[10000] w-14 sm:w-16 h-auto will-change-transform drop-shadow-md"
+        className="pointer-events-none fixed top-0 left-0 z-[10000] w-20 sm:w-24 h-auto will-change-transform drop-shadow-md"
         style={{
           transform: 'translate3d(-100px, -100px, 0)',
           opacity: 0,
@@ -159,7 +159,7 @@ export default function CustomCursor() {
         ref={hoverRef}
         src={cursorHoverImg}
         alt=""
-        className="pointer-events-none fixed top-0 left-0 z-[10000] w-14 sm:w-16 h-auto will-change-transform drop-shadow-lg invert"
+        className="pointer-events-none fixed top-0 left-0 z-[10000] w-20 sm:w-24 h-auto will-change-transform drop-shadow-lg invert"
         style={{
           transform: 'translate3d(-100px, -100px, 0)',
           opacity: 0,

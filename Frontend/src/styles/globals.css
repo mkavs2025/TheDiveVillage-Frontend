@@ -42,6 +42,23 @@
     user-select: text;
   }
 
+  /* Hide scrollbars globally across all browsers for elements with scrollbar-none or no-scrollbar */
+  .scrollbar-none::-webkit-scrollbar,
+  .no-scrollbar::-webkit-scrollbar,
+  .overflow-x-auto::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+  }
+
+  .scrollbar-none,
+  .no-scrollbar,
+  .overflow-x-auto {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+
   .hide-cursors,
   .hide-cursors * {
     cursor: none !important;
@@ -52,6 +69,67 @@
     transform: translateY(-2px) scale(1.04) !important;
     box-shadow: 0 12px 24px -6px rgba(0, 174, 199, 0.35) !important;
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  /* Completely remove hover glow and scale transform on header / toolbar elements */
+  header .proximity-active,
+  header button.proximity-active,
+  header a.proximity-active,
+  header div.proximity-active,
+  header button:hover,
+  header a:hover {
+    box-shadow: none !important;
+  }
+
+  /* Completely remove hover glow and box shadows on footer elements */
+  footer .proximity-active,
+  footer button.proximity-active,
+  footer a.proximity-active,
+  footer div.proximity-active,
+  footer button:hover,
+  footer a:hover {
+    box-shadow: none !important;
+    filter: none !important;
+    drop-shadow: none !important;
+  }
+
+  /* Carousel arrow buttons: locked position with zero shift on hover, turning yellow on hover */
+  .carousel-arrow-btn {
+    transform: translateY(-50%) !important;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+  }
+
+  .carousel-arrow-btn.proximity-active {
+    transform: translateY(-50%) !important;
+    box-shadow: none !important;
+  }
+
+  .carousel-arrow-btn:hover,
+  .carousel-arrow-btn.proximity-active:hover {
+    background-color: #FFCD00 !important;
+    color: #00223D !important;
+    border-color: #FFCD00 !important;
+    transform: translateY(-50%) !important;
+  }
+
+  /* Program panel glassmorphic buttons turning yellow on hover */
+  .program-panel-btn {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+  }
+
+  .program-panel-btn:hover,
+  .group:hover .program-panel-btn,
+  .program-panel-btn.proximity-active {
+    background-color: #FFCD00 !important;
+    color: #00223D !important;
+    border-color: #FFCD00 !important;
+    transform: none !important;
+    box-shadow: none !important;
   }
 
   @keyframes floatPngSlow {
@@ -74,12 +152,6 @@
     @apply font-heading font-bold;
   }
 
-  /* Default justified alignment for multi-line body paragraphs */
-  p, article, .prose p {
-    text-align: justify;
-    text-justify: inter-word;
-    text-align-last: left;
-  }
 
   /* Utility class overrides for centered, left, or right aligned text blocks & section headers */
   .text-center,
@@ -165,6 +237,22 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     border-right: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-btn {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .glass-btn:hover {
+    background: #FFCD00 !important;
+    color: #003865 !important;
+    border-color: #FFCD00 !important;
+    box-shadow: 0 12px 35px rgba(255, 205, 0, 0.55) !important;
   }
 
   .hide-scrollbar::-webkit-scrollbar {

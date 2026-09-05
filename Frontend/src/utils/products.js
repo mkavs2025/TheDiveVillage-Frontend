@@ -44,7 +44,7 @@ export const SHOP_PRODUCTS = [
       '4-Way Stretch: Flexible fabric allows easy movement without restricting your mobility.',
       'Lightweight & Breathable: Lightweight fabric allows airflow and keeps you comfortable during extended wear.'
     ],
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    sizes: ['One Size (XS-M)'],
     colors: [
       { name: 'Black', hex: '#000000' }
     ],
@@ -71,7 +71,7 @@ export const SHOP_PRODUCTS = [
       'Thigh-Smoothing Panels: Designed to provide extra coverage and create a smoother appearance around the thighs.',
       'Full-Length Coverage: Offers extended coverage for your legs while providing comfort and protection during water activities.'
     ],
-    sizes: ['S', 'M', 'L', 'XL'],
+    sizes: ['One Size (XS-M)'],
     colors: [
       { name: 'Black', hex: '#000000' }
     ],
@@ -82,8 +82,8 @@ export const SHOP_PRODUCTS = [
   },
   {
     id: 'product-womens-strap',
-    title: 'Women’s Shoulder Strap Top',
-    name: 'Women’s Shoulder Strap Top',
+    title: 'Women’s Shoulder Strap Top / Women’s Shortie',
+    name: 'Women’s Shoulder Strap Top / Women’s Shortie',
     price: 1999,
     oldPrice: 2499,
     image: imgWomensStrapFront,
@@ -98,7 +98,7 @@ export const SHOP_PRODUCTS = [
       'Stretch-Fit Fabric: Flexible fabric moves with your body for unrestricted movement while swimming or diving.',
       'Full-Body Coverage: Provides comfortable coverage across the torso and upper legs for added protection in the water.'
     ],
-    sizes: ['S', 'M', 'L'],
+    sizes: ['One Size (XS-M)'],
     colors: [
       { name: 'Black', hex: '#000000' }
     ],
@@ -125,7 +125,7 @@ export const SHOP_PRODUCTS = [
       'Stretch-Fit Fabric: Flexible fabric moves naturally with your body for unrestricted movement while swimming or diving.',
       'Lightweight & Quick-Dry: Lightweight fabric dries quickly after getting wet, keeping you comfortable in and out of the water.'
     ],
-    sizes: ['M', 'L', 'XL', 'XXL'],
+    sizes: ['One Size (XS-M)'],
     colors: [
       { name: 'Black', hex: '#000000' }
     ],
@@ -152,7 +152,7 @@ export const SHOP_PRODUCTS = [
       '4-Way Stretch: Flexible fabric moves with your body for unrestricted movement during swimming and diving.',
       'Lightweight & Breathable: Lightweight construction allows airflow and keeps you comfortable during extended wear.'
     ],
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    sizes: ['One Size (XS-M)'],
     colors: [
       { name: 'Black', hex: '#000000' }
     ],
@@ -170,7 +170,7 @@ export const SHOP_PRODUCTS = [
     image: imgSkinSuitFront,
     images: [imgSkinSuitFront, imgSkinSuitBack],
     video: videoSkinSuit,
-    category: 'Swimwear',
+    category: 'Skin Wear',
     tag: 'Premium',
     description: 'Ultimate full-body protection with grip panels on the knees and seat, front zip closure, and stirrup foot straps.',
     features: [
@@ -179,7 +179,7 @@ export const SHOP_PRODUCTS = [
       'Stirrup Foot Straps: Integrated foot straps help keep the suit securely in place and prevent the legs from riding up during movement.',
       'Full-Body Coverage: Provides extended coverage from the neck to the ankles for added protection and comfort in the water.'
     ],
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    sizes: ['One Size (XS-M)'],
     colors: [
       { name: 'Black', hex: '#000000' }
     ],

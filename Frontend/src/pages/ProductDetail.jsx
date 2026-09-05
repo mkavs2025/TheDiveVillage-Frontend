@@ -17,20 +17,27 @@ export default function ProductDetail() {
   const product = SHOP_PRODUCTS.find((p) => p.id === id) || SHOP_PRODUCTS[0]
   const relatedProducts = SHOP_PRODUCTS.filter((p) => p.id !== product.id).slice(0, 4)
 
+  const getMediaLabel = (type, idx) => {
+    if (type === 'video') return '360 view of the Product'
+    if (idx === 0) return 'Front'
+    if (idx === 1) return 'Back'
+    return `View ${idx + 1}`
+  }
+
   const mediaItems = []
   if (product.images && product.images.length > 0) {
     product.images.forEach((img, idx) => {
-      mediaItems.push({ type: 'image', src: img, id: `img-${idx}` })
+      mediaItems.push({ type: 'image', src: img, id: `img-${idx}`, label: getMediaLabel('image', idx) })
     })
   } else if (product.image) {
-    mediaItems.push({ type: 'image', src: product.image, id: 'img-0' })
+    mediaItems.push({ type: 'image', src: product.image, id: 'img-0', label: 'Front' })
   }
   if (product.video) {
-    mediaItems.push({ type: 'video', src: product.video, id: 'video-0' })
+    mediaItems.push({ type: 'video', src: product.video, id: 'video-0', label: '360 view of the Product' })
   }
 
   const [activeMedia, setActiveMedia] = useState(mediaItems[0] || null)
-  const [selectedSize, setSelectedSize] = useState(product.sizes?.[0] || 'M')
+  const [selectedSize, setSelectedSize] = useState('One Size (XS-M)')
   const [selectedColor, setSelectedColor] = useState(product.colors?.[0] || { name: 'Black', hex: '#000000' })
   const [quantity, setQuantity] = useState(1)
   const [activeTab, setActiveTab] = useState('details')
@@ -41,12 +48,12 @@ export default function ProductDetail() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
     const initialItems = []
     if (product.images && product.images.length > 0) {
-      product.images.forEach((img, idx) => initialItems.push({ type: 'image', src: img, id: `img-${idx}` }))
+      product.images.forEach((img, idx) => initialItems.push({ type: 'image', src: img, id: `img-${idx}`, label: getMediaLabel('image', idx) }))
     } else if (product.image) {
-      initialItems.push({ type: 'image', src: product.image, id: 'img-0' })
+      initialItems.push({ type: 'image', src: product.image, id: 'img-0', label: 'Front' })
     }
     if (product.video) {
-      initialItems.push({ type: 'video', src: product.video, id: 'video-0' })
+      initialItems.push({ type: 'video', src: product.video, id: 'video-0', label: '360 view of the Product' })
     }
     setActiveMedia(initialItems[0] || null)
     if (product.sizes && product.sizes.length > 0) {
@@ -152,45 +159,55 @@ export default function ProductDetail() {
           <div className="lg:col-span-7 flex flex-col gap-6">
             <div className="flex gap-4 flex-col-reverse sm:flex-row">
               {/* Thumbnail Selectors */}
-              <div className="flex sm:flex-col gap-3 overflow-x-auto sm:overflow-visible shrink-0">
+              <div className="flex sm:flex-col gap-4 overflow-x-auto sm:overflow-visible shrink-0">
                 {mediaItems.map((item, i) => (
-                  <button
-                    key={item.id || i}
-                    onClick={() => setActiveMedia(item)}
-                    className={`flex-shrink-0 w-20 h-24 rounded-2xl overflow-hidden border-2 transition relative ${
-                      activeMedia?.src === item.src
-                        ? 'border-navy shadow-md ring-2 ring-navy/20'
-                        : 'border-transparent hover:border-navy/30 bg-[#F0F2F5]'
-                    }`}
-                  >
-                    {item.type === 'image' ? (
-                      <img src={item.src} alt={`Thumbnail ${i + 1}`} className="w-full h-full object-cover bg-white" />
-                    ) : (
-                      <div className="relative w-full h-full bg-black flex items-center justify-center">
-                        <video src={item.src} className="w-full h-full object-cover opacity-70 pointer-events-none" muted />
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                          <span className="w-7 h-7 rounded-full bg-accent text-navy flex items-center justify-center text-xs font-bold shadow-sm">
-                            ▶
-                          </span>
+                  <div key={item.id || i} className="flex flex-col items-center gap-1 shrink-0">
+                    <button
+                      onClick={() => setActiveMedia(item)}
+                      className={`flex-shrink-0 w-20 h-24 rounded-2xl overflow-hidden border-2 transition relative cursor-pointer ${
+                        activeMedia?.src === item.src
+                          ? 'border-navy shadow-md ring-2 ring-navy/20'
+                          : 'border-transparent hover:border-navy/30 bg-[#F0F2F5]'
+                      }`}
+                    >
+                      {item.type === 'image' ? (
+                        <img src={item.src} alt={item.label} className="w-full h-full object-cover bg-white" />
+                      ) : (
+                        <div className="relative w-full h-full bg-black flex items-center justify-center">
+                          <video src={item.src} className="w-full h-full object-cover opacity-70 pointer-events-none" muted />
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                            <span className="w-7 h-7 rounded-full bg-accent text-navy flex items-center justify-center text-xs font-bold shadow-sm">
+                              ▶
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </button>
+                      )}
+                    </button>
+                    <span className="text-[11px] font-bold text-navy/80 tracking-tight text-center max-w-[80px] leading-tight">
+                      {item.label}
+                    </span>
+                  </div>
                 ))}
               </div>
 
               {/* Main Product Card Media Display (Fits Box Size) */}
               <div className="flex-1 rounded-[32px] overflow-hidden bg-white border border-navy/5 aspect-[4/5] relative shadow-card group">
                 {activeMedia?.type === 'video' ? (
-                  <video
-                    src={activeMedia.src}
-                    controls
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover rounded-[32px]"
-                  />
+                  <>
+                    <video
+                      src={activeMedia.src}
+                      controls
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover rounded-[32px]"
+                    />
+                    <div className="absolute top-6 right-6 bg-navy/90 backdrop-blur-md px-4 py-2 text-xs font-bold text-[#FFCD00] rounded-full shadow-lg z-10 border border-[#FFCD00]/40 flex items-center gap-2 pointer-events-none">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#FFCD00] animate-ping" />
+                      <span>360 view of the Product</span>
+                    </div>
+                  </>
                 ) : (
                   <img
                     src={activeMedia?.src || product.image}
@@ -210,35 +227,37 @@ export default function ProductDetail() {
           {/* Right Column: Product Specifications & Actions */}
           <div className="lg:col-span-5 flex flex-col justify-start">
             
-            {/* Category & Badge */}
-            <div className="flex items-center gap-3 mb-2">
-              <span className="text-xs font-bold uppercase tracking-widest text-accent">
+            {/* Category & Stock Header */}
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-xs font-semibold uppercase tracking-widest text-navy/50">
                 {product.category}
               </span>
-              <span className="h-1 w-1 rounded-full bg-navy/30" />
-              <span className="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
-                ● {product.stockStatus || 'In Stock'}
+              <span className="h-1 w-1 rounded-full bg-navy/20" />
+              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                {product.stockStatus || 'In Stock'}
               </span>
             </div>
 
-            {/* Product Name */}
-            <h1 className="font-heading text-3xl sm:text-4xl font-bold text-navy leading-tight mb-3 text-balance">
+            {/* Product Title */}
+            <h1 className="font-heading text-3xl sm:text-4xl font-bold text-navy leading-tight mb-3 text-left tracking-tight">
               {product.title}
             </h1>
 
-
-
             {/* Product Description */}
-            <p className="text-navy/80 text-sm leading-relaxed mb-6">
+            <p className="text-navy/75 text-sm sm:text-base leading-relaxed mb-6 text-left">
               {product.description}
             </p>
 
             {/* 1. Color Variant Selection */}
             {product.colors && product.colors.length > 0 && (
-              <div className="mb-6 pt-4 border-t border-navy/10">
+              <div className="mb-6 pt-5 border-t border-navy/10">
                 <div className="flex justify-between items-center mb-3">
                   <p className="text-xs font-bold uppercase tracking-wider text-navy/70">
-                    Available Colour: <span className="font-bold text-navy normal-case text-sm ml-1">{selectedColor.name}</span>
+                    Color: <span className="font-bold text-navy normal-case text-sm ml-1">{selectedColor.name}</span>
                   </p>
                 </div>
                 <div className="flex gap-3">
@@ -247,10 +266,10 @@ export default function ProductDetail() {
                       key={idx}
                       onClick={() => setSelectedColor(color)}
                       title={color.name}
-                      className={`w-9 h-9 rounded-full transition relative flex items-center justify-center ${
+                      className={`w-9 h-9 rounded-full transition relative flex items-center justify-center cursor-pointer ${
                         selectedColor.name === color.name
-                          ? 'ring-2 ring-offset-2 ring-navy scale-110'
-                          : 'opacity-85 hover:opacity-100 hover:scale-105'
+                          ? 'ring-2 ring-offset-2 ring-navy scale-105'
+                          : 'opacity-80 hover:opacity-100 hover:scale-105'
                       }`}
                       style={{ backgroundColor: color.hex }}
                     >
@@ -265,69 +284,57 @@ export default function ProductDetail() {
               </div>
             )}
 
-            {/* 2. Size Variant Selection */}
-            {product.sizes && product.sizes.length > 0 && (
-              <div className="mb-6">
-                <div className="flex justify-between items-center mb-3">
-                  <p className="text-xs font-bold uppercase tracking-wider text-navy/70">
-                    Select Size: <span className="font-bold text-navy normal-case text-sm ml-1">{selectedSize}</span>
-                  </p>
-                  <button 
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      setActiveTab('sizeGuide')
-                      setTimeout(() => {
-                        sizeChartRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                      }, 50)
-                    }} 
-                    className="text-xs font-bold text-accent hover:underline cursor-pointer"
-                  >
-                    Size Guide & Chart 📐
-                  </button>
-                </div>
-                <div className="grid grid-cols-5 gap-2">
-                  {product.sizes.map((size) => (
-                    <button
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
-                      className={`py-3 text-xs sm:text-sm font-bold rounded-2xl transition border ${
-                        selectedSize === size
-                          ? 'border-navy bg-navy text-white shadow-sm'
-                          : 'border-navy/15 hover:border-navy bg-white text-navy'
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
+            {/* 2. Size Information (One Size Fits All) */}
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-3">
+                <p className="text-xs font-bold uppercase tracking-wider text-navy/70">
+                  Size: <span className="font-bold text-navy normal-case text-sm ml-1">One Size (Fits XS - M)</span>
+                </p>
+                <button 
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setActiveTab('sizeGuide')
+                    setTimeout(() => {
+                      sizeChartRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    }, 50)
+                  }} 
+                  className="text-xs font-bold text-navy/70 hover:text-navy underline transition cursor-pointer flex items-center gap-1"
+                >
+                  Size Guide
+                </button>
               </div>
-            )}
 
-            {/* 3. Quantity & Stock Availability */}
+              {/* Refined One Size Fits All Info Card */}
+              <div className="flex items-center gap-3 rounded-2xl bg-navy/[0.04] border border-navy/10 px-4 py-3 text-xs text-navy/80 font-medium">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-navy/60 shrink-0">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="16" x2="12" y2="12" />
+                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                </svg>
+                <span><strong>Ultra-Stretch Fit:</strong> Engineered from 4-way stretch fabric to adaptively fit all sizes from <strong>XS to M</strong>.</span>
+              </div>
+            </div>
+
+            {/* 3. Quantity */}
             <div className="mb-6">
               <p className="text-xs font-bold uppercase tracking-wider text-navy/70 mb-3">Quantity</p>
-              <div className="flex items-center gap-4">
-                <div className="inline-flex items-center rounded-2xl border border-navy/20 bg-white p-1 shadow-sm">
-                  <button
-                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                    className="w-10 h-10 flex items-center justify-center rounded-xl text-navy hover:bg-[#F0F2F5] transition text-base font-bold"
-                    aria-label="Decrease quantity"
-                  >
-                    −
-                  </button>
-                  <span className="w-12 text-center font-bold text-sm text-navy">{quantity}</span>
-                  <button
-                    onClick={() => setQuantity((q) => q + 1)}
-                    className="w-10 h-10 flex items-center justify-center rounded-xl text-navy hover:bg-[#F0F2F5] transition text-base font-bold"
-                    aria-label="Increase quantity"
-                  >
-                    +
-                  </button>
-                </div>
-                <span className="text-xs text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-3 py-2 rounded-xl">
-                  ✓ {product.stockStatus || 'In Stock'}
-                </span>
+              <div className="inline-flex items-center rounded-2xl border border-navy/15 bg-white p-1 shadow-sm">
+                <button
+                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                  className="w-10 h-10 flex items-center justify-center rounded-xl text-navy hover:bg-[#F0F2F5] transition text-base font-bold cursor-pointer"
+                  aria-label="Decrease quantity"
+                >
+                  −
+                </button>
+                <span className="w-12 text-center font-bold text-sm text-navy">{quantity}</span>
+                <button
+                  onClick={() => setQuantity((q) => q + 1)}
+                  className="w-10 h-10 flex items-center justify-center rounded-xl text-navy hover:bg-[#F0F2F5] transition text-base font-bold cursor-pointer"
+                  aria-label="Increase quantity"
+                >
+                  +
+                </button>
               </div>
             </div>
 
@@ -336,7 +343,7 @@ export default function ProductDetail() {
               <button
                 onClick={handleAddToCart}
                 disabled={isAdding}
-                className="flex-1 w-full bg-navy hover:bg-accent text-white font-bold py-4 px-6 rounded-full transition shadow-md flex items-center justify-center gap-2 text-sm cursor-pointer"
+                className="flex-1 w-full bg-navy hover:bg-[#002b4e] text-white font-bold py-4 px-6 rounded-full transition shadow-md flex items-center justify-center gap-2 text-sm cursor-pointer"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
@@ -348,24 +355,24 @@ export default function ProductDetail() {
 
               <button
                 onClick={handleBuyNow}
-                className="flex-1 w-full bg-accent hover:bg-white hover:text-navy text-navy font-bold py-4 px-6 rounded-full transition border border-accent shadow-md flex items-center justify-center gap-2 text-sm cursor-pointer"
+                className="flex-1 w-full bg-[#FFCD00] hover:bg-navy hover:text-white text-navy font-bold py-4 px-6 rounded-full transition shadow-md flex items-center justify-center gap-2 text-sm cursor-pointer"
               >
-                Buy Now ⚡
+                Buy Now
               </button>
 
               <button
                 type="button"
                 onClick={() => toggleWishlist(product)}
-                className="w-14 h-14 shrink-0 rounded-full bg-navy border border-white/20 transition duration-200 flex items-center justify-center shadow-md hover:scale-105 active:scale-95 cursor-pointer"
+                className="w-14 h-14 shrink-0 rounded-full bg-white border border-navy/15 transition duration-200 flex items-center justify-center shadow-sm hover:border-navy hover:scale-105 active:scale-95 cursor-pointer"
                 title={isWishlisted(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
                 aria-label="Wishlist"
               >
                 <svg
-                  width="24"
-                  height="24"
+                  width="22"
+                  height="22"
                   viewBox="0 0 24 24"
                   fill={isWishlisted(product.id) ? '#FFCD00' : 'none'}
-                  stroke={isWishlisted(product.id) ? '#FFCD00' : 'white'}
+                  stroke={isWishlisted(product.id) ? '#FFCD00' : '#003865'}
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -374,7 +381,6 @@ export default function ProductDetail() {
                 </svg>
               </button>
             </div>
-
           </div>
         </div>
 
@@ -419,8 +425,15 @@ export default function ProductDetail() {
           )}
 
           {activeTab === 'sizeGuide' && (
-            <div className="space-y-4">
-              <h3 className="font-heading text-2xl font-bold text-navy">Universal Sizing Chart (in inches)</h3>
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-heading text-2xl font-bold text-navy mb-2">Universal Sizing Chart (XS to M)</h3>
+                <div className="bg-[#F0F2F5] border border-navy/10 rounded-2xl p-4 mb-4">
+                  <p className="text-xs sm:text-sm text-navy/80 leading-relaxed font-medium">
+                    ✨ <strong>One Size Fits All (High-Stretch Material):</strong> Our dive apparel is crafted from 4-way ultra-stretch performance fabric designed to expand and conform seamlessly to any body profile from <strong>XS to M</strong>.
+                  </p>
+                </div>
+              </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs sm:text-sm border-collapse">
                   <thead>
@@ -436,9 +449,6 @@ export default function ProductDetail() {
                     <tr><td className="p-3.5 font-bold">XS</td><td className="p-3.5">32 - 34</td><td className="p-3.5">26 - 28</td><td className="p-3.5">155 - 165</td><td className="p-3.5">48 - 58</td></tr>
                     <tr><td className="p-3.5 font-bold">S</td><td className="p-3.5">35 - 37</td><td className="p-3.5">28 - 30</td><td className="p-3.5">162 - 172</td><td className="p-3.5">55 - 68</td></tr>
                     <tr><td className="p-3.5 font-bold">M</td><td className="p-3.5">38 - 40</td><td className="p-3.5">31 - 33</td><td className="p-3.5">170 - 180</td><td className="p-3.5">65 - 78</td></tr>
-                    <tr><td className="p-3.5 font-bold">L</td><td className="p-3.5">41 - 43</td><td className="p-3.5">34 - 36</td><td className="p-3.5">175 - 185</td><td className="p-3.5">75 - 88</td></tr>
-                    <tr><td className="p-3.5 font-bold">XL</td><td className="p-3.5">44 - 46</td><td className="p-3.5">37 - 39</td><td className="p-3.5">180 - 192</td><td className="p-3.5">85 - 98</td></tr>
-                    <tr><td className="p-3.5 font-bold">XXL</td><td className="p-3.5">47 - 50</td><td className="p-3.5">40 - 43</td><td className="p-3.5">185 - 198</td><td className="p-3.5">95 - 115</td></tr>
                   </tbody>
                 </table>
               </div>
