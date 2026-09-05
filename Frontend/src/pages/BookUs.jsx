@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router'
 import { motion } from 'framer-motion'
 import InteractiveDiveMap from '../components/InteractiveDiveMap'
@@ -97,9 +97,19 @@ export default function BookUs() {
 
   const [currentStep, setCurrentStep] = useState(1)
 
+  // Today & 1 year max date bounds
+  const todayStr = useMemo(() => new Date().toISOString().split('T')[0], [])
+  const maxDateStr = useMemo(() => {
+    const d = new Date()
+    d.setFullYear(d.getFullYear() + 1)
+    return d.toISOString().split('T')[0]
+  }, [])
+
   // Step 1: Location, Date & Group Size
   const [location, setLocation] = useState('Andaman Islands (Havelock)')
   const [date, setDate] = useState('')
+  const [dateError, setDateError] = useState('')
+  const [stepError, setStepError] = useState('')
   const [groupSize, setGroupSize] = useState(1)
 
   // Step 2: Participant Info List
@@ -288,20 +298,14 @@ export default function BookUs() {
                       <label className="mb-2 block text-xs font-bold text-navy/70 uppercase tracking-wider">
                         Selected Dive Location
                       </label>
-                      <div className="relative">
-                        <input
-                          type="text"
-                          value={location}
-                          onChange={(e) => setLocation(e.target.value)}
-                          placeholder="Select location or pick on map 👉"
-                          required
-                          className="w-full rounded-2xl bg-[#F0F2F5] px-5 py-4 text-sm font-bold text-navy outline-none focus:ring-2 focus:ring-accent/50 transition"
-                        />
-                        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-accent bg-accent/10 px-3 py-1.5 rounded-full pointer-events-none">
-                          📍 Map Sync
-                        </span>
-                      </div>
-                      <p className="text-[11px] text-navy/50 mt-1.5">You can also click any marker on the interactive 3D map to update location.</p>
+                      <input
+                        type="text"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        placeholder="Select location"
+                        required
+                        className="w-full rounded-2xl bg-[#F0F2F5] px-5 py-4 text-sm font-bold text-navy outline-none focus:ring-2 focus:ring-accent/50 transition"
+                      />
                     </div>
 
                     <div className="grid sm:grid-cols-2 gap-6">
@@ -312,11 +316,28 @@ export default function BookUs() {
                         <input
                           type="date"
                           value={date}
-                          onChange={(e) => setDate(e.target.value)}
+                          onChange={(e) => {
+                            const val = e.target.value
+                            setDate(val)
+                            if (val && (val < todayStr || val > maxDateStr)) {
+                              setDateError('Please Select a Proper Date')
+                            } else {
+                              setDateError('')
+                              setStepError('')
+                            }
+                          }}
                           required
-                          min={new Date().toISOString().split('T')[0]}
-                          className="w-full rounded-2xl bg-[#F0F2F5] px-5 py-4 text-sm font-bold text-navy outline-none focus:ring-2 focus:ring-accent/50 transition"
+                          min={todayStr}
+                          max={maxDateStr}
+                          className={`w-full rounded-2xl bg-[#F0F2F5] px-5 py-4 text-sm font-bold text-navy outline-none focus:ring-2 transition ${
+                            dateError ? 'border-2 border-red-500 focus:ring-red-300' : 'focus:ring-accent/50'
+                          }`}
                         />
+                        {dateError && (
+                          <p className="mt-1.5 text-xs font-bold text-red-500 flex items-center gap-1.5">
+                            <span>⚠️</span> {dateError}
+                          </p>
+                        )}
                       </div>
 
                       <div>
@@ -554,12 +575,23 @@ export default function BookUs() {
 
               </div>
 
+              {/* Inline Step Error Message */}
+              {stepError && (
+                <div className="mt-4 p-3.5 rounded-2xl bg-red-50 border border-red-200 text-red-600 text-xs font-bold flex items-center gap-2">
+                  <span>⚠️</span>
+                  <span>{stepError}</span>
+                </div>
+              )}
+
               {/* Navigation Controls */}
-              <div className="pt-6 mt-8 border-t border-navy/5 flex items-center justify-between gap-4">
+              <div className="pt-6 mt-6 border-t border-navy/5 flex items-center justify-between gap-4">
                 {currentStep > 1 ? (
                   <button
                     type="button"
-                    onClick={() => setCurrentStep(prev => prev - 1)}
+                    onClick={() => {
+                      setStepError('')
+                      setCurrentStep(prev => prev - 1)
+                    }}
                     className="rounded-full px-6 py-3.5 text-sm font-bold text-navy hover:bg-[#F0F2F5] transition"
                   >
                     ← Back
@@ -570,24 +602,35 @@ export default function BookUs() {
                   <button
                     type="button"
                     onClick={() => {
-                      if (currentStep === 1 && (!location || !date)) {
-                        alert("Please select a location and preferred date.");
-                        return
+                      if (currentStep === 1) {
+                        if (!location) {
+                          setStepError("Please enter a dive location.");
+                          return
+                        }
+                        if (!date || date < todayStr || date > maxDateStr) {
+                          setDateError("Please Select a Proper Date");
+                          return
+                        }
+                        setDateError("");
+                        setStepError("");
                       }
                       if (currentStep === 2) {
                         const hasEmpty = participants.some(p => !p.name || !p.age)
                         if (hasEmpty) {
-                          alert("Please fill in the Name and Age for all participants.");
+                          setStepError("Please fill in the Name and Age for all participants.");
                           return
                         }
+                        setStepError("");
                       }
                       if (currentStep === 3) {
                         const hasUnselected = participants.some(p => !p.selectedProgram)
                         if (hasUnselected) {
-                          alert("Please select an eligible program for each participant.");
+                          setStepError("Please select an eligible program for each participant.");
                           return
                         }
+                        setStepError("");
                       }
+                      setStepError("")
                       setCurrentStep(prev => prev + 1)
                     }}
                     className="rounded-full bg-navy px-8 py-3.5 text-sm font-bold text-white transition hover:bg-accent hover:text-navy shadow-md flex items-center gap-2"
